@@ -1,16 +1,14 @@
-package com.common.mealProduct.model;
+package com.meal.model;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import static com.common.DBConstants.PASSWORD;
+import static com.common.DBConstants.URL;
+import static com.common.DBConstants.USER;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-
-import static com.common.mealProduct.model.Common.*;
 
 public class MealDAOImpl implements MealDAO {
 //    private static DataSource ds = null;

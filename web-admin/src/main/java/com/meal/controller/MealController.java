@@ -1,8 +1,8 @@
-package com.backEnd;
+package com.meal.controller;
 
-import com.common.mealProduct.model.MealDAO;
-import com.common.mealProduct.model.MealDAOImpl;
-import com.common.mealProduct.model.MealVO;
+import com.meal.model.MealDAO;
+import com.meal.model.MealDAOImpl;
+import com.meal.model.MealVO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -12,11 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLException;
 
-@WebServlet("/mealInsert")
+@WebServlet("/mealController")
 @MultipartConfig(fileSizeThreshold = 0, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
-public class MealInsert extends HttpServlet {
+public class MealController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");

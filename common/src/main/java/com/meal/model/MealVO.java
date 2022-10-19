@@ -1,4 +1,4 @@
-package com.common.mealProduct.model;
+package com.meal.model;
 
 import java.io.InputStream;
 import java.sql.Date;

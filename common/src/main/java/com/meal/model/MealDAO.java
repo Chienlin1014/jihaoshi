@@ -1,6 +1,5 @@
-package com.common.mealProduct.model;
+package com.meal.model;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface MealDAO {
