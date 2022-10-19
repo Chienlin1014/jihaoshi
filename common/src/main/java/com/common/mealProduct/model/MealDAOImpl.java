@@ -32,7 +32,7 @@ public class MealDAOImpl implements MealDAO {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        try( Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jihaoshi?serverTimezone=Asia/Taipei", "root", "1234");
+        try( Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jihaoshi?serverTimezone=Asia/Taipei&useSSL=false", "root", "1234");
 
              PreparedStatement ps= conn.prepareStatement(INSERT_SQL);) {
 //            conn= ds.getConnection();
