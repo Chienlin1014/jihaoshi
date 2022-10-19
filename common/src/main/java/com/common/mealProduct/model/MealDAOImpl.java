@@ -44,7 +44,7 @@ public class MealDAOImpl implements MealDAO {
             ps.setInt(5, meal.getMealPrice());
             ps.setBinaryStream(6, meal.getMealPhoto());
             ps.setString(7,meal.getMealRecipe());
-
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
