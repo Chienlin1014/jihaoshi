@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import static com.common.mealProduct.model.Common.*;
+
 public class MealDAOImpl implements MealDAO {
 //    private static DataSource ds = null;
 //    static {
@@ -22,7 +24,7 @@ public class MealDAOImpl implements MealDAO {
 //    }
 
     private static final String GET_ALL_SQL = "select * from meal_product";
-    public static final String INSERT_SQL = "insert into jihaoshi.meal_product (meal_name, meal_content, meal_cal, meal_allergen, meal_price, meal_photo, meal_recipe) values (?,?,?,?,?,?,?);";
+    public static final String INSERT_SQL = "insert into meal_product (meal_name, meal_content, meal_cal, meal_allergen, meal_price, meal_photo, meal_recipe) values (?,?,?,?,?,?,?);";
     @Override
     public void insert(MealVO meal) {
 //        Connection conn=null;
@@ -32,7 +34,7 @@ public class MealDAOImpl implements MealDAO {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        try( Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jihaoshi?serverTimezone=Asia/Taipei&useSSL=false", "root", "1234");
+        try( Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
              PreparedStatement ps= conn.prepareStatement(INSERT_SQL);) {
 //            conn= ds.getConnection();
@@ -52,6 +54,8 @@ public class MealDAOImpl implements MealDAO {
 
     @Override
     public Integer update(MealVO meal) {
+        int rowCount=0;
+
         return null;
     }
 
