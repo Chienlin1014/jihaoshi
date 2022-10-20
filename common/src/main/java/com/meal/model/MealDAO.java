@@ -7,9 +7,10 @@ public interface MealDAO {
 
 //    static void insert(MealVO meal) throws SQLException;
 
-    public Integer update(MealVO meal);
-    public Integer launch(Boolean launch);
-    public MealVO findBymealName(String mealName);
-    public MealVO findWithoutAllergen(String mealAllergen);
-    public List<MealVO> getAll();
+    Integer update(MealVO meal);
+    Integer launchOn(Integer mealNo);
+    Integer launchOff(Integer mealNo);
+    MealVO findBymealName(String mealName);
+    MealVO findWithoutAllergen(String mealAllergen);
+    List<MealVO> getAll();
 }
