@@ -1,8 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page import="com.meal.model.MealVO" %><%--
+  Created by IntelliJ IDEA.
+  User: CHIENLIN
+  Date: 2022/10/20
+  Time: 下午 08:28
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%
+    MealVO meal = (MealVO) request.getAttribute("MealVO");
+%>
+
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>新增菜單商品</title>
 </head>
 <body>
 <form method="post" action="mealController" enctype="multipart/form-data" id="form1">

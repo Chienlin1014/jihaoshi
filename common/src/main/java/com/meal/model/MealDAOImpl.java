@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MealDAOImpl implements MealDAO {
@@ -98,6 +99,8 @@ public class MealDAOImpl implements MealDAO {
 
     @Override
     public List<MealVO> getAll() {
+        List<MealVO> meal = new ArrayList<>();
+
         return null;
     }
 }
