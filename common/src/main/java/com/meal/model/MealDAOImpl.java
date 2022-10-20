@@ -11,22 +11,15 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class MealDAOImpl implements MealDAO {
-//    private static DataSource ds = null;
-//    static {
-//        try {
-//            Context ctx = new InitialContext();
-//            ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jihaoshi");
-//        } catch (NamingException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
 
     private static final String GET_ALL_SQL = "select * from meal_product";
-    public static final String INSERT_SQL = "insert into meal_product (meal_name, meal_content, meal_cal, meal_allergen, meal_price, meal_photo, meal_recipe) values (?,?,?,?,?,?,?);";
+    public static final String INSERT_SQL = "insert into meal_product (meal_name, meal_content, meal_cal, meal_allergen, meal_price, meal_photo, meal_recipe, launch) values (?,?,?,?,?,?,?,?);";
+    public static final String UPDATE_SQL = "update meal_product set ";
+
+
     @Override
     public void insert(MealVO meal) {
-//        Connection conn=null;
-//        PreparedStatement ps=null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -35,8 +28,6 @@ public class MealDAOImpl implements MealDAO {
         try( Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
              PreparedStatement ps= conn.prepareStatement(INSERT_SQL);) {
-//            conn= ds.getConnection();
-
             ps.setString(1,meal.getMealName());
             ps.setString(2, meal.getMealContent());
             ps.setInt(3, meal.getMealCal());
@@ -44,6 +35,7 @@ public class MealDAOImpl implements MealDAO {
             ps.setInt(5, meal.getMealPrice());
             ps.setBinaryStream(6, meal.getMealPhoto());
             ps.setString(7,meal.getMealRecipe());
+            ps.setInt(8,meal.getLaunch());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

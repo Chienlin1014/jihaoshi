@@ -27,7 +27,8 @@ public class MealController extends HttpServlet {
         Integer mealPrice = Integer.valueOf(req.getParameter("maelPrice"));
         InputStream mealPhoto = req.getPart("mealPhoto").getInputStream();
         String mealRecipe = req.getParameter("mealRecipe");
-        MealVO meal = new MealVO(mealName, mealContent, mealCal, mealAllergen, mealPrice, mealPhoto, mealRecipe);
+        Integer launch = Integer.valueOf(req.getParameter("launch"));
+        MealVO meal = new MealVO(mealName, mealContent, mealCal, mealAllergen, mealPrice, mealPhoto, mealRecipe,launch);
         MealDAO dao = new MealDAOImpl();
         dao.insert(meal);
 

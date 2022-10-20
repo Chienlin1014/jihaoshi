@@ -21,7 +21,7 @@ public class MealVO {
     public MealVO() {
     }
 
-    public MealVO(String mealName, String mealContent, Integer mealCal, String mealAllergen, Integer mealPrice, InputStream mealPhoto, String mealRecipe) {
+    public MealVO(String mealName, String mealContent, Integer mealCal, String mealAllergen, Integer mealPrice, InputStream mealPhoto, String mealRecipe, Integer launch) {
         this.mealName = mealName;
         this.mealContent = mealContent;
         this.mealCal = mealCal;
@@ -29,6 +29,7 @@ public class MealVO {
         this.mealPrice = mealPrice;
         this.mealPhoto = mealPhoto;
         this.mealRecipe = mealRecipe;
+        this.launch = launch;
     }
 
     public MealVO(Integer mealNo, String mealName, String mealContent, Integer mealCal, String mealAllergen, Integer mealPrice, InputStream mealPhoto, Integer saleVolume, String mealRecipe, Integer commentPeople, Integer commentScore, Integer launch, Date updateTime) {
