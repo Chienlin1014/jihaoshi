@@ -21,14 +21,7 @@ public class MealVO {
     public MealVO() {
     }
 
-    public
-
-
-
-
-
-
-    (String mealName, String mealContent, Integer mealCal, String mealAllergen, Integer mealPrice, InputStream mealPhoto, String mealRecipe, Integer launch) {
+     public MealVO (String mealName, String mealContent, Integer mealCal, String mealAllergen, Integer mealPrice, InputStream mealPhoto, String mealRecipe, Integer launch) {
         this.mealName = mealName;
         this.mealContent = mealContent;
         this.mealCal = mealCal;
