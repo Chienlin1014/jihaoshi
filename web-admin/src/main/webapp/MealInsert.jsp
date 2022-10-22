@@ -5,6 +5,7 @@
 
 <%
     MealVO meal = (MealVO) request.getAttribute("MealVO");
+
 %>
 <html>
 <head>
@@ -46,5 +47,8 @@
         <button type="reset" form="form1">清除資料</button>
     </div>
 </form>
+<script>
+
+</script>
 </body>
 </html>

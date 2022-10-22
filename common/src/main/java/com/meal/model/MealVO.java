@@ -1,9 +1,10 @@
 package com.meal.model;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.sql.Date;
 
-public class MealVO {
+public class MealVO implements Serializable {
     private Integer mealNo;
     private String mealName;
     private String mealContent;
@@ -46,6 +47,18 @@ public class MealVO {
         this.commentScore = commentScore;
         this.launch = launch;
         this.updateTime = updateTime;
+    }
+
+    public MealVO(Integer mealNo, String mealName, String mealContent, Integer mealCal, String mealAllergen, Integer mealPrice, InputStream mealPhoto, String mealRecipe, Integer launch) {
+        this.mealNo = mealNo;
+        this.mealName = mealName;
+        this.mealContent = mealContent;
+        this.mealCal = mealCal;
+        this.mealAllergen = mealAllergen;
+        this.mealPrice = mealPrice;
+        this.mealPhoto = mealPhoto;
+        this.mealRecipe = mealRecipe;
+        this.launch = launch;
     }
 
     public Integer getMealNo() {
