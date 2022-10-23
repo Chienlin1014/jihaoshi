@@ -19,11 +19,6 @@ public class MealDAOImpl implements MealDAO {
     public static final String FINDBY_MEALNO = "select * from meal_product where meal_no=? ;";
     @Override
     public void insert(MealVO meal) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
         try( Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement ps= conn.prepareStatement(INSERT_SQL);) {
             ps.setString(1,meal.getMealName());
@@ -42,11 +37,6 @@ public class MealDAOImpl implements MealDAO {
 
     @Override
     public MealVO findByLastUpdate() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
         try( Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement ps= conn.prepareStatement(FINDBYLAST_SQL);) {
             ResultSet rs = ps.executeQuery();
@@ -68,11 +58,6 @@ public class MealDAOImpl implements MealDAO {
 
     @Override
     public MealVO findByMealNo(Integer mealNo) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
         try( Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement ps= conn.prepareStatement(FINDBY_MEALNO);) {
             ps.setInt(1,mealNo);
@@ -95,11 +80,6 @@ public class MealDAOImpl implements MealDAO {
 
     @Override
     public void update(MealVO meal) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
         try( Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement ps= conn.prepareStatement(UPDATE_SQL);) {
             ps.setString(1,meal.getMealName());
@@ -119,13 +99,7 @@ public class MealDAOImpl implements MealDAO {
 
     @Override
     public Integer launchOn(Integer mealNo) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
         try( Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-
              PreparedStatement ps= conn.prepareStatement(LAUNCH_SQL);) {
             ps.setInt(1, 1);
             ps.setInt(2,mealNo);
@@ -137,13 +111,7 @@ public class MealDAOImpl implements MealDAO {
         }
     }
     public Integer launchOff(Integer mealNo){
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
         try( Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-
              PreparedStatement ps= conn.prepareStatement(LAUNCH_SQL);) {
             ps.setInt(1, 0);
             ps.setInt(2,mealNo);
