@@ -1,5 +1,10 @@
 package com.meal.model;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import static com.common.DBConstants.PASSWORD;
 import static com.common.DBConstants.URL;
 import static com.common.DBConstants.USER;
@@ -9,6 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MealDAOImpl implements MealDAO {
+    public static DataSource ds=null;
+    static {
+        try {
+            Context ctx = new InitialContext();
+            ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jihaoshi");
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     private static final String GET_ALL_SQL = "select * from meal_product";
@@ -19,7 +33,7 @@ public class MealDAOImpl implements MealDAO {
     public static final String FINDBY_MEALNO = "select * from meal_product where meal_no=? ;";
     @Override
     public void insert(MealVO meal) {
-        try( Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+        try( Connection conn = ds.getConnection();
              PreparedStatement ps= conn.prepareStatement(INSERT_SQL);) {
             ps.setString(1,meal.getMealName());
             ps.setString(2, meal.getMealContent());
@@ -37,7 +51,7 @@ public class MealDAOImpl implements MealDAO {
 
     @Override
     public MealVO findByLastUpdate() {
-        try( Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+        try( Connection conn = ds.getConnection();
              PreparedStatement ps= conn.prepareStatement(FINDBYLAST_SQL);) {
             ResultSet rs = ps.executeQuery();
             MealVO meal =null;
@@ -58,7 +72,7 @@ public class MealDAOImpl implements MealDAO {
 
     @Override
     public MealVO findByMealNo(Integer mealNo) {
-        try( Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+        try( Connection conn = ds.getConnection();
              PreparedStatement ps= conn.prepareStatement(FINDBY_MEALNO);) {
             ps.setInt(1,mealNo);
             ResultSet rs = ps.executeQuery();
@@ -80,7 +94,7 @@ public class MealDAOImpl implements MealDAO {
 
     @Override
     public void update(MealVO meal) {
-        try( Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+        try( Connection conn = ds.getConnection();
              PreparedStatement ps= conn.prepareStatement(UPDATE_SQL);) {
             ps.setString(1,meal.getMealName());
             ps.setString(2, meal.getMealContent());
@@ -99,7 +113,7 @@ public class MealDAOImpl implements MealDAO {
 
     @Override
     public Integer launchOn(Integer mealNo) {
-        try( Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+        try( Connection conn = ds.getConnection();
              PreparedStatement ps= conn.prepareStatement(LAUNCH_SQL);) {
             ps.setInt(1, 1);
             ps.setInt(2,mealNo);
@@ -111,7 +125,8 @@ public class MealDAOImpl implements MealDAO {
         }
     }
     public Integer launchOff(Integer mealNo){
-        try( Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+        try( Connection conn = ds.getConnection();
+
              PreparedStatement ps= conn.prepareStatement(LAUNCH_SQL);) {
             ps.setInt(1, 0);
             ps.setInt(2,mealNo);
