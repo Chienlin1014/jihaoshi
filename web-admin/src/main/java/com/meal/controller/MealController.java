@@ -82,8 +82,8 @@ public class MealController extends HttpServlet {
                 return; //程式中斷
             }
             MealDAO dao = new MealDAOImpl();
-            dao.insert(meal);
-            MealVO lastMeal=dao.findByLastUpdate();
+
+            MealVO lastMeal=dao.insert(meal);;
             if (lastMeal != null) {
                 req.setAttribute("Meal",lastMeal);
                 RequestDispatcher productPage=req.getRequestDispatcher("/meal/ProductPage.jsp");

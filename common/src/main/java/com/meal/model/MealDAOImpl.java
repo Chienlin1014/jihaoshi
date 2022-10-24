@@ -28,7 +28,7 @@ public class MealDAOImpl implements MealDAO {
     public static final String FINDBYLAST_SQL="SELECT * FROM MEAL_PRODUCT WHERE MEAL_NO=(SELECT MAX(MEAL_NO) FROM MEAL_PRODUCT);";
     public static final String FINDBY_MEALNO = "SELECT * FROM MEAL_PRODUCT WHERE MEAL_NO=? ;";
     @Override
-    public void insert(MealVO meal) {
+    public MealVO insert(MealVO meal) {
         try( Connection conn = ds.getConnection();
              PreparedStatement ps= conn.prepareStatement(INSERT_SQL,Statement.RETURN_GENERATED_KEYS);) {
             ps.setString(1,meal.getMealName());
@@ -44,13 +44,15 @@ public class MealDAOImpl implements MealDAO {
             if (generatedKeys.next()) {
                 meal.setMealNo(generatedKeys.getInt(1));
             }
+            return findByLastUpdate(meal.getMealNo());
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     @Override
-    public MealVO findByLastUpdate() {
+    public MealVO findByLastUpdate(Integer mealNo) {
         try( Connection conn = ds.getConnection();
              PreparedStatement ps= conn.prepareStatement(FINDBYLAST_SQL);) {
             ResultSet rs = ps.executeQuery();
