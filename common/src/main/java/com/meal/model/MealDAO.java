@@ -9,7 +9,6 @@ public interface MealDAO {
     Integer launchOff(Integer mealNo);
     MealVO findBymealName(String mealName);
     MealVO findWithoutAllergen(String mealAllergen);
-    MealVO findByLastUpdate(Integer mealNo);
 
     MealVO findByMealNo(Integer mealNo);
     List<MealVO> getAll();
