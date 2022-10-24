@@ -21,7 +21,7 @@ public class MealDAOImpl implements MealDAO {
     }
 
 
-    private static final String GET_ALL_SQL = "SELECT * FROM MEAL_PRODUCT";
+    private static final String GET_ALL_SQL = "SELECT MEAL_NO, MEAL_NAME, MEAL_CONTENT, MEAL_PRICE, LAUNCH FROM MEAL_PRODUCT";
     public static final String INSERT_SQL = "INSERT INTO MEAL_PRODUCT (MEAL_NAME, MEAL_CONTENT, MEAL_CAL, MEAL_ALLERGEN, MEAL_PRICE, MEAL_PHOTO, MEAL_RECIPE, LAUNCH) VALUES (?,?,?,?,?,?,?,?);";
     public static final String UPDATE_SQL = "UPDATE MEAL_PRODUCT SET MEAL_NAME=?, MEAL_CONTENT=?, MEAL_CAL=?, MEAL_ALLERGEN=?, MEAL_PRICE=?, MEAL_PHOTO=?, MEAL_RECIPE=?, LAUNCH=? WHERE MEAL_NO=? ;";
     public static final String LAUNCH_SQL = "UPDATE MEAL_PRODUCT SET LAUNCH = ? WHERE MEAL_NO = ? ;";
@@ -30,6 +30,7 @@ public class MealDAOImpl implements MealDAO {
     public MealVO insert(MealVO meal) {
         try( Connection conn = ds.getConnection();
              PreparedStatement ps= conn.prepareStatement(INSERT_SQL,Statement.RETURN_GENERATED_KEYS);) {
+            conn.setAutoCommit(false);
             ps.setString(1,meal.getMealName());
             ps.setString(2, meal.getMealContent());
             ps.setInt(3, meal.getMealCal());
@@ -39,6 +40,7 @@ public class MealDAOImpl implements MealDAO {
             ps.setString(7,meal.getMealRecipe());
             ps.setInt(8,meal.getLaunch());
             ps.executeUpdate();
+            conn.commit();
             var generatedKeys = ps.getGeneratedKeys();
             if (generatedKeys.next()) {
                 meal.setMealNo(generatedKeys.getInt(1));
@@ -46,6 +48,7 @@ public class MealDAOImpl implements MealDAO {
             return findByMealNo(meal.getMealNo());
         } catch (SQLException e) {
             e.printStackTrace();
+
         }
         return null;
     }
@@ -118,7 +121,7 @@ public class MealDAOImpl implements MealDAO {
         }
     }
     @Override
-    public MealVO findBymealName(String mealName) {
+    public MealVO findByMealName(String mealName) {
         return null;
     }
 
@@ -129,8 +132,18 @@ public class MealDAOImpl implements MealDAO {
 
     @Override
     public List<MealVO> getAll() {
-        List<MealVO> meal = new ArrayList<>();
-
+        List<MealVO> meals = new ArrayList<>();
+        try(Connection conn=ds.getConnection();
+        PreparedStatement ps =conn.prepareStatement(GET_ALL_SQL)) {
+            ResultSet rs= ps.executeQuery();
+            while (rs.next()) {
+                MealVO meal =new MealVO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5));
+                meals.add(meal);
+            }
+            return meals;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

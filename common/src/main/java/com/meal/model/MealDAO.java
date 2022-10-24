@@ -7,7 +7,7 @@ public interface MealDAO {
     void update(MealVO meal);
     Integer launchOn(Integer mealNo);
     Integer launchOff(Integer mealNo);
-    MealVO findBymealName(String mealName);
+    MealVO findByMealName(String mealName);
     MealVO findWithoutAllergen(String mealAllergen);
 
     MealVO findByMealNo(Integer mealNo);

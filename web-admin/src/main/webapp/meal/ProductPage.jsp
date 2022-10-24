@@ -14,9 +14,13 @@
 <head>
     <title>Title</title>
     <style>
-        img {
+        #productPhoto {
             width: 500px;
             height: 500px;
+        }
+        #pageHead{
+            width: 100%;
+            height: 30%;
         }
         #div1{
             width:500px;
@@ -43,9 +47,9 @@
 
 </head>
 <body>
-
+<img src="../images/JihaoshiPageHead.jpg" id="pageHead">
 <div id="div1">
-    <img src="ShowMealPhoto?mealNo=<%=meal.getMealNo()%>" >
+    <img src="ShowMealPhoto?mealNo=<%=meal.getMealNo()%>" id="productPhoto">
 </div>
 <div id="div2">
     <p><label >菜單名稱：</label><%=meal.getMealName()%></p> <br>

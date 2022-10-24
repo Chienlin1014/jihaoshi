@@ -1,10 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-  <title>web admin index</title>
+  <title>Jihaoshi</title>
+  <style>
+    #pageHead{
+      width: 100%;
+      height: 30%;
+    }
+    a{
+      font-size: 20px;
+    }
+  </style>
 </head>
 <body>
-<h1>web admin index</h1>
-<a href="meal/MealInsert.jsp">Add meal product</a>
+<img src="images/JihaoshiPageHead.jpg" id="pageHead">
+<br><br>
+<a href="meal/MealInsert.jsp">新增菜單</a>
+<a href=""></a>
 </body>
 </html>

@@ -10,8 +10,15 @@
 <html>
 <head>
   <title>修改菜單商品</title>
+  <style>
+    #pageHead{
+      width: 100%;
+      height: 30%;
+    }
+  </style>
 </head>
 <body>
+<img src="../images/JihaoshiPageHead.jpg" id="pageHead">
 <c:if test="${not empty errMsgs}">
   <font style="color:red">請修正以下錯誤:</font>
   <ul>

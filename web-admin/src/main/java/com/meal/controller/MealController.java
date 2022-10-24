@@ -77,7 +77,7 @@ public class MealController extends HttpServlet {
             if (!errMsgs.isEmpty()) {
                 req.setAttribute("MealVO", meal);
                 RequestDispatcher failureView = req
-                        .getRequestDispatcher("/meal/MealInsert.`jsp`");
+                        .getRequestDispatcher("/meal/MealInsert.jsp");
                 failureView.forward(req, res);
                 return; //程式中斷
             }
