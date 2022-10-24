@@ -5,10 +5,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import static com.common.DBConstants.PASSWORD;
-import static com.common.DBConstants.URL;
-import static com.common.DBConstants.USER;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,16 +21,16 @@ public class MealDAOImpl implements MealDAO {
     }
 
 
-    private static final String GET_ALL_SQL = "select * from meal_product";
-    public static final String INSERT_SQL = "insert into meal_product (meal_name, meal_content, meal_cal, meal_allergen, meal_price, meal_photo, meal_recipe, launch) values (?,?,?,?,?,?,?,?);";
-    public static final String UPDATE_SQL = "update meal_product set meal_name=?, meal_content=?, meal_cal=?, meal_allergen=?, meal_price=?, meal_photo=?, meal_recipe=?, launch=? where meal_no=? ;";
-    public static final String LAUNCH_SQL = "update meal_product set launch = ? where meal_no = ? ;";
-    public static final String FINDBYLAST_SQL="select * from meal_product where meal_no=(select max(meal_no) from meal_product);";
-    public static final String FINDBY_MEALNO = "select * from meal_product where meal_no=? ;";
+    private static final String GET_ALL_SQL = "SELECT * FROM MEAL_PRODUCT";
+    public static final String INSERT_SQL = "INSERT INTO MEAL_PRODUCT (MEAL_NAME, MEAL_CONTENT, MEAL_CAL, MEAL_ALLERGEN, MEAL_PRICE, MEAL_PHOTO, MEAL_RECIPE, LAUNCH) VALUES (?,?,?,?,?,?,?,?);";
+    public static final String UPDATE_SQL = "UPDATE MEAL_PRODUCT SET MEAL_NAME=?, MEAL_CONTENT=?, MEAL_CAL=?, MEAL_ALLERGEN=?, MEAL_PRICE=?, MEAL_PHOTO=?, MEAL_RECIPE=?, LAUNCH=? WHERE MEAL_NO=? ;";
+    public static final String LAUNCH_SQL = "UPDATE MEAL_PRODUCT SET LAUNCH = ? WHERE MEAL_NO = ? ;";
+    public static final String FINDBYLAST_SQL="SELECT * FROM MEAL_PRODUCT WHERE MEAL_NO=(SELECT MAX(MEAL_NO) FROM MEAL_PRODUCT);";
+    public static final String FINDBY_MEALNO = "SELECT * FROM MEAL_PRODUCT WHERE MEAL_NO=? ;";
     @Override
     public void insert(MealVO meal) {
         try( Connection conn = ds.getConnection();
-             PreparedStatement ps= conn.prepareStatement(INSERT_SQL);) {
+             PreparedStatement ps= conn.prepareStatement(INSERT_SQL,Statement.RETURN_GENERATED_KEYS);) {
             ps.setString(1,meal.getMealName());
             ps.setString(2, meal.getMealContent());
             ps.setInt(3, meal.getMealCal());
@@ -44,6 +40,10 @@ public class MealDAOImpl implements MealDAO {
             ps.setString(7,meal.getMealRecipe());
             ps.setInt(8,meal.getLaunch());
             ps.executeUpdate();
+            var generatedKeys = ps.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                meal.setMealNo(generatedKeys.getInt(1));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

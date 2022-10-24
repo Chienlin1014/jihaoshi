@@ -18,7 +18,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/mealController")
+@WebServlet("/meal/mealController")
 @MultipartConfig(fileSizeThreshold = 0, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class MealController extends HttpServlet {
     @Override
@@ -77,7 +77,7 @@ public class MealController extends HttpServlet {
             if (!errMsgs.isEmpty()) {
                 req.setAttribute("MealVO", meal);
                 RequestDispatcher failureView = req
-                        .getRequestDispatcher("/MealInsert.jsp");
+                        .getRequestDispatcher("/meal/MealInsert.`jsp`");
                 failureView.forward(req, res);
                 return; //程式中斷
             }
@@ -86,7 +86,7 @@ public class MealController extends HttpServlet {
             MealVO lastMeal=dao.findByLastUpdate();
             if (lastMeal != null) {
                 req.setAttribute("Meal",lastMeal);
-                RequestDispatcher productPage=req.getRequestDispatcher("/ProductPage.jsp");
+                RequestDispatcher productPage=req.getRequestDispatcher("/meal/ProductPage.jsp");
                 productPage.forward(req,res);
             }
         }
@@ -133,7 +133,7 @@ public class MealController extends HttpServlet {
             if (!errMsgs.isEmpty()) {
                 req.setAttribute("MealVO", meal);
                 RequestDispatcher failureView = req
-                        .getRequestDispatcher("/MealUpdate.jsp");
+                        .getRequestDispatcher("/meal/MealUpdate.jsp");
                 failureView.forward(req, res);
                 return; //程式中斷
             }
@@ -142,7 +142,7 @@ public class MealController extends HttpServlet {
             MealVO updatedMeal = dao.findByMealNo(mealNo);
             if (updatedMeal != null) {
                 req.setAttribute("Meal", updatedMeal);
-                RequestDispatcher productPage=req.getRequestDispatcher("/ProductPage.jsp");
+                RequestDispatcher productPage=req.getRequestDispatcher("/meal/ProductPage.jsp");
                 productPage.forward(req,res);
             }
         }
