@@ -5,6 +5,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import java.io.BufferedInputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,8 @@ public class MealDAOImpl implements MealDAO {
     public static final String UPDATE_SQL = "UPDATE MEAL_PRODUCT SET MEAL_NAME=?, MEAL_CONTENT=?, MEAL_CAL=?, MEAL_ALLERGEN=?, MEAL_PRICE=?, MEAL_PHOTO=?, MEAL_RECIPE=?, LAUNCH=? WHERE MEAL_NO=? ;";
     public static final String LAUNCH_SQL = "UPDATE MEAL_PRODUCT SET LAUNCH = ? WHERE MEAL_NO = ? ;";
     public static final String FINDBY_MEALNO = "SELECT * FROM MEAL_PRODUCT WHERE MEAL_NO=? ;";
+    public static final String GET_POHOTO_BY_MEALNO="select meal_photo from meal_product where meal_no= ?";
+
     @Override
     public MealVO insert(MealVO meal) {
         try( Connection conn = ds.getConnection();
@@ -68,6 +71,23 @@ public class MealDAOImpl implements MealDAO {
                                 rs.getInt(10),rs.getInt(11),rs.getInt(12),
                                 rs.getDate(13));
                 return meal;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public BufferedInputStream showMealphoto(Integer mealNo) {
+        try( Connection conn = ds.getConnection();
+             PreparedStatement ps= conn.prepareStatement(GET_POHOTO_BY_MEALNO);) {
+            ps.setInt(1,mealNo);
+            ResultSet rs = ps.executeQuery();
+            MealVO meal =null;
+            if (rs.next()) {
+                BufferedInputStream mealPhoto = new BufferedInputStream(rs.getBinaryStream(1));
+                return mealPhoto;
             }
         } catch (SQLException e) {
             e.printStackTrace();

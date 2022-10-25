@@ -3,15 +3,19 @@ package com.meal.controller;
 import com.meal.model.MealDAO;
 import com.meal.model.MealDAOImpl;
 import com.meal.model.MealVO;
+import com.sun.jdi.IntegerValue;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -21,6 +25,20 @@ import java.util.List;
 @WebServlet("/meal/mealController")
 @MultipartConfig(fileSizeThreshold = 0, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class MealController extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        ServletOutputStream out = res.getOutputStream();
+        Integer mealNo= Integer.valueOf(req.getParameter("mealNo"));
+        MealDAO dao=new MealDAOImpl();
+        BufferedInputStream mealPhoto=dao.showMealphoto(mealNo);
+        byte[] buf = new byte[4 * 1024];
+        int len;
+        while ((len = mealPhoto.read(buf)) != -1) {
+            out.write(buf, 0, len);
+        }
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");

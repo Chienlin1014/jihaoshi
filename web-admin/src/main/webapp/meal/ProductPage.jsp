@@ -49,7 +49,7 @@
 <body>
 <img src="../images/JihaoshiPageHead.jpg" id="pageHead">
 <div id="div1">
-    <img src="ShowMealPhoto?mealNo=<%=meal.getMealNo()%>" id="productPhoto">
+    <img src="mealController?mealNo=<%=meal.getMealNo()%>" id="productPhoto">
 </div>
 <div id="div2">
     <p><label >菜單名稱：</label><%=meal.getMealName()%></p> <br>
