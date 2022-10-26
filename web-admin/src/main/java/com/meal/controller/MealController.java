@@ -1,26 +1,23 @@
 package com.meal.controller;
 
-import com.meal.model.MealDAO;
-import com.meal.model.MealDAOImpl;
-import com.meal.model.MealVO;
-import com.sun.jdi.IntegerValue;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import org.apache.commons.io.IOUtils;
+
+import com.meal.model.MealDAO;
+import com.meal.model.MealDAOImpl;
+import com.meal.model.MealVO;
 
 @WebServlet("/meal/mealController")
 @MultipartConfig(fileSizeThreshold = 0, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -28,36 +25,36 @@ public class MealController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        ServletOutputStream out = res.getOutputStream();
-        Integer mealNo= Integer.valueOf(req.getParameter("mealNo"));
-        MealDAO dao=new MealDAOImpl();
-        BufferedInputStream mealPhoto=dao.showMealphoto(mealNo);
-        byte[] buf = new byte[4 * 1024];
-        int len;
-        while ((len = mealPhoto.read(buf)) != -1) {
-            out.write(buf, 0, len);
-        }
+//        ServletOutputStream out = res.getOutputStream();
+//        Integer mealNo = Integer.valueOf(req.getParameter("mealNo"));
+//        MealDAO dao = new MealDAOImpl();
+//        BufferedInputStream mealPhoto = dao.showMealphoto(mealNo);
+//        byte[] buf = new byte[4 * 1024];
+//        int len;
+//        while ((len = mealPhoto.read(buf)) != -1) {
+//            out.write(buf, 0, len);
+//        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        res.setContentType("text/html; charset=UTF-8");
-        Integer mealNo=null;
-        String mealName= null;
-        String mealContent= null;
+        Integer mealNo = null;
+        String mealName = null;
+        String mealContent = null;
         Integer mealCal = null;
-        String mealAllergen= null;
-        Integer mealPrice= null;
-        InputStream mealPhoto= null;
-        String mealRecipe= null;
-        Integer launch= null;
+        String mealAllergen = null;
+        Integer mealPrice = null;
+        byte[] mealPhoto = null;
+        String mealRecipe = null;
+        Integer launch = null;
         String action = req.getParameter("action");
         if ("insert".equals(action)) {
             List<String> errMsgs = new ArrayList<>();
             req.setAttribute("errMsgs", errMsgs);
-            mealName = req.getParameter("mealName").trim();
-            if (mealName == null || mealName.length() == 0) {
+            mealName = req.getParameter("mealName");
+            if (mealName == null || mealName.isBlank()) {
+
                 errMsgs.add("菜單名稱不得空白");
             }
             mealContent = req.getParameter("mealContent").trim();
@@ -84,7 +81,7 @@ public class MealController extends HttpServlet {
             } catch (Exception e) {
                 errMsgs.add("價錢不得為空白或文字");
             }
-            mealPhoto = req.getPart("mealPhoto").getInputStream();
+            mealPhoto = IOUtils.toByteArray(req.getPart("mealPhoto").getInputStream());
             mealRecipe = req.getParameter("mealRecipe").trim();
             launch = Integer.valueOf(req.getParameter("launch"));
             if (mealRecipe == null || mealContent.trim().length() == 0) {
@@ -100,12 +97,14 @@ public class MealController extends HttpServlet {
                 return; //程式中斷
             }
             MealDAO dao = new MealDAOImpl();
+            MealVO lastMeal = dao.insert(meal);
 
-            MealVO lastMeal=dao.insert(meal);;
             if (lastMeal != null) {
-                req.setAttribute("Meal",lastMeal);
-                RequestDispatcher productPage=req.getRequestDispatcher("/meal/ProductPage.jsp");
-                productPage.forward(req,res);
+                String photo = Base64.getEncoder().encodeToString(mealPhoto);
+                lastMeal.setShowPhoto(photo);
+                req.setAttribute("Meal", lastMeal);
+                RequestDispatcher productPage = req.getRequestDispatcher("/meal/ProductPage.jsp");
+                productPage.forward(req, res);
             }
         }
         if ("update".equals(action)) {
@@ -140,7 +139,7 @@ public class MealController extends HttpServlet {
             } catch (Exception e) {
                 errMsgs.add("價錢不得為空白或文字");
             }
-            mealPhoto = req.getPart("mealPhoto").getInputStream();
+            mealPhoto = IOUtils.toByteArray(req.getPart("mealPhoto").getInputStream());
             mealRecipe = req.getParameter("mealRecipe").trim();
             launch = Integer.valueOf(req.getParameter("launch"));
             if (mealRecipe == null || mealContent.trim().length() == 0) {
@@ -160,8 +159,8 @@ public class MealController extends HttpServlet {
             MealVO updatedMeal = dao.findByMealNo(mealNo);
             if (updatedMeal != null) {
                 req.setAttribute("Meal", updatedMeal);
-                RequestDispatcher productPage=req.getRequestDispatcher("/meal/ProductPage.jsp");
-                productPage.forward(req,res);
+                RequestDispatcher productPage = req.getRequestDispatcher("/meal/ProductPage.jsp");
+                productPage.forward(req, res);
             }
         }
 

@@ -9,6 +9,7 @@
       MealDAO dao=new MealDAOImpl();
       meal=dao.findByMealNo(Integer.valueOf(request.getParameter("mealNo")));
   }
+
 %>
 <html>
 <head>
@@ -47,9 +48,9 @@
 
 </head>
 <body>
-<img src="../images/JihaoshiPageHead.jpg" id="pageHead">
+<img src="<%= request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
 <div id="div1">
-    <img src="mealController?mealNo=<%=meal.getMealNo()%>" id="productPhoto">
+    <img src="data:image/png;base64,<%= meal.getShowPhoto()%>" id="productPhoto"/>
 </div>
 <div id="div2">
     <p><label >菜單名稱：</label><%=meal.getMealName()%></p> <br>
