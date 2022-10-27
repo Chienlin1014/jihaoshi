@@ -1,13 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.meal.model.MealDAO" %>
-<%@ page import="com.meal.model.MealDAOImpl" %>
 <%@ page import="com.meal.model.MealVO" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%
     List<MealVO> meals = (List<MealVO>) request.getAttribute("lastAllMeal");
     request.setAttribute("meals", meals);
+
 %>
+
 <html>
 <head>
     <title>Title</title>
@@ -63,7 +63,10 @@
                                     <ul class="tag_box s_label"></ul>
                                     <h5 class="prod_name"><a
                                             href="mealController?action=findByprod&mealNo=${meal.mealNo}">${meal.mealName}</a></h5>
-                                    <span>${meal.mealRecipe}</span>
+                                    <br>
+                                    <span style="font-size: 18px">${meal.mealRecipe}</span>
+                                    <br>
+                                    <span style="font-size: 18px">狀態：${meal.launch eq 0?"未上架":"上架中"}</span>
                                     <ul id="bookInfo"></ul>
                                 </dd>
                                 <dd class="c3f" id="button_DRAA0A-A900BUT82">
@@ -72,9 +75,16 @@
                                         </li>
                                     </ul>
                                     <form method="post" action="mealController?action=toUpdate"
-                                          enctype="application/x-www-form-urlencoded" id="form${meal.mealNo}">
+                                          enctype="application/x-www-form-urlencoded" id="edit${meal.mealNo}">
                                         <input type="text" value="${meal.mealNo}" name="mealNo" hidden>
-                                        <button type="submit" form="form${meal.mealNo}">修改商品</button>
+                                        <button type="submit" form="edit${meal.mealNo}">修改商品</button>
+                                    </form>
+                                    <br>
+                                    <form method="post" action="mealController" enctype="application/x-www-form-urlencoded" id="launch${meal.mealNo}">
+                                        <input type="text" name="mealNo" value="${meal.mealNo}" hidden>
+                                        <input type="text" name="launch" value="${meal.launch eq 0?1:0}" hidden>
+                                        <input type="text" name="action" value="launch" hidden>
+                                        <button type="submit" form="launch${meal.mealNo}">${meal.launch eq 0?"上架":"下架"}</button>
                                     </form>
                                 </dd>
                             </dl>

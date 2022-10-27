@@ -29,4 +29,8 @@ public class MealService {
     public List<MealVO> getAll() {
         return dao.getAll();
     }
+
+    public Integer launchSwitch(Integer mealNo, Integer launch) {
+        return dao.launchSwitch(mealNo,launch);
+    }
 }

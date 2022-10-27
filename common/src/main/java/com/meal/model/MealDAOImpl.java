@@ -141,24 +141,10 @@ public class MealDAOImpl implements MealDAO {
     }
 
     @Override
-    public Integer launchOn(Integer mealNo) {
+    public Integer launchSwitch(Integer mealNo, Integer launch) {
         try (Connection conn = ds.getConnection();
              PreparedStatement ps = conn.prepareStatement(LAUNCH_SQL);) {
-            ps.setInt(1, 1);
-            ps.setInt(2, mealNo);
-            ps.executeUpdate();
-            return 1;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
-    public Integer launchOff(Integer mealNo) {
-        try (Connection conn = ds.getConnection();
-
-             PreparedStatement ps = conn.prepareStatement(LAUNCH_SQL);) {
-            ps.setInt(1, 0);
+            ps.setInt(1, launch);
             ps.setInt(2, mealNo);
             ps.executeUpdate();
             return 1;

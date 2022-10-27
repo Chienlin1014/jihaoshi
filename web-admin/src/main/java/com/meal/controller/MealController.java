@@ -181,14 +181,27 @@ public class MealController extends HttpServlet {
             }
         }
         if ("findByprod".equals(action)) {
-
             mealNo = Integer.valueOf(req.getParameter("mealNo"));
             MealService mealSV =new MealService();
             MealVO meal = mealSV.findByMealNo(mealNo);
             if (meal != null) {
                 req.setAttribute("meal", meal);
                 RequestDispatcher productPage = req.getRequestDispatcher("/meal/ProductPage.jsp");
+                System.out.println("我有到這喔");
                 productPage.forward(req, res);
+
+            }
+        }
+        System.out.println(action);
+        if ("launch".equals(action)) {
+            mealNo = Integer.valueOf(req.getParameter("mealNo"));
+            launch = Integer.valueOf(req.getParameter("launch"));
+             MealService mealSV =new MealService();
+            int launchOK=mealSV.launchSwitch(mealNo, launch);
+            if (launchOK == 1) {
+                System.out.println("我有執行喔");
+                RequestDispatcher listMealProductPage = req.getRequestDispatcher("/meal/mealController?action=listAll");
+                listMealProductPage.forward(req, res);
             }
         }
     }

@@ -6,8 +6,8 @@
     int pageIndexArray[]=null;
     int pageIndex=0;
 %>
-
 <%
+
     rowNumber=meals.size();
     if (rowNumber%rowsPerPage !=0)
          pageNumber=rowNumber/rowsPerPage + 1;
