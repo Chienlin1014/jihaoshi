@@ -78,6 +78,17 @@ public class MealVO implements Serializable {
         this.launch = launch;
     }
 
+    public MealVO(Integer mealNo, String mealName, String mealContent, Integer mealCal, String mealAllergen, Integer mealPrice, String mealRecipe, Integer launch) {
+        this.mealNo = mealNo;
+        this.mealName = mealName;
+        this.mealContent = mealContent;
+        this.mealCal = mealCal;
+        this.mealAllergen = mealAllergen;
+        this.mealPrice = mealPrice;
+        this.mealRecipe = mealRecipe;
+        this.launch = launch;
+    }
+
     public Integer getMealNo() {
         return mealNo;
     }

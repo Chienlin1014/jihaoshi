@@ -30,6 +30,8 @@ public class MealDAOImpl implements MealDAO {
     private static final String GET_ALL_SQL = "SELECT MEAL_NO, MEAL_NAME, MEAL_CONTENT, MEAL_PRICE,MEAL_PHOTO, LAUNCH,MEAL_RECIPE FROM MEAL_PRODUCT";
     public static final String INSERT_SQL = "INSERT INTO MEAL_PRODUCT (MEAL_NAME, MEAL_CONTENT, MEAL_CAL, MEAL_ALLERGEN, MEAL_PRICE, MEAL_PHOTO, MEAL_RECIPE, LAUNCH) VALUES (?,?,?,?,?,?,?,?);";
     public static final String UPDATE_SQL = "UPDATE MEAL_PRODUCT SET MEAL_NAME=?, MEAL_CONTENT=?, MEAL_CAL=?, MEAL_ALLERGEN=?, MEAL_PRICE=?, MEAL_PHOTO=?, MEAL_RECIPE=?, LAUNCH=? WHERE MEAL_NO=? ;";
+    public static final String UPDATE_WITHOUT_PHOTO_SQL = "UPDATE MEAL_PRODUCT SET MEAL_NAME=?, MEAL_CONTENT=?, MEAL_CAL=?, MEAL_ALLERGEN=?, MEAL_PRICE=?,  MEAL_RECIPE=?, LAUNCH=? WHERE MEAL_NO=? ;";
+
     public static final String LAUNCH_SQL = "UPDATE MEAL_PRODUCT SET LAUNCH = ? WHERE MEAL_NO = ? ;";
     public static final String FINDBY_MEALNO = "SELECT * FROM MEAL_PRODUCT WHERE MEAL_NO=? ;";
     public static final String GET_POHOTO_BY_MEALNO = "select meal_photo from meal_product where meal_no= ?";
@@ -121,6 +123,24 @@ public class MealDAOImpl implements MealDAO {
     }
 
     @Override
+    public void updateWithoutPhoto(MealVO meal) {
+        try (Connection conn = ds.getConnection();
+             PreparedStatement ps = conn.prepareStatement(UPDATE_WITHOUT_PHOTO_SQL);) {
+            ps.setString(1, meal.getMealName());
+            ps.setString(2, meal.getMealContent());
+            ps.setInt(3, meal.getMealCal());
+            ps.setString(4, meal.getMealAllergen());
+            ps.setInt(5, meal.getMealPrice());
+            ps.setString(6, meal.getMealRecipe());
+            ps.setInt(7, meal.getLaunch());
+            ps.setInt(8, meal.getMealNo());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public Integer launchOn(Integer mealNo) {
         try (Connection conn = ds.getConnection();
              PreparedStatement ps = conn.prepareStatement(LAUNCH_SQL);) {
@@ -165,7 +185,7 @@ public class MealDAOImpl implements MealDAO {
              PreparedStatement ps = conn.prepareStatement(GET_ALL_SQL)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                MealVO meal = new MealVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4),rs.getInt(6));
+                MealVO meal = new MealVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(6));
                 meal.setShowPhoto(Base64.getEncoder().encodeToString(rs.getBytes(5)));
                 meal.setMealRecipe(rs.getString(7));
                 meals.add(meal);

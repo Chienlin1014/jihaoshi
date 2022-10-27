@@ -4,16 +4,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-  MealVO meal =(MealVO) request.getAttribute("Meal");
-  if(meal==null){
-      MealDAO dao=new MealDAOImpl();
-      meal=dao.findByMealNo(Integer.valueOf(request.getParameter("mealNo")));
-  }
-
+  MealVO meal =(MealVO) request.getAttribute("meal");
 %>
 <html>
 <head>
     <title>Title</title>
+<%--    <link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">--%>
     <style>
         #productPhoto {
             width: 500px;
@@ -64,7 +60,7 @@
     <p><label >評分：</label><%=meal.getCommentScore()%></p> <br>
     <p><label >是否上架：</label><%=(meal.getLaunch()==1)?"上架中":"未上架"%></p> <br>
     <p><label >更新時間：</label><%=meal.getUpdateTime()%></p> <br>
-    <form method="post" action="MealUpdate.jsp" id="form1">
+    <form method="post" action="mealController?action=toUpdate" id="form1">
         <input type="text" value="<%=meal.getMealNo()%>" name="mealNo" hidden>
         <button type="submit" form="form1">修改資料</button>
     </form>

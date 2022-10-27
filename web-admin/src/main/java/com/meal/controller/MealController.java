@@ -15,8 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 
-import com.meal.model.MealDAO;
-import com.meal.model.MealDAOImpl;
+import com.meal.model.MealService;
 import com.meal.model.MealVO;
 
 @WebServlet("/meal/mealController")
@@ -25,15 +24,7 @@ public class MealController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-//        ServletOutputStream out = res.getOutputStream();
-//        Integer mealNo = Integer.valueOf(req.getParameter("mealNo"));
-//        MealDAO dao = new MealDAOImpl();
-//        BufferedInputStream mealPhoto = dao.showMealphoto(mealNo);
-//        byte[] buf = new byte[4 * 1024];
-//        int len;
-//        while ((len = mealPhoto.read(buf)) != -1) {
-//            out.write(buf, 0, len);
-//        }
+        doPost(req,res);
     }
 
     @Override
@@ -96,13 +87,13 @@ public class MealController extends HttpServlet {
                 failureView.forward(req, res);
                 return; //程式中斷
             }
-            MealDAO dao = new MealDAOImpl();
-            MealVO lastMeal = dao.insert(meal);
+            MealService mealSV=new MealService();
+            MealVO lastMeal =  mealSV.addMeal(mealName, mealContent, mealCal, mealAllergen, mealPrice, mealPhoto, mealRecipe, launch);
 
             if (lastMeal != null) {
-                String photo = Base64.getEncoder().encodeToString(mealPhoto);
-                lastMeal.setShowPhoto(photo);
-                req.setAttribute("Meal", lastMeal);
+//                String photo = Base64.getEncoder().encodeToString(mealPhoto);
+//                lastMeal.setShowPhoto(photo);
+                req.setAttribute("meal", lastMeal);
                 RequestDispatcher productPage = req.getRequestDispatcher("/meal/ProductPage.jsp");
                 productPage.forward(req, res);
             }
@@ -154,15 +145,51 @@ public class MealController extends HttpServlet {
                 failureView.forward(req, res);
                 return; //程式中斷
             }
-            MealDAO dao = new MealDAOImpl();
-            dao.update(meal);
-            MealVO updatedMeal = dao.findByMealNo(mealNo);
+
+            MealService meslSV=new MealService();
+            String photoBase64= Base64.getEncoder().encodeToString(IOUtils.toByteArray(req.getPart("mealPhoto").getInputStream()));
+
+            if (!photoBase64.isEmpty()) {
+                meslSV.updateMeal(mealNo, mealName, mealContent, mealCal, mealAllergen, mealPrice, mealPhoto, mealRecipe, launch);
+            }else {
+                meslSV.updateMeal(mealNo, mealName, mealContent, mealCal, mealAllergen, mealPrice, mealRecipe, launch);
+            }
+            MealVO updatedMeal = meslSV.findByMealNo(mealNo);
             if (updatedMeal != null) {
-                req.setAttribute("Meal", updatedMeal);
+                req.setAttribute("meal", updatedMeal);
                 RequestDispatcher productPage = req.getRequestDispatcher("/meal/ProductPage.jsp");
                 productPage.forward(req, res);
             }
         }
+        if ("listAll".equals(action)) {
+            MealService meslSV=new MealService();
+            List<MealVO> meals=meslSV.getAll();
+            if (meals != null) {
+                req.setAttribute("lastAllMeal", meals);
+                RequestDispatcher productPage = req.getRequestDispatcher("/meal/ListMealProduct.jsp");
+                productPage.forward(req, res);
+            }
+        }
+        if ("toUpdate".equals(action)) {
+            mealNo = Integer.valueOf(req.getParameter("mealNo"));
+            MealService mealSV =new MealService();
+            MealVO meal = mealSV.findByMealNo(mealNo);
+            if (meal != null) {
+                req.setAttribute("meal", meal);
+                RequestDispatcher productPage = req.getRequestDispatcher("/meal/MealUpdate.jsp");
+                productPage.forward(req, res);
+            }
+        }
+        if ("findByprod".equals(action)) {
 
+            mealNo = Integer.valueOf(req.getParameter("mealNo"));
+            MealService mealSV =new MealService();
+            MealVO meal = mealSV.findByMealNo(mealNo);
+            if (meal != null) {
+                req.setAttribute("meal", meal);
+                RequestDispatcher productPage = req.getRequestDispatcher("/meal/ProductPage.jsp");
+                productPage.forward(req, res);
+            }
+        }
     }
 }

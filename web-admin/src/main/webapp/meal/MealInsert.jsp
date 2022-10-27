@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>新增菜單商品</title>
-    <link type="text/css" href="../css/jihaoshi.css" rel="stylesheet">
+    <link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
     <style>
         #pageHead{
             width: 100%;
@@ -30,8 +30,11 @@
                     <ul class="treeview">
                         <li id="cate_D" class="expanded"><H1>功能列表</H1>
                             <ul class="main">
-                                <li><a
-                                        href="<%=request.getContextPath()%>/meal/MealInsert.jsp">新增菜單</a>
+                                <li>
+                                    <a href="<%=request.getContextPath()%>/meal/MealInsert.jsp">新增菜單</a>
+                                </li>
+                                <li>
+                                    <a href="<%=request.getContextPath()%>/index.jsp">回首頁</a>
                                 </li>
                             </ul>
                     </ul>
@@ -56,14 +59,14 @@
 
                                     <div>
                                         <input type="text" name="action" value="insert" hidden>
-                                        <label>輸入菜單名稱：</label>
+                                        <label>菜單名稱：</label>
                                         <input type="text" name="mealName" value="<%=(meal==null)? "":meal.getMealName() %>"><br><br>
-                                        <label>輸入食材內容：</label>
+                                        <label>食材內容：</label>
                                         <input type="text" name="mealContent" value="<%=(meal==null)? "":meal.getMealContent()%>"><br><br>
-                                        <label>輸入熱量：</label>
+                                        <label>食品熱量：</label>
                                         <input type="text" name="mealCal">
                                         <br><br>
-                                        <label>輸入可能過敏源：</label>
+                                        <label>過敏物質：</label>
                                         <input type="text" name="mealAllergen" value="<%=(meal==null)? "":meal.getMealAllergen()%>"><br><br>
                                         <label>輸入售價：</label>
                                         <input type="text" name="maelPrice" ><br><br>

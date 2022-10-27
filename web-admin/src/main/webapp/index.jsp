@@ -36,11 +36,11 @@
                     <ul class="treeview">
                         <li id="cate_D" class="expanded"><H1>功能列表</H1>
                             <ul class="main">
-                                <li><a
-                                        href="<%=request.getContextPath()%>/meal/MealInsert.jsp">新增菜單商品</a>
+                                <li>
+                                    <a href="<%=request.getContextPath()%>/meal/MealInsert.jsp">新增菜單商品</a>
                                 </li>
-                                <li><a
-                                        href="<%=request.getContextPath()%>/meal/ListMealProduct.jsp">菜單商品列表</a>
+                                <li>
+                                    <a href="meal/mealController?action=listAll" >菜單商品列表</a>
                                 </li>
                             </ul>
                     </ul>
