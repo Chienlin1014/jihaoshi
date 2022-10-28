@@ -12,7 +12,7 @@
 </head>
 <body>
 <img src="../images/JihaoshiPageHead.jpg" id="pageHead">
-
+<p></p>
 <div id="WRAPPER" class="ecsite-layout style_shopping ecsite-search">
     <div id="CONTENT" class="layout-wrapper">
         <div class="layout-center" style="text-align:center">
