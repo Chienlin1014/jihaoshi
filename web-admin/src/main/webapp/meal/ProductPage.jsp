@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Title</title>
-<%--    <link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">--%>
+    <link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
     <style>
         #productPhoto {
             width: 500px;
