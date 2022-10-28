@@ -308,7 +308,7 @@ a:focus, button:focus, input {
     -moz-outline-style: none
 }
 
-label, button, .button {
+button, .button {
     cursor: pointer
 }
 
@@ -1623,3 +1623,24 @@ popTrace
     }
 }
 
+#pageHead{
+    width: 100%;
+    height: 30%;
+}
+.prod_area{
+    display: flex;
+    flex-direction: row;
+}
+.div_productPage{
+    width:500px;
+    height: 500px;
+    margin: 20px;
+    float:left;
+}
+#productPhoto {
+    width: 500px;
+    height: 500px;
+}
+.mealDescription{
+    font-size: 18px;
+}
