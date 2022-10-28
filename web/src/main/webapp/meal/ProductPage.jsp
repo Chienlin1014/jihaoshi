@@ -1,6 +1,7 @@
 <%@ page import="com.meal.model.MealVO" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     MealVO meal = (MealVO) request.getAttribute("meal");
@@ -97,12 +98,14 @@
             $('#price').text(price);
         });
         $('#quantity1\\.2').click(function () {
+
             let cal =
             <%=meal.getMealCal()%> *
             $('#quantity1\\.2').val()
             let price =
             <%=meal.getMealPrice()%> *
             $('#quantity1\\.2').val()
+
             $('#cal').text(cal);
             $('#price').text(price);
         });
@@ -113,6 +116,7 @@
             let price =
             <%=meal.getMealPrice()%> *
             $('#quantity1\\.5').val()
+
             $('#cal').text(cal);
             $('#price').text(price);
         });

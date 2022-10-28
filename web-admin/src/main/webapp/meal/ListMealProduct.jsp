@@ -84,7 +84,6 @@
                                         <input type="text" name="mealNo" value="${meal.mealNo}" hidden>
                                         <input type="text" name="launch" value="${meal.launch eq 0?1:0}" hidden>
                                         <input type="text" name="action" value="launch" hidden>
-
                                     </form>
                                     <button type="submit" form="edit${meal.mealNo}">修改商品</button>
                                     <button type="submit" form="launch${meal.mealNo}" class="launchSwitch">${meal.launch eq 0?"上架":"下架"}</button>

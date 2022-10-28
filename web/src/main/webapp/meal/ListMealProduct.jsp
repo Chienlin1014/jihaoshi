@@ -52,15 +52,12 @@
                         <c:forEach var="meal" items="${meals}" begin="<%= pageIndex %>"
                                    end="<%= pageIndex+rowsPerPage-1 %>">
                             <dl class="col3f" id="DRAA0A-A900BUT82">
-                                <dd class="c1f"><a class="prod_img"
-                                                   href="mealController?action=findByprod&mealNo=${meal.mealNo}">
+                                <dd class="c1f"><a class="prod_img" href="mealController?action=findByprod&mealNo=${meal.mealNo}">
                                     <img src="data:image/png;base64,${meal.showPhoto}"></a></dd>
                                 <dd class="c2f">
                                     <ul class="tag_box s_label"></ul>
-                                    <h5 class="prod_name"><a
-                                            href="mealController?action=findByprod&mealNo=${meal.mealNo}">${meal.mealName}</a>
+                                    <h5 class="prod_name"><a href="mealController?action=findByprod&mealNo=${meal.mealNo}">${meal.mealName}</a>
                                     </h5>
-
                                     <br>
                                     <span style="font-size: 18px">簡易食譜：${meal.mealRecipe}</span>
                                     <br>
@@ -74,6 +71,7 @@
                                         <li><span style="font-size: 18px">價格NT$${meal.mealPrice}</span>
                                         </li>
                                     </ul>
+
                                     <form method="post" action="#" enctype="application/x-www-form-urlencoded"
                                           id="cart${meal.mealNo}">
                                         <input type="text" value="${meal.mealNo}" name="mealNo" hidden>
@@ -88,8 +86,7 @@
                                     <button type="submit" form="checkout${meal.mealNo}">直接購買</button>
                                     <br>
                                     <P>評論人數：${meal.commentPeople}</P>
-                                    <p>
-                                        產品評價：${meal.commentPeople==0?"尚無人評分":(meal.commentScore/meal.commentPeople)}</p>
+                                    <p>產品評價：${meal.commentPeople==0?"尚無人評分":(meal.commentScore/meal.commentPeople)}</p>
                                 </dd>
                             </dl>
                         </c:forEach>
