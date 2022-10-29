@@ -56,28 +56,28 @@
                             <br>
                             <label>評論人數：</label><span><%=meal.getCommentPeople()%></span>
                             <br>
-
                             <label>評分：</label><span><%=(meal.getCommentPeople() != 0) ? (meal.getCommentScore() / meal.getCommentPeople()) : "尚無人評分"%> </span>
                            <br>
                             <label>調整分量：</label> </p>
-                                <span>
-                                    <input type="radio" name="quantity" value="1" id="quantity1" class="quantity"
-                                           checked>
+
+                                <input type="radio" name="quantity" value="1" id="quantity1" class="quantity"
+                                       checked>
                             <label for="quantity1">原始分量</label>
                             <input type="radio" name="quantity" value="1.2" id="quantity1.2" class="quantity">
                             <label for="quantity1.2">1.2倍</label>
                             <input type="radio" name="quantity" value="1.5" id="quantity1.5" class="quantity">
-                            <label for="quantity1.5">1.5倍</label>
-                                </span></p>
-                                <form method="post" action="#" id="formCart">
-                                <input type="text" value="<%=meal.getMealNo()%>" name="mealNo" hidden>
-
+                            <label for="quantity1.5">1.5倍</label></p>
+                            </span>
+                            <form method="post" action="mealController" id="formCart">
+                                <input type="text" name="mealNo" value="<%=meal.getMealNo()%>"  hidden>
+                                <input type="text"  name="action" value="cartAdd" hidden>
+                                <input type="text" name="quantityCart" id="quantityCart" value="1" hidden>
                             </form>
                             <form method="post" action="#" id="formCheckout">
                                 <input type="text" value="<%=meal.getMealNo()%>" name="mealNo" hidden>
-
+                                <input type="text" name="quantityCheckout" id="quantityCheckout" value="1" hidden>
                             </form>
-                            </span>
+
                             <button type="submit" form="formCart">加入購物車</button>
                             <button type="submit" form="formCheckout">直接購買</button>
                         </div>
@@ -100,6 +100,8 @@
             $('#quantity1').val()
             $('#cal').text(cal);
             $('#price').text(price);
+            $('#quantityCart').attr('value',$('#quantity1').val());
+            $('#quantityCheckout').attr('value',$('#quantity1').val());
         });
         $('#quantity1\\.2').click(function () {
             let cal =
@@ -110,6 +112,8 @@
             $('#quantity1\\.2').val()
             $('#cal').text(cal);
             $('#price').text(price);
+            $('#quantityCart').attr('value',$('#quantity1\\.2').val());
+            $('#quantityCheckout').attr('value', $('#quantity1\\.2').val());
         });
         $('#quantity1\\.5').click(function () {
             let cal =
@@ -117,9 +121,11 @@
             $('#quantity1\\.5').val()
             let price =
             <%=meal.getMealPrice()%> *
-            $('#quantity1\\.5').val()
+            $('#quantity1\\.5').val();
             $('#cal').text(cal);
             $('#price').text(price);
+            $('#quantityCart').attr('value',$('#quantity1\\.5').val());
+            $('#quantityCheckout').attr('value',$('#quantity1\\.5').val());
         });
     });
 </script>
