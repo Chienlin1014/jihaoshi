@@ -12,55 +12,60 @@ MemberVO MemberVO = (MemberVO) request.getAttribute("memberVO");
 <title>會員新增 - addmember.jsp</title>
 
 <style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
-
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
-
-<style>
+body {
+	background-color: lightgray;
+	}
 table {
-	width: 450px;
-	background-color: white;
+	width: 455px;
+	background-color: lightgray;
 	margin-top: 1px;
 	margin-bottom: 1px;
-	
+	magin-left: 50%;
+	font-size: 18px;
 }
-
-
 
 table, th, td {
 	border: 0px solid #CCCCFF;
+	background-color: lightgray;
 }
 
 th, td {
-	padding: 1px;
+	padding: 5px;
 }
 
+h3 {
+	text-align: center;
+}
 
+form {
+	border: 1px solid black;
+	width: 500px;
+	height: 500px;
+	margin-left: 30%;
+	position: absolute;
+	background-color: lightgray;
+}
 
+#submit {
+	position: absolute;
+	margin-left: 40%;
+}
+
+input {
+	background-color: lightgray;
+}
 </style>
+
+
 
 </head>
 <body bgcolor='white'>
 
-	<h3>會員註冊:</h3>
+
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red ">請修正以下錯誤:</font>
+		<font style="color: red">請修正以下錯誤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
@@ -69,6 +74,7 @@ th, td {
 	</c:if>
 
 	<FORM METHOD="post" ACTION="MemberServlet" name="form1">
+		<h3 id="form-title">會員註冊:</h3>
 		<table>
 			<tr>
 				<td>會員帳號:</td>
@@ -105,10 +111,11 @@ th, td {
 				<td><input type="TEXT" name="memberEmail" size="45"
 					value="<%=(MemberVO == null) ? "" : MemberVO.getMemberEmail()%>" /></td>
 			</tr>
-
+			<tr>
+				<td><input type="hidden" name="action" value="insert">
+					<input type="submit" value="送出新增" id="submit"></td>
+			</tr>
 		</table>
-		<br> <input type="hidden" name="action" value="insert"> <input
-			type="submit" value="送出新增" id="submit">
 
 	</FORM>
 </body>
