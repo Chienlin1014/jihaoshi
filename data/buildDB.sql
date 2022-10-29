@@ -214,26 +214,28 @@ CREATE TABLE LATEST_NEWS
     PRIMARY KEY (NEWS_NO)
 );
 
-CREATE TABLE PHYSICAL_COURSE
-(
-    COURSE_NO                INT           NOT NULL AUTO_INCREMENT COMMENT '實體課程編號',
-    COURSE_NAME              VARCHAR(50)   NOT NULL COMMENT '實體課程名稱',
-    COURSE_HR                INT           NOT NULL COMMENT '上課時數',
-    COURSE_PRICE             INT           NOT NULL COMMENT '課程費用',
-    COURSE_TEACHER           CHAR(12)      NOT NULL COMMENT '授課老師',
-    COURSE_DATE              TIMESTAMP     NOT NULL COMMENT '開課時間',
-    COURSE_LOCATION          CHAR(12)      NOT NULL COMMENT '上課教室',
-    COURSE_INFO              VARCHAR(1000) NOT NULL COMMENT '課程簡介',
-    COURSE_STATUS            INT           NOT NULL DEFAULT 0 COMMENT '狀態',
-    COURSE_ON_BOARD_DATE     TIMESTAMP     NOT NULL COMMENT '上架日期',
-    COURSE_UPDATE_TIME       TIMESTAMP     NOT NULL COMMENT '修改日期',
-    COURSE_SIGN_UP_START_DAY DATETIME      NOT NULL COMMENT '報名開始日期',
-    COURSE_SING_UP_END_DAY   DATETIME      NOT NULL COMMENT '報名結束日期',
-    MAX_SIGN_UP_PEOPLE       INT           NOT NULL COMMENT '人數上限',
-    MIN_SIGN_UP_PEOPLE       INT           NOT NULL COMMENT '人數下限',
-    CURRENT_SIGN_UP_PEOPLE   INT           NOT NULL DEFAULT 0 COMMENT '目前報名人數',
-    PRIMARY KEY (COURSE_NO)
+create table JihaoshiDB.Physical_course (
+    course_no int not null auto_increment comment'實體課程編號',
+    course_name varchar(50) not null comment '實體課程名稱',
+    course_hr int not null comment '上課時數',
+    course_price int not null comment '課程費用',
+    course_teacher char(12) not null comment '授課老師',
+    course_date timestamp not null comment '開課時間',
+    course_location char(12) not null comment '上課教室',
+    course_info varchar(1000) not null comment '課程簡介',
+    course_status int not null default 0 comment '狀態',
+    create_date timestamp not null default current_timestamp comment '上架日期',
+    update_time timestamp not null default current_timestamp on update current_timestamp  comment '修改日期',
+    sign_up_start_day date not null comment '報名開始日期',
+    sign_up_end_day date not null comment '報名結束日期',
+    max_sign_up_people int not null comment '人數上限',
+    min_sign_up_people int not null comment '人數下限',
+    current_sign_up_people int not null default 0 comment '目前報名人數',
+    pic longblob comment '課程照片',
+
+	primary key (course_no)
 );
+
 
 CREATE TABLE PHYCAL_COURSE_REG_LIST
 (
