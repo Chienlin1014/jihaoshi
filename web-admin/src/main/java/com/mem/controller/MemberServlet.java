@@ -66,28 +66,28 @@ public class MemberServlet extends HttpServlet {
 				errorMsgs.add("會員email請勿空白");
 			}
 
-			MemberVO MemberVO = new MemberVO();
-			MemberVO.setMemberName(membername);
-			MemberVO.setMemberAccount(memberacc);
-			MemberVO.setMemberPassword(memberpas);
-			MemberVO.setMemberPhone(memberpho);
-			MemberVO.setMemberNickname(membernick);
-			MemberVO.setMemberAddress(memberadd);
-			MemberVO.setMemberEmail(memberemail);
+			MemberVO memVO = new MemberVO();
+			memVO.setMemberName(membername);
+			memVO.setMemberAccount(memberacc);
+			memVO.setMemberPassword(memberpas);
+			memVO.setMemberPhone(memberpho);
+			memVO.setMemberNickname(membernick);
+			memVO.setMemberAddress(memberadd);
+			memVO.setMemberEmail(memberemail);
 
 			if (!errorMsgs.isEmpty()) {
-				req.setAttribute("memberVO", MemberVO);
+				req.setAttribute("memberVO", memVO);
 				RequestDispatcher failureView = req.getRequestDispatcher("/member/addmember.jsp");
 				failureView.forward(req, res);
 				return;
 			}
 
 			MemService memSvc = new MemService();
-			MemberVO = memSvc.addmember(membername, memberacc, memberpas, memberpho, membernick, memberadd,
+			memVO = memSvc.addmember(membername, memberacc, memberpas, memberpho, membernick, memberadd,
 					memberemail);
 			
 			
-			req.setAttribute("MemberVO", MemberVO);
+			req.setAttribute("MemberVO", memVO);
 			String url = "/member/listAllMember.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
@@ -137,18 +137,18 @@ public class MemberServlet extends HttpServlet {
 				errorMsgs.add("會員email請勿空白");
 			}
 
-			MemberVO MemberVO = new MemberVO();
-			MemberVO.setMemberAccount(memberacc);
-			MemberVO.setMemberName(membername);
-			MemberVO.setMemberPassword(memberpas);
-			MemberVO.setMemberPhone(memberpho);
-			MemberVO.setMemberNickname(membernick);
-			MemberVO.setMemberAddress(memberadd);
-			MemberVO.setMemberEmail(memberemail);
-			MemberVO.setMemberNo(memberno);
+			MemberVO memVO = new MemberVO();
+			memVO.setMemberAccount(memberacc);
+			memVO.setMemberName(membername);
+			memVO.setMemberPassword(memberpas);
+			memVO.setMemberPhone(memberpho);
+			memVO.setMemberNickname(membernick);
+			memVO.setMemberAddress(memberadd);
+			memVO.setMemberEmail(memberemail);
+			memVO.setMemberNo(memberno);
 
 			if (!errorMsgs.isEmpty()) {
-				req.setAttribute("MemberVO", MemberVO);
+				req.setAttribute("MemberVO", memVO);
 				RequestDispatcher failureView = req.getRequestDispatcher("/member/update_mem_input.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
@@ -156,11 +156,11 @@ public class MemberServlet extends HttpServlet {
 
 			/*************************** 2.開始修改資料 *****************************************/
 			MemService memSvc = new MemService();
-			MemberVO = memSvc.updateEmp(memberacc, memberno, memberpas, membername, memberpho, membernick, memberadd,
+			memVO = memSvc.updateEmp(memberacc, memberno, memberpas, membername, memberpho, membernick, memberadd,
 					memberemail);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("MemberVO", MemberVO);
+			req.setAttribute("MemberVO", memVO);
 			String url = "listOneMember.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
@@ -200,8 +200,8 @@ public class MemberServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 *****************************************/
 			MemService memSvc = new MemService();
-			MemberVO MemberVO = memSvc.getOneMem(memberNo);
-			if (MemberVO == null) {
+			MemberVO memVO = memSvc.getOneMem(memberNo);
+			if (memVO == null) {
 				errorMsgs.add("查無資料");
 
 			}
@@ -213,7 +213,7 @@ public class MemberServlet extends HttpServlet {
 			}
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("MemberVO", MemberVO);
+			req.setAttribute("MemberVO", memVO);
 			String url = "listOneMember.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
@@ -230,8 +230,8 @@ public class MemberServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 ****************************************/
 			MemService memSvc = new MemService();
-			MemberVO MemberVO = memSvc.getOneMem(memberNo);
-			if (MemberVO == null) {
+			MemberVO memVO = memSvc.getOneMem(memberNo);
+			if (memVO == null) {
 				errorMsgs.add("查無資料");
 
 			}
@@ -241,7 +241,7 @@ public class MemberServlet extends HttpServlet {
 				return;// 程式中斷
 			}
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-			req.setAttribute("MemberVO", MemberVO);
+			req.setAttribute("MemberVO", memVO);
 			String url = "update_mem_input.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 			successView.forward(req, res);
