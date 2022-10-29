@@ -58,20 +58,32 @@
                             <br>
                             <label>評分：</label><span><%=(meal.getCommentPeople() != 0) ? (meal.getCommentScore() / meal.getCommentPeople()) : "尚無人評分"%> </span>
                            <br>
-                            <label>調整分量：</label> </p>
-
-                                <input type="radio" name="quantity" value="1" id="quantity1" class="quantity"
-                                       checked>
+                            <label>調整分量：</label><br>
+                            <input type="radio" name="quantity" value="1" id="quantity1" class="quantity" checked>
                             <label for="quantity1">原始分量</label>
                             <input type="radio" name="quantity" value="1.2" id="quantity1.2" class="quantity">
                             <label for="quantity1.2">1.2倍</label>
                             <input type="radio" name="quantity" value="1.5" id="quantity1.5" class="quantity">
-                            <label for="quantity1.5">1.5倍</label></p>
-                            </span>
+                            <label for="quantity1.5">1.5倍</label>
+                            </span><br>
                             <form method="post" action="mealController" id="formCart">
-                                <input type="text" name="mealNo" value="<%=meal.getMealNo()%>"  hidden>
-                                <input type="text"  name="action" value="cartAdd" hidden>
+                                <input type="text" name="mealNo" value="<%=meal.getMealNo()%>" hidden>
+                                <input type="text" name="action" value="cartAdd" hidden>
                                 <input type="text" name="quantityCart" id="quantityCart" value="1" hidden>
+                                <label style="font-size: 18px">請輸入購買數量：</label>
+                                <select name="amount" style="font-size: 18px">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                </select>
+
                             </form>
                             <form method="post" action="#" id="formCheckout">
                                 <input type="text" value="<%=meal.getMealNo()%>" name="mealNo" hidden>
@@ -101,8 +113,8 @@
             $('#quantity1').val()
             $('#cal').text(cal);
             $('#price').text(price);
-            $('#quantityCart').attr('value',$('#quantity1').val());
-            $('#quantityCheckout').attr('value',$('#quantity1').val());
+            $('#quantityCart').attr('value', $('#quantity1').val());
+            $('#quantityCheckout').attr('value', $('#quantity1').val());
         });
         $('#quantity1\\.2').click(function () {
             let cal =
@@ -113,7 +125,7 @@
             $('#quantity1\\.2').val()
             $('#cal').text(cal);
             $('#price').text(price);
-            $('#quantityCart').attr('value',$('#quantity1\\.2').val());
+            $('#quantityCart').attr('value', $('#quantity1\\.2').val());
             $('#quantityCheckout').attr('value', $('#quantity1\\.2').val());
         });
         $('#quantity1\\.5').click(function () {
@@ -125,8 +137,8 @@
             $('#quantity1\\.5').val();
             $('#cal').text(cal);
             $('#price').text(price);
-            $('#quantityCart').attr('value',$('#quantity1\\.5').val());
-            $('#quantityCheckout').attr('value',$('#quantity1\\.5').val());
+            $('#quantityCart').attr('value', $('#quantity1\\.5').val());
+            $('#quantityCheckout').attr('value', $('#quantity1\\.5').val());
         });
     });
 </script>
