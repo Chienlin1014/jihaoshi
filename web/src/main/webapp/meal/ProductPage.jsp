@@ -75,6 +75,7 @@
                             </form>
                             <form method="post" action="#" id="formCheckout">
                                 <input type="text" value="<%=meal.getMealNo()%>" name="mealNo" hidden>
+                                <input type="text" name="action" value="checkout" hidden>
                                 <input type="text" name="quantityCheckout" id="quantityCheckout" value="1" hidden>
                             </form>
 
