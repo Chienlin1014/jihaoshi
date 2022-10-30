@@ -3,7 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%
-    List<MealVO> meals = (List<MealVO>) request.getAttribute("lastAllMeal");
+    List<MealVO> meals = (List<MealVO>) request.getAttribute("listMeals");
     request.setAttribute("meals", meals);
 
 %>
