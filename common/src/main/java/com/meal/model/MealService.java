@@ -2,6 +2,8 @@ package com.meal.model;
 
 import java.util.List;
 
+import com.cart.model.CartProdVO;
+
 public class MealService {
     private MealDAO dao;
 
@@ -35,5 +37,11 @@ public class MealService {
 
     public boolean launchSwitch(Integer mealNo, Integer launch) {
         return dao.launchSwitch(mealNo,launch);
+    }
+
+    public int calculatePrice(List<CartProdVO> cartProds) {
+        return cartProds.stream()
+            .map(cartProdVO -> ((int) (cartProdVO.getPrice() * cartProdVO.getAmount() * cartProdVO.getQuantity())))
+            .mapToInt(value -> value).sum();
     }
 }
