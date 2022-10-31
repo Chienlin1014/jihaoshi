@@ -20,8 +20,14 @@
             <dl class="block_W">
                 <dd id="CategoryContainer">
                     <ul class="treeview">
-                        <li id="cate_D" class="expanded"><H1>功能列表</H1>
+                        <li id="cate_D" class="expanded"><H1>功能列表</H1></li>
                             <ul class="main">
+                                <li>
+                                    <a href="mealController?action=listAll">產品清單</a>
+                                </li>
+                                <li>
+                                    <a href="<%=request.getContextPath()%>/meal/MealCart.jsp">菜單商品購物車</a>
+                                </li>
                                 <li>
                                     <a href="<%=request.getContextPath()%>/index.jsp">回首頁</a>
                                 </li>

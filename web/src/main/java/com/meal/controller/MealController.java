@@ -82,6 +82,7 @@ public class MealController extends HttpServlet {
                         prod.setAmount(prod.getAmount() + amount); // 找到就改變數量跟價格
                         prod.setPrice((int) (meal.getMealPrice() * quantity * amount));
                         session.setAttribute("cartProds", cartProds);
+                        res.sendRedirect(req.getHeader("referer"));
                         return;
                     }
                 }
@@ -94,7 +95,7 @@ public class MealController extends HttpServlet {
                 cartProds.add(prod);
                 session.setAttribute("cartProds", cartProds);
             }
-
+            res.sendRedirect(req.getHeader("referer"));
         }
     }
 }
