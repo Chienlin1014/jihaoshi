@@ -1,7 +1,9 @@
+<%@ page import="com.cart.model.CartProdVO" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
   session.getAttribute("account");
-
+  List<CartProdVO> cartProds = (List<CartProdVO>) session.getAttribute("cartProds");
 %>
 
 <html>
@@ -45,7 +47,7 @@
                   <a href="<%=request.getContextPath()%>/meal/MealProductIndex.jsp">好食產品專區</a>
                 </li>
                 <li>
-                  <a href="<%=request.getContextPath()%>/meal/MealCart.jsp">菜單商品購物車</a>
+                  <a href="<%=request.getContextPath()%>/meal/MealCart.jsp">菜單商品購物車<%= (cartProds==null)?"0":("("+cartProds.size()+")")%></a>
                 </li>
                 <li>
                   <a href="#">線上課程購物車</a>

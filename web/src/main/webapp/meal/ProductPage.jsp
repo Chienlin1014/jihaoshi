@@ -1,9 +1,13 @@
 <%@ page import="com.meal.model.MealVO" %>
+<%@ page import="com.cart.model.CartProdVO" %>
+<%@ page import="java.util.List" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+    List<CartProdVO> cartProds = (List<CartProdVO>) session.getAttribute("cartProds");
     MealVO meal = (MealVO) request.getAttribute("meal");
+
 %>
 <html>
 <head>
@@ -26,7 +30,7 @@
                                     <a href="mealController?action=listAll">產品清單</a>
                                 </li>
                                 <li>
-                                    <a href="<%=request.getContextPath()%>/meal/MealCart.jsp">菜單商品購物車</a>
+                                    <a href="<%=request.getContextPath()%>/meal/MealCart.jsp">菜單商品購物車<%= (cartProds==null)?"0":("("+cartProds.size()+")")%></a>
                                 </li>
                                 <li>
                                     <a href="<%=request.getContextPath()%>/index.jsp">回首頁</a>

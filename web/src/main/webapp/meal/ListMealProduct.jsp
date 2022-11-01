@@ -1,8 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.meal.model.MealVO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.cart.model.CartProdVO" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%
+    List<CartProdVO> cartProds = (List<CartProdVO>) session.getAttribute("cartProds");
     List<MealVO> meals = (List<MealVO>) request.getAttribute("listMeals");
     request.setAttribute("meals", meals);
 
@@ -43,7 +45,7 @@
                         <li id="cate_D" class="expanded"><H1>功能列表</H1>
                             <ul class="main">
                                 <li>
-                                    <a href="<%=request.getContextPath()%>/meal/MealCart.jsp">菜單商品購物車</a>
+                                    <a href="<%=request.getContextPath()%>/meal/MealCart.jsp">菜單商品購物車<%= (cartProds==null)?"":("("+cartProds.size()+")")%></a>
                                 </li>
                                 <li>
                                     <a href="<%=request.getContextPath()%>/index.jsp">回首頁</a>
@@ -95,7 +97,7 @@
                                     </form>
                                     <button type="submit" form="cart${meal.mealNo}">加入購物車</button>
                                     <button type="submit" form="checkout${meal.mealNo}">直接購買</button>
-                                    <br>
+                                    <br><br>
                                     <P>評論人數：${meal.commentPeople}</P>
                                     <p>產品評價：${meal.commentPeople==0?"尚無人評分":(meal.commentScore/meal.commentPeople)}</p>
                                 </dd>
