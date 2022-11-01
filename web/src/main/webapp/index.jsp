@@ -47,7 +47,7 @@
                   <a href="<%=request.getContextPath()%>/meal/MealProductIndex.jsp">好食產品專區</a>
                 </li>
                 <li>
-                  <a href="<%=request.getContextPath()%>/meal/MealCart.jsp">菜單商品購物車<%= (cartProds==null)?"0":("("+cartProds.size()+")")%></a>
+                  <a href="<%=request.getContextPath()%>/meal/MealCart.jsp">菜單商品購物車<%= (cartProds==null)?"":(" ("+cartProds.size()+")")%></a>
                 </li>
                 <li>
                   <a href="#">線上課程購物車</a>
