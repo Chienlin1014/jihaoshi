@@ -7,7 +7,7 @@
 <html>
 <head>
   <title>Jihaoshi</title>
-  <link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
+  <link type="text/css" href="${ctxPath}/css/jihaoshi.css" rel="stylesheet">
   <style>
     #pageHead {
       width: 100%;
@@ -20,7 +20,7 @@
   </style>
 </head>
 <body>
-<img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
+<img src="${ctxPath}/images/JihaoshiPageHead.jpg" id="pageHead">
 <div class="block_N" style="margin:0px auto;">
   <!--搜尋欄開始-->
   <div class="Nm" style="display: flex; justify-content: center; align-items: center; ">
