@@ -1,11 +1,8 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="com.meal.model.MealVO" %>
-<%@ page import="com.cart.model.CartProdVO" %>
-<%@ page import="java.util.List" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-    List<CartProdVO> cartProds = (List<CartProdVO>) session.getAttribute("cartProds");
     MealVO meal = (MealVO) request.getAttribute("meal");
 
 %>
@@ -30,7 +27,7 @@
                                     <a href="mealController?action=listAll">產品清單</a>
                                 </li>
                                 <li>
-                                    <a href="<%=request.getContextPath()%>/meal/MealCart.jsp">菜單商品購物車<%= (cartProds==null)?"":(" ("+cartProds.size()+")")%></a>
+                                    <a href="<%=request.getContextPath()%>/meal/MealCart.jsp">菜單商品購物車<c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
                                 </li>
                                 <li>
                                     <a href="<%=request.getContextPath()%>/index.jsp">回首頁</a>
@@ -49,21 +46,21 @@
 
                         <div class="div_productPage" style="text-align: left;line-height: 35px">
                             <span class="mealDescription">
-                            <label>菜單名稱：</label><span><%=meal.getMealName()%></span>
+                            <label>菜單名稱：</label><span>${meal.mealName}</span>
                             <br>
-                            <label>內容物：</label><span><%=meal.getMealContent()%></span>
+                            <label>內容物：</label><span>${meal.mealContent}</span>
                             <br>
-                            <label>熱量：</label><span id="cal"><%=meal.getMealCal()%></span>
+                            <label>熱量：</label><span id="cal">${meal.mealCal}</span>
                             <br>
-                            <label>過敏源：</label><span><%=meal.getMealAllergen()%></span>
+                            <label>過敏源：</label><span>${meal.mealAllergen}</span>
                             <br>
-                            <label>價格：</label><span id="price"><%=meal.getMealPrice()%></span>
+                            <label>價格：</label><span id="price">${meal.mealPrice}</span>
                             <br>
-                            <label>食譜：</label><span><%=meal.getMealRecipe()%></span>
+                            <label>食譜：</label><span>${meal.mealRecipe}</span>
                             <br>
-                            <label>評論人數：</label><span><%=meal.getCommentPeople()%></span>
+                            <label>評論人數：</label><span>${meal.commentPeople}</span>
                             <br>
-                            <label>評分：</label><span><%=(meal.getCommentPeople() != 0) ? (meal.getCommentScore() / meal.getCommentPeople()) : "尚無人評分"%> </span>
+                            <label>評分：</label><span>${meal.commentPeople==0?"尚無人評分":(meal.commentScore/meal.commentPeople)}</span>
                            <br>
                             <label>調整分量：</label><br>
                             <input type="radio" name="quantity" value="1" id="quantity1" class="quantity" checked>
@@ -74,7 +71,7 @@
                             <label for="quantity1.5">1.5倍</label>
                             </span><br>
                             <form method="post" action="mealController" id="formCart">
-                                <input type="text" name="mealNo" value="<%=meal.getMealNo()%>" hidden>
+                                <input type="text" name="mealNo" value="${meal.mealNo}" hidden>
                                 <input type="text" name="action" value="cartAdd" hidden>
                                 <input type="text" name="quantityCart" id="quantityCart" value="1" hidden>
                                 <label style="font-size: 18px">請輸入購買數量：</label>
