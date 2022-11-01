@@ -73,6 +73,7 @@ public class MealController extends HttpServlet {
                 prod.setQuantity(quantity);
                 prod.setAmount(amount);
                 prod.setPrice((int) (meal.getMealPrice() * quantity * amount));
+                prod.setCal((int)(meal.getMealCal()*quantity));
                 cartProds.add(prod);
                 session.setAttribute("cartProds", cartProds);
             } else { // 購物車內有東西時
@@ -92,6 +93,7 @@ public class MealController extends HttpServlet {
                 prod.setQuantity(quantity);
                 prod.setAmount(amount);
                 prod.setPrice((int) (meal.getMealPrice() * quantity * amount));
+                prod.setCal((int)(meal.getMealCal()*quantity));
                 cartProds.add(prod);
                 session.setAttribute("cartProds", cartProds);
             }

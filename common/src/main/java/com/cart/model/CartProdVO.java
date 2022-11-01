@@ -9,6 +9,15 @@ public class CartProdVO implements Serializable {
     private Double quantity;
     private Integer amount;
     private Integer price;
+    private Integer cal;
+
+    public Integer getCal() {
+        return cal;
+    }
+
+    public void setCal(Integer cal) {
+        this.cal = cal;
+    }
 
     public MealVO getMeal() {
         return meal;
