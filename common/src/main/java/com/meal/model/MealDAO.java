@@ -16,6 +16,9 @@ public interface MealDAO {
     MealVO findWithoutAllergen(String mealAllergen);
 
     MealVO findByMealNo(Integer mealNo);
+    MealVO findByMealNo(Integer mealNo, Double quantity);
 
     List<MealVO> getAll();
+
+    List<MealVO> getAllLaunch();
 }
