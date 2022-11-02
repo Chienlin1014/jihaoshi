@@ -1,9 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%
-  session.getAttribute("account");
-
-%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
   <title>Jihaoshi</title>
@@ -43,6 +40,9 @@
               <ul class="main">
                 <li>
                   <a href="mealController?action=listAll">產品清單</a>
+                </li>
+                <li>
+                  <a href="<%=request.getContextPath()%>/cart/MealCart.jsp">菜單商品購物車<c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
                 </li>
               </ul>
           </ul>
