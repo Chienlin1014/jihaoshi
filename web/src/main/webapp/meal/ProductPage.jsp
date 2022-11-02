@@ -27,7 +27,7 @@
                                     <a href="mealController?action=listAll">產品清單</a>
                                 </li>
                                 <li>
-                                    <a href="<%=request.getContextPath()%>/meal/MealCart.jsp">菜單商品購物車<c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
+                                    <a href="<%=request.getContextPath()%>/cart/MealCart.jsp">菜單商品購物車<c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
                                 </li>
                                 <li>
                                     <a href="<%=request.getContextPath()%>/index.jsp">回首頁</a>
@@ -70,24 +70,13 @@
                             <input type="radio" name="quantity" value="1.5" id="quantity1.5" class="quantity">
                             <label for="quantity1.5">1.5倍</label>
                             </span><br>
-                            <form method="post" action="mealController" id="formCart">
-                                <input type="text" name="mealNo" value="${meal.mealNo}" hidden>
+                            <form method="post" action="${ctxPath}/cart/cartController" id="formCart">
                                 <input type="text" name="action" value="cartAdd" hidden>
+                                <input type="text" name="mealNo" value="${meal.mealNo}" hidden>
                                 <input type="text" name="quantityCart" id="quantityCart" value="1" hidden>
                                 <label style="font-size: 18px">請輸入購買數量：</label>
-                                <select name="amount" style="font-size: 18px">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                                </select>
-
+                                <input name="amount" type="range" min="1" max="99" value="1" id="amount">
+                                <span id="amount_value">1</span>
                             </form>
                             <form method="post" action="#" id="formCheckout">
                                 <input type="text" value="<%=meal.getMealNo()%>" name="mealNo" hidden>
@@ -108,6 +97,9 @@
 
 <script>
     $(document).ready(function () {
+        $('#amount').mousemove(function () {
+            $('#amount_value').html($('#amount').val());
+        });
         $('#quantity1').click(function () {
             let cal =
             <%=meal.getMealCal()%> *
@@ -144,6 +136,7 @@
             $('#quantityCart').attr('value', $('#quantity1\\.5').val());
             $('#quantityCheckout').attr('value', $('#quantity1\\.5').val());
         });
+
     });
 </script>
 </body>

@@ -11,7 +11,7 @@
 <head>
     <title>Title</title>
     <link type="text/css" href="${ctxPath}/css/jihaoshi.css" rel="stylesheet">
-
+    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <img src="../images/JihaoshiPageHead.jpg" id="pageHead">
@@ -23,7 +23,9 @@
 
                 <li><input id="keyword" type="text" class="text ac_input" placeholder="請輸入關鍵字" autocomplete="off"></li>
                 <li><input type="text" name="action" value="keywordSearch" hidden></li>
-                <li><button id="btn_search" type="submit" class="button" form="keywordSearch">搜尋</button></li>
+                <li>
+                    <button id="btn_search" type="submit" class="button" form="keywordSearch">搜尋</button>
+                </li>
 
             </ul>
 
@@ -42,7 +44,8 @@
                         <li id="cate_D" class="expanded"><H1>功能列表</H1>
                             <ul class="main">
                                 <li>
-                                    <a href="${ctxPath}/meal/MealCart.jsp">菜單商品購物車<c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
+                                    <a href="${ctxPath}/cart/MealCart.jsp">菜單商品購物車<c:if
+                                            test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
                                 </li>
                                 <li>
                                     <a href="${ctxPath}/index.jsp">回首頁</a>
@@ -58,7 +61,7 @@
                         <!--商品欄開始-->
                         <%@ include file="page1.jsp" %>
                         <c:forEach var="meal" items="${listMeals}" begin="<%= pageIndex %>"
-                                   end="<%= pageIndex+rowsPerPage-1 %>">
+                                   end="<%= pageIndex+rowsPerPage-1 %>" varStatus="loop">
                             <dl class="col3f" id="DRAA0A-A900BUT82">
                                 <dd class="c1f"><a class="prod_img"
                                                    href="mealController?action=findByprod&mealNo=${meal.mealNo}">
@@ -82,24 +85,13 @@
                                         </li>
                                     </ul>
 
-                                    <form method="post" action="mealController" enctype="application/x-www-form-urlencoded" id="cart${meal.mealNo}">
+                                    <form method="post" action="${ctxPath}/cart/cartController"
+                                          enctype="application/x-www-form-urlencoded" id="cart${meal.mealNo}">
                                         <input type="text" name="action" value="cartAdd" hidden>
                                         <input type="text" value="${meal.mealNo}" name="mealNo" hidden>
                                         <input type="text" name="quantityCart" id="quantityCart" value="1" hidden>
-
-                                        <label style="font-size: 18px">請輸入購買數量：</label>
-                                        <select name="amount" style="font-size: 18px">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>
-                                            <option>9</option>
-                                            <option>10</option>
-                                        </select><br>
+                                        <label style="font-size: 18px">請輸入購買數量：<span id="amount_value_${loop.index}">1</span></label>
+                                        <input name="amount" type="range" min="1" max="99" value="1" id="amount${loop.index}">
                                         <p>(若需調整份量，請進入商品頁面)</p>
                                     </form>
                                     <br>
@@ -126,9 +118,13 @@
     </div>
 </div>
 <script>
-<c:forEach var="meal" items="${listMeals}">
-
-</c:forEach>
+    $(document).ready(function () {
+    <c:forEach var="meal" items="${listMeals}" varStatus="loop">
+        $('#amount${loop.index}').mousemove(function () {
+            $('#amount_value_${loop.index}').html($('#amount${loop.index}').val());
+        });
+    </c:forEach>
+    });
 </script>
 </body>
 </html>
