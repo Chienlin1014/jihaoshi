@@ -6,9 +6,7 @@
 
 
 <%
-OnlineCourseService onlinecourseSvc = new OnlineCourseService();
-List<OnlineCourseVO> list = onlinecourseSvc.getAll();
-pageContext.setAttribute("list", list);
+List<OnlineCourseVO> list = (List<OnlineCourseVO>) request.getAttribute("list");
 %>
 
 
@@ -62,7 +60,7 @@ th, td {
 			<td>
 				<h3>所有線上課程資料 - listAllOnlineCourse.jsp</h3>
 				<h4>
-					<a href="select_page.jsp">回首頁</a>
+					<a href="${pageContext.request.contextPath}/onlinecourse/select_page.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -82,11 +80,8 @@ th, td {
 			<th>評論分數</th>
 			
 		</tr>
-		<%@ include file="page1.file"%>
-		<c:forEach var="onlinecourseVO" items="${list}" 
-		    begin="<%=pageIndex%>" 
-			end="<%=pageIndex+rowsPerPage-1%>"> 
 
+		<c:forEach var="onlinecourseVO" items="${list}" > 
 			<tr>
 				<td>${onlinecourseVO.courseNo}</td>
 				<td>${onlinecourseVO.courseName}</td>
@@ -119,7 +114,7 @@ th, td {
 			</tr>
 		</c:forEach>
 	</table>
-	<%@ include file="page2.file"%>
+
 
 
 </body>

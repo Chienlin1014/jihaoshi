@@ -6,28 +6,31 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import com.online_course.model.OnlineCourseService;
 import com.online_course.model.OnlineCourseVO;
 
 @WebServlet("/OnlineCourse")
+@MultipartConfig
 public class OnlineCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		String action = req.getParameter("action");
+		String action = req.getParameter("action");   //
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
-			List<String> errorMsgs = new LinkedList<String>();
+			List<String> errorMsgs = new LinkedList<String>();  //為了存錯誤訊息
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
+			req.setAttribute("errorMsgs", errorMsgs);  //為了存錯誤訊息  key,value
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			String str = req.getParameter("courseNo");
@@ -36,8 +39,8 @@ public class OnlineCourseServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/onlinecourse/select_page.jsp");
-				failureView.forward(req, res);
+				RequestDispatcher failureView = req.getRequestDispatcher("/onlinecourse/select_page.jsp"); //設定跳轉的頁面
+				failureView.forward(req, res); //執行跳轉
 				return;// 程式中斷
 			}
 
@@ -54,7 +57,7 @@ public class OnlineCourseServlet extends HttpServlet {
 				return;// 程式中斷
 			}
 
-			/*************************** 2.開始查詢資料 *****************************************/
+			/*************************** 2.開始查詢資料(呼叫去拿Service方法，關係到商業邏輯判斷) *****************************************/
 			OnlineCourseService onlinecourseSvc = new OnlineCourseService();
 			OnlineCourseVO onlinecourseVO = onlinecourseSvc.getOneOnlineCourse(courseNo);
 			if (onlinecourseVO == null) {
@@ -82,6 +85,7 @@ public class OnlineCourseServlet extends HttpServlet {
 
 			/*************************** 1.接收請求參數 ****************************************/
 			Integer courseNo = Integer.valueOf(req.getParameter("courseNo"));
+			
 
 			/*************************** 2.開始查詢資料 ****************************************/
 			OnlineCourseService onlinecourseSvc = new OnlineCourseService();
@@ -187,7 +191,6 @@ public class OnlineCourseServlet extends HttpServlet {
 		}
 
 		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
-			System.out.println("~~~~~");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -250,6 +253,10 @@ public class OnlineCourseServlet extends HttpServlet {
 				errorMsgs.add("評論分數請勿空白");
 			}
 
+			
+				
+	
+			
 			OnlineCourseVO onlinecourseVO = new OnlineCourseVO();
 			onlinecourseVO.setCourseName(courseName);
 			onlinecourseVO.setCourseHr(courseHr);
@@ -259,6 +266,15 @@ public class OnlineCourseServlet extends HttpServlet {
 			onlinecourseVO.setCourseStatus(courseStatus);
 			onlinecourseVO.setCommentPeople(commentPeople);
 			onlinecourseVO.setCommentScore(commentScore);
+			
+			Part part = req.getPart("photo");
+			if(part !=null) {
+				byte[] photo = part.getInputStream().readAllBytes();
+				onlinecourseVO.setOnlineCoursePhoto(photo);
+				
+			}else {
+				errorMsgs.add("請選擇圖片上傳，檔案為jpg檔");
+			}
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {

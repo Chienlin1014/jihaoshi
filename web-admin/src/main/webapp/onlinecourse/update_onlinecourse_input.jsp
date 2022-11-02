@@ -66,7 +66,7 @@ OnlineCourseVO onlinecourseVO = (OnlineCourseVO) request.getAttribute("onlinecou
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="/jihaoshitest/OnlineCourse" name="form1">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/OnlineCourse" name="form1">
 <input  type="hidden" name="courseNo" size="45" value= "${onlinecourseVO.courseNo}" />
 <table>
 
@@ -107,8 +107,8 @@ OnlineCourseVO onlinecourseVO = (OnlineCourseVO) request.getAttribute("onlinecou
 	
 		<tr>
 		<td>上架狀態:</td>
-		<td><input type="radio" name="courseStatus"  value="0"/> 上架
-			 <input type="radio" name="courseStatus"  value="1"/>下架
+		<td><input type="radio" name="courseStatus"  value="0" ${(onlinecourseVO.courseStatus==0)? 'checked':'' }/> 上架
+			 <input type="radio" name="courseStatus"  value="1"${(onlinecourseVO.courseStatus==1)? 'checked':'' }/>下架
 		</td>
 	</tr>
 

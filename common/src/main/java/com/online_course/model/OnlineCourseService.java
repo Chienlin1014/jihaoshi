@@ -2,10 +2,6 @@ package com.online_course.model;
 
 import java.util.List;
 
-import com.authority.model.AuthorityDAO_interface;
-import com.authority.model.AuthorityJDBCDAO;
-import com.authority.model.AuthorityVO;
-
 public class OnlineCourseService {
 	private OnlineCourseDAO_interface dao;
 
@@ -32,5 +28,9 @@ public class OnlineCourseService {
 
 	public List<OnlineCourseVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public List<OnlineCourseVO> getByCourseName(String courseName) {
+		return dao.selectByCourseName(courseName);
 	}
 }

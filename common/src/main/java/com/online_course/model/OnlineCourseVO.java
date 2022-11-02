@@ -15,84 +15,108 @@ public class OnlineCourseVO implements Serializable {
 	private Timestamp updateDate;
 	private Integer commentPeople;
 	private Integer commentScore;
-	
-	 public OnlineCourseVO() {
-	    }
+	private byte[] onlineCoursePhoto;
 
-     public OnlineCourseVO(String courseName, String courseHr, String courseTeacher, String courseInfo, Integer coursePrice ,Integer courseStatus) {
-     this.courseName = courseName;
-     this.courseHr = courseHr;
-     this.courseTeacher = courseTeacher;
-     this.courseInfo = courseInfo;
-     this.coursePrice = coursePrice;
-     this.courseStatus = courseStatus;
-   
-    
- }
+	public OnlineCourseVO() {
+	}
+
+	public OnlineCourseVO(String courseName, String courseHr, String courseTeacher, String courseInfo,
+			Integer coursePrice, Integer courseStatus, byte[] onlineCoursePhoto) {
+		this.courseName = courseName;
+		this.courseHr = courseHr;
+		this.courseTeacher = courseTeacher;
+		this.courseInfo = courseInfo;
+		this.coursePrice = coursePrice;
+		this.courseStatus = courseStatus;
+		this.onlineCoursePhoto = onlineCoursePhoto;
+
+	}
+
 	public Integer getCourseNo() {
 		return courseNo;
 	}
+
 	public void setCourseNo(Integer courseNo) {
 		this.courseNo = courseNo;
 	}
+
 	public String getCourseName() {
 		return courseName;
 	}
+
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
+
 	public String getCourseHr() {
 		return courseHr;
 	}
+
 	public void setCourseHr(String courseHr) {
 		this.courseHr = courseHr;
 	}
+
 	public String getCourseTeacher() {
 		return courseTeacher;
 	}
+
 	public void setCourseTeacher(String courseTeacher) {
 		this.courseTeacher = courseTeacher;
 	}
+
 	public String getCourseInfo() {
 		return courseInfo;
 	}
+
 	public void setCourseInfo(String courseInfo) {
 		this.courseInfo = courseInfo;
 	}
+
 	public Integer getCoursePrice() {
 		return coursePrice;
 	}
+
 	public void setCoursePrice(Integer coursePrice) {
 		this.coursePrice = coursePrice;
 	}
+
 	public Integer getCourseStatus() {
 		return courseStatus;
 	}
+
 	public void setCourseStatus(Integer courseStatus) {
 		this.courseStatus = courseStatus;
 	}
+
 	public Timestamp getUpdateDate() {
 		return updateDate;
 	}
+
 	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
 	}
+
 	public Integer getCommentPeople() {
 		return commentPeople;
 	}
+
 	public void setCommentPeople(Integer commentPeople) {
 		this.commentPeople = commentPeople;
 	}
+
 	public Integer getCommentScore() {
 		return commentScore;
 	}
+
 	public void setCommentScore(Integer commentScore) {
 		this.commentScore = commentScore;
 	}
-	
-	
-	
 
+	public byte[] getOnlineCoursePhoto() {
+		return onlineCoursePhoto;
+	}
 
-	
+	public void setOnlineCoursePhoto(byte[] onlineCoursePhoto) {
+		this.onlineCoursePhoto = onlineCoursePhoto;
+	}
 }

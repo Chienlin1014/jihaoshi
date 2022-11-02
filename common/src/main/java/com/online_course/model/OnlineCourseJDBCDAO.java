@@ -1,32 +1,38 @@
 package com.online_course.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/Jihaoshi?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
+	private DataSource dataSource;
+
+	public OnlineCourseJDBCDAO() {
+		try {
+			dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/jihaoshi");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void insert(OnlineCourseVO onlineCourseVO) {
-		String sql = "INSERT INTO Online_course(course_name ,course_hr ,course_teacher ,course_info , course_price ,course_status) VALUES(?, ?, ?, ?, ?, ?)";
-		try (Connection conn = DriverManager.getConnection(url, userid, passwd);
-				PreparedStatement pstmt = conn.prepareStatement(sql);) {
-			
+		String sql = "INSERT INTO Online_course(course_name ,course_hr ,course_teacher ,course_info , course_price ,course_status,course_photo) VALUES(?, ?, ?, ?, ?, ?, ?)";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
 			pstmt.setString(1, onlineCourseVO.getCourseName());
 			pstmt.setString(2, onlineCourseVO.getCourseHr());
 			pstmt.setString(3, onlineCourseVO.getCourseTeacher());
 			pstmt.setString(4, onlineCourseVO.getCourseInfo());
 			pstmt.setInt(5, onlineCourseVO.getCoursePrice());
 			pstmt.setInt(6, onlineCourseVO.getCourseStatus());
+			pstmt.setBytes(7, onlineCourseVO.getOnlineCoursePhoto());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,9 +41,8 @@ public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
 
 	@Override
 	public void update(OnlineCourseVO onlineCourseVO) {
-		String sql = "update Online_course set course_name = ?, course_hr = ?, course_teacher = ? ,course_info = ?,course_price = ?,course_status = ?,comment_people = ?, comment_score = ? where course_no = ?";
-		try (Connection conn = DriverManager.getConnection(url, userid, passwd);
-				PreparedStatement pstmt = conn.prepareStatement(sql);) {
+		String sql = "update Online_course set course_name = ?, course_hr = ?, course_teacher = ? ,course_info = ?,course_price = ?,course_status = ?,comment_people = ?, comment_score = ? , course_photo = ? where course_no = ?";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setString(1, onlineCourseVO.getCourseName());
 			pstmt.setString(2, onlineCourseVO.getCourseHr());
 			pstmt.setString(3, onlineCourseVO.getCourseTeacher());
@@ -47,6 +52,7 @@ public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
 			pstmt.setInt(7, onlineCourseVO.getCommentPeople());
 			pstmt.setInt(8, onlineCourseVO.getCommentScore());
 			pstmt.setInt(9, onlineCourseVO.getCourseNo());
+			pstmt.setBytes(10, onlineCourseVO.getOnlineCoursePhoto());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,8 +63,7 @@ public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
 	@Override
 	public void delete(OnlineCourseVO onlineCourseVO) {
 		String sql = "delete from Online_course where course_no = ?";
-		try (Connection conn = DriverManager.getConnection(url, userid, passwd);
-				PreparedStatement pstmt = conn.prepareStatement(sql);) {
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
 			pstmt.setInt(1, onlineCourseVO.getCourseNo());
 			int rowCount = pstmt.executeUpdate();
@@ -72,8 +77,7 @@ public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
 	@Override
 	public OnlineCourseVO findByPrimaryKey(Integer courseNo) {
 		String sql = "select * from Online_course where course_no = ?";
-		try (Connection conn = DriverManager.getConnection(url, userid, passwd);
-				PreparedStatement pstmt = conn.prepareStatement(sql);) {
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setInt(1, courseNo);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
@@ -101,7 +105,7 @@ public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
 	@Override
 	public List<OnlineCourseVO> getAll() {
 		String sql = "select * from Online_course";
-		try (Connection conn = DriverManager.getConnection(url, userid, passwd);
+		try (Connection conn = dataSource.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()) {
 			List<OnlineCourseVO> list = new ArrayList<>();
@@ -117,6 +121,8 @@ public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
 				vo.setUpdateDate(rs.getTimestamp("update_date"));
 				vo.setCommentPeople(rs.getInt("comment_people"));
 				vo.setCommentScore(rs.getInt("comment_score"));
+				vo.setCommentScore(rs.getInt("comment_score"));
+				vo.setOnlineCoursePhoto(rs.getBytes("course_photo"));
 				list.add(vo);
 			}
 			return list;
@@ -126,15 +132,6 @@ public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
 		return null;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public static void main(String[] args) {
 
 		OnlineCourseJDBCDAO dao = new OnlineCourseJDBCDAO();
@@ -198,8 +195,35 @@ public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
 //			System.out.println();
 //		}
 	}
-	
+
+	@Override
+	public List<OnlineCourseVO> selectByCourseName(String courseName) {
+		String sql = "select * from Online_course where course_name like ?";
+		try (Connection conn = dataSource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setString(1, "%" + courseName + "%");
+			try (ResultSet rs = pstmt.executeQuery()) {
+				List<OnlineCourseVO> list = new ArrayList<>();
+				while (rs.next()) {
+					OnlineCourseVO vo = new OnlineCourseVO();
+					vo.setCourseNo(rs.getInt("course_no"));
+					vo.setCourseName(rs.getString("course_name"));
+					vo.setCourseHr(rs.getString("course_hr"));
+					vo.setCourseTeacher(rs.getString("course_teacher"));
+					vo.setCourseInfo(rs.getString("course_info"));
+					vo.setCoursePrice(rs.getInt("course_price"));
+					vo.setCourseStatus(rs.getInt("course_status"));
+					vo.setUpdateDate(rs.getTimestamp("update_date"));
+					vo.setCommentPeople(rs.getInt("comment_people"));
+					vo.setCommentScore(rs.getInt("comment_score"));
+					list.add(vo);
+				}
+				return list;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
-
-
-
