@@ -80,6 +80,7 @@
                                 </dd>
                             </dl>
                         </c:forEach>
+                        <div id="totalPrice">所有商品總價：<span>${totalPrice["totalPrice"]}</span></div>
                     </div>
                 </div>
             </div>
