@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.cart.model.CartProdVO;
+import com.cart.model.CartService;
 import com.meal.model.MealService;
 import com.meal.model.MealVO;
 
@@ -24,7 +25,7 @@ public class CartController extends HttpServlet {
         HttpSession session = req.getSession();
         List<CartProdVO> cartProds = (ArrayList<CartProdVO>) session.getAttribute("cartProds");
         MealService mealSV = new MealService();
-
+        CartService cartSV=new CartService();
         String action = req.getParameter("action");
         if ("cartAdd".equals(action)) {
 
@@ -44,7 +45,7 @@ public class CartController extends HttpServlet {
                 prod.setPrice((int) (meal.getMealPrice() * quantity * amount));
                 prod.setCal((int) (meal.getMealCal() * quantity));
                 cartProds.add(prod);
-                Map<String, Integer> totalPrice = getTotalPrice(cartProds);
+                Map<String, Integer> totalPrice = cartSV.getTotalPrice(cartProds);
                 session.setAttribute("totalPrice", totalPrice);
                 session.setAttribute("cartProds", cartProds);
             } else { // 購物車內有東西時
@@ -53,7 +54,7 @@ public class CartController extends HttpServlet {
                     if (prod.getMeal().getMealNo().equals(mealNo) && prod.getQuantity().equals(quantity)) {
                         prod.setAmount(prod.getAmount() + amount); // 找到就改變數量跟價格
                         prod.setPrice((int) (meal.getMealPrice() * quantity * amount));
-                        Map<String, Integer> totalPrice = getTotalPrice(cartProds);
+                        Map<String, Integer> totalPrice = cartSV.getTotalPrice(cartProds);
                         session.setAttribute("totalPrice", totalPrice);
                         session.setAttribute("cartProds", cartProds);
                         res.sendRedirect(req.getHeader("referer"));
@@ -68,7 +69,7 @@ public class CartController extends HttpServlet {
                 prod.setPrice((int) (meal.getMealPrice() * quantity * amount));
                 prod.setCal((int) (meal.getMealCal() * quantity));
                 cartProds.add(prod);
-                Map<String, Integer> totalPrice = getTotalPrice(cartProds);
+                Map<String, Integer> totalPrice = cartSV.getTotalPrice(cartProds);
                 session.setAttribute("totalPrice", totalPrice);
                 session.setAttribute("cartProds", cartProds);
             }
@@ -81,7 +82,7 @@ public class CartController extends HttpServlet {
             cartProd.setAmount(amount);
             cartProd.setPrice((int) (cartProd.getMeal().getMealPrice() * cartProd.getQuantity() * cartProd.getAmount()));
             cartProds.set(cartIndex, cartProd);
-            Map<String, Integer> totalPrice = getTotalPrice(cartProds);
+            Map<String, Integer> totalPrice = cartSV.getTotalPrice(cartProds);
             session.setAttribute("totalPrice", totalPrice);
             session.setAttribute("cartProds", cartProds);
             res.sendRedirect(req.getHeader("referer"));
@@ -90,19 +91,11 @@ public class CartController extends HttpServlet {
             Integer cartIndex = Integer.valueOf(req.getParameter("cartIndex"));
             cartProds.remove(cartProds.get(cartIndex));
 
-            Map<String, Integer> totalPrice = getTotalPrice(cartProds);
+            Map<String, Integer> totalPrice = cartSV.getTotalPrice(cartProds);
             session.setAttribute("totalPrice", totalPrice);
             session.setAttribute("cartProds", cartProds);
             res.sendRedirect(req.getHeader("referer"));
         }
-    }
-    private Map<String, Integer> getTotalPrice(List<CartProdVO> cartProds) {
-        Integer amountPrice = 0;
-        for (CartProdVO CartProd : cartProds) {
-            amountPrice += CartProd.getPrice();
-        }
-        Map<String, Integer> totalPrice = Map.of("totalPrice", amountPrice);
-        return totalPrice;
     }
 
 }
