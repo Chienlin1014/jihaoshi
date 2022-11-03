@@ -17,6 +17,7 @@ public class MealService {
     public MealVO findByMealNo(Integer mealNo) {
         return dao.findByMealNo(mealNo);
     }
+
     public void updateMeal(Integer MealNo, String mealName,String mealContent,Integer mealCal,String mealAllergen,Integer mealPrice,byte[] mealPhoto,String mealRecipe,Integer launch) {
         MealVO meal = new MealVO(MealNo,mealName, mealContent, mealCal, mealAllergen, mealPrice, mealPhoto, mealRecipe, launch);
         dao.update(meal);
@@ -30,7 +31,11 @@ public class MealService {
         return dao.getAll();
     }
 
-    public Integer launchSwitch(Integer mealNo, Integer launch) {
+    public boolean launchSwitch(Integer mealNo, Integer launch) {
         return dao.launchSwitch(mealNo,launch);
+    }
+
+    public List<MealVO> getAllLaunch() {
+        return dao.getAllLaunch();
     }
 }
