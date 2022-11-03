@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class MemberJDBCDAO implements MemberDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/test2?serverTimezone=Asia/Taipei";
@@ -21,10 +19,11 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT member_no,member_account,member_password,member_name,member_phone,member_nickname,member_address,member_email FROM member where member_no = ? ";
 	private static final String DELETE = "DELETE FROM member where member_no = ?";
 	private static final String UPDATE = "UPDATE member set member_account=?,member_password=?,member_name=?,member_phone=?,member_nickname=?,member_address=?,member_email=? where member_no = ? ";
+	private static final String Login = "SELECT * FROM MEMBER where member_account = ? and member_password = ?";
 
 	@Override
 	public void insert(MemberVO memberVO) {
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -227,7 +226,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 				// empVO 也稱為 Domain objects
 				MemberVO = new MemberVO();
 				MemberVO.setMemberNo(rs.getInt("member_no"));
-				MemberVO.setMemberAccount(rs.getString("member_account"));;
+				MemberVO.setMemberAccount(rs.getString("member_account"));
+				;
 				MemberVO.setMemberPassword(rs.getString("member_password"));
 				MemberVO.setMemberName(rs.getString("member_name"));
 				MemberVO.setMemberPhone(rs.getString("member_phone"));
@@ -265,6 +265,60 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public MemberVO selectForLogin(String mamberAccount, String mamberPassword) {
+		MemberVO MemberVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+
+			con = DriverManager.getConnection(url, userid, passwd);
+			
+			pstmt = con.prepareStatement(Login);
+
+			pstmt.setString(1, mamberAccount);
+			pstmt.setString(2, mamberPassword);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				MemberVO = new MemberVO();
+				MemberVO.setMemberAccount(rs.getString("member_account"));
+				MemberVO.setMemberPassword(rs.getString("member_password"));
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			se.printStackTrace();
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return MemberVO;
 	}
 
 	public static void main(String[] args) {
@@ -307,11 +361,11 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		List<MemberVO> list = dao.getAll();
 		for (MemberVO amem : list) {
 			System.out.print(amem.getMemberNo() + "," + " ");
-			System.out.print(amem.getMemberAccount() + ","+ " ");
-			System.out.print(amem.getMemberPassword() + ","+ " ");
-			System.out.print(amem.getMemberName() + ","+ " ");
-			System.out.print(amem.getMemberPhone() + ","+ " ");
-			System.out.print(amem.getMemberNickname() + ","+ " ");
+			System.out.print(amem.getMemberAccount() + "," + " ");
+			System.out.print(amem.getMemberPassword() + "," + " ");
+			System.out.print(amem.getMemberName() + "," + " ");
+			System.out.print(amem.getMemberPhone() + "," + " ");
+			System.out.print(amem.getMemberNickname() + "," + " ");
 			System.out.print(amem.getMemberAddress() + ",");
 			System.out.print(amem.getMemberEmail() + "\t");
 //			System.out.print(aEmp.getDeptVO()); // join DeptVO

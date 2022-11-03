@@ -2,8 +2,6 @@ package com.mem.model;
 
 import java.util.List;
 
-
-
 public interface MemberDAO_interface {
 	public void insert(MemberVO memberVO);
 
@@ -14,4 +12,8 @@ public interface MemberDAO_interface {
 	public MemberVO findByPrimaryKey(Integer memberNo);
 
 	public List<MemberVO> getAll();
+
+	public MemberVO selectForLogin(String mamberAccount, String mamberPassword);
+
+
 }

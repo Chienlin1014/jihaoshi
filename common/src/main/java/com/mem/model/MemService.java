@@ -26,8 +26,8 @@ public class MemService {
 		return MemberVO;
 	}
 
-	public MemberVO updateEmp(String memberAccount,Integer memberNo, String memberPassword, String memberName, String memberPhone,
-			String memberNickname, String memberAddress, String memberEmail) {
+	public MemberVO updateEmp(String memberAccount, Integer memberNo, String memberPassword, String memberName,
+			String memberPhone, String memberNickname, String memberAddress, String memberEmail) {
 
 		MemberVO MemberVO = new MemberVO();
 		MemberVO.setMemberAccount(memberAccount);
@@ -52,6 +52,10 @@ public class MemService {
 
 	public MemberVO getOneMem(Integer memberNo) {
 		return dao.findByPrimaryKey(memberNo);
+	}
+
+	public MemberVO Login(String memberAccount, String memberPassword) {
+		return dao.selectForLogin(memberAccount,memberPassword);
 	}
 
 }
