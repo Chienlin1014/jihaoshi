@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Jihaoshi</title>
-    <link type="text/css" href="./css/jihaoshi.css" rel="stylesheet">
+    <link type="text/css" href="../css/jihaoshi.css" rel="stylesheet">
     <style>
         #pageHead {
             width: 100%;
@@ -15,8 +15,17 @@
     </style>
 </head>
 <body>
-<img src="./images/JihaoshiPageHead.jpg" id="pageHead">
+<img src="../images/JihaoshiPageHead.jpg" id="pageHead">
 <div class="block_N" style="margin:0px auto;">
+    <!--搜尋欄開始-->
+    <div class="Nm" style="display: flex; justify-content: center; align-items: center; ">
+        <ul class="searchfield">
+            <li><input id="keyword" type="text" class="text ac_input" placeholder="請輸入關鍵字" autocomplete="off">
+            </li>
+            <li><input id="btn_search" type="button" class="button" value="找菜單"></li>
+        </ul>
+    </div>
+    <!--搜尋欄結束-->
 </div>
 <div id="WRAPPER" class="ecsite-layout style_shopping ecsite-search">
     <div id="CONTENT" class="layout-wrapper">
@@ -28,7 +37,10 @@
                         <li id="cate_D" class="expanded"><H1>功能列表</H1>
                             <ul class="main">
                                 <li>
-                                    <a href="<%=request.getContextPath()%>/meal/MealManagerIndex.jsp">菜單商品管理</a>
+                                    <a href="<%=request.getContextPath()%>/meal/MealInsert.jsp">新增菜單商品</a>
+                                </li>
+                                <li>
+                                    <a href="<%=request.getContextPath()%>/meal/mealController?action=listAll" >菜單商品列表</a>
                                 </li>
                             </ul>
                     </ul>
