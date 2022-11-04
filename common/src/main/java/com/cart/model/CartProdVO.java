@@ -10,7 +10,7 @@ public class CartProdVO implements Serializable {
     private Integer amount;
     private Integer price;
     private Integer cal;
-    private static Integer totalPrice;
+    private static Integer totalPrice=0;
     public Integer getCal() {
         return cal;
     }
