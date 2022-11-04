@@ -285,8 +285,6 @@ public class MemberServlet extends HttpServlet {
 			}
 			
 			res.sendRedirect(req.getContextPath()+"/member/LoginSuccess.jsp");
-			
-		     
 
 		}
 
