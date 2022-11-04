@@ -1,7 +1,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
 <head>
     <title>購物車</title>
@@ -20,7 +19,8 @@
                         <li id="cate_D" class="expanded"><H1>功能列表</H1>
                             <ul class="main">
                                 <li>
-                                    <a href="${ctxPath}/cart/MealCart.jsp">菜單商品購物車<c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if>
+                                    <a href="${ctxPath}/cart/MealCart.jsp">菜單商品購物車<c:if
+                                            test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if>
                                     </a>
                                 </li>
                                 <li>
@@ -36,12 +36,14 @@
                     <div id="ItemContainer" class="Cm_C">
                         <c:forEach var="cartProd" items="${cartProds}" varStatus="loop">
                             <dl class="col3f" id="DRAA0A-A900BUT82">
-                                <dd class="c1f"><a class="prod_img" href="${ctxPath}/meal/mealController?action=findByprod&mealNo=${cartProd.meal.mealNo}">
+                                <dd class="c1f"><a class="prod_img"
+                                                   href="${ctxPath}/meal/mealController?action=findByprod&mealNo=${cartProd.meal.mealNo}">
                                     <img src="data:image/png;base64,${cartProd.meal.showPhoto}"></a></dd>
                                 <dd class="c2f">
 
                                     <ul class="tag_box s_label"></ul>
-                                    <h5 class="prod_name"><a href="${ctxPath}/meal/mealController?action=findByprod&mealNo=${cartProd.meal.mealNo}">${cartProd.meal.mealName}</a>
+                                    <h5 class="prod_name"><a
+                                            href="${ctxPath}/meal/mealController?action=findByprod&mealNo=${cartProd.meal.mealNo}">${cartProd.meal.mealName}</a>
                                     </h5>
                                     <br>
                                     <span style="font-size: 18px">分量：${cartProd.quantity}</span>
@@ -60,17 +62,21 @@
                                             <span style="font-size: 18px">總價NT$${cartProd.price}</span>
                                         </li>
                                         <li>
-                                           <span style="font-size: 18px">數量：</span> <span style="font-size: 18px" id="amount_value_${loop.index}">${cartProd.amount}</span>
+                                            <span style="font-size: 18px">數量：</span> <span style="font-size: 18px"
+                                                                                           id="amount_value_${loop.index}">${cartProd.amount}</span>
                                         </li>
                                     </ul>
 
-                                    <form method="post" action="cartController" enctype="application/x-www-form-urlencoded" id="cart${loop.index}">
+                                    <form method="post" action="cartController"
+                                          enctype="application/x-www-form-urlencoded" id="cart${loop.index}">
                                         <input name="action" type="text" value="cartModify" hidden>
-                                        <input name="amount" type="range" min="1" max="99" value="${cartProd.amount}" id="amount${loop.index}">
+                                        <input name="amount" type="range" min="1" max="99" value="${cartProd.amount}"
+                                               id="amount${loop.index}">
                                         <input name="cartIndex" type="text" value="${loop.index}" hidden>
                                     </form>
                                     <br>
-                                    <form method="post" action="cartController" enctype="application/x-www-form-urlencoded" id="cartDelete${loop.index}">
+                                    <form method="post" action="cartController"
+                                          enctype="application/x-www-form-urlencoded" id="cartDelete${loop.index}">
                                         <input name="action" type="text" value="cartDelete" hidden>
                                         <input name="cartIndex" type="text" value="${loop.index}" hidden>
                                     </form>
@@ -80,7 +86,25 @@
                                 </dd>
                             </dl>
                         </c:forEach>
-                        <div id="totalPrice">所有商品總價：<span>${totalPrice["totalPrice"]}</span></div>
+                        <div id="totalPrice">
+                            <c:choose>
+                                <c:when test="${totalPrice==0||totalPrice==null}">
+                                    <span style="font-size: 16px;">購物車中還沒有東西喔</span>
+                                    <span style="font-size: 16px;"><a
+                                            href="${ctxPath}/meal/mealController?action=listAll">去選購</a></span><br>
+                                </c:when>
+                                <c:otherwise>
+                                    <span style="font-size: 16px;">商品總價：${totalPrice}元 </span><button type="submit" form="checkout">去結帳</button>
+                                    <form method="post" action="/web/checkout/checkoutController" id="checkout">
+                                        <input type="text" name="action" value="checkout" hidden>
+                                    </form>
+                                </c:otherwise>
+                            </c:choose>
+
+                        </div>
+                        <form method="post" action="checkoutController" id="checkout">
+
+                        </form>
                     </div>
                 </div>
             </div>
@@ -90,13 +114,13 @@
 </div>
 <script>
     $(document).ready(function () {
-    <c:forEach var="cartProd" items="${cartProds}" varStatus="loop">
+        <c:forEach var="cartProd" items="${cartProds}" varStatus="loop">
 
         $('#amount${loop.index}').mousemove(function () {
             $('#amount_value_${loop.index}').html($('#amount${loop.index}').val());
         });
 
-    </c:forEach>
+        </c:forEach>
     });
 </script>
 </body>
