@@ -36,6 +36,9 @@ public class Forum_articleService {
 	public void deleteForum_article(Integer article_no) {
 		dao.delete(article_no);
 	}
+	public void change_status_0(Integer article_no) {
+		dao.change_status_0(article_no);
+	}
 
 	public Forum_articleVO getOneForum_article(Integer article_no) {
 		return dao.findByPrimarykey(article_no);

@@ -13,7 +13,7 @@ pageContext.setAttribute("list", list);
 
 <html>
 <head>
-<title>論壇文章資料</title>
+<title>論壇文章資料2</title>
 
 <style>
 table#table-1 {
@@ -76,7 +76,7 @@ th, td {
 			<th>會員編號</th>
 			<th>編輯時間</th>
 			<th>文章內容</th>
-			
+			<th>文章狀態</th>
 		</tr>
 		<%@ include file="forum_article_page1.file"%>
 		<c:forEach var="forum_articleVO" items="${list}"
@@ -89,14 +89,14 @@ th, td {
 				<td>${forum_articleVO.member_no}</td>
 				<td>${forum_articleVO.article_time}</td>
 				<td>${forum_articleVO.article_content}</td>
-				
+				<td>${forum_articleVO.article_status}</td>
 
 				<td>
 					<FORM METHOD="post" ACTION="/third/Forum_articleServlet"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
+						<input type="submit" value="修改文章狀態"> <input type="hidden"
 							name="article_no" value="${forum_articleVO.article_no}">
-						<input type="hidden" name="action" value="getOne_For_Update">
+						<input type="hidden" name="action" value="change_status_0">
 					</FORM>
 				</td>
 <!-- 				<td> -->

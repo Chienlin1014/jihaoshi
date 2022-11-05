@@ -212,5 +212,18 @@ public class Forum_articleServlet extends HttpServlet {
 			RequestDispatcher successview = req.getRequestDispatcher(url);
 			successview.forward(req, res);
 		}
+		
+		if ("change_status_0".equals(action)) { // 來自listAllForum_article.jsp
+
+			/*************************** 1.接收請求參數 ***************************************/
+			Integer article_no = Integer.valueOf(req.getParameter("article_no"));
+			/*************************** 2.開始刪除資料 ***************************************/
+			Forum_articleService forum_articleSvc = new Forum_articleService();
+			forum_articleSvc.change_status_0(article_no);
+			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+			String url = "/forum_article/listAllForum_article_3.jsp";
+			RequestDispatcher successview = req.getRequestDispatcher(url);
+			successview.forward(req, res);
+		}
 	}
 }

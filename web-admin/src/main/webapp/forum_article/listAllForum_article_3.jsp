@@ -10,10 +10,12 @@ Forum_articleService forum_articleSvc = new Forum_articleService();
 List<Forum_articleVO> list = forum_articleSvc.getAll();
 pageContext.setAttribute("list", list);
 %>
-
+<% 
+    session.setAttribute("member_no", 2);
+    //Integer member_no = (Integer)session.getAttribute("member_no"); %>
 <html>
 <head>
-<title>論壇文章資料</title>
+<title>論壇文章資料3</title>
 
 <style>
 table#table-1 {
@@ -36,7 +38,7 @@ h4 {
 
 <style>
 table {
-	width: 600px;
+	width: 1000px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -76,7 +78,7 @@ th, td {
 			<th>會員編號</th>
 			<th>編輯時間</th>
 			<th>文章內容</th>
-			
+			<th>文章狀態</th>
 		</tr>
 		<%@ include file="forum_article_page1.file"%>
 		<c:forEach var="forum_articleVO" items="${list}"
@@ -89,14 +91,30 @@ th, td {
 				<td>${forum_articleVO.member_no}</td>
 				<td>${forum_articleVO.article_time}</td>
 				<td>${forum_articleVO.article_content}</td>
+				<td>[${forum_articleVO.article_status}]
+				  ${(forum_articleVO.article_status==0)? '隱藏':''}
+				  ${(forum_articleVO.article_status==1)? '顯示':''}
 				
+				</td>
 
 				<td>
-					<FORM METHOD="post" ACTION="/third/Forum_articleServlet"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
-							name="article_no" value="${forum_articleVO.article_no}">
-						<input type="hidden" name="action" value="getOne_For_Update">
+					<FORM METHOD="post" ACTION="/third/Forum_articleServlet" style="margin-bottom: 0px;">
+						 <c:if test="${forum_articleVO.member_no==member_no}">
+						   <input type="submit" value="修改文章狀態"> 
+						</c:if> 
+						<c:if test="${forum_articleVO.member_no!=member_no}">
+						 <input type="submit" value="檢舉" style="border-color: red"> 
+						</c:if> 
+						
+						<input type="hidden" name="article_no" value="${forum_articleVO.article_no}">
+					
+					 <c:if test="${forum_articleVO.article_status==1}">	
+						<input type="hidden" name="action" value="change_status_0">
+					 </c:if> 
+					 <c:if test="${forum_articleVO.article_status==0}">	
+						<input type="hidden" name="action" value="change_status_1">
+					 </c:if> 
+					
 					</FORM>
 				</td>
 <!-- 				<td> -->
