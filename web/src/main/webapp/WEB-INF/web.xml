@@ -12,11 +12,11 @@
 
     <filter>
         <filter-name>filter</filter-name>
-        <filter-class>filters.loginFilter</filter-class>
+        <filter-class>com.mem.Filters.loginFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>filter</filter-name>
-        <url-pattern>/onlyLogin.jsp</url-pattern>
+        <url-pattern>/member/onlyLogin.jsp</url-pattern>
 
     </filter-mapping>
 </web-app>
