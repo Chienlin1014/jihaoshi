@@ -74,9 +74,8 @@
                                 <input type="text" name="action" value="cartAdd" hidden>
                                 <input type="text" name="mealNo" value="${meal.mealNo}" hidden>
                                 <input type="text" name="quantityCart" id="quantityCart" value="1" hidden>
-                                <label style="font-size: 18px">請輸入購買數量：</label>
+                                <label style="font-size: 18px">請輸入購買數量：</label><span id="amount_value" style="font-size: 18px">1</span>
                                 <input name="amount" type="range" min="1" max="99" value="1" id="amount">
-                                <span id="amount_value">1</span>
                             </form>
                             <form method="post" action="#" id="formCheckout">
                                 <input type="text" value="<%=meal.getMealNo()%>" name="mealNo" hidden>
@@ -85,7 +84,6 @@
                             </form>
 
                             <button type="submit" form="formCart">加入購物車</button>
-                            <button type="submit" form="formCheckout">直接購買</button>
                         </div>
                     </div>
                 </div>
@@ -98,6 +96,9 @@
 <script>
     $(document).ready(function () {
         $('#amount').mousemove(function () {
+            $('#amount_value').html($('#amount').val());
+        });
+        $('#amount').change(function () {
             $('#amount_value').html($('#amount').val());
         });
         $('#quantity1').click(function () {
