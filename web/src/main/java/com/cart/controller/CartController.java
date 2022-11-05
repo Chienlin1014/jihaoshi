@@ -35,19 +35,15 @@ public class CartController extends HttpServlet {
             Double quantity = Double.valueOf(req.getParameter("quantityCart"));
             Integer amount = Integer.valueOf(req.getParameter("amount"));
             MealVO meal = mealSV.findByMealNo(mealNo);
-            if (cartProds == null) {
-                cartProds=new ArrayList<>();
-            }
-            CartProdVO prod = null;
-            prod=cartSV.getCartProds(quantity, amount, meal, prod, cartProds);
-            cartProds.add(prod);
+            cartProds=cartSV.getCartProds(quantity, amount, meal, cartProds);
             totalPrice = cartSV.setTotalPrice(cartProds);
             session.setAttribute("totalPrice",totalPrice);
             session.setAttribute("cartProds", cartProds);
-
             res.sendRedirect(req.getHeader("referer"));
+
         }
         if ("cartModify".equals(action)) {
+
             Integer amount = Integer.valueOf(req.getParameter("amount"));
             Integer cartIndex = Integer.valueOf(req.getParameter("cartIndex"));
             CartProdVO cartProd = cartProds.get(cartIndex);
@@ -58,8 +54,10 @@ public class CartController extends HttpServlet {
             session.setAttribute("totalPrice",totalPrice);
             session.setAttribute("cartProds", cartProds);
             res.sendRedirect(req.getHeader("referer"));
+
         }
         if ("cartDelete".equals(action)) {
+
             Integer cartIndex = Integer.valueOf(req.getParameter("cartIndex"));
             cartProds.remove(cartProds.get(cartIndex));
             cartSV.setTotalPrice(cartProds);
@@ -67,6 +65,7 @@ public class CartController extends HttpServlet {
             session.setAttribute("totalPrice",totalPrice);
             session.setAttribute("cartProds", cartProds);
             res.sendRedirect(req.getHeader("referer"));
+            
         }
     }
 
