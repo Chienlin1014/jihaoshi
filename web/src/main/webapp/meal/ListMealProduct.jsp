@@ -123,6 +123,9 @@
         $('#amount${loop.index}').mousemove(function () {
             $('#amount_value_${loop.index}').html($('#amount${loop.index}').val());
         });
+        $('#amount${loop.index}').change(function () {
+            $('#amount_value_${loop.index}').html($('#amount${loop.index}').val());
+        });
     </c:forEach>
     });
 </script>
