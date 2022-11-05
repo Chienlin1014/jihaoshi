@@ -5,13 +5,13 @@ import java.util.List;
 public class Forum_articleService {
 
 	private Forum_articleDAO_interface dao;
-	
+
 	public Forum_articleService() {
 		dao = new Forum_articleJDBCDAO();
 	}
-	
-	public Forum_articleVO addForum_article(String article_name, Integer member_no, String  article_content) {
-	
+
+	public Forum_articleVO addForum_article(String article_name, Integer member_no, String article_content) {
+
 		Forum_articleVO forum_articleVO = new Forum_articleVO();
 		forum_articleVO.setArticle_name(article_name);
 		forum_articleVO.setMember_no(member_no);
@@ -20,7 +20,8 @@ public class Forum_articleService {
 		return forum_articleVO;
 	}
 
-	public Forum_articleVO updateForum_article( String article_name, String article_content, Integer article_status, Integer article_no) {
+	public Forum_articleVO updateForum_article(String article_name, String article_content, Integer article_status,
+			Integer article_no) {
 		Forum_articleVO forum_articleVO = new Forum_articleVO();
 		forum_articleVO.setArticle_name(article_name);
 		forum_articleVO.setArticle_content(article_content);
@@ -28,14 +29,13 @@ public class Forum_articleService {
 		forum_articleVO.setArticle_no(article_no);
 		dao.update(forum_articleVO);
 		return forum_articleVO;
-		
-	
-		
+
 	}
 
 	public void deleteForum_article(Integer article_no) {
 		dao.delete(article_no);
 	}
+
 	public void change_status_0(Integer article_no) {
 		dao.change_status_0(article_no);
 	}
@@ -48,7 +48,4 @@ public class Forum_articleService {
 		return dao.getAll();
 	}
 
-	
-	
-	
 }
