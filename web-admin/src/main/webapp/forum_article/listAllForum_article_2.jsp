@@ -92,7 +92,7 @@ th, td {
 				<td>${forum_articleVO.article_status}</td>
 
 				<td>
-					<FORM METHOD="post" ACTION="/third/Forum_articleServlet"
+					<FORM METHOD="post" ACTION="/web-admin/Forum_articleServlet"
 						style="margin-bottom: 0px;">
 						<input type="submit" value="修改文章狀態"> <input type="hidden"
 							name="article_no" value="${forum_articleVO.article_no}">
@@ -100,7 +100,7 @@ th, td {
 					</FORM>
 				</td>
 <!-- 				<td> -->
-<!-- 					<FORM METHOD="post" ACTION="/third/Forum_articleServlet" -->
+<!-- 					<FORM METHOD="post" ACTION="/web-admin/Forum_articleServlet" -->
 <!-- 						style="margin-bottom: 0px;"> -->
 <!-- 						<input type="submit" value="刪除"> <input type="hidden" -->
 <%-- 							name="article_no" value="${forum_articleVO.article_no}"> --%>

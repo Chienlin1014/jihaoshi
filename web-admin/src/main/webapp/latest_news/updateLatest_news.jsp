@@ -65,7 +65,7 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="/third/Latest_newsServlet" name="form1">
+<FORM METHOD="post" ACTION="/web-admin/Latest_newsServlet" name="form1">
 <table>
 <!-- 	<tr> -->
 <!-- 		<td>消息編號:<font color=red><b>*</b></font></td> -->

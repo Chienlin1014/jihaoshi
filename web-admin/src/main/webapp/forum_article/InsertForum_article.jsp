@@ -12,7 +12,7 @@
 
 <body>
 <h1>論壇文章新增:</h1>
-    <form method="post" action="/third/Forum_articleServlet" id="form1">
+    <form method="post" action="/web-admin/Forum_articleServlet" id="form1">
         <div>
 <!--            <label>輸入論壇文章編號：</label><input type="text" name="article_no"><br><br> -->
             	<label>輸入消息標題：</label><input type="text" name="article_name" value="${param.article_name}"><br><br>

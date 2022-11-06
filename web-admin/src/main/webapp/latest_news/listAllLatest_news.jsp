@@ -88,7 +88,7 @@ th, td {
 				<td>${latest_newsVO.news_content}</td>
 
 				<td>
-					<FORM METHOD="post" ACTION="/third/Latest_newsServlet"
+					<FORM METHOD="post" ACTION="/web-admin/Latest_newsServlet"
 						style="margin-bottom: 0px;">
 						<input type="submit" value="修改"> <input type="hidden"
 							name="news_no" value="${latest_newsVO.news_no}"> <input
@@ -96,7 +96,7 @@ th, td {
 					</FORM>
 				</td>
 				<td>
-					<FORM METHOD="post" ACTION="/third/Latest_newsServlet"
+					<FORM METHOD="post" ACTION="/web-admin/Latest_newsServlet"
 						style="margin-bottom: 0px;">
 						<input type="submit" value="刪除"> <input type="hidden"
 							name="news_no" value="${latest_newsVO.news_no}"> <input

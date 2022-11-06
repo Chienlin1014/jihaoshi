@@ -75,7 +75,7 @@ th, td {
 		</ul>
 	</c:if>
 
-	<FORM METHOD="post" ACTION="/third/Forum_articleServlet" name="form1">
+	<FORM METHOD="post" ACTION="/web-admin/Forum_articleServlet" name="form1">
 		<table>
 
 
