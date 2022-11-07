@@ -20,12 +20,12 @@ public class Forum_articleService {
 		return forum_articleVO;
 	}
 
-	public Forum_articleVO updateForum_article(String article_name, String article_content, Integer article_status,
+	public Forum_articleVO updateForum_article(String article_name, String article_content,
 			Integer article_no) {
 		Forum_articleVO forum_articleVO = new Forum_articleVO();
 		forum_articleVO.setArticle_name(article_name);
 		forum_articleVO.setArticle_content(article_content);
-		forum_articleVO.setArticle_status(article_status);
+		
 		forum_articleVO.setArticle_no(article_no);
 		dao.update(forum_articleVO);
 		return forum_articleVO;
@@ -39,6 +39,10 @@ public class Forum_articleService {
 	public void change_status_0(Integer article_no) {
 		dao.change_status_0(article_no);
 	}
+	public void change_status_1(Integer article_no) {
+		dao.change_status_1(article_no);
+	}
+	
 
 	public Forum_articleVO getOneForum_article(Integer article_no) {
 		return dao.findByPrimarykey(article_no);

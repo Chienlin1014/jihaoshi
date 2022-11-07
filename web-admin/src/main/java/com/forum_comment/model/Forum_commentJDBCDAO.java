@@ -17,11 +17,11 @@ public class Forum_commentJDBCDAO implements Forum_commentDAO_interface {
 	String userid = "root";
 	String passwd = "password";
 
-	private static final String INSERT_STMT = "INSERT INTO forum_comment(article_no,member_no,comment_time,comment_content,comment_status) VALUES (?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO forum_comment(article_no,member_no, comment_content) VALUES (?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT comment_no,article_no,member_no,comment_time,comment_content,comment_status FROM forum_comment order by comment_no";
 	private static final String GET_ONE_STMT = "SELECT comment_no,article_no,member_no,comment_time,comment_content,comment_status FROM forum_comment where comment_no = ?";
 	private static final String DELETE = "DELETE FROM forum_comment where comment_no = ?";
-	private static final String UPDATE = "UPDATE forum_comment set article_no=?, member_no=?, comment_time=?, comment_content=?, comment_status=? where comment_no = ?";
+	private static final String UPDATE = "UPDATE forum_comment set article_no=?, member_no=?, comment_content=?, comment_status=? where comment_no = ?";
 
 	@Override
 	public void insert(Forum_commentVO forum_commentVO) {
@@ -36,9 +36,9 @@ public class Forum_commentJDBCDAO implements Forum_commentDAO_interface {
 
 			pstmt.setInt(1, forum_commentVO.getArticle_no());
 			pstmt.setInt(2, forum_commentVO.getMember_no());
-			pstmt.setDate(3, forum_commentVO.getComment_time());
-			pstmt.setString(4, forum_commentVO.getComment_content());
-			pstmt.setInt(5, forum_commentVO.getComment_status());
+//			pstmt.setDate(3, forum_commentVO.getComment_time());
+			pstmt.setString(3, forum_commentVO.getComment_content());
+//			pstmt.setInt(4, forum_commentVO.getComment_status());
 
 			pstmt.executeUpdate();
 
@@ -80,10 +80,9 @@ public class Forum_commentJDBCDAO implements Forum_commentDAO_interface {
 
 			pstmt.setInt(1, forum_commentVO.getArticle_no());
 			pstmt.setInt(2, forum_commentVO.getMember_no());
-			pstmt.setDate(3, forum_commentVO.getComment_time());
-			pstmt.setString(4, forum_commentVO.getComment_content());
-			pstmt.setInt(5, forum_commentVO.getComment_status());
-			pstmt.setInt(6, forum_commentVO.getComment_no());
+			pstmt.setString(3, forum_commentVO.getComment_content());
+			pstmt.setInt(4, forum_commentVO.getComment_status());
+			pstmt.setInt(5, forum_commentVO.getComment_no());
 
 			pstmt.executeUpdate();
 
@@ -285,16 +284,16 @@ public class Forum_commentJDBCDAO implements Forum_commentDAO_interface {
 		Forum_commentVO forum_commentVO1 = new Forum_commentVO();
 		forum_commentVO1.setArticle_no(2);
 		forum_commentVO1.setMember_no(1);
-		forum_commentVO1.setComment_time(java.sql.Date.valueOf("2005-01-01"));
+//		forum_commentVO1.setComment_time(java.sql.Date.valueOf("2005-01-01"));
 		forum_commentVO1.setComment_content("文章內容1");
-		forum_commentVO1.setComment_status(1);
+//		forum_commentVO1.setComment_status(1);
 		dao.insert(forum_commentVO1);
 
 		// 修改
 		Forum_commentVO forum_commentVO2 = new Forum_commentVO();
 		forum_commentVO2.setArticle_no(2);
 		forum_commentVO2.setMember_no(2);
-		forum_commentVO2.setComment_time(java.sql.Date.valueOf("2002-01-01"));
+//		forum_commentVO2.setComment_time(java.sql.Date.valueOf("2002-01-01"));
 		forum_commentVO2.setComment_content("文章內容2");
 		forum_commentVO2.setComment_status(1);
 		forum_commentVO2.setComment_no(2);

@@ -25,10 +25,11 @@ public class Forum_articleJDBCDAO implements Forum_articleDAO_interface {
 	private static final String DELETE = 
 			"DELETE FROM forum_article where article_no = ?";
 	private static final String UPDATE = 
-			"UPDATE forum_article set article_name=?, article_content=?, article_status=? where article_no = ?";
+			"UPDATE forum_article set article_name=?, article_content=? where article_no = ?";
 private static final String change_status_0 = 
 			"UPDATE forum_article set article_status=0 where article_no = ?";
-
+private static final String change_status_1 = 
+			"UPDATE forum_article set article_status=1 where article_no = ?";
 	@Override
 	public void insert(Forum_articleVO forum_articleVO) {
 		Connection con = null;
@@ -91,8 +92,7 @@ private static final String change_status_0 =
 
 			pstmt.setString(1, forum_articleVO.getArticle_name());
 			pstmt.setString(2, forum_articleVO.getArticle_content());
-			pstmt.setInt(3, forum_articleVO.getArticle_status());
-			pstmt.setInt(4, forum_articleVO.getArticle_no());
+			pstmt.setInt(3, forum_articleVO.getArticle_no());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -342,7 +342,49 @@ private static final String change_status_0 =
 
 		
 	}
+	@Override
+	public void change_status_1(Integer article_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
 
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(change_status_1);
+
+			pstmt.setInt(1, article_no);
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+		
+	}
 	public static void main(String[] args) {
 		Forum_articleJDBCDAO dao = new Forum_articleJDBCDAO();
 		
@@ -360,7 +402,7 @@ private static final String change_status_0 =
 //		
 //		forum_articleVO2.setArticle_name("文章名稱1文章名稱1");
 //		forum_articleVO2.setArticle_content("文章內容1文章內容1");
-//		forum_articleVO2.setArticle_status(0);
+//		
 //		forum_articleVO2.setArticle_no(1);
 //		dao.update(forum_articleVO2);
 //		
@@ -370,6 +412,7 @@ private static final String change_status_0 =
 //		dao.delete(5);
 		
 		dao.change_status_0(2);
+		dao.change_status_1(4);
 		
 		// 查詢
 //		Forum_articleVO forum_articleVO3 = dao.findByPrimarykey(1);

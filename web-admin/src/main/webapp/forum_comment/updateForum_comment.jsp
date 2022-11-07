@@ -1,15 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="com.forum_article.model.Forum_articleVO"%>
+<%@page import="com.forum_comment.model.Forum_commentVO"%>
 
 <%
-Forum_articleVO forum_articleVO = (Forum_articleVO) request.getAttribute("forum_articleVO"); //Forum_articleVOServlet.java (Concroller) 存入req的forum_articleVO物件 (包括幫忙取出的forum_articleVO, 也包括輸入資料錯誤時的forum_articleVO物件)
+Forum_commentVO forum_commentVO = (Forum_commentVO) request.getAttribute("forum_commentVO"); //Forum_commentVOServlet.java (Concroller) 存入req的forum_commentVO物件 (包括幫忙取出的forum_commentVO, 也包括輸入資料錯誤時的forum_commentVO物件)
 %>
 
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>論壇文章修改</title>
+<title>論壇留言修改</title>
 
 <style>
 table#table-1 {
@@ -53,10 +53,10 @@ th, td {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>論壇文章修改</h3>
+				<h3>論壇留言修改</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp">
+						href="<%=request.getContextPath()%>/forum_comment/forum_comment_select_page.jsp">
 						<img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
 				</h4>
 			</td>
@@ -75,34 +75,40 @@ th, td {
 		</ul>
 	</c:if>
 
-	<FORM METHOD="post" ACTION="/web-admin/Forum_articleServlet" name="form1">
+	<FORM METHOD="post" ACTION="/web-admin/Forum_commentServlet" name="form1">
 		<table>
 
 
 			<tr>
-				<td>文章標題:</td>
-				<td><input type="TEXT" name="article_name" size="45"
-					value="<%=forum_articleVO.getArticle_name()%>"  required/></td>
+				<td>論壇文章編號:</td>
+				<td><input type="TEXT" name="article_no" size="45"
+					value="<%=forum_commentVO.getArticle_no()%>"  required/></td>
+			</tr>
+			
+			<tr>
+				<td>會員編號:</td>
+				<td><input type="TEXT" name="member_no" size="45"
+					value="<%=forum_commentVO.getMember_no()%>"  required/></td>
 			</tr>
 
 			<tr>
 				<td>文章內容:</td>
 				<td><textarea type="TEXT" name="article_content" size="45"
-						value="<%=forum_articleVO.getArticle_content()%>"  required/></textarea></td>
+						value="<%=forum_commentVO.getComment_content()%>"  required/></textarea></td>
 			</tr>
 
 		
 <!-- 			<tr> -->
 <!-- 				<td>文章狀態:</td> -->
-<!-- 				<td><input type="TEXT" name="article_status" size="45" -->
-<%-- 						value="<%=forum_articleVO.getArticle_status()%>" /></td> --%>
+<!-- 				<td><input type="TEXT" name="comment_status" size="45" -->
+<%-- 						value="<%=forum_commentVO.getComment_status()%>" /></td> --%>
 <!-- 			</tr> -->
 
 
 		</table>
 		<br> <input type="hidden" name="action" value="update"> <input
 			type="hidden" name="article_no"
-			value="<%=forum_articleVO.getArticle_no()%>"> <input
+			value="<%=forum_commentVO.getComment_no()%>"> <input
 			type="submit" value="送出修改">
 	</FORM>
 </body>
@@ -134,7 +140,7 @@ th, td {
  	       timepicker:false,       //timepicker:true,
  	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
  	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '<%=forum_articleVO.getArticle_time()%>
+ 		   value: '<%=forum_commentVO.getComment_time()%>
 	', // value:   new Date(),
 	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 	//startDate:	            '2017/07/10',  // 起始日
