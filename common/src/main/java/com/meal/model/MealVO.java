@@ -14,7 +14,12 @@ public class MealVO implements Serializable {
     private String showPhoto;
     private Double quantity;
     private Integer amount;
-
+    private Integer saleVolume;
+    private String mealRecipe;
+    private Integer commentPeople;
+    private Integer commentScore;
+    private Integer launch;
+    private Date updateTime;
     public Integer getAmount() {
         return amount;
     }
@@ -39,12 +44,7 @@ public class MealVO implements Serializable {
         this.showPhoto = showPhoto;
     }
 
-    private Integer saleVolume;
-    private String mealRecipe;
-    private Integer commentPeople;
-    private Integer commentScore;
-    private Integer launch;
-    private Date updateTime;
+
 
     public MealVO() {
     }

@@ -1,16 +1,17 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ryokoon
-  Date: 2022/11/4
-  Time: 下午 07:50
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>導向結帳頁面</title>
+    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
-${checkoutPage}
+<h1 style="text-align: center" >請稍後，正將您導向結帳頁面...</h1>
+<div id="checkout">
+    ${checkoutPage}
+</div>
+
 </body>
+
 </html>

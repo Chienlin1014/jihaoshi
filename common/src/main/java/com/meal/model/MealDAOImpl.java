@@ -71,19 +71,24 @@ public class MealDAOImpl implements MealDAO {
             ResultSet rs = ps.executeQuery();
             MealVO meal = null;
             if (rs.next()) {
-                meal = new MealVO
-                        (rs.getInt(1), rs.getString(2), rs.getString(3),
-                                rs.getInt(4), rs.getString(5), rs.getInt(6),
-                                rs.getBytes(7), rs.getInt(8), rs.getString(9),
-                                rs.getInt(10), rs.getInt(11), rs.getInt(12),
-                                rs.getDate(13));
-                meal.setShowPhoto(Base64.getEncoder().encodeToString(meal.getMealPhoto()));
+                meal = parseMealVO(rs);
                 return meal;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private MealVO parseMealVO(ResultSet rs) throws SQLException {
+        MealVO meal = new MealVO
+                (rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getInt(4), rs.getString(5), rs.getInt(6),
+                        rs.getBytes(7), rs.getInt(8), rs.getString(9),
+                        rs.getInt(10), rs.getInt(11), rs.getInt(12),
+                        rs.getDate(13));
+        meal.setShowPhoto(Base64.getEncoder().encodeToString(meal.getMealPhoto()));
+        return meal;
     }
 
     @Override
@@ -150,39 +155,21 @@ public class MealDAOImpl implements MealDAO {
 
     @Override
     public List<MealVO> getAll() {
-        List<MealVO> meals = new ArrayList<>();
-        try (Connection conn = ds.getConnection();
-             PreparedStatement ps = conn.prepareStatement(GET_ALL_SQL)) {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                MealVO meal = new MealVO(rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getInt(4), rs.getString(5), rs.getInt(6),
-                        rs.getBytes(7), rs.getInt(8), rs.getString(9),
-                        rs.getInt(10), rs.getInt(11), rs.getInt(12),
-                        rs.getDate(13));
-                meal.setShowPhoto(Base64.getEncoder().encodeToString(rs.getBytes(7)));
-                meals.add(meal);
-            }
-            return meals;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+      return getAll(GET_ALL_SQL);
     }
 
     @Override
     public List<MealVO> getAllLaunch() {
+        return getAll(GET_ALL_LAUNCH);
+    }
+
+    private List<MealVO> getAll(String sql) {
         List<MealVO> meals = new ArrayList<>();
         try (Connection conn = ds.getConnection();
-             PreparedStatement ps = conn.prepareStatement(GET_ALL_LAUNCH)) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                MealVO meal = new MealVO(rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getInt(4), rs.getString(5), rs.getInt(6),
-                        rs.getBytes(7), rs.getInt(8), rs.getString(9),
-                        rs.getInt(10), rs.getInt(11), rs.getInt(12),
-                        rs.getDate(13));
-                meal.setShowPhoto(Base64.getEncoder().encodeToString(rs.getBytes(7)));
+                MealVO meal = parseMealVO(rs);
                 meals.add(meal);
             }
             return meals;

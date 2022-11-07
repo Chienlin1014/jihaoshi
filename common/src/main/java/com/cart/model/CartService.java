@@ -3,9 +3,12 @@ package com.cart.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.meal.model.MealDAO;
+import com.meal.model.MealDAOImpl;
 import com.meal.model.MealVO;
 
 public class CartService {
+    MealDAO dao=new MealDAOImpl();
 
     public List<CartProdVO> getCartProds(Double quantity, Integer amount, MealVO meal, List<CartProdVO> cartProds) {
         CartProdVO prod=null;
@@ -38,11 +41,12 @@ public class CartService {
             prod.setPrice((int) (meal.getMealPrice() * quantity * amount));
             prod.setCal((int) (meal.getMealCal() * quantity));
             cartProds.add(prod);
-            return cartProds;        }
+            return cartProds;
+        }
 
     }
 
-    public Integer setTotalPrice(List<CartProdVO> cartProds) {
+    public Integer calculateTotalPrice(List<CartProdVO> cartProds) {
         Integer totalPrice = 0;
         for (CartProdVO CartProd : cartProds) {
             totalPrice += CartProd.getPrice();
