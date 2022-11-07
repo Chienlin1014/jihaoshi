@@ -62,8 +62,9 @@
                                             <span style="font-size: 18px">總價NT$${cartProd.price}</span>
                                         </li>
                                         <li>
-                                            <span style="font-size: 18px">數量：</span> <span style="font-size: 18px"
-                                                                                           id="amount_value_${loop.index}">${cartProd.amount}</span>
+                                            <span style="font-size: 18px">數量：</span>
+                                            <span style="font-size: 18px"
+                                                  id="amount_value_${loop.index}">${cartProd.amount}</span>
                                         </li>
                                     </ul>
 
@@ -88,23 +89,21 @@
                         </c:forEach>
                         <div id="totalPrice">
                             <c:choose>
-                                <c:when test="${totalPrice==0||totalPrice==null}">
+                                <c:when test="${totalPrice==0|| empty totalPrice}">
                                     <span style="font-size: 16px;">購物車中還沒有東西喔</span>
                                     <span style="font-size: 16px;"><a
                                             href="${ctxPath}/meal/mealController?action=listAll">去選購</a></span><br>
                                 </c:when>
                                 <c:otherwise>
-                                    <span style="font-size: 16px;">商品總價：${totalPrice}元 </span><button type="submit" form="checkout">去結帳</button>
-                                    <form method="post" action="/web/checkout/checkoutController" id="checkout">
+                                    <span style="font-size: 16px;">商品總價：${totalPrice}元 </span>
+                                    <button type="submit" form="checkout">去結帳</button>
+                                    <form method="post" action="/web/checkout/checkoutController" id="checkout" enctype="application/x-www-form-urlencoded">
                                         <input type="text" name="action" value="checkout" hidden>
                                     </form>
                                 </c:otherwise>
                             </c:choose>
 
                         </div>
-                        <form method="post" action="checkoutController" id="checkout">
-
-                        </form>
                     </div>
                 </div>
             </div>
@@ -115,9 +114,8 @@
 <script>
     $(document).ready(function () {
         <c:forEach var="cartProd" items="${cartProds}" varStatus="loop">
-
-        $('#amount${loop.index}').mousemove(function () {
-            $('#amount_value_${loop.index}').html($('#amount${loop.index}').val());
+        $('#amount${loop.index}').on('change mousemove',function () {
+            $('#amount_value_${loop.index}').html($(this).val());
         });
 
         </c:forEach>

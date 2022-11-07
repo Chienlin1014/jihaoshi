@@ -22,7 +22,7 @@ import com.meal.model.MealVO;
 public class CartController extends HttpServlet {
     MealService mealSV = new MealService();
     CartService cartSV = new CartService();
-    Integer totalPrice=0;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -36,7 +36,7 @@ public class CartController extends HttpServlet {
             Integer amount = Integer.valueOf(req.getParameter("amount"));
             MealVO meal = mealSV.findByMealNo(mealNo);
             cartProds=cartSV.getCartProds(quantity, amount, meal, cartProds);
-            totalPrice = cartSV.setTotalPrice(cartProds);
+            Integer totalPrice = cartSV.calculateTotalPrice(cartProds);
             session.setAttribute("totalPrice",totalPrice);
             session.setAttribute("cartProds", cartProds);
             res.sendRedirect(req.getHeader("referer"));
@@ -50,7 +50,7 @@ public class CartController extends HttpServlet {
             cartProd.setAmount(amount);
             cartProd.setPrice((int) (cartProd.getMeal().getMealPrice() * cartProd.getQuantity() * cartProd.getAmount()));
             cartProds.set(cartIndex, cartProd);
-            totalPrice = cartSV.setTotalPrice(cartProds);
+            Integer totalPrice = cartSV.calculateTotalPrice(cartProds);
             session.setAttribute("totalPrice",totalPrice);
             session.setAttribute("cartProds", cartProds);
             res.sendRedirect(req.getHeader("referer"));
@@ -60,8 +60,7 @@ public class CartController extends HttpServlet {
 
             Integer cartIndex = Integer.valueOf(req.getParameter("cartIndex"));
             cartProds.remove(cartProds.get(cartIndex));
-            cartSV.setTotalPrice(cartProds);
-            totalPrice = cartSV.setTotalPrice(cartProds);
+            Integer totalPrice = cartSV.calculateTotalPrice(cartProds);
             session.setAttribute("totalPrice",totalPrice);
             session.setAttribute("cartProds", cartProds);
             res.sendRedirect(req.getHeader("referer"));
