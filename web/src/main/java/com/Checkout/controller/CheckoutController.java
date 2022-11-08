@@ -18,7 +18,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import com.cart.model.CartProdVO;
 import com.cart.model.CartService;
-
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
 
@@ -33,11 +32,10 @@ public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+        HttpSession session = req.getSession();
+        List<CartProdVO> cartProds = (ArrayList<CartProdVO>) session.getAttribute("cartProds");
         String action = req.getParameter("action");
         if ("checkout".equals(action)) {
-            HttpSession session = req.getSession();
-            List<CartProdVO> cartProds = (ArrayList<CartProdVO>) session.getAttribute("cartProds");
             Integer totalPrice = cartSV.calculateTotalPrice(cartProds);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             String tradeDate = sdf.format(new Date(System.currentTimeMillis()));
@@ -47,12 +45,9 @@ public class CheckoutController extends HttpServlet {
             for (CartProdVO prod : cartProds) {
                 itemName+="品名："+prod.getMeal().getMealName()+" 份量："+prod.getQuantity()+" 數量："+prod.getAmount()+"#";
             }
-            System.out.println(itemName.length());
-            System.out.println(itemName);
             if (itemName.length()>=200) {
                 itemName = "Jihaoshi商品一批";
             }
-            System.out.println(itemName);
             String ranAlphabet = RandomStringUtils.randomAlphabetic(2).toUpperCase();
             int ranNum = (int) (Math.random() * 8999+ 1000);
             String merchantTradeNo=ranAlphabet+tradeDate.replace("/", "").replace(":", "").replace(" ", "")+ranNum;
@@ -76,14 +71,14 @@ public class CheckoutController extends HttpServlet {
             return;
         }
         if ("callBack".equals(action)) {
-            String merchantTradeNo=req.getParameter("MerchantTradeNo"); // 店內之交易編號
-            String tradeNo=req.getParameter("TradeNo"); // 綠界之交易編號
+
             Integer rtnCode = Integer.valueOf(req.getParameter("RtnCode")); // rtnCode==1 交易成功
-            System.out.println(merchantTradeNo);
-//            if (rtnCode.equals(1)) {
-//                RequestDispatcher orderInsert =req.getRequestDispatcher("/order/orderController?action=orderInsert");
-//                orderInsert.forward(req,res);
-//            }
+
+            if (rtnCode.equals(1)) {
+                RequestDispatcher orderInsert =req.getRequestDispatcher("/order/orderController?action=orderInsert");
+                orderInsert.forward(req,res);
+            }else {
+            }
         }
     }
 }
