@@ -170,7 +170,11 @@ public class MealController extends HttpServlet {
         }
         if ("listAll".equals(action)) {
             List<MealVO> meals = mealSV.getAll();
+
             if (meals != null) {
+                for (MealVO meal : meals) {
+                    meal.setShowPhoto("data:image/png;base64,"+Base64.getEncoder().encodeToString(meal.getMealPhoto()));
+                }
                 req.setAttribute("lastAllMeal", meals);
                 RequestDispatcher productPage = req.getRequestDispatcher("/meal/ListMealProduct.jsp");
                 productPage.forward(req, res);
@@ -188,6 +192,7 @@ public class MealController extends HttpServlet {
         if ("findByprod".equals(action)) {
             mealNo = Integer.valueOf(req.getParameter("mealNo"));
             MealVO meal = mealSV.findByMealNo(mealNo);
+            meal.setShowPhoto("data:image/png;base64,"+Base64.getEncoder().encodeToString(meal.getMealPhoto()));
             if (meal != null) {
                 req.setAttribute("meal", meal);
                 RequestDispatcher productPage = req.getRequestDispatcher("/meal/ProductPage.jsp");
