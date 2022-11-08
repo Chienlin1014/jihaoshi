@@ -3,19 +3,18 @@ package com.order.model;
 import java.util.Date;
 
 public class OrderVO {
-    private Integer orderNo;
+    private String orderNo;
     private Integer memberNo;
     private Integer price;
     private Date updateTime;
     private Integer status;
-    private String merchantTradeNo;
     private String tradeNo;
 
-    public Integer getOrderNo() {
+    public String getOrderNo() {
         return orderNo;
     }
 
-    public void setOrderNo(Integer orderNo) {
+    public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
     }
 
@@ -51,13 +50,6 @@ public class OrderVO {
         this.status = status;
     }
 
-    public String getMerchantTradeNo() {
-        return merchantTradeNo;
-    }
-
-    public void setMerchantTradeNo(String merchantTradeNo) {
-        this.merchantTradeNo = merchantTradeNo;
-    }
 
     public String getTradeNo() {
         return tradeNo;
