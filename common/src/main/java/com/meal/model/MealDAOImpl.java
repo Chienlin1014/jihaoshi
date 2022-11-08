@@ -86,8 +86,7 @@ public class MealDAOImpl implements MealDAO {
                         rs.getInt(4), rs.getString(5), rs.getInt(6),
                         rs.getBytes(7), rs.getInt(8), rs.getString(9),
                         rs.getInt(10), rs.getInt(11), rs.getInt(12),
-                        rs.getDate(13));
-        meal.setShowPhoto(Base64.getEncoder().encodeToString(meal.getMealPhoto()));
+                        rs.getTimestamp(13));
         return meal;
     }
 

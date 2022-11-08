@@ -41,7 +41,7 @@
                 <div class="Cm">
                     <div class="prod_area">
                         <div class="div_productPage">
-                            <img src="data:image/png;base64,<%= meal.getShowPhoto()%>" id="productPhoto"/>
+                            <img src="${meal.showPhoto}" id="productPhoto"/>
                         </div>
 
                         <div class="div_productPage" style="text-align: left;line-height: 35px">
