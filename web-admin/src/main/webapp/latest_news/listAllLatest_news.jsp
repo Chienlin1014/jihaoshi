@@ -61,8 +61,7 @@ th, td {
 			<td>
 				<h3>所有最新消息資料</h3>
 				<h4>
-					<a href="<%=request.getContextPath()%>/latest_news/select_page.jsp"><img
-						src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
+					<a href="<%=request.getContextPath()%>/latest_news/select_page.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>

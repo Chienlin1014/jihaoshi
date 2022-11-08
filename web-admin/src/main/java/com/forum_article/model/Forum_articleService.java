@@ -25,7 +25,6 @@ public class Forum_articleService {
 		Forum_articleVO forum_articleVO = new Forum_articleVO();
 		forum_articleVO.setArticle_name(article_name);
 		forum_articleVO.setArticle_content(article_content);
-		
 		forum_articleVO.setArticle_no(article_no);
 		dao.update(forum_articleVO);
 		return forum_articleVO;

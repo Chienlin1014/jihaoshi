@@ -108,7 +108,7 @@ th, td {
 		</table>
 		<br> <input type="hidden" name="action" value="update"> <input
 			type="hidden" name="article_no"
-			value="<%=forum_commentVO.getComment_no()%>"> <input
+			value="<%=forum_commentVO.getArticle_no()%>"> <input
 			type="submit" value="送出修改">
 	</FORM>
 </body>

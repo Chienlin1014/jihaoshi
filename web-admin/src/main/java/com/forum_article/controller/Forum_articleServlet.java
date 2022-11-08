@@ -15,8 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.forum_article.model.Forum_articleService;
 import com.forum_article.model.Forum_articleVO;
-import com.latest_news.model.Latest_newsService;
-import com.latest_news.model.Latest_newsVO;
+
 
 @WebServlet("/Forum_articleServlet")
 //@MultipartConfig(fileSizeThreshold = 0, maxFileSize = 5)
@@ -180,7 +179,6 @@ public class Forum_articleServlet extends HttpServlet {
 			Forum_articleVO forum_articleVO = new Forum_articleVO();
 			forum_articleVO.setArticle_name(article_name);
 			forum_articleVO.setArticle_content(article_content);
-			
 			forum_articleVO.setArticle_no(article_no);
 
 			// Send the use back to the form, if there were errors

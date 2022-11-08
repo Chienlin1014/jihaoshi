@@ -7,6 +7,7 @@ public class Forum_comment_reportVO implements java.io.Serializable{
 	private Integer member_no;
 	private String report_reason;
 	private Integer report_status;
+	
 	public Integer getComment_report_no() {
 		return comment_report_no;
 	}

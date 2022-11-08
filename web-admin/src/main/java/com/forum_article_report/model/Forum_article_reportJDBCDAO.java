@@ -16,7 +16,7 @@ public class Forum_article_reportJDBCDAO implements Forum_article_reportDAO_inte
 	String url = "jdbc:mysql://localhost:3306/database1?serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "password";
-	private static final String INSERT_STMT = "INSERT INTO forum_article_report(article_no, member_no, report_reason, report_status) VALUES (?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO forum_article_report(article_no, member_no, report_reason) VALUES (?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT article_report_no, article_no, member_no, report_reason, report_status FROM forum_article_report order by article_report_no";
 	private static final String GET_ONE_STMT = "SELECT article_report_no, article_no, member_no, report_reason, report_status FROM forum_article_report where article_report_no = ?";
 	private static final String DELETE = "DELETE FROM forum_article_report where article_report_no = ?";
@@ -36,7 +36,7 @@ public class Forum_article_reportJDBCDAO implements Forum_article_reportDAO_inte
 			pstmt.setInt(1, forum_article_reportVO.getArticle_no());
 			pstmt.setInt(2, forum_article_reportVO.getMember_no());
 			pstmt.setString(3, forum_article_reportVO.getReport_reason());
-			pstmt.setInt(4, forum_article_reportVO.getReport_status());
+//			pstmt.setInt(4, forum_article_reportVO.getReport_status());
 
 			pstmt.executeUpdate();
 
@@ -287,7 +287,7 @@ public class Forum_article_reportJDBCDAO implements Forum_article_reportDAO_inte
 		forum_article_reportVO1.setArticle_no(2);
 		forum_article_reportVO1.setMember_no(3);
 		forum_article_reportVO1.setReport_reason("檢舉事由1");
-		forum_article_reportVO1.setReport_status(1);
+//		forum_article_reportVO1.setReport_status(1);
 		dao.insert(forum_article_reportVO1);
 
 		// 修改
