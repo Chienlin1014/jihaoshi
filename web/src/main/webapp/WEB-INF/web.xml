@@ -11,12 +11,22 @@
     </resource-ref>
 
     <filter>
-        <filter-name>filter</filter-name>
+        <filter-name>loginFilter</filter-name>
         <filter-class>com.mem.Filters.loginFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>filter</filter-name>
+        <filter-name>loginFilter</filter-name>
         <url-pattern>/member/onlyLogin.jsp</url-pattern>
+
+    </filter-mapping>
+    
+    <filter>
+        <filter-name>checkoutFilter</filter-name>
+        <filter-class>com.testcheckout.Filters.checkoutFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>checkoutFilter</filter-name>
+        <url-pattern>/java/testCheckout.java</url-pattern>
 
     </filter-mapping>
 </web-app>
