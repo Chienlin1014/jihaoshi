@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3> 未保護的頁面</h3>
+<h3> 假的購物車</h3>
 </body>
 </html>

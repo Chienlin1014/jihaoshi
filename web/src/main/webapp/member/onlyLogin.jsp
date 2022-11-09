@@ -12,7 +12,9 @@
     <title>onlyLogin</title>
 </head>
 <body>
-<h3> 保護的頁面 - select_page2_protected.jsp      </h3>
+<h3> 首頁 </h3>
 <h3> 歡迎: ${member_account} 您好 </h3>
+
+<a href='login.jsp'>登入</a> <br><br>
 </body>
 </html>

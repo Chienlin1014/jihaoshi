@@ -44,7 +44,7 @@ public class MemberServlet extends HttpServlet {
 			String memberadd = req.getParameter("memberAddress");
 			String memberemail = req.getParameter("memberEmail");
 			if (memberacc == null || memberacc.trim().length() == 0) {
-				errorMsgs.add("會員帳號請勿空白1");
+				errorMsgs.add("會員帳號請勿空白");
 			}
 			if (memberpas == null || memberpas.trim().length() == 0) {
 				errorMsgs.add("會員密碼請勿空白");

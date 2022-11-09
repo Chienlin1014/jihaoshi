@@ -46,7 +46,7 @@ form,li,a {
 					type="submit" value="新增">
 			</FORM>
 		
-		<a href='listAllMember.jsp'>List</a> all Mems.  <br><br></li>
+		<a href='listAllMember.jsp'>List</a> all Mems.  <br><br>
 	
 </body>
 </html>
