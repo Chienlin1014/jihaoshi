@@ -26,7 +26,7 @@
     </filter>
     <filter-mapping>
         <filter-name>checkoutFilter</filter-name>
-        <url-pattern>/java/testCheckout.java</url-pattern>
+        <url-pattern>/testCart/testCheckout</url-pattern>
 
     </filter-mapping>
 </web-app>
