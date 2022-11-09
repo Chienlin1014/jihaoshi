@@ -34,6 +34,7 @@ public class MealDAOImpl implements MealDAO {
     public static final String LAUNCH_SQL = "UPDATE MEAL_PRODUCT SET LAUNCH = ? WHERE MEAL_NO = ? ;";
     public static final String FINDBY_MEALNO = "SELECT * FROM MEAL_PRODUCT WHERE MEAL_NO=? ;";
     public static final String GET_ALL_LAUNCH = "SELECT * FROM MEAL_PRODUCT WHERE LAUNCH=1;";
+
     @Override
     public MealVO insert(MealVO meal) {
         try (Connection conn = ds.getConnection();
@@ -153,7 +154,7 @@ public class MealDAOImpl implements MealDAO {
 
     @Override
     public List<MealVO> getAll() {
-      return getAll(GET_ALL_SQL);
+        return getAll(GET_ALL_SQL);
     }
 
     @Override
