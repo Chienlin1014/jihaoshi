@@ -29,9 +29,9 @@ public class loginFilter implements Filter {
         // 【取得 session】
         HttpSession session = req.getSession();
         // 【從 session 判斷此user是否登入過】
-        Object account = session.getAttribute("member_account");
+        Object account = session.getAttribute("MemberAcc");
         if (account == null) {
-            session.setAttribute("member_account", "訪客");
+            session.setAttribute("MemberAcc", "訪客");
             chain.doFilter(request, response);
         } else {
             chain.doFilter(request, response);

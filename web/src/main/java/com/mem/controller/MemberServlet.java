@@ -260,10 +260,10 @@ public class MemberServlet extends HttpServlet {
 			if (memberpas == null || memberpas.trim().length() == 0) {
 				errorMsgs.add("會員密碼請勿空白");
 			}
-			session.setAttribute("member_account", memberacc);
+		
 			MemberVO memVO = new MemberVO();
-			memVO.setMemberAccount(memberacc);
-			memVO.setMemberPassword(memberpas);
+//			memVO.setMemberAccount(memberacc);
+//			memVO.setMemberPassword(memberpas);
 
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("memberVO", memVO);
@@ -274,6 +274,10 @@ public class MemberServlet extends HttpServlet {
 
 			MemService memSvc = new MemService();
 			memVO = memSvc.Login(memberacc, memberpas);
+			
+			
+			
+			
 			if (memVO == null) {
 				errorMsgs.add("帳號或密碼錯誤");
 			}
@@ -283,10 +287,20 @@ public class MemberServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return;
 			}
-			
-			res.sendRedirect(req.getContextPath()+"/member/LoginSuccess.jsp");
+			session.setAttribute("MemberAcc", memVO.getMemberAccount());
+			session.setAttribute("MemberName", memVO.getMemberName());
+			session.setAttribute("MemberNo", memVO.getMemberNo());
+			res.sendRedirect(req.getContextPath() + "/member/LoginSuccess.jsp");
 
 		}
-
+		
+		//登出
+		if ("Logout".equals(action)) {
+			final HttpSession session = req.getSession();
+			session.removeAttribute("MemberAcc");
+			session.removeAttribute("MemberName");
+			session.removeAttribute("MemberNo");
+		}
+		//-------------------登出結束------------------------------------
 	}
 }

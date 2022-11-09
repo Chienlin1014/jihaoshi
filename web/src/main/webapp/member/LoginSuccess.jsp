@@ -9,6 +9,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3> 歡迎:<font color=red> ${member_account} </font>您好</h3>
+	<h3>
+		歡迎:<font color=red> ${MemberAcc} </font>您好
+		<br><font>會員編號: ${MemberNo} </font>
+		<br><font>會員姓名: ${MemberName} </font>
+	</h3>
+
+	<FORM METHOD="post" ACTION="MemberServlet">
+		<input type="hidden" name="action" value="Logout"> <input
+			type="submit" value="登出">
+	</FORM>
 </body>
 </html>
