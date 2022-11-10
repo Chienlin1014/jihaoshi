@@ -73,7 +73,7 @@
 <!-- 	</tr> -->
 	<tr>
 		<td>消息標題:</td>
-		<td><input type="TEXT" name="news_name" size="45" value="<%=latest_newsVO.getNews_name()%>" /></td>
+		<td><input type="TEXT" name="news_name" size="45" value="<%=latest_newsVO.getNews_name()%>" required/></td>
 	</tr>
 <!-- 	<tr> -->
 <!-- 		<td>編輯時間:</td> -->
@@ -81,7 +81,7 @@
 <!-- 	</tr> -->
 	<tr>
 		<td>消息內文:</td>
-		<td><textarea type="TEXT" name="news_content" size="45"	value="<%=latest_newsVO.getNews_content()%>" /></textarea></td>
+		<td><textarea type="TEXT" name="news_content" size="45"	value="<%=latest_newsVO.getNews_content()%>" required/></textarea></td>
 	</tr>
 
 	

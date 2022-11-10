@@ -18,7 +18,7 @@ public class Forum_commentJDBCDAO implements Forum_commentDAO_interface {
 	String passwd = "password";
 
 	private static final String INSERT_STMT = "INSERT INTO forum_comment(article_no,member_no, comment_content) VALUES (?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT comment_no,article_no,member_no,comment_time,comment_content,comment_status FROM forum_comment order by comment_no";
+	private static final String GET_ALL_STMT = "SELECT comment_no,article_no,member_no,comment_time,comment_content,comment_status FROM forum_comment where article_no = ? order by comment_no";
 	private static final String GET_ONE_STMT = "SELECT comment_no,article_no,member_no,comment_time,comment_content,comment_status FROM forum_comment where comment_no = ?";
 	private static final String DELETE = "DELETE FROM forum_comment where comment_no = ?";
 	private static final String UPDATE = "UPDATE forum_comment set article_no=?, member_no=?, comment_content=?, comment_status=? where comment_no = ?";
@@ -215,7 +215,7 @@ public class Forum_commentJDBCDAO implements Forum_commentDAO_interface {
 	}
 
 	@Override
-	public List<Forum_commentVO> getAll() {
+	public List<Forum_commentVO> getAll(Integer article_no) {
 
 		List<Forum_commentVO> list = new ArrayList<Forum_commentVO>();
 		Forum_commentVO forum_commentVO = null;
@@ -229,6 +229,7 @@ public class Forum_commentJDBCDAO implements Forum_commentDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
+			pstmt.setInt(1, article_no);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -240,8 +241,7 @@ public class Forum_commentJDBCDAO implements Forum_commentDAO_interface {
 				forum_commentVO.setComment_time(rs.getDate("comment_time"));
 				forum_commentVO.setComment_content(rs.getString("comment_content"));
 				forum_commentVO.setComment_status(rs.getInt("comment_status"));
-
-				list.add(forum_commentVO); // Store the row in the list
+				list.add(forum_commentVO);
 			}
 
 			// Handle any driver errors
@@ -280,41 +280,41 @@ public class Forum_commentJDBCDAO implements Forum_commentDAO_interface {
 	public static void main(String[] args) {
 		Forum_commentJDBCDAO dao = new Forum_commentJDBCDAO();
 
-		// 新增
-		Forum_commentVO forum_commentVO1 = new Forum_commentVO();
-		forum_commentVO1.setArticle_no(2);
-		forum_commentVO1.setMember_no(1);
-//		forum_commentVO1.setComment_time(java.sql.Date.valueOf("2005-01-01"));
-		forum_commentVO1.setComment_content("文章內容1");
-//		forum_commentVO1.setComment_status(1);
-		dao.insert(forum_commentVO1);
-
-		// 修改
-		Forum_commentVO forum_commentVO2 = new Forum_commentVO();
-		forum_commentVO2.setArticle_no(2);
-		forum_commentVO2.setMember_no(2);
-//		forum_commentVO2.setComment_time(java.sql.Date.valueOf("2002-01-01"));
-		forum_commentVO2.setComment_content("文章內容2");
-		forum_commentVO2.setComment_status(1);
-		forum_commentVO2.setComment_no(2);
-		dao.update(forum_commentVO2);
-
-		// 刪除
-		dao.delete(10);
+//		// 新增
+//		Forum_commentVO forum_commentVO1 = new Forum_commentVO();
+//		forum_commentVO1.setArticle_no(2);
+//		forum_commentVO1.setMember_no(1);
+////		forum_commentVO1.setComment_time(java.sql.Date.valueOf("2005-01-01"));
+//		forum_commentVO1.setComment_content("文章內容1");
+////		forum_commentVO1.setComment_status(1);
+//		dao.insert(forum_commentVO1);
+//
+//		// 修改
+//		Forum_commentVO forum_commentVO2 = new Forum_commentVO();
+//		forum_commentVO2.setArticle_no(2);
+//		forum_commentVO2.setMember_no(2);
+////		forum_commentVO2.setComment_time(java.sql.Date.valueOf("2002-01-01"));
+//		forum_commentVO2.setComment_content("文章內容2");
+//		forum_commentVO2.setComment_status(1);
+//		forum_commentVO2.setComment_no(2);
+//		dao.update(forum_commentVO2);
+//
+//		// 刪除
+//		dao.delete(10);
+//
+//		// 查詢
+//		Forum_commentVO forum_commentVO3 = dao.findByPrimarykey(1);
+//		System.out.print(forum_commentVO3.getComment_no() + ",");
+//		System.out.print(forum_commentVO3.getArticle_no() + ",");
+//		System.out.print(forum_commentVO3.getMember_no() + ",");
+//		System.out.print(forum_commentVO3.getComment_time() + ",");
+//		System.out.print(forum_commentVO3.getComment_content() + ",");
+//		System.out.print(forum_commentVO3.getComment_status() + ",");
+//
+//		System.out.println("---------------------");
 
 		// 查詢
-		Forum_commentVO forum_commentVO3 = dao.findByPrimarykey(1);
-		System.out.print(forum_commentVO3.getComment_no() + ",");
-		System.out.print(forum_commentVO3.getArticle_no() + ",");
-		System.out.print(forum_commentVO3.getMember_no() + ",");
-		System.out.print(forum_commentVO3.getComment_time() + ",");
-		System.out.print(forum_commentVO3.getComment_content() + ",");
-		System.out.print(forum_commentVO3.getComment_status() + ",");
-
-		System.out.println("---------------------");
-
-		// 查詢
-		List<Forum_commentVO> list = dao.getAll();
+		List<Forum_commentVO> list = dao.getAll(1);
 		for (Forum_commentVO aforum_comment : list) {
 			System.out.print(aforum_comment.getComment_no() + ",");
 			System.out.print(aforum_comment.getArticle_no() + ",");

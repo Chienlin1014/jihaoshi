@@ -7,5 +7,5 @@ public interface Forum_commentDAO_interface {
 	public void update(Forum_commentVO forum_commentVO);
 	public void delete(Integer comment_no);
 	public Forum_commentVO findByPrimarykey(Integer comment_no);
-	public List<Forum_commentVO> getAll();
+	public List<Forum_commentVO> getAll(Integer article_no);
 }
