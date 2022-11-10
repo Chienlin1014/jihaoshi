@@ -2,10 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.course.model.*"%>
-<<<<<<< HEAD
-=======
-<%-- 此頁練習採用 EL 的寫法取值 --%>
->>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
 
 <%
     PhyCouService phyCouSvc = new PhyCouService();
@@ -17,21 +13,13 @@
 
 <html>
 <head>
-<<<<<<< HEAD
 <title>所有課程資料</title>
-=======
-<title>所有course資料 - listAllCou.jsp</title>
->>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
 
 <style>
   table#table-1 {
 	background-color: #CCCCFF;
     border: 2px solid black;
     text-align: center;
-<<<<<<< HEAD
-
-=======
->>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
   }
   table#table-1 h4 {
     color: red;
@@ -46,11 +34,7 @@
 
 <style>
   table {
-<<<<<<< HEAD
 	width: 2000px;
-=======
-	width: 800px;
->>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -62,7 +46,6 @@
     padding: 5px;
     text-align: center;
   }
-<<<<<<< HEAD
   #info {
     width:450px;
   }
@@ -70,32 +53,20 @@
     width: 2000px;
     height: 28%;
   }
-=======
->>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
 </style>
 
 </head>
 <body bgcolor='white'>
-<<<<<<< HEAD
 <img src="<%= request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
 
 <table id="table-1">
 	<tr><td>
 		 <h3>所有課程資料 <a href="select_page.jsp"> ~回首頁</a></h3> 
-=======
-
-<h4>此頁練習採用 EL 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>所有course資料 - listAllCou.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
->>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
 	</td></tr>
 </table>
 
 <table>
 	<tr>
-<<<<<<< HEAD
 		<th>實體課程編號</th>
 		<th>實體課程名稱</th>
 		<th>上課時數</th>
@@ -113,25 +84,6 @@
 		<th>人數下限</th>
 		<th>目前報名人數</th>
 		<th>照片</th>	
-=======
-		<th>course_no</th>
-		<th>course_name</th>
-		<th>course_hr</th>
-		<th>course_price</th>
-		<th>course_teacher</th>
-		<th>course_date</th>
-		<th>course_location</th>
-		<th>course_info</th>
-		<th>course_status</th>
-		<th>create_date</th>
-		<th>update_time</th>
-		<th>sign_up_start_day</th>
-		<th>sign_up_end_day</th>
-		<th>max_sign_up_people</th>
-		<th>min_sign_up_people</th>
-		<th>current_sign_up_people</th>
-		<th>pic</th>
->>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
 		
 	</tr>
 	<%-- <%@ include file="page1.file" %>  --%> 
