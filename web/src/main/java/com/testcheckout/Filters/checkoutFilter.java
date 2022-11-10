@@ -33,7 +33,7 @@ public class checkoutFilter  implements Filter {
 		// 【取得 session】
 		HttpSession session = req.getSession();
 		// 【從 session 判斷此user是否登入過】
-		Object account = session.getAttribute("member_account");
+		Object account = session.getAttribute("MemberAcc");
 		if (account == null) {
 			session.setAttribute("location", req.getRequestURI());
 			res.sendRedirect(req.getContextPath() + "/member/login.jsp");
