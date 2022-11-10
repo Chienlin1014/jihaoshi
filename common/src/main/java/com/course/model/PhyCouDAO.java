@@ -26,7 +26,11 @@ public class PhyCouDAO implements PhyCouDAO_interface {
     static {
         try {
             Context ctx = new InitialContext();
+<<<<<<< HEAD
+            ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Jihaoshi");
+=======
             ds = (DataSource) ctx.lookup("java:comp/env/jdbc/JihaoshiDB");
+>>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
         } catch (NamingException e) {
             e.printStackTrace();
         }
@@ -40,6 +44,11 @@ public class PhyCouDAO implements PhyCouDAO_interface {
 		"SELECT * FROM Physical_course order by course_no";
 	private static final String GET_ONE_STMT = 
 		"SELECT * FROM Physical_course where course_no = ?";
+<<<<<<< HEAD
+	private static final String GET_CAN_SIGNUP_STMT = 
+		"SELECT * FROM Physical_course where current_sign_up_people < max_sign_up_people ;";
+=======
+>>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
 	private static final String DELETE = 
 		"update Physical_course set course_status = ? where course_no= ?" ;
 	private static final String UPDATE = 
@@ -414,6 +423,52 @@ public class PhyCouDAO implements PhyCouDAO_interface {
 	}
 
 	@Override
+<<<<<<< HEAD
+	public List<PhyCouVO> getCanSignUp() {
+		List<PhyCouVO> list = new ArrayList<PhyCouVO>();
+		PhyCouVO phyCouVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_CAN_SIGNUP_STMT);
+			rs = pstmt.executeQuery();
+			
+			while ( rs.next()) {
+				phyCouVO = new PhyCouVO();
+				phyCouVO.setCourse_no(rs.getInt("course_no"));
+				phyCouVO.setCourse_name(rs.getString("course_name"));
+				phyCouVO.setCourse_hr(rs.getInt("course_hr"));
+				phyCouVO.setCourse_price(rs.getInt("course_price"));
+				phyCouVO.setCourse_teacher(rs.getString("course_teacher"));
+				phyCouVO.setCourse_date(rs.getDate("course_date"));
+				phyCouVO.setCourse_location(rs.getString("course_location"));
+				phyCouVO.setCourse_info(rs.getString("course_info"));
+				phyCouVO.setCourse_status(rs.getInt("course_status"));
+				phyCouVO.setCreate_date(rs.getDate("create_date"));
+				phyCouVO.setUpdate_time(rs.getDate("update_time"));
+				phyCouVO.setSign_up_start_day(rs.getDate("sign_up_start_day"));
+				phyCouVO.setSign_up_end_day(rs.getDate("sign_up_end_day"));
+				phyCouVO.setMax_sign_up_people(rs.getInt("max_sign_up_people"));
+				phyCouVO.setMin_sign_up_people(rs.getInt("min_sign_up_people"));
+				phyCouVO.setCurrent_sign_up_people(rs.getInt("current_sign_up_people"));
+				phyCouVO.setPic(rs.getBytes("pic"));
+				list.add(phyCouVO); // Store the row in the list
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		return list;
+	}
+
+	@Override
+=======
+>>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
 	public List<PhyCouVO> getAll(Map<String, String[]> map) {
 		// TODO Auto-generated method stub
 		return null;
