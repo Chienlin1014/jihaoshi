@@ -65,7 +65,11 @@ public class DBGifReader extends HttpServlet {
 //	    		Class.forName("com.mysql.cj.jdbc.Driver");
 //				con = DriverManager.getConnection("jdbc:mysql://15.152.181.134:3306/JihaoDB?serverTimezone=Asia/Taipei", "tsai", "Tibame@cga104");
 	    	Context ctx = new javax.naming.InitialContext();
+<<<<<<< HEAD
 	    	DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Jihaoshi");	 
+=======
+	    	DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/JihaoshiDB");	 
+>>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
 	    	con = ds.getConnection();
 	    	
 		} catch (NamingException e) {

@@ -77,10 +77,13 @@ public class PhyCouService {
 		return dao.getAll();
 	}
 	
+<<<<<<< HEAD
 	public List<PhyCouVO> getCanSignUp() {
 		return dao.getCanSignUp();
 	}
 	
+=======
+>>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
 	public List<PhyCouVO> getAll(Map<String, String[]> map) {
 		return dao.getAll(map);
 	}

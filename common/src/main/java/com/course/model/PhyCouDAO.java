@@ -26,7 +26,11 @@ public class PhyCouDAO implements PhyCouDAO_interface {
     static {
         try {
             Context ctx = new InitialContext();
+<<<<<<< HEAD
             ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Jihaoshi");
+=======
+            ds = (DataSource) ctx.lookup("java:comp/env/jdbc/JihaoshiDB");
+>>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
         } catch (NamingException e) {
             e.printStackTrace();
         }
@@ -40,8 +44,11 @@ public class PhyCouDAO implements PhyCouDAO_interface {
 		"SELECT * FROM Physical_course order by course_no";
 	private static final String GET_ONE_STMT = 
 		"SELECT * FROM Physical_course where course_no = ?";
+<<<<<<< HEAD
 	private static final String GET_CAN_SIGNUP_STMT = 
 		"SELECT * FROM Physical_course where current_sign_up_people < max_sign_up_people ;";
+=======
+>>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
 	private static final String DELETE = 
 		"update Physical_course set course_status = ? where course_no= ?" ;
 	private static final String UPDATE = 
@@ -416,6 +423,7 @@ public class PhyCouDAO implements PhyCouDAO_interface {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<PhyCouVO> getCanSignUp() {
 		List<PhyCouVO> list = new ArrayList<PhyCouVO>();
 		PhyCouVO phyCouVO = null;
@@ -459,6 +467,8 @@ public class PhyCouDAO implements PhyCouDAO_interface {
 	}
 
 	@Override
+=======
+>>>>>>> 19583f5f10b33792ca0852b8b32e65436605f024
 	public List<PhyCouVO> getAll(Map<String, String[]> map) {
 		// TODO Auto-generated method stub
 		return null;
