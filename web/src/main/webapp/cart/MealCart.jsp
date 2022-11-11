@@ -27,7 +27,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="${ctxPath}/order/ListOrder.jsp">訂單管理</a>
+                                    <a href="${ctxPath}/order/orderController?action=orderList">訂單管理</a>
                                 </li>
                                 <li>
                                     <a href="${ctxPath}/index.jsp">回首頁</a>
