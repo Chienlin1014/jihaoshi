@@ -30,6 +30,9 @@
                                 <li>
                                     <a href="<%=request.getContextPath()%>/meal/MealManagerIndex.jsp">菜單商品管理</a>
                                 </li>
+                                <li>
+                                    <a href="<%=request.getContextPath()%>/faqservlet?action=selectFAQ" >FAQ列表</a>
+                                </li>
                             </ul>
                     </ul>
                 </dd>
