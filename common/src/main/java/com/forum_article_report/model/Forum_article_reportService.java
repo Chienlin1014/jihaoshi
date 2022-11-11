@@ -16,6 +16,7 @@ private Forum_article_reportDAO_interface dao;
 	public Forum_article_reportVO addForum_article_report(Integer article_no, Integer member_no, String  report_reason) {
 	
 		Forum_article_reportVO forum_article_reportVO = new Forum_article_reportVO();
+		
 		forum_article_reportVO.setArticle_no(article_no);
 		forum_article_reportVO.setMember_no(member_no);
 		forum_article_reportVO.setReport_reason(report_reason);

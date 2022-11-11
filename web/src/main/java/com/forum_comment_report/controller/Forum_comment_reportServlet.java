@@ -97,6 +97,7 @@ public class Forum_comment_reportServlet extends HttpServlet {
 			}
 
 			Forum_comment_reportVO forum_comment_reportVO = new Forum_comment_reportVO();
+			
 			forum_comment_reportVO.setComment_no(comment_no);
 			forum_comment_reportVO.setArticle_no(article_no);
 			forum_comment_reportVO.setMember_no(member_no);
@@ -116,7 +117,7 @@ public class Forum_comment_reportServlet extends HttpServlet {
 			/*************************** 2.開始新增資料 ***************************************/
 			Forum_comment_reportService forum_comment_reportSvc = new Forum_comment_reportService();
 			forum_comment_reportVO = forum_comment_reportSvc.addForum_comment_report(comment_no, article_no, member_no,
-					report_reason);
+			report_reason);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = "/forum_comment_report/listAllForum_comment_report.jsp";

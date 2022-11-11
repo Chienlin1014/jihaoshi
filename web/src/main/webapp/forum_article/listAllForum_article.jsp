@@ -90,23 +90,23 @@ th, td {
 				<td>${forum_articleVO.article_content}</td>
 				
 
-				<td>
-					<FORM METHOD="post" ACTION="/web/Forum_article_reportServlet"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="檢舉"> 
-						<input type="hidden" name="article_no" value="${forum_articleVO.article_no}">
-						<input type="hidden" name="action" value="insert">
-					</FORM>
-				</td>
-				<td>
-					<FORM METHOD="post" ACTION="/web/Forum_article_reportServlet"
-						style="margin-bottom: 0px;">
-						<input type="hidden" name="article_no" value="${forum_articleVO.article_no}">
-						<input type="hidden" name="action" value="123">
-						<input type="submit" value="留言">
-					</FORM>
-				</td>
-			</tr>
+<!-- 				<td> -->
+<!-- 					<FORM METHOD="post" ACTION="/web/Forum_article_reportServlet" -->
+<!-- 						style="margin-bottom: 0px;"> -->
+<!-- 						<input type="submit" value="檢舉">  -->
+<%-- 						<input type="hidden" name="article_no" value="${forum_articleVO.article_no}"> --%>
+<!-- 						<input type="hidden" name="action" value="insert"> -->
+<!-- 					</FORM> -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					<FORM METHOD="post" ACTION="/web/Forum_article_reportServlet" -->
+<!-- 						style="margin-bottom: 0px;"> -->
+<%-- 						<input type="hidden" name="article_no" value="${forum_articleVO.article_no}"> --%>
+<!-- 						<input type="hidden" name="action" value="123"> -->
+<!-- 						<input type="submit" value="留言"> -->
+<!-- 					</FORM> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
 
 		</c:forEach>
 	</table>

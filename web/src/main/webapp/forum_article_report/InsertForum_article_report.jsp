@@ -12,7 +12,7 @@
 
 <body>
 	<h1>論壇文章檢舉新增:</h1>
-	<form method="post" action="/web-admin/Forum_article_reportServlet" id="form1">
+	<form method="post" action="/web/Forum_article_reportServlet" id="form1">
 		<div>
 		
 			<label>輸入論壇文章編號：</label><input type="text" name="article_no" value="${param.article_no}" required><br>

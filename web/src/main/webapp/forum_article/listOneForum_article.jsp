@@ -36,12 +36,13 @@ pageContext.setAttribute("list", list);
 
 <style>
   table {
-	width: 600px;
+	width: 1000px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
   }
   table, th, td {
+   width: 700px;
     border: 1px solid #CCCCFF;
   }
   th, td {
@@ -49,7 +50,23 @@ pageContext.setAttribute("list", list);
     text-align: center;
   }
 </style>
+<style>
+ div.comments {
+            display: grid;
+            grid-template-columns: 60px 80px auto;
+            padding: 10px;
+        }
 
+        div.comments>div {
+            text-align: left;
+        }
+
+        div.comments>div:first-child {
+            /* 	background: #1E90FF; */
+            grid-row-start: 1;
+            grid-row-end: 3;
+        }
+</style>
 </head>
 <body bgcolor='white'>
 
@@ -90,6 +107,17 @@ pageContext.setAttribute("list", list);
                     <div class="ctime">&ensp;${forum_commentVO.comment_time}</div>
                     <div class="c"></div>
               	</div>
+              	<div class="addForum_comment_report">
+                <form method="post" action="/web/Forum_comment_reportServlet">
+                    <input type="hidden" name="comment_no" value="${param.article_no}">
+                    <input type="hidden" name="article_no" value="${param.article_no}">
+                    <input type="hidden" name="member_no" value=5>
+                    <input type="hidden" name="action" value="insert">
+                    <input type="text" class="form-control insert" name="report_reason" value="${param.report_reason}"
+                        placeholder="這留言我覺得不行">&ensp;
+                    <button type="submit" class="btn btn-info">送出</button>
+                </form>
+                </div>
             </c:forEach>
 
             <div class="addComment">
@@ -105,6 +133,8 @@ pageContext.setAttribute("list", list);
                 
                  <div class="addForum_article_report">
                 <form method="post" action="/web/Forum_article_reportServlet">
+                
+                 
                     <input type="hidden" name="article_no" value="${param.article_no}">
                     <input type="hidden" name="member_no" value=5>
                     <input type="hidden" name="action" value="insert">
@@ -113,6 +143,8 @@ pageContext.setAttribute("list", list);
                     <button type="submit" class="btn btn-info">送出</button>
                 </form>
                 </div>
+                
+                
                 
 			</div>
 </body>

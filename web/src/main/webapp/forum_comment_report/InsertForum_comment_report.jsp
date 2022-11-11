@@ -12,7 +12,7 @@
 
 <body>
 	<h1>論壇留言檢舉新增:</h1>
-	<form method="post" action="/web-admin/Forum_comment_reportServlet" id="form1">
+	<form method="post" action="/web/Forum_comment_reportServlet" id="form1">
 		<div>
 			<label>輸入論壇文章留言編號：</label><input type="text" name="comment_no" value="${param.comment_no}" required><br>
 			<br> 

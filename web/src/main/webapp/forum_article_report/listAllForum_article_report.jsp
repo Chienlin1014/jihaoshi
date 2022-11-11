@@ -58,7 +58,7 @@ th, td {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>論壇文章檢舉言資料</h3>
+				<h3>論壇文章檢舉資料</h3>
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/forum_article_report/forum_article_report_select_page.jsp">回首頁</a>
@@ -73,7 +73,7 @@ th, td {
 			<th>論壇文章編號</th>
 			<th>會員編號</th>
 			<th>檢舉事由</th>
-			<th>檢舉狀態</th>
+<!-- 			<th>檢舉狀態</th> -->
 			
 		</tr>
 		<%@ include file="forum_article_report_page1.file"%>
@@ -86,17 +86,17 @@ th, td {
 				<td>${forum_article_reportVO.article_no}</td>
 				<td>${forum_article_reportVO.member_no}</td>
 				<td>${forum_article_reportVO.report_reason}</td>
-				<td>${forum_article_reportVO.report_status}</td>
+<%-- 				<td>${forum_article_reportVO.report_status}</td> --%>
 				
 
-				<td>
-					<FORM METHOD="post" ACTION="/web-admin/Forum_article_reportServlet"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
-							name="article_report_no" value="${forum_article_reportVO.article_report_no}">
-						<input type="hidden" name="action" value="getOne_For_Update">
-					</FORM>
-				</td>
+<!-- 				<td> -->
+<!-- 					<FORM METHOD="post" ACTION="/web-admin/Forum_article_reportServlet" -->
+<!-- 						style="margin-bottom: 0px;"> -->
+<!-- 						<input type="submit" value="修改"> <input type="hidden" -->
+<%-- 							name="article_report_no" value="${forum_article_reportVO.article_report_no}"> --%>
+<!-- 						<input type="hidden" name="action" value="getOne_For_Update"> -->
+<!-- 					</FORM> -->
+<!-- 				</td> -->
 <!-- 				<td> -->
 <!-- 					<FORM METHOD="post" ACTION="/web-admin/Forum_article_reportServlet" -->
 <!-- 						style="margin-bottom: 0px;"> -->
