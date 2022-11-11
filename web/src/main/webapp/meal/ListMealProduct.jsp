@@ -65,7 +65,7 @@
                             <dl class="col3f" id="DRAA0A-A900BUT82">
                                 <dd class="c1f"><a class="prod_img"
                                                    href="mealController?action=findByprod&mealNo=${meal.mealNo}">
-                                    <img src="${meal.showPhoto}"></a></dd>
+                                    <img src="${not empty meal.showPhoto? meal.showPhoto:"../images/noImg.jpg"}"></a></dd>
                                 <dd class="c2f">
                                     <ul class="tag_box s_label"></ul>
                                     <h5 class="prod_name"><a

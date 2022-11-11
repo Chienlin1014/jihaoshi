@@ -1,12 +1,22 @@
 package com.orderDetail.model;
 
-public class OrderDeatailVO {
+import com.meal.model.MealVO;
+
+public class OrderDetailVO {
+    public MealVO meal;
     private String orderNo;
     private Integer mealNo;
     private Double quantity;
     private Integer amount;
     private Integer price;
 
+    public MealVO getMeal() {
+        return meal;
+    }
+
+    public void setMeal(MealVO meal) {
+        this.meal = meal;
+    }
     public String getOrderNo() {
         return orderNo;
     }

@@ -39,7 +39,7 @@ public class MealController extends HttpServlet {
                     meal.setShowPhoto("data:image/png;base64,"+ Base64.getEncoder().encodeToString(meal.getMealPhoto()));
                 }
                 req.setAttribute("listMeals", listMeals);
-                productPage = req.getRequestDispatcher("/meal/ListMealProduct.jsp");
+                productPage = req.getRequestDispatcher("ListMealProduct.jsp");
                 productPage.forward(req, res);
             }
         }
@@ -50,7 +50,7 @@ public class MealController extends HttpServlet {
             if (meal != null&& meal.getLaunch().equals(1)) {
                 meal.setShowPhoto("data:image/png;base64,"+ Base64.getEncoder().encodeToString(meal.getMealPhoto()));
                 req.setAttribute("meal", meal);
-                productPage = req.getRequestDispatcher("/meal/ProductPage.jsp");
+                productPage = req.getRequestDispatcher("ProductPage.jsp");
                 productPage.forward(req, res);
                 return;
             }else {

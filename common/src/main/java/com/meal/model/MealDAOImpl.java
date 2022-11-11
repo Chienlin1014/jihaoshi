@@ -74,12 +74,28 @@ public class MealDAOImpl implements MealDAO {
                 meal = parseMealVO(rs);
                 return meal;
             }
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
+    public MealVO findByMealNo(Integer mealNo,Connection conn) {
+        try {
+            PreparedStatement ps = conn.prepareStatement(FINDBY_MEALNO);
+            ps.setInt(1, mealNo);
+            ResultSet rs = ps.executeQuery();
+            MealVO meal = null;
+            if (rs.next()) {
+                meal = parseMealVO(rs);
+                return meal;
+            }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     private MealVO parseMealVO(ResultSet rs) throws SQLException {
         MealVO meal = new MealVO
                 (rs.getInt(1), rs.getString(2), rs.getString(3),
@@ -104,6 +120,7 @@ public class MealDAOImpl implements MealDAO {
             ps.setInt(8, meal.getLaunch());
             ps.setInt(9, meal.getMealNo());
             ps.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

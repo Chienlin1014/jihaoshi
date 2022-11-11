@@ -14,4 +14,8 @@ public class OrderService {
         order.setTradeNo(tradeNo);
         dao.insert(order,cartProds);
     }
+
+    public List<OrderVO> listOrsers(Integer memberNo) {
+        return dao.listOrsers(memberNo);
+    }
 }

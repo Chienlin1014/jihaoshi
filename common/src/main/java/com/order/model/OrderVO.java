@@ -1,12 +1,12 @@
 package com.order.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class OrderVO {
     private String orderNo;
     private Integer memberNo;
     private Integer price;
-    private Date updateTime;
+    private Timestamp orderTime;
     private Integer status;
     private String tradeNo;
 
@@ -34,12 +34,12 @@ public class OrderVO {
         this.price = price;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Timestamp getOrderTime() {
+        return orderTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setOrderTime(Timestamp orderTime) {
+        this.orderTime = orderTime;
     }
 
     public Integer getStatus() {
