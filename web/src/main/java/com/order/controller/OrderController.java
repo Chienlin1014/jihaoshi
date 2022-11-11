@@ -30,12 +30,24 @@ public class OrderController extends HttpServlet {
         CartService cartSV=new CartService();
 
         if ("orderInsert".equals(action)) {
+            //            Integer memberNo = req.getParameter("memberNo");
+
             Integer memberNo=1;
             String merchantTradeNo=req.getParameter("MerchantTradeNo"); // 店內之交易編號
             String tradeNo=req.getParameter("TradeNo"); // 綠界之交易編號
             Integer totalPrice = cartSV.calculateTotalPrice(cartProds);
             OrderService orderSV=new OrderService();
             orderSV.orderInsert(merchantTradeNo, memberNo, totalPrice, tradeNo, cartProds);
+            session.removeAttribute("cartProds");
+            session.removeAttribute("totalPrice");
+            res.sendRedirect(req.getContextPath()+"/order/ListOrder.jsp");
+        }
+
+        if ("orderList".equals(action)) {
+//            Integer memberNo = req.getParameter("memberNo");
+            Integer memberNo=1;
+
+
         }
     }
 }

@@ -3,6 +3,7 @@ package com.cart.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -34,6 +35,7 @@ public class CartController extends HttpServlet {
             Double quantity = Double.valueOf(req.getParameter("quantityCart"));
             Integer amount = Integer.valueOf(req.getParameter("amount"));
             MealVO meal = mealSV.findByMealNo(mealNo);
+            meal.setShowPhoto("data:image/png;base64,"+ Base64.getEncoder().encodeToString(meal.getMealPhoto()));
             cartProds=cartSV.getCartProds(quantity, amount, meal, cartProds);
             Integer totalPrice = cartSV.calculateTotalPrice(cartProds);
             session.setAttribute("totalPrice",totalPrice);
