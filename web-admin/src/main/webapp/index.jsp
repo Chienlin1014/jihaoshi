@@ -15,6 +15,7 @@ a {
 </style>
 </head>
 <body>
+
 	<img src="images/JihaoshiPageHead.jpg" id="pageHead">
 	<div class="block_N" style="margin: 0px auto;">
 		<!--搜尋欄開始-->
@@ -49,7 +50,6 @@ a {
 									<li><a
 										href="${pageContext.request.contextPath}/onlineCourse/searchAll">線上課程管理</a>
 									</li>
-									
 									
 
 								</ul>
