@@ -57,7 +57,7 @@
                         <c:forEach var="meal" items="${meals}" begin="<%= pageIndex %>"
                                    end="<%= pageIndex+rowsPerPage-1 %>">
                             <dl class="col3f" id="DRAA0A-A900BUT82">
-                                <dd class="c1f"><a class="prod_img" href="#">
+                                <dd class="c1f"><a class="prod_img" href="mealController?action=findByprod&mealNo=${meal.mealNo}">
                                     <img src="data:image/png;base64,${meal.showPhoto}"></a></dd>
                                 <dd class="c2f">
                                     <ul class="tag_box s_label"></ul>
@@ -66,8 +66,8 @@
                                     <br>
                                     <span style="font-size: 18px">${meal.mealRecipe}</span>
                                     <br>
-                                    <span style="font-size: 18px">狀態：${meal.launch eq 0?"未上架":"上架中"}</span>
-                                    <ul id="bookInfo"></ul>
+                                    <span style="font-size: 18px">狀態：${launchStatus[meal.launch]}</span>
+<%--                                    <ul id="bookInfo"></ul>--%>
                                 </dd>
                                 <dd class="c3f" id="button_DRAA0A-A900BUT82">
                                     <ul class="price_box">
@@ -77,15 +77,16 @@
                                     <form method="post" action="mealController?action=toUpdate"
                                           enctype="application/x-www-form-urlencoded" id="edit${meal.mealNo}">
                                         <input type="text" value="${meal.mealNo}" name="mealNo" hidden>
-                                        <button type="submit" form="edit${meal.mealNo}">修改商品</button>
+
                                     </form>
                                     <br>
                                     <form method="post" action="mealController" enctype="application/x-www-form-urlencoded" id="launch${meal.mealNo}">
                                         <input type="text" name="mealNo" value="${meal.mealNo}" hidden>
                                         <input type="text" name="launch" value="${meal.launch eq 0?1:0}" hidden>
                                         <input type="text" name="action" value="launch" hidden>
-                                        <button type="submit" form="launch${meal.mealNo}">${meal.launch eq 0?"上架":"下架"}</button>
                                     </form>
+                                    <button type="submit" form="edit${meal.mealNo}">修改商品</button>
+                                    <button type="submit" form="launch${meal.mealNo}" class="launchSwitch">${meal.launch eq 0?"上架":"下架"}</button>
                                 </dd>
                             </dl>
                         </c:forEach>
@@ -98,5 +99,7 @@
 
     </div>
 </div>
+<script>
+</script>
 </body>
 </html>

@@ -11,6 +11,7 @@
 	<artifactId>web</artifactId>
 	<packaging>war</packaging>
 
+
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -23,6 +24,14 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+
+  <dependencies>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.11.0</version>
+    </dependency>
+
 
 		<dependency>
 			<groupId>com.tibame.cga104.jihaoshi</groupId>
