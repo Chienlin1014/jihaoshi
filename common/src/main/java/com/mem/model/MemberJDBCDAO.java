@@ -367,6 +367,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			System.out.print(amem.getMemberPhone() + "," + " ");
 			System.out.print(amem.getMemberNickname() + "," + " ");
 			System.out.print(amem.getMemberAddress() + ",");
+//			System.out.print(aEmp.getDeptVO()); // join DeptVO
 			System.out.print(amem.getMemberEmail() + "\t");
 			System.out.println();
 		}
