@@ -9,6 +9,7 @@ MemService memSvc = new MemService();
 List<MemberVO> list = memSvc.getAll();
 pageContext.setAttribute("list", list);
 %>
+
 <html>
 <head>
 

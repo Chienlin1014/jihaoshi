@@ -12,7 +12,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/test2?serverTimezone=Asia/Taipei";
 	String userid = "root";
-	String passwd = "1118";
+	String passwd = "password";
 
 	private static final String INSERT_STMT = "INSERT INTO member (member_account,member_password,member_name,member_phone,member_nickname,member_address,member_email) VALUES (?, ?, ?, ?, ?,?,?) ";
 	private static final String GET_ALL_STMT = "SELECT member_no,member_account,member_password,member_name,member_phone,member_nickname,member_address,member_email FROM member order by member_no ";
@@ -367,7 +367,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			System.out.print(amem.getMemberPhone() + "," + " ");
 			System.out.print(amem.getMemberNickname() + "," + " ");
 			System.out.print(amem.getMemberAddress() + ",");
-//			System.out.print(aEmp.getDeptVO()); // join DeptVO
 			System.out.print(amem.getMemberEmail() + "\t");
 			System.out.println();
 		}

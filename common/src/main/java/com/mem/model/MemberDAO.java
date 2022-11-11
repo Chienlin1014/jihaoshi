@@ -32,7 +32,7 @@ public class MemberDAO implements MemberDAO_interface {
 
 	@Override
 	public void insert(MemberVO memberVO) {
-		// TODO Auto-generated method stub
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -287,7 +287,7 @@ public class MemberDAO implements MemberDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO 也稱為 Domain objects
+				
 				MemberVO = new MemberVO();
 				MemberVO.setMemberNo(rs.getInt("member_no"));
 				MemberVO.setMemberAccount(rs.getString("member_account"));
@@ -298,13 +298,13 @@ public class MemberDAO implements MemberDAO_interface {
 				MemberVO.setMemberAddress(rs.getString("member_address"));
 				MemberVO.setMemberEmail(rs.getString("member_email"));
 				MemberVO.setMemberState(rs.getInt("member_state"));
-				list.add(MemberVO); // Store the row in the list
+				list.add(MemberVO); 
 			}
 
-			// Handle any driver errors
+			
 		} catch (SQLException se) {
 			se.printStackTrace();
-			// Clean up JDBC resources
+			
 		} finally {
 			if (rs != null) {
 				try {

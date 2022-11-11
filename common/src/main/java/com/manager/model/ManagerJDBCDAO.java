@@ -1,27 +1,18 @@
 package com.manager.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
-public class ManagerDAO implements ManagerDAO_interface {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jihaoshi");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+public class ManagerJDBCDAO implements ManagerDAO_interface {
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://localhost:3306/jihaoshi?serverTimezone=Asia/Taipei";
+	String userid = "root";
+	String passwd = "password";
 	// manager_no, manager_name, manager_ip, manager_account, manager_password,manager_status
 
 	private static final String INSERT_STMT = "INSERT INTO backend_manager (manager_name,manager_ip,manager_account,manager_password) VALUES (?, ?, ?, ?)";
@@ -45,7 +36,7 @@ public class ManagerDAO implements ManagerDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, ManagerVO.getManagerName());
@@ -86,7 +77,7 @@ public class ManagerDAO implements ManagerDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, ManagerVO.getManagerName());
@@ -128,7 +119,7 @@ public class ManagerDAO implements ManagerDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, managerNo);
@@ -186,7 +177,7 @@ public class ManagerDAO implements ManagerDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(Login);
 
 			pstmt.setString(1, mamberAccount);
@@ -241,7 +232,7 @@ public class ManagerDAO implements ManagerDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, managerNo);
@@ -274,7 +265,7 @@ public class ManagerDAO implements ManagerDAO_interface {
 	@Override
 	public List<ManagerVO> getAll() {
 		List<ManagerVO> list = new ArrayList<ManagerVO>();
-		ManagerVO manVO = null;
+		ManagerVO managerVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -282,22 +273,22 @@ public class ManagerDAO implements ManagerDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			//manager_no, manager_name, authority_name, manager_account, manager_status
 			
 			while (rs.next()) {
 				
-				manVO = new ManagerVO();
-				manVO.setManagerNo(rs.getInt("manager_no"));
-				manVO.setManagerName(rs.getString("manager_name"));
-				manVO.setManagerAccount(rs.getString("manager_account"));
+				managerVO = new ManagerVO();
+				managerVO.setManagerNo(rs.getInt("manager_no"));
+				managerVO.setManagerName(rs.getString("manager_name"));
+				managerVO.setManagerAccount(rs.getString("manager_account"));
 //				managerVO.setManagerPassword(rs.getString("manager_password"));
-				manVO.setManagerStatus(rs.getInt("manager_status"));
-				manVO.setAuthorityName(rs.getString("authority_name"));
+				managerVO.setManagerStatus(rs.getInt("manager_status"));
+				managerVO.setAuthorityName(rs.getString("authority_name"));
 				
-				list.add(manVO); 
+				list.add(managerVO); 
 			}
 
 			
@@ -329,5 +320,22 @@ public class ManagerDAO implements ManagerDAO_interface {
 		}
 		return list;
 	}
-	
+	public static void main(String[] args) {
+		ManagerJDBCDAO dao = new ManagerJDBCDAO();
+		List<ManagerVO> list = dao.getAll();
+		for (ManagerVO amem : list) {
+			System.out.print(amem.getManagerNo() + "," + " ");
+			System.out.print(amem.getManagerName() + "," + " ");
+			System.out.print(amem.getManagerAccount() + "," + " ");
+			System.out.print(amem.getManagerStatus() + "," + " ");
+			System.out.print(amem.getAuthorityName() + "," + " ");
+			System.out.println();
+		}
+//		ManagerVO manvo = new ManagerVO();
+//		manvo.setAuthorityName("test1");
+//		manvo.setManagerIp("0000");
+//		manvo.setManagerAccount("parker");
+//		manvo.setManagerPassword("peter");
+//		dao.insert(manvo);
+	}
 }
