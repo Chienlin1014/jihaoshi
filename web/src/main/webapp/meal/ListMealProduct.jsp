@@ -95,13 +95,7 @@
                                         <p>(若需調整份量，請進入商品頁面)</p>
                                     </form>
                                     <br>
-                                    <form method="post" action="#" enctype="application/x-www-form-urlencoded"
-                                          id="checkout${meal.mealNo}">
-                                        <input type="text" value="${meal.mealNo}" name="mealNo" hidden>
-
-                                    </form>
                                     <button type="submit" form="cart${meal.mealNo}">加入購物車</button>
-                                    <button type="submit" form="checkout${meal.mealNo}">直接購買</button>
                                     <br><br>
                                     <P>評論人數：${meal.commentPeople}</P>
                                     <p>產品評價：${meal.commentPeople==0?"尚無人評分":(meal.commentScore/meal.commentPeople)}</p>

@@ -27,7 +27,7 @@ public class CartService {
                 prod = cartProds.get(i);
                 if (prod.getMeal().getMealNo().equals(meal.getMealNo()) && prod.getQuantity().equals(quantity)) {
                     prod.setAmount(prod.getAmount() + amount); // 找到就改變數量跟價格
-                    prod.setPrice((int) (meal.getMealPrice() * quantity * amount));
+                    prod.setPrice((int) (meal.getMealPrice() * quantity*prod.getAmount()));
                     prod.setCal((int) (meal.getMealCal() * quantity));
                     return cartProds;
 

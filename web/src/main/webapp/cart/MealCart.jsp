@@ -19,9 +19,15 @@
                         <li id="cate_D" class="expanded"><H1>功能列表</H1>
                             <ul class="main">
                                 <li>
+                                    <a href="${ctxPath}/meal/mealController?action=listAll">產品清單</a>
+                                </li>
+                                <li>
                                     <a href="${ctxPath}/cart/MealCart.jsp">菜單商品購物車<c:if
                                             test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if>
                                     </a>
+                                </li>
+                                <li>
+                                    <a href="${ctxPath}/order/ListOrder.jsp">訂單管理</a>
                                 </li>
                                 <li>
                                     <a href="${ctxPath}/index.jsp">回首頁</a>
@@ -38,7 +44,7 @@
                             <dl class="col3f" id="DRAA0A-A900BUT82">
                                 <dd class="c1f"><a class="prod_img"
                                                    href="${ctxPath}/meal/mealController?action=findByprod&mealNo=${cartProd.meal.mealNo}">
-                                    <img src="data:image/png;base64,${cartProd.meal.showPhoto}"></a></dd>
+                                    <img src="${cartProd.meal.showPhoto}"></a></dd>
                                 <dd class="c2f">
 
                                     <ul class="tag_box s_label"></ul>
