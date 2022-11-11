@@ -15,12 +15,14 @@ public class OnlineCourseOrderJDBCDAO implements OnlineCourseOrderDAO_interface 
 
 	@Override
 	public void insert(OnlineCourseOrderVO onlineCourseOrderVO) {
-		String sql = "INSERT INTO Online_course_order(member_no,order_price) VALUES(?, ?)";
+		String sql = "INSERT INTO Online_course_order(course_no,course_name,member_no,order_price,order_status) VALUES(?, ?, ?, ?, ?)";
 		try (Connection conn = DriverManager.getConnection(url, userid, passwd);
-
 				PreparedStatement pstmt = conn.prepareStatement(sql);) {
-			pstmt.setInt(1, onlineCourseOrderVO.getMemberNo());
-			pstmt.setInt(2, onlineCourseOrderVO.getOrderPrice());
+			pstmt.setInt(1, onlineCourseOrderVO.getCourseNo());
+			pstmt.setString(2, onlineCourseOrderVO.getCourseName());
+			pstmt.setInt(3, onlineCourseOrderVO.getMemberNo());
+			pstmt.setInt(4, onlineCourseOrderVO.getOrderPrice());
+			pstmt.setInt(5, onlineCourseOrderVO.getOrderStatus());
 
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -31,12 +33,14 @@ public class OnlineCourseOrderJDBCDAO implements OnlineCourseOrderDAO_interface 
 
 	@Override
 	public void update(OnlineCourseOrderVO onlineCourseOrderVO) {
-		String sql = "update Online_course_order set member_no = ?, order_price = ? where order_no = ?";
+		String sql = "update Online_course_order set course_no = ?, course_name = ? , order_price = ? , order_status = ? where order_no = ?";
 		try (Connection conn = DriverManager.getConnection(url, userid, passwd);
 
 				PreparedStatement pstmt = conn.prepareStatement(sql);) {
-			pstmt.setInt(1, onlineCourseOrderVO.getMemberNo());
-			pstmt.setInt(2, onlineCourseOrderVO.getOrderPrice());
+			pstmt.setInt(1, onlineCourseOrderVO.getCourseNo());
+			pstmt.setString(2, onlineCourseOrderVO.getCourseName());
+			pstmt.setInt(3, onlineCourseOrderVO.getOrderPrice());
+			pstmt.setInt(4, onlineCourseOrderVO.getOrderStatus());
 
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -70,9 +74,12 @@ public class OnlineCourseOrderJDBCDAO implements OnlineCourseOrderDAO_interface 
 				if (rs.next()) {
 					OnlineCourseOrderVO vo = new OnlineCourseOrderVO();
 					vo.setOrderNo(rs.getInt("order_no"));
+					vo.setCourseNo(rs.getInt("course_no"));
+					vo.setCourseName(rs.getString("course_name"));
 					vo.setMemberNo(rs.getInt("member_no"));
 					vo.setOrderTime(rs.getTimestamp("order_time"));
 					vo.setOrderPrice(rs.getInt("order_price"));
+					vo.setOrderStatus(rs.getInt("order_status"));
 					return vo;
 				}
 			}
@@ -81,6 +88,49 @@ public class OnlineCourseOrderJDBCDAO implements OnlineCourseOrderDAO_interface 
 		}
 		return null;
 	}
+	
+	@Override
+	public OnlineCourseOrderVO findByMemNo(Integer memberNo) {
+		String sql = "select * from Online_course_order where order_no = ?";
+		try (Connection conn = DriverManager.getConnection(url, userid, passwd);
+				PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setInt(1, memberNo);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					OnlineCourseOrderVO vo = new OnlineCourseOrderVO();
+					vo.setOrderNo(rs.getInt("order_no"));
+					vo.setCourseNo(rs.getInt("course_no"));
+					vo.setCourseName(rs.getString("course_name"));
+					vo.setMemberNo(rs.getInt("member_no"));
+					vo.setOrderTime(rs.getTimestamp("order_time"));
+					vo.setOrderPrice(rs.getInt("order_price"));
+					vo.setOrderStatus(rs.getInt("order_status"));
+					return vo;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public List<OnlineCourseOrderVO> getAll() {
@@ -92,9 +142,12 @@ public class OnlineCourseOrderJDBCDAO implements OnlineCourseOrderDAO_interface 
 			while (rs.next()) {
 				OnlineCourseOrderVO vo = new OnlineCourseOrderVO();
 				vo.setOrderNo(rs.getInt("order_no"));
+				vo.setCourseNo(rs.getInt("course_no"));
+				vo.setCourseName(rs.getString("course_name"));
 				vo.setMemberNo(rs.getInt("member_no"));
 				vo.setOrderTime(rs.getTimestamp("order_time"));
 				vo.setOrderPrice(rs.getInt("order_price"));
+				vo.setOrderStatus(rs.getInt("order_status"));
 				list.add(vo);
 			}
 			return list;

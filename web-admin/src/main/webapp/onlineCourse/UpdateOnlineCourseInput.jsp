@@ -50,7 +50,7 @@ OnlineCourseVO onlinecourseVO = (OnlineCourseVO) request.getAttribute("onlinecou
 <table id="table-1">
 	<tr><td>
 		 <h3>線上課程資料修改 - update_onlinecourse_input.jsp</h3>
-		 <h4><a href="onlinecourse/select_page.jsp">回首頁</a></h4>
+		 <h4><a href="searchAll">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -66,7 +66,7 @@ OnlineCourseVO onlinecourseVO = (OnlineCourseVO) request.getAttribute("onlinecou
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/OnlineCourse" name="form1">
+<FORM METHOD="post" ACTION="onlineCourse" name="form1"  enctype="multipart/form-data">
 <input  type="hidden" name="courseNo" size="45" value= "${onlinecourseVO.courseNo}" />
 <table>
 
@@ -111,6 +111,11 @@ OnlineCourseVO onlinecourseVO = (OnlineCourseVO) request.getAttribute("onlinecou
 			 <input type="radio" name="courseStatus"  value="1"${(onlinecourseVO.courseStatus==1)? 'checked':'' }/>下架
 		</td>
 	</tr>
+
+  <tr>
+		<td>圖片上傳</td><br>
+		<td><input type="file" name="photo"></td>
+		</tr>
 
 	<jsp:useBean id="deptSvc" scope="page" class="com.online_course.model.OnlineCourseService" />
 

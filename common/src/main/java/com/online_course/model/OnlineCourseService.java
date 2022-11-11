@@ -1,5 +1,7 @@
 package com.online_course.model;
 
+import java.util.Base64;
+import java.util.Base64.Encoder;
 import java.util.List;
 
 public class OnlineCourseService {
@@ -15,7 +17,6 @@ public class OnlineCourseService {
 
 	public void updateOnlineCourse(OnlineCourseVO onlineCourseVO) {
 		dao.update(onlineCourseVO);
-
 	}
 
 	public void deleteOnlineCourse(OnlineCourseVO onlineCourseVO) {
@@ -23,14 +24,45 @@ public class OnlineCourseService {
 	}
 
 	public OnlineCourseVO getOneOnlineCourse(Integer courseNo) {
-		return dao.findByPrimaryKey(courseNo);
+		Encoder encoder = Base64.getEncoder();
+		OnlineCourseVO vo = dao.findByPrimaryKey(courseNo);
+		byte[] photo = vo.getOnlineCoursePhoto();
+		if (photo != null) {
+			String photoBase64Str = encoder.encodeToString(photo);
+			vo.setOnlineCoursePhotoBaseStr64(photoBase64Str);
+		}	
+		return vo;
 	}
 
 	public List<OnlineCourseVO> getAll() {
-		return dao.getAll();
+		Encoder encoder = Base64.getEncoder();
+		List<OnlineCourseVO> list = dao.getAll();
+		for (OnlineCourseVO vo : list) {
+			byte[] photo = vo.getOnlineCoursePhoto();
+			if (photo == null) {
+				continue;
+			}
+			String photoBase64Str = encoder.encodeToString(photo);
+			vo.setOnlineCoursePhotoBaseStr64(photoBase64Str);
+		}
+		return list;
 	}
 	
 	public List<OnlineCourseVO> getByCourseName(String courseName) {
-		return dao.selectByCourseName(courseName);
+		Encoder encoder = Base64.getEncoder();
+		List<OnlineCourseVO> list = dao.selectByCourseName(courseName);
+		for (OnlineCourseVO vo : list) {
+			byte[] photo = vo.getOnlineCoursePhoto();
+			if (photo == null) {
+				continue;
+			}
+			String photoBase64Str = encoder.encodeToString(photo);
+			vo.setOnlineCoursePhotoBaseStr64(photoBase64Str);
+		}
+		return list;
 	}
+	
+    public boolean courseSwitch(Integer courseNo, Integer courseStatus) {
+        return dao.courseSwitch(courseNo,courseStatus);
+    }
 }

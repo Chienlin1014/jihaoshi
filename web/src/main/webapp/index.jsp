@@ -48,6 +48,12 @@
                   <a href="<%=request.getContextPath()%>/cart/MealCart.jsp">菜單商品購物車<c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
                 </li>
                 <li>
+                  <a href="${pageContext.request.contextPath}/onlineCourse/ListAllOnlineCourse.jsp">線上課程瀏覽專區</a>
+                </li>
+                 <li>
+                  <a href="${pageContext.request.contextPath}/onlineCourse/ManageCourse.jsp">會員線上課程管理</a>
+                </li>
+                <li>
                   <a href="#">線上課程購物車</a>
                 </li>
                 <li>

@@ -53,13 +53,14 @@ OnlineCourseVO onlinecourseVO = (OnlineCourseVO) request.getAttribute("onlinecou
 <table id="table-1">
 	<tr><td>
 		 <h3>單筆線上課程資料 - listOneOnlineCourse.jsp</h3>
-		 <h4><a href="onlinecourse/select_page.jsp">回首頁</a></h4>
+		 <h4><a href="searchAll">回首頁</a></h4>
 	</td></tr>
 </table>
 
 <table>
 	<tr>
 		    
+			<th>線上課程編號</th>
 			<th>線上課程名稱</th>
 			<th>線上課程時數</th>
 			<th>線上課程師資</th>
@@ -71,6 +72,7 @@ OnlineCourseVO onlinecourseVO = (OnlineCourseVO) request.getAttribute("onlinecou
 	</tr>
 	<tr>
 		
+		<td>${onlinecourseVO.courseNo}</td>
 		<td>${onlinecourseVO.courseName}</td>
 		<td>${onlinecourseVO.courseHr}</td>
 		<td>${onlinecourseVO.courseTeacher}</td>

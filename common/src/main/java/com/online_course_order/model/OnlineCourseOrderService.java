@@ -17,17 +17,20 @@ public class OnlineCourseOrderService {
 		dao.insert(onlineCourseOrderVO);
 	}
 
-	public void updateAuthorityDetail(OnlineCourseOrderVO onlineCourseOrderVO) {
+	public void updateOnlineCourseOrder(OnlineCourseOrderVO onlineCourseOrderVO) {
 		dao.update(onlineCourseOrderVO);
 
 	}
 
-	public void deleteAuthorityDetail(OnlineCourseOrderVO onlineCourseOrderVO) {
+	public void deleteOnlineCourseOrder(OnlineCourseOrderVO onlineCourseOrderVO) {
 		dao.delete(onlineCourseOrderVO);
 	}
 
-	public OnlineCourseOrderVO getOneAuthorityDetail(Integer orderNo) {
+	public OnlineCourseOrderVO getOneOnlineCourseOrder(Integer orderNo) {
 		return dao.findByPrimaryKey(orderNo);
+	}
+	public OnlineCourseOrderVO getOneOnlineCourseOrderMem(Integer memberNo) {
+		return dao.findByMemNo(memberNo);
 	}
 
 	public List<OnlineCourseOrderVO> getAll() {

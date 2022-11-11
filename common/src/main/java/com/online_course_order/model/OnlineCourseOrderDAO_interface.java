@@ -8,6 +8,7 @@ public interface OnlineCourseOrderDAO_interface {
 	public void update(OnlineCourseOrderVO onlineCourseOrderVO);
 	public void delete(OnlineCourseOrderVO onlineCourseOrderVO);
 	public OnlineCourseOrderVO findByPrimaryKey(Integer orderNo);
+	public OnlineCourseOrderVO findByMemNo(Integer memberNo);
 	public List<OnlineCourseOrderVO> getAll();
 	
 

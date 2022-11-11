@@ -15,13 +15,14 @@ public class OnlineCourseOrderDetailJDBCDAO implements OnlineCourseOrderDetailDA
 
 	@Override
 	public void insert(OnlineCourseOrderDetailVO onlineCourseOrderDetailVO) {
-		String sql = "INSERT INTO Online_course_order_detail VALUES(?, ?, ?)";
+		String sql = "INSERT INTO Online_course_order_detail (order_no ,course_no ,course_price ,order_photo) VALUES(?, ?, ?, ?)";
 		try (Connection conn = DriverManager.getConnection(url, userid, passwd);
 
 				PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setInt(1, onlineCourseOrderDetailVO.getOrderNo());
 			pstmt.setInt(2, onlineCourseOrderDetailVO.getCourseNo());
 			pstmt.setInt(3, onlineCourseOrderDetailVO.getCoursePrice());
+			pstmt.setBytes(4, onlineCourseOrderDetailVO.getOrderPhoto());
 
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -39,6 +40,7 @@ public class OnlineCourseOrderDetailJDBCDAO implements OnlineCourseOrderDetailDA
 			pstmt.setInt(1, onlineCourseOrderDetailVO.getCoursePrice());
 			pstmt.setInt(2, onlineCourseOrderDetailVO.getOrderNo());
 			pstmt.setInt(3, onlineCourseOrderDetailVO.getCourseNo());
+			pstmt.setBytes(4, onlineCourseOrderDetailVO.getOrderPhoto());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,6 +77,7 @@ public class OnlineCourseOrderDetailJDBCDAO implements OnlineCourseOrderDetailDA
 					vo.setOrderNo(rs.getInt("order_no"));
 					vo.setCourseNo(rs.getInt("course_no"));
 					vo.setCoursePrice(rs.getInt("course_price"));
+					vo.setOrderPhoto(rs.getBytes("order_photo"));
 
 					return vo;
 				}
@@ -98,6 +101,7 @@ public class OnlineCourseOrderDetailJDBCDAO implements OnlineCourseOrderDetailDA
 				vo.setOrderNo(rs.getInt("order_no"));
 				vo.setCourseNo(rs.getInt("course_no"));
 				vo.setCoursePrice(rs.getInt("course_price"));
+				vo.setOrderPhoto(rs.getBytes("order_photo"));
 
 				list.add(vo);
 			}

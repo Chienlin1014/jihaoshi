@@ -14,4 +14,6 @@ public interface OnlineCourseDAO_interface {
 	public List<OnlineCourseVO> getAll();
 
 	public List<OnlineCourseVO> selectByCourseName(String courseName);
+	
+	boolean courseSwitch(Integer courseNo, Integer courseStatus);
 }

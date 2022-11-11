@@ -16,6 +16,7 @@ public class OnlineCourseVO implements Serializable {
 	private Integer commentPeople;
 	private Integer commentScore;
 	private byte[] onlineCoursePhoto;
+	private String onlineCoursePhotoBaseStr64;
 
 	public OnlineCourseVO() {
 	}
@@ -118,5 +119,13 @@ public class OnlineCourseVO implements Serializable {
 
 	public void setOnlineCoursePhoto(byte[] onlineCoursePhoto) {
 		this.onlineCoursePhoto = onlineCoursePhoto;
+	}
+
+	public String getOnlineCoursePhotoBaseStr64() {
+		return onlineCoursePhotoBaseStr64;
+	}
+
+	public void setOnlineCoursePhotoBaseStr64(String onlineCoursePhotoBaseStr64) {
+		this.onlineCoursePhotoBaseStr64 = onlineCoursePhotoBaseStr64;
 	}
 }

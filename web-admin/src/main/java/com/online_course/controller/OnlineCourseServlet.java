@@ -1,6 +1,7 @@
 package com.online_course.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,13 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.meal.model.MealService;
 import com.online_course.model.OnlineCourseService;
 import com.online_course.model.OnlineCourseVO;
 
-@WebServlet("/OnlineCourse")
+@WebServlet("/onlineCourse/onlineCourse")
 @MultipartConfig
 public class OnlineCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	OnlineCourseService courseSV = new OnlineCourseService();
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -39,7 +42,7 @@ public class OnlineCourseServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/onlinecourse/select_page.jsp"); //設定跳轉的頁面
+				RequestDispatcher failureView = req.getRequestDispatcher("/ListOneOnlineCourse.jsp"); //設定跳轉的頁面
 				failureView.forward(req, res); //執行跳轉
 				return;// 程式中斷
 			}
@@ -52,7 +55,7 @@ public class OnlineCourseServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/onlinecourse/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/onlineCourse/SelectPage.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -65,13 +68,13 @@ public class OnlineCourseServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/onlinecourse/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/onlineCourse/SelectPage.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("onlinecourseVO", onlinecourseVO); // 資料庫取出的empVO物件,存入req
-			String url = "/onlinecourse/listOneOnlineCourse.jsp";
+			String url = "/onlineCourse/ListOneOnlineCourse.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -93,7 +96,7 @@ public class OnlineCourseServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("onlinecourseVO", onlinecourseVO); // 資料庫取出的empVO物件,存入req
-			String url = "/onlinecourse/update_onlinecourse_input.jsp";
+			String url = "/onlineCourse/UpdateOnlineCourseInput.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 			successView.forward(req, res);
 		}
@@ -158,8 +161,17 @@ public class OnlineCourseServlet extends HttpServlet {
 				commentScore = 0;
 				errorMsgs.add("評論分數請勿空白");
 			}
+			
+			Part onlineCoursePhoto = req.getPart("photo");
+			if (onlineCoursePhoto == null) {
+				errorMsgs.add("請上傳圖片");
+			}
 
 			Integer courseNo = Integer.valueOf(req.getParameter("courseNo"));
+			
+			Part part = req.getPart("photo");
+			InputStream is = part.getInputStream();
+			byte[] pic = is.readAllBytes();
 
 			OnlineCourseVO onlinecourseVO = new OnlineCourseVO();
 			onlinecourseVO.setCourseName(courseName);
@@ -171,11 +183,12 @@ public class OnlineCourseServlet extends HttpServlet {
 			onlinecourseVO.setCommentPeople(commentPeople);
 			onlinecourseVO.setCommentScore(commentScore);
 			onlinecourseVO.setCourseNo(courseNo);
+			onlinecourseVO.setOnlineCoursePhoto(pic);
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("onlinecourseVO", onlinecourseVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/onlinecourse/update_onlinecourse_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/onlineCourse/UpdateOnlineCourseInput.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -185,7 +198,7 @@ public class OnlineCourseServlet extends HttpServlet {
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("onlinecourseVO", onlinecourseVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url = "/onlinecourse/listOneOnlineCourse.jsp";
+			String url = "/onlineCourse/ListOneOnlineCourse.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -279,7 +292,7 @@ public class OnlineCourseServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("onlinecourseVO", onlinecourseVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/onlinecourse/addOnlineCourse.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/onlineCourse/AddOnlineCourse.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -289,33 +302,35 @@ public class OnlineCourseServlet extends HttpServlet {
 			onlinecourseSvc.save(onlinecourseVO);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/onlinecourse/listAllOnlineCourse.jsp";
+			String url = "/onlineCourse/ListAllOnlineCourse.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 		}
 
-		if ("delete".equals(action)) { // 來自listAllEmp.jsp
-
-			List<String> errorMsgs2 = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs2", errorMsgs2);
-
-			/*************************** 1.接收請求參數 ***************************************/
-			Integer courseNo = Integer.valueOf(req.getParameter("courseNo"));
-
-			/*************************** 2.開始刪除資料 ***************************************/
-			OnlineCourseVO onlinecourseVO = new OnlineCourseVO();
-			onlinecourseVO.setCourseNo(courseNo);
-			OnlineCourseService onlinecourseSvc = new OnlineCourseService();
-			onlinecourseSvc.deleteOnlineCourse(onlinecourseVO);
+//		if ("delete".equals(action)) { // 來自listAllEmp.jsp
+//
+//			List<String> errorMsgs2 = new LinkedList<String>();
+//			// Store this set in the request scope, in case we need to
+//			// send the ErrorPage view.
+//			req.setAttribute("errorMsgs2", errorMsgs2);
+//
+//			/*************************** 1.接收請求參數 ***************************************/
+//			Integer courseNo = Integer.valueOf(req.getParameter("courseNo"));
+//
+//			/*************************** 2.開始刪除資料 ***************************************/
+//			OnlineCourseVO onlinecourseVO = new OnlineCourseVO();
+//			onlinecourseVO.setCourseNo(courseNo);
+//			OnlineCourseService onlinecourseSvc = new OnlineCourseService();
+//			onlinecourseSvc.deleteOnlineCourse(onlinecourseVO);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
 //			String url = "/onlinecourse/listAllOnlineCourse.jsp";
 //			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 //			successView.forward(req, res);
-			res.sendRedirect("onlinecourse/listAllOnlineCourse.jsp");
-		}
+//			res.sendRedirect("onlinecourse/listAllOnlineCourse.jsp");
+//		}
+		
+	
 	}
 
 }
