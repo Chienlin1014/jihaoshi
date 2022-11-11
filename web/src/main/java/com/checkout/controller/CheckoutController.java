@@ -1,4 +1,4 @@
-package com.eckout.controller;
+package com.checkout.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
