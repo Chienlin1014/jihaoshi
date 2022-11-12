@@ -12,7 +12,7 @@ Integer article_no = forum_articleVO.getArticle_no();
 List<Forum_commentVO> list= forum_commentSvc.getAll(article_no);
 pageContext.setAttribute("list", list);
 %>
-
+ 
 <html>
 <head>
 <title>論壇文章資料</title>
@@ -97,7 +97,7 @@ pageContext.setAttribute("list", list);
 		
 	</tr>
 </table>
-    		
+			
     		<div class="comment">
             <c:forEach var="forum_commentVO" items="${list}">
 
@@ -119,7 +119,8 @@ pageContext.setAttribute("list", list);
                 </form>
                 </div>
             </c:forEach>
-
+				</br>
+                </br>
             <div class="addComment">
                 <form method="post" action="/web/Forum_commentServlet">
                     <input type="hidden" name="article_no" value="${param.article_no}">

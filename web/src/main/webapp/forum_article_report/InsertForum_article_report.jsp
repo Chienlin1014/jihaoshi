@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>Title</title>
 </head>
-
+ 
 <body>
 	<h1>論壇文章檢舉新增:</h1>
 	<form method="post" action="/web/Forum_article_reportServlet" id="form1">

@@ -10,7 +10,9 @@ Forum_articleService forum_articleSvc = new Forum_articleService();
 List<Forum_articleVO> list = forum_articleSvc.getAll();
 pageContext.setAttribute("list", list);
 %>
-
+<% 
+   // session.setAttribute("member_no", 2);
+    //Integer member_no = (Integer)session.getAttribute("member_no"); %>
 <html>
 <head>
 <title>論壇文章資料</title>
@@ -54,16 +56,13 @@ th, td {
 
 </head>
 <body bgcolor='white'>
-
-
 	<table id="table-1">
 		<tr>
 			<td>
 				<h3>論壇文章資料</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp"><img
-						src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
+						href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -76,7 +75,7 @@ th, td {
 			<th>會員編號</th>
 			<th>編輯時間</th>
 			<th>文章內容</th>
-			
+			<th>文章狀態</th>
 		</tr>
 		<%@ include file="forum_article_page1.file"%>
 		<c:forEach var="forum_articleVO" items="${list}"
@@ -89,24 +88,30 @@ th, td {
 				<td>${forum_articleVO.member_no}</td>
 				<td>${forum_articleVO.article_time}</td>
 				<td>${forum_articleVO.article_content}</td>
-				
+				<td>[${forum_articleVO.article_status}]
+				  ${(forum_articleVO.article_status==0)? '隱藏':''}
+				  ${(forum_articleVO.article_status==1)? '顯示':''}
+</td>
 
 				<td>
-					<FORM METHOD="post" ACTION="/web-admin/Forum_articleServlet"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
-							name="article_no" value="${forum_articleVO.article_no}">
-						<input type="hidden" name="action" value="getOne_For_Update">
+					<FORM METHOD="post" ACTION="/web-admin/Forum_articleServlet?whichPage=" <%=pageIndex%> style="margin-bottom: 0px;">
+						 
+						   <input type="submit" value="修改文章狀態"> 
+						
+						
+						
+						<input type="hidden" name="article_no" value="${forum_articleVO.article_no}">
+					
+					 <c:if test="${forum_articleVO.article_status==1}">	
+						<input type="hidden" name="action" value="change_status_0">
+					 </c:if> 
+					 <c:if test="${forum_articleVO.article_status==0}">	
+						<input type="hidden" name="action" value="change_status_1">
+					 </c:if> 
+					
 					</FORM>
 				</td>
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post" ACTION="/web-admin/Forum_articleServlet" -->
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="刪除"> <input type="hidden" -->
-<%-- 							name="article_no" value="${forum_articleVO.article_no}"> --%>
-<!-- 						<input type="hidden" name="action" value="delete"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
+
 			</tr>
 
 		</c:forEach>

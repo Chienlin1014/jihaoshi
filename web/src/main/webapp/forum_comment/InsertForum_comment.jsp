@@ -10,7 +10,7 @@
 <title>Title</title>
 </head>
 
-<body>
+<body> 
 	<h1>論壇留言新增:</h1>
 	<form method="post" action="/web/Forum_commentServlet" id="form1">
 		<div>

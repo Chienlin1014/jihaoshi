@@ -7,7 +7,7 @@
 <%
 // Forum_commentVO forum_commentVO = (Forum_commentVO) request.getAttribute("forum_commentVO"); //Forum_commentServlet.java(Concroller), 存入req的Forum_commentVO物件
 Forum_commentService forum_commentSvc = new Forum_commentService();
-List<Forum_commentVO> list = forum_commentSvc.getAll();
+List<Forum_commentVO> list = forum_commentSvc.getAll(5);
 pageContext.setAttribute("list", list);
 %>
 

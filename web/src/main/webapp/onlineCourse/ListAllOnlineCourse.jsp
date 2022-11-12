@@ -14,9 +14,9 @@
 
  <link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
     <style>
-        #pageHead {
+        #pageHead { 
             width: 100%;
-            height: 30%;
+            height: 30%; 
         }
         div.divflex{
         display:flex;

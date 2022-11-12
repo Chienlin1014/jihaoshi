@@ -231,5 +231,17 @@ public class Forum_articleServlet extends HttpServlet {
 			successview.forward(req, res);
 			
 		}
+		if("catch_display".equals(action)) {
+			/*************************** 1.接收請求參數 ***************************************/
+			Integer article_no = Integer.valueOf(req.getParameter("article_no"));
+			
+
+			/***********************準備轉交(Send the Success view) ***********/
+			String url = "/forum_article/forum_article_select_page.jsp";
+			RequestDispatcher successview = req.getRequestDispatcher(url);
+			successview.forward(req, res);
+			
+		}
 	}
+	
 }

@@ -10,7 +10,7 @@ List<Forum_article_reportVO> list = forum_article_reportSvc.getAll();
 pageContext.setAttribute("list", list);
 %>
 
-<html>
+<html> 
 <head>
 <title>論壇文章檢舉資料</title>
 

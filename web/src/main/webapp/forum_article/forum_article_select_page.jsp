@@ -6,11 +6,11 @@
 
 <%
 	Forum_articleService forum_articleSvc = new Forum_articleService();
-    List<Forum_articleVO> list = forum_articleSvc.getAll();
+    List<Forum_articleVO> list = forum_articleSvc.catch_display();
     pageContext.setAttribute("list",list);
 %>
 
-
+ 
 <html>
 <head>
 <title>論壇文章首頁: Home</title>
@@ -135,7 +135,8 @@
 <%--             <div class="atitle">${forum_articleVO.article_name}</div> --%>
             <div class="author">${forum_articleVO.member_no}</div>
             <div class="ptime">${forum_articleVO.article_time}</div>
-			
+	
+
 			 <form method="post" action="/web/Forum_articleServlet"> 
            			<input type="hidden" name="article_no" value="${forum_articleVO.article_no}">
 					<input type="hidden" name="action" value="getOne_For_Display">

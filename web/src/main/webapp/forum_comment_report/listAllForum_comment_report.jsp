@@ -10,7 +10,7 @@ Forum_comment_reportService forum_comment_reportSvc = new Forum_comment_reportSe
 List<Forum_comment_reportVO> list = forum_comment_reportSvc.getAll();
 pageContext.setAttribute("list", list);
 %>
-
+ 
 <html>
 <head>
 <title>論壇留言檢舉資料</title>
