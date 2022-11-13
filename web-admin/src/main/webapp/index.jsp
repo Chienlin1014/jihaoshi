@@ -43,7 +43,10 @@
                                     <a href="meal/mealController?action=listAll" >菜單商品列表</a>
                                 </li>
                                 <li>
-                                    <a href="<%=request.getContextPath()%>/faqservlet?action=selectFAQ" >FAQ列表</a>
+                                    <a href="<%=request.getContextPath()%>/faqservlet?action=getAll" >FAQ列表</a>
+                                </li>
+                                <li>
+                                    <a href="<%=request.getContextPath()%>/OnlineCourseCommentReportServlet?action=getAll" >線上課程評論檢舉</a>
                                 </li>
                             </ul>
                     </ul>
