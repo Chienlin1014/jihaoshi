@@ -35,7 +35,7 @@ public class DBGifReader extends HttpServlet {
 			Statement stmt = con.createStatement();
 			String course_no = req.getParameter("course_no").trim();
 			ResultSet rs = stmt.executeQuery(
-				"SELECT pic FROM Physical_course where course_no ="+course_no);
+				"SELECT PIC FROM PHYSICAL_COURSE WHERE COURSE_NO ="+course_no);
 
 			if (rs.next()) {
 				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("pic"));
@@ -65,7 +65,7 @@ public class DBGifReader extends HttpServlet {
 //	    		Class.forName("com.mysql.cj.jdbc.Driver");
 //				con = DriverManager.getConnection("jdbc:mysql://15.152.181.134:3306/JihaoDB?serverTimezone=Asia/Taipei", "tsai", "Tibame@cga104");
 	    	Context ctx = new javax.naming.InitialContext();
-	    	DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/JihaoshiDB");	 
+	    	DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jihaoshi");	 
 	    	con = ds.getConnection();
 	    	
 		} catch (NamingException e) {
