@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.forum_article.model.Forum_articleVO;
 import com.latest_news.model.Latest_newsVO;
 
 import java.sql.ResultSet;
@@ -19,10 +20,16 @@ public class Forum_commentJDBCDAO implements Forum_commentDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO forum_comment(article_no,member_no, comment_content) VALUES (?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT comment_no,article_no,member_no,comment_time,comment_content,comment_status FROM forum_comment where article_no = ? order by comment_no";
+	private static final String GET_ALL_STMTALL =  "SELECT comment_no,article_no,member_no,comment_time,comment_content,comment_status FROM forum_comment order by comment_no";
 	private static final String GET_ONE_STMT = "SELECT comment_no,article_no,member_no,comment_time,comment_content,comment_status FROM forum_comment where comment_no = ?";
 	private static final String DELETE = "DELETE FROM forum_comment where comment_no = ?";
 	private static final String UPDATE = "UPDATE forum_comment set article_no=?, member_no=?, comment_content=?, comment_status=? where comment_no = ?";
-
+private static final String change_status_0 = 											
+			"UPDATE forum_comment set comment_status=0 where comment_no = ?";
+private static final String change_status_1 = 
+			"UPDATE forum_comment set comment_status=1 where comment_no = ?";
+private static final String catch_display =
+			"SELECT * from forum_comment where comment_status = 1 and article_no = ? ";
 	@Override
 	public void insert(Forum_commentVO forum_commentVO) {
 		Connection con = null;
@@ -250,6 +257,220 @@ public class Forum_commentJDBCDAO implements Forum_commentDAO_interface {
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<Forum_commentVO> getAll() {
+
+		List<Forum_commentVO> list = new ArrayList<Forum_commentVO>();
+		Forum_commentVO forum_commentVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ALL_STMTALL);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// forum_commentVO也稱為 Domain objects
+				forum_commentVO = new Forum_commentVO();
+				forum_commentVO.setComment_no(rs.getInt("comment_no"));
+				forum_commentVO.setArticle_no(rs.getInt("article_no"));
+				forum_commentVO.setMember_no(rs.getInt("member_no"));
+				forum_commentVO.setComment_time(rs.getDate("comment_time"));
+				forum_commentVO.setComment_content(rs.getString("comment_content"));
+				forum_commentVO.setComment_status(rs.getInt("comment_status"));
+				list.add(forum_commentVO);
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public void change_status_0(Integer comment_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(change_status_0);
+
+			pstmt.setInt(1, comment_no);
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+		
+	}
+	@Override
+	public void change_status_1(Integer comment_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(change_status_1);
+
+			pstmt.setInt(1, comment_no);
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+		
+	}
+	
+	@Override
+	public List<Forum_commentVO> catch_display(Integer article_no) {
+		List<Forum_commentVO> list = new ArrayList<Forum_commentVO>();
+		Forum_commentVO forum_commentVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(catch_display);
+			pstmt.setInt(1, article_no);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				// forum_articleVO 也稱為 Domain objects
+				forum_commentVO = new Forum_commentVO();
+				forum_commentVO.setComment_no(rs.getInt("comment_no"));
+				forum_commentVO.setArticle_no(rs.getInt("article_no"));
+				forum_commentVO.setMember_no(rs.getInt("member_no"));
+				forum_commentVO.setComment_time(rs.getDate("comment_time"));
+				forum_commentVO.setComment_content(rs.getString("comment_content"));
+				forum_commentVO.setComment_status(rs.getInt("comment_status"));
+				
+				list.add(forum_commentVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {

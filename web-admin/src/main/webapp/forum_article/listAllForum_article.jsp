@@ -94,7 +94,7 @@ th, td {
 </td>
 
 				<td>
-					<FORM METHOD="post" ACTION="/web-admin/Forum_articleServlet?whichPage=" <%=pageIndex%> style="margin-bottom: 0px;">
+					<FORM METHOD="post" ACTION="/web-admin/Forum_articleServlet?whichPage=" <%=pageNumber%> style="margin-bottom: 0px;">
 						 
 						   <input type="submit" value="修改文章狀態"> 
 						

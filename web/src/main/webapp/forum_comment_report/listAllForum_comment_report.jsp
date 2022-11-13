@@ -62,7 +62,7 @@ th, td {
 				<h3>論壇留言檢舉資料</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/forum_comment_report/forum_comment_report_select_page.jsp">回首頁</a>
+						href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp">回論壇文章首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -92,14 +92,14 @@ th, td {
 				<td>${forum_comment_reportVO.report_status}</td>
 				
 
-				<td>
-					<FORM METHOD="post" ACTION="/web-admin/Forum_comment_reportServlet"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
-							name="comment_report_no" value="${forum_comment_reportVO.comment_report_no}">
-						<input type="hidden" name="action" value="getOne_For_Update">
-					</FORM>
-				</td>
+<!-- 				<td> -->
+<!-- 					<FORM METHOD="post" ACTION="/web-admin/Forum_comment_reportServlet" -->
+<!-- 						style="margin-bottom: 0px;"> -->
+<!-- 						<input type="submit" value="修改"> <input type="hidden" -->
+<%-- 							name="comment_report_no" value="${forum_comment_reportVO.comment_report_no}"> --%>
+<!-- 						<input type="hidden" name="action" value="getOne_For_Update"> -->
+<!-- 					</FORM> -->
+<!-- 				</td> -->
 <!-- 				<td> -->
 <!-- 					<FORM METHOD="post" ACTION="/web-admin/Forum_comment_reportServlet" -->
 <!-- 						style="margin-bottom: 0px;"> -->

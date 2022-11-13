@@ -14,6 +14,28 @@ pageContext.setAttribute("list", list);
 <head>
 <title>論壇文章檢舉資料</title>
 
+  <link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
+    <style>
+        #pageHead { 
+            width: 100%;
+            height: 30%; 
+        }
+        div.divflex{
+        display:flex;
+        width:100%;
+        margin:0;
+        height:100vh-30%;
+        }
+        body{
+        height: 100vh;
+        background-color:#FFFAF0;
+        }
+        div.formdiv{
+        style="width:80%%;
+        background: #FFFAF0;
+        }
+    </style>
+
 <style>
 table#table-1 {
 	background-color: #CCCCFF;
@@ -35,7 +57,7 @@ h4 {
 
 <style>
 table {
-	width: 600px;
+	width: 1100px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -52,33 +74,54 @@ th, td {
 </style>
 
 </head>
+
 <body bgcolor='white'>
+<img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
 
-
+<div id="WRAPPER" class="">
+    <div class="divflex">
+        <div class="" style="text-align:center;background-color:#FFFAF0;widtH:13%; height:100vw; background-color:#F3E3C3;">
+            <!--側邊欄區塊開始-->
+                    <ul class="treeview">
+                        <li id="cate_D" class="expanded"><H1>功能列表</H1>
+                            <ul class="main">
+                               
+                                <li>
+                                    <a href="<%=request.getContextPath()%>/index.jsp">回即好食首頁</a>
+                                </li>
+                            </ul>
+                      </li>
+                 </ul>
+          </div>   
+            <!--側邊欄區塊結束-->
+	<div style="display:flex;flex-direction:column;width:100%">
+	<h1 style="align-self:center;margin: 2rem 0">論壇文章檢舉資料</h1>
+	
+	
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>論壇文章檢舉資料</h3>
+				
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/forum_article_report/forum_article_report_select_page.jsp">回首頁</a>
+						href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp">回論壇文章首頁</a>
 				</h4>
 			</td>
 		</tr>
 	</table>
 
 	<table>
-		<tr>
-			<th>論壇文章檢舉編號</th>
-			<th>論壇文章編號</th>
-			<th>會員編號</th>
-			<th>檢舉事由</th>
-<!-- 			<th>檢舉狀態</th> -->
-			
-		</tr>
-		<%@ include file="forum_article_report_page1.file"%>
-		<c:forEach var="forum_article_reportVO" items="${list}"
-			begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+			<tr>
+				<th>論壇文章檢舉編號</th>
+				<th>論壇文章編號</th>
+				<th>會員編號</th>
+				<th>檢舉事由</th>
+			<!-- <th>檢舉狀態</th> -->
+				
+			</tr>
+			<%@ include file="forum_article_report_page1.file"%>
+			<c:forEach var="forum_article_reportVO" items="${list}"
+				begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 
 
 			<tr>
@@ -86,25 +129,6 @@ th, td {
 				<td>${forum_article_reportVO.article_no}</td>
 				<td>${forum_article_reportVO.member_no}</td>
 				<td>${forum_article_reportVO.report_reason}</td>
-<%-- 				<td>${forum_article_reportVO.report_status}</td> --%>
-				
-
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post" ACTION="/web-admin/Forum_article_reportServlet" -->
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="修改"> <input type="hidden" -->
-<%-- 							name="article_report_no" value="${forum_article_reportVO.article_report_no}"> --%>
-<!-- 						<input type="hidden" name="action" value="getOne_For_Update"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post" ACTION="/web-admin/Forum_article_reportServlet" -->
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="刪除"> <input type="hidden" -->
-<%-- 							name="article_no" value="${forum_articleVO.article_no}"> --%>
-<!-- 						<input type="hidden" name="action" value="delete"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
 			</tr>
 
 		</c:forEach>

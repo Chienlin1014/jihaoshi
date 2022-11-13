@@ -9,7 +9,8 @@
 Forum_articleVO forum_articleVO = (Forum_articleVO) request.getAttribute("forum_articleVO"); //Forum_articleServlet.java(Concroller), 存入req的latest_newsVO物件
 Forum_commentService forum_commentSvc = new Forum_commentService();
 Integer article_no = forum_articleVO.getArticle_no();
-List<Forum_commentVO> list= forum_commentSvc.getAll(article_no);
+List<Forum_commentVO> list = forum_commentSvc.catch_display(article_no);
+
 pageContext.setAttribute("list", list);
 %>
  

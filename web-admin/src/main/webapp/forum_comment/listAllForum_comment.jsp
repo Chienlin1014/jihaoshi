@@ -7,7 +7,8 @@
 <%
 // Forum_commentVO forum_commentVO = (Forum_commentVO) request.getAttribute("forum_commentVO"); //Forum_commentServlet.java(Concroller), 存入req的Forum_commentVO物件
 Forum_commentService forum_commentSvc = new Forum_commentService();
-List<Forum_commentVO> list = forum_commentSvc.getAll(5);
+// List<Forum_commentVO> list = forum_commentSvc.getAll(1);
+List<Forum_commentVO> list = forum_commentSvc.getAll();
 pageContext.setAttribute("list", list);
 %>
 
@@ -62,8 +63,7 @@ th, td {
 				<h3>論壇留言資料</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/forum_comment/forum_comment_select_page.jsp"><img
-						src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
+						href="<%=request.getContextPath()%>/forum_comment/forum_comment_select_page.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -90,25 +90,29 @@ th, td {
 				<td>${forum_commentVO.member_no}</td>
 				<td>${forum_commentVO.comment_time}</td>
 				<td>${forum_commentVO.comment_content}</td>
-				<td>${forum_commentVO.comment_status}</td>
 				
-
-				<td>
-					<FORM METHOD="post" ACTION="/web-admin/Forum_commentServlet"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
-							name="comment_no" value="${forum_commentVO.comment_no}">
-						<input type="hidden" name="action" value="getOne_For_Update">
+				<td>[${forum_commentVO.comment_status}]
+				  ${(forum_commentVO.comment_status==0)? '隱藏':''}
+				  ${(forum_commentVO.comment_status==1)? '顯示':''}
+			<td>
+					<FORM METHOD="post" ACTION="/web-admin/Forum_commentServlet?whichPage=" <%=pageIndex%> style="margin-bottom: 0px;">
+						 
+						   <input type="submit" value="修改留言狀態"> 
+						
+						
+						
+						<input type="hidden" name="comment_no" value="${forum_commentVO.comment_no}">
+					
+					 <c:if test="${forum_commentVO.comment_status==1}">	
+						<input type="hidden" name="action" value="change_status_0">
+					 </c:if> 
+					 <c:if test="${forum_commentVO.comment_status==0}">	
+						<input type="hidden" name="action" value="change_status_1">
+					 </c:if> 
+					
 					</FORM>
 				</td>
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post" ACTION="/web-admin/Forum_articleServlet" -->
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="刪除"> <input type="hidden" -->
-<%-- 							name="article_no" value="${forum_articleVO.article_no}"> --%>
-<!-- 						<input type="hidden" name="action" value="delete"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
+				
 			</tr>
 
 		</c:forEach>
