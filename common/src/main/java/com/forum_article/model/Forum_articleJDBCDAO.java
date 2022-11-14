@@ -12,26 +12,26 @@ import com.latest_news.model.Latest_newsVO;
 
 public class Forum_articleJDBCDAO implements Forum_articleDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/database1?serverTimezone=Asia/Taipei";
+	String url = "jdbc:mysql://localhost:3306/jihaoshi?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "password";
 
 	private static final String INSERT_STMT = 
-			"INSERT INTO forum_article(article_name, member_no, article_content) VALUES (?, ?, ?)";
+			"INSERT INTO FORUM_ARTICLE(ARTICLE_NAME, MEMBER_NO, ARTICLE_CONTENT) VALUES (?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT article_no, article_name, member_no, article_time, article_content, article_status FROM forum_article order by article_no";
+			"SELECT ARTICLE_NO, ARTICLE_NAME, MEMBER_NO, ARTICLE_TIME, ARTICLE_CONTENT, ARTICLE_STATUS FROM FORUM_ARTICLE ORDER BY ARTICLE_NO";
 	private static final String GET_ONE_STMT = 
-			"SELECT article_no, article_name, member_no, article_time, article_content, article_status FROM forum_article where article_no = ?";
+			"SELECT ARTICLE_NO, ARTICLE_NAME, MEMBER_NO, ARTICLE_TIME, ARTICLE_CONTENT, ARTICLE_STATUS FROM FORUM_ARTICLE WHERE ARTICLE_NO = ?";
 	private static final String DELETE = 
-			"DELETE FROM forum_article where article_no = ?";
+			"DELETE FROM FORUM_ARTICLE WHERE ARTICLE_NO = ?";
 	private static final String UPDATE = 
-			"UPDATE forum_article set article_name=?, article_content=? where article_no = ?";
+			"UPDATE FORUM_ARTICLE SET ARTICLE_NAME=?, ARTICLE_CONTENT=? WHERE ARTICLE_NO = ?";
 private static final String change_status_0 = 
-			"UPDATE forum_article set article_status=0 where article_no = ?";
+			"UPDATE FORUM_ARTICLE SET ARTICLE_STATUS=0 WHERE ARTICLE_NO = ?";
 private static final String change_status_1 = 
-			"UPDATE forum_article set article_status=1 where article_no = ?";
+			"UPDATE FORUM_ARTICLE SET ARTICLE_STATUS=1 WHERE ARTICLE_NO = ?";
 private static final String catch_display =
-			"SELECT article_no, article_name, member_no, article_time, article_content, article_status FROM forum_article where article_status = 1 ";
+			"SELECT ARTICLE_NO, ARTICLE_NAME, MEMBER_NO, ARTICLE_TIME, ARTICLE_CONTENT, ARTICLE_STATUS FROM FORUM_ARTICLE WHERE ARTICLE_STATUS = 1 ";	
 	@Override
 	public void insert(Forum_articleVO forum_articleVO) {
 		Connection con = null;

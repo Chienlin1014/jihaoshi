@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Forum_commentJDBCDAO implements Forum_commentDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/database1?serverTimezone=Asia/Taipei";
+	String url = "jdbc:mysql://localhost:3306/jihaoshi?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "password";
 
