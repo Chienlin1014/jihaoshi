@@ -98,7 +98,7 @@ console.log(pageNumber);
 				<td>
 					<FORM METHOD="post" ACTION="/web-admin/Forum_article_reportServlet" style="margin-bottom: 0px;">
 						 <c:if test="${forum_article_reportVO.report_status!=2}">	
-							<input type="submit" value="處理論壇文章檢舉">
+							<input type="submit" value="論壇文章檢舉處理">
 						 </c:if>
 						    
 						<input type="hidden" name="whichPage" value="<%=whichPage%>"/>

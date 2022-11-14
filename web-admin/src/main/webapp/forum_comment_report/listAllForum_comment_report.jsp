@@ -54,6 +54,9 @@ th, td {
 
 </head>
 <body bgcolor='white'>
+<script>
+console.log(pageNumber);
+</script>
 
 
 	<table id="table-1">
@@ -89,17 +92,46 @@ th, td {
 				<td>${forum_comment_reportVO.article_no}</td>
 				<td>${forum_comment_reportVO.member_no}</td>
 				<td>${forum_comment_reportVO.report_reason}</td>
-				<td>${forum_comment_reportVO.report_status}</td>
+				<td>[${forum_comment_reportVO.report_status}]
+				  ${(forum_comment_reportVO.report_status==0)? '未處理':''}
+				  ${(forum_comment_reportVO.report_status==1)? '未通過':''}
+				   ${(forum_comment_reportVO.report_status==2)? '通過':''}
+				</td>
 				
-
 				<td>
-					<FORM METHOD="post" ACTION="/web-admin/Forum_comment_reportServlet"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
-							name="comment_report_no" value="${forum_comment_reportVO.comment_report_no}">
-						<input type="hidden" name="action" value="getOne_For_Update">
+					<FORM METHOD="post" ACTION="/web-admin/Forum_comment_reportServlet" style="margin-bottom: 0px;">
+						 <c:if test="${forum_comment_reportVO.report_status!=2}">	
+							<input type="submit" value="論壇留言檢舉處理">
+						 </c:if>
+						    
+						<input type="hidden" name="whichPage" value="<%=whichPage%>"/>
+						
+						
+						<input type="hidden" name="comment_report_no" value="${forum_comment_reportVO.comment_report_no}">
+					
+					 <c:if test="${forum_comment_reportVO.report_status==0}">	
+						<input type="hidden" name="action" value="change_status_0">
+					 </c:if> 
+					 <c:if test="${forum_comment_reportVO.report_status==1}">	
+						<input type="hidden" name="action" value="change_status_1">
+					 </c:if> 
+					 <c:if test="${forum_comment_reportVO.report_status==2}">	
+						<input type="hidden" name="action" value="change_status_2">
+					 </c:if> 
+					 
 					</FORM>
 				</td>
+				
+				
+
+<!-- 				<td> -->
+<!-- 					<FORM METHOD="post" ACTION="/web-admin/Forum_comment_reportServlet" -->
+<!-- 						style="margin-bottom: 0px;"> -->
+<!-- 						<input type="submit" value="修改"> <input type="hidden" -->
+<%-- 							name="comment_report_no" value="${forum_comment_reportVO.comment_report_no}"> --%>
+<!-- 						<input type="hidden" name="action" value="getOne_For_Update"> -->
+<!-- 					</FORM> -->
+<!-- 				</td> -->
 <!-- 				<td> -->
 <!-- 					<FORM METHOD="post" ACTION="/web-admin/Forum_comment_reportServlet" -->
 <!-- 						style="margin-bottom: 0px;"> -->
