@@ -18,18 +18,18 @@ public class Forum_commentJDBCDAO implements Forum_commentDAO_interface {
 	String userid = "root";
 	String passwd = "password";
 
-	private static final String INSERT_STMT = "INSERT INTO forum_comment(article_no,member_no, comment_content) VALUES (?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT comment_no,article_no,member_no,comment_time,comment_content,comment_status FROM forum_comment where article_no = ? order by comment_no";
-	private static final String GET_ALL_STMTALL =  "SELECT comment_no,article_no,member_no,comment_time,comment_content,comment_status FROM forum_comment order by comment_no";
-	private static final String GET_ONE_STMT = "SELECT comment_no,article_no,member_no,comment_time,comment_content,comment_status FROM forum_comment where comment_no = ?";
-	private static final String DELETE = "DELETE FROM forum_comment where comment_no = ?";
-	private static final String UPDATE = "UPDATE forum_comment set article_no=?, member_no=?, comment_content=?, comment_status=? where comment_no = ?";
+	private static final String INSERT_STMT = "INSERT INTO FORUM_COMMENT(ARTICLE_NO,MEMBER_NO, COMMENT_CONTENT) VALUES (?, ?, ?)";
+	private static final String GET_ALL_STMT = "SELECT COMMENT_NO,ARTICLE_NO,MEMBER_NO,COMMENT_TIME,COMMENT_CONTENT,COMMENT_STATUS FROM FORUM_COMMENT WHERE ARTICLE_NO = ? ORDER BY COMMENT_NO";
+	private static final String GET_ALL_STMTALL =  "SELECT COMMENT_NO,ARTICLE_NO,MEMBER_NO,COMMENT_TIME,COMMENT_CONTENT,COMMENT_STATUS FROM FORUM_COMMENT ORDER BY COMMENT_NO";
+	private static final String GET_ONE_STMT = "SELECT COMMENT_NO,ARTICLE_NO,MEMBER_NO,COMMENT_TIME,COMMENT_CONTENT,COMMENT_STATUS FROM FORUM_COMMENT WHERE COMMENT_NO = ?";
+	private static final String DELETE = "DELETE FROM FORUM_COMMENT WHERE COMMENT_NO = ?";
+	private static final String UPDATE = "UPDATE FORUM_COMMENT SET ARTICLE_NO=?, MEMBER_NO=?, COMMENT_CONTENT=?, COMMENT_STATUS=? WHERE COMMENT_NO = ?";
 private static final String change_status_0 = 											
-			"UPDATE forum_comment set comment_status=0 where comment_no = ?";
+			"UPDATE FORUM_COMMENT SET COMMENT_STATUS=0 WHERE COMMENT_NO = ?";
 private static final String change_status_1 = 
-			"UPDATE forum_comment set comment_status=1 where comment_no = ?";
+			"UPDATE FORUM_COMMENT SET COMMENT_STATUS=1 WHERE COMMENT_NO = ?";
 private static final String catch_display =
-			"SELECT * from forum_comment where comment_status = 1 and article_no = ? ";
+			"SELECT * FROM FORUM_COMMENT WHERE COMMENT_STATUS = 1 AND ARTICLE_NO = ? ";
 	@Override
 	public void insert(Forum_commentVO forum_commentVO) {
 		Connection con = null;
