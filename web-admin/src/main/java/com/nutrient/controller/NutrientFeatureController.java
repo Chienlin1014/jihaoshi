@@ -25,6 +25,12 @@ public class NutrientFeatureController {
         this.nutrientFeatureSV = nutrientFeatureSV;
     }
 
+    @GetMapping("/insert")
+    public String index(ModelMap model) {
+        model.addAttribute("nutrientFeature", new NutrientFeatureVO());
+        return "nutrient/NutrientFeatureInsert";
+    }
+
     @PostMapping("/insert")
     public String insert(@Valid @ModelAttribute("nutrientFeature") NutrientFeatureVO nutrientFeature, BindingResult result) {
 

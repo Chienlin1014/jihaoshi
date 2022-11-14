@@ -3,7 +3,13 @@
 <html>
 <head>
     <title>營養特色新增</title>
+    <style>
+        .errors {
+            color: red;
+        }
+    </style>
 </head>
+
 <body>
 <form:form method="post" action="${ctxPath}/nutrient/insert"
            enctype="application/x-www-form-urlencoded"
