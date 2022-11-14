@@ -91,7 +91,7 @@ th, td {
 				<td>[${forum_articleVO.article_status}]
 				  ${(forum_articleVO.article_status==0)? '隱藏':''}
 				  ${(forum_articleVO.article_status==1)? '顯示':''}
-</td>
+				</td>
 
 				<td>
 					<FORM METHOD="post" ACTION="/web-admin/Forum_articleServlet?whichPage=" <%=pageNumber%> style="margin-bottom: 0px;">
