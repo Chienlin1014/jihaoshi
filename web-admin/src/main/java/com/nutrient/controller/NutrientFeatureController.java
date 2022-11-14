@@ -1,6 +1,5 @@
 package com.nutrient.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -29,7 +28,6 @@ public class NutrientFeatureController {
     @PostMapping("/insert")
     public String insert(@Valid @ModelAttribute("nutrientFeature") NutrientFeatureVO nutrientFeature, BindingResult result) {
 
-//        model.addAllAttributes("result")
         if (result.hasErrors()) {
             return "nutrient/NutrientFeatureInsert";
         }
@@ -42,7 +40,6 @@ public class NutrientFeatureController {
         List<NutrientFeatureVO> nutrientFeatures;
         nutrientFeatures=nutrientFeatureSV.listFeature();
         model.addAttribute("nutrientFeatures", nutrientFeatures);
-        model.addAttribute("featureNos", new ArrayList<Integer>());
         return "nutrient/DetailInsert";
 
     }
