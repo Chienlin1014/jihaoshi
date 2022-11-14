@@ -22,7 +22,11 @@ import com.forum_article.model.Forum_articleVO;
 
 public class Forum_articleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		doPost(req, res);
+	}
+	
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");

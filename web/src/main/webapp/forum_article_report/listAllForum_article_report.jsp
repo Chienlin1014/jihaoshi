@@ -103,8 +103,7 @@ th, td {
 			<td>
 				
 				<h4>
-					<a
-						href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp">回論壇文章首頁</a>
+					<a href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp">回論壇文章首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -123,10 +122,11 @@ th, td {
 			<c:forEach var="forum_article_reportVO" items="${list}"
 				begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 
-
+	
 			<tr>
 				<td>${forum_article_reportVO.article_report_no}</td>
-				<td>${forum_article_reportVO.article_no}</td>
+				<td><a href="/web/Forum_articleServlet?article_no=${forum_article_reportVO.article_no}&action=getOne_For_Display">
+					${forum_article_reportVO.article_no} </a></td> 
 				<td>${forum_article_reportVO.member_no}</td>
 				<td>${forum_article_reportVO.report_reason}</td>
 			</tr>
