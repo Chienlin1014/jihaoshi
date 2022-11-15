@@ -7,7 +7,7 @@
  
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>最新消息新增</title>
 </head>
 
 <body>

@@ -7,7 +7,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Title</title>
+<title>論壇文章新增</title>
 </head>
 
 <body>

@@ -13,6 +13,27 @@ pageContext.setAttribute("list", list);
 <html>
 <head>
 <title>論壇文章檢舉資料</title>
+<link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
+    <style>
+        #pageHead { 
+            width: 100%;
+            height: 30%; 
+        }
+        div.divflex{
+        display:flex;
+        width:100%;
+        margin:0;
+        height:100vh-30%;
+        }
+        body{
+        height: 100vh;
+        background-color:#FFFAF0;
+        }
+        div.formdiv{
+        style="width:80%%;
+        background: #FFFAF0;
+        }
+    </style>
 
 <style>
 table#table-1 {
@@ -35,7 +56,7 @@ h4 {
 
 <style>
 table {
-	width: 600px;
+	width: 1280px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -53,6 +74,7 @@ th, td {
 
 </head>
 <body bgcolor='white'>
+<img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
 <script>
 console.log(pageNumber);
 </script>
@@ -61,7 +83,7 @@ console.log(pageNumber);
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>論壇文章檢舉言資料</h3>
+				<h3>論壇文章檢舉資料</h3>
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/forum_article_report/forum_article_report_select_page.jsp">回首頁</a>
