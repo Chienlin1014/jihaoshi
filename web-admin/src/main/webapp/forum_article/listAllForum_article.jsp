@@ -16,7 +16,27 @@ pageContext.setAttribute("list", list);
 <html>
 <head>
 <title>論壇文章資料</title>
-
+<link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
+    <style>
+        #pageHead { 
+            width: 100%;
+            height: 30%; 
+        }
+        div.divflex{
+        display:flex;
+        width:100%;
+        margin:0;
+        height:100vh-30%;
+        }
+        body{
+        height: 100vh;
+        background-color:#FFFAF0;
+        }
+        div.formdiv{
+        style="width:80%%;
+        background: #FFFAF0;
+        }
+    </style>
 <style>
 table#table-1 {
 	background-color: #CCCCFF;
@@ -38,7 +58,7 @@ h4 {
 
 <style>
 table {
-	width: 600px;
+	width: 1280px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -55,7 +75,9 @@ th, td {
 </style>
 
 </head>
-<body bgcolor='white'>
+<body bgcolor='white'> 
+<img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
+
 	<table id="table-1">
 		<tr>
 			<td>
@@ -94,11 +116,11 @@ th, td {
 				</td>
 
 				<td>
-					<FORM METHOD="post" ACTION="/web-admin/Forum_articleServlet?whichPage=" <%=pageNumber%> style="margin-bottom: 0px;">
+					<FORM METHOD="post" ACTION="/web-admin/Forum_articleServlet" <%=pageNumber%> style="margin-bottom: 0px;">
 						 
 						   <input type="submit" value="修改文章狀態"> 
 						
-						
+						<input type="hidden" name="whichPage" value="<%=whichPage%>"/>
 						
 						<input type="hidden" name="article_no" value="${forum_articleVO.article_no}">
 					
