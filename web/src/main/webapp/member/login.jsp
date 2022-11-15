@@ -8,11 +8,11 @@
 <title>front page</title>
 <style>
 table {
- 	width: 270px; 
+	width: 270px;
 	background-color: lightgray;
 	margin-top: 1px;
 	margin-bottom: 1px;
-	magin-left: 50%; 	
+	magin-left: 50%;
 	font-size: 18px;
 }
 
@@ -23,7 +23,7 @@ h3 {
 form {
 	margin: 65px;
 	border: 1px solid black;
-/* 	width: 270px; */
+	/* 	width: 270px; */
 	height: 400px;
 	margin-left: 38%;
 	position: absolute;
@@ -62,8 +62,9 @@ form {
 				<td><input type="password" name="memberPassword"></td>
 			</tr>
 			<tr>
-				<td><input type="hidden" name="action"
-					value="Login"> <input type="submit" value="送出">
+				<td><input type="hidden" name="action" value="Login"> <input
+					type="submit" value="送出"></td>
+				<td><a href="<%=request.getContextPath()%>/member/addmember.jsp">註冊</a>
 				</td>
 			</tr>
 		</table>

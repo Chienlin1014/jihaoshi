@@ -19,9 +19,15 @@
         <url-pattern>/member/onlyLogin.jsp</url-pattern>
 
     </filter-mapping>
+    
     <filter-mapping>
         <filter-name>loginFilter</filter-name>
         <url-pattern>/member/LoginSuccess.jsp</url-pattern>
+
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <url-pattern>/index.jsp</url-pattern>
 
     </filter-mapping>
     
@@ -34,4 +40,5 @@
         <url-pattern>/testCart/testCheckout</url-pattern>
 
     </filter-mapping>
+    
 </web-app>
