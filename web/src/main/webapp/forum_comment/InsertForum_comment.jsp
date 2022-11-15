@@ -7,11 +7,36 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Title</title>
+<title>論壇留言新增</title>
+<link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
+    <style>
+        #pageHead { 
+            width: 100%;
+            height: 30%; 
+        }
+        div.divflex{
+        display:flex;
+        width:100%;
+        margin:0;
+        height:100vh-30%;
+        }
+        body{
+        height: 100vh;
+        background-color:#FFFAF0;
+        }
+        div.formdiv{
+        style="width:80%%;
+        background: #FFFAF0;
+        }
+    </style>
+
 </head>
 
-<body> 
+<body bgcolor='white'> 
+<img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
+
 	<h1>論壇留言新增:</h1>
+	<br>
 	<form method="post" action="/web/Forum_commentServlet" id="form1">
 		<div>
 		
