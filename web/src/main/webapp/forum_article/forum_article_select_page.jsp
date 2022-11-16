@@ -57,7 +57,7 @@
         .title {
             width: 75%;
             height: 30px;
-            background-color: #33b5e5;
+            background-color: #919f01;
             position: relative;
             left: 50%;
             transform: translate(-50%);
@@ -139,13 +139,14 @@
 <body bgcolor='white'>
 <img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
 
-<table id="table-1">
-   <tr><td><h3>論壇文章首頁: Home</h3><h4>( Forum_article )</h4></td></tr>
+<div style="width:50%; margin:auto; text-align: center">
+<table id="table-1" style="margin: auto">
+   <tr style="text-align: center;"><td><h3>論壇文章首頁: Home</h3><h4>( Forum_article )</h4></td></tr>
 </table>
 
-
-
 <p>This is the Home page for Forum_article: Home</p>
+</div>
+
 <div class="container">
  <div class="title"> 
             
@@ -173,11 +174,11 @@
 
 
 <ul>
-
-<h3>論壇文章新增</h3>
-
+<br>
+<h3 style="padding-left: 12.5%">論壇文章新增</h3>
+<br>
 <ul>
-  <li><a href='<%= request.getContextPath() %>/forum_article/InsertForum_article.jsp'>Add</a> a new Forum_article.</li>
+  <li><a  style="padding-left: 12.5%;" href='<%= request.getContextPath() %>/forum_article/InsertForum_article.jsp'>Add</a> a new Forum_article.</li>
 </ul>
 
 </body>

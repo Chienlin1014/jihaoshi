@@ -42,7 +42,7 @@ pageContext.setAttribute("list", list);
 
 <style>
   table#table-1 {
-	background-color: #CCCCFF;
+	background-color: #F0E68C;
     border: 2px solid black;
     text-align: center;
   }
@@ -127,8 +127,9 @@ pageContext.setAttribute("list", list);
 
                 <div class="comments">
                     <div class="cname">&ensp;${forum_commentVO.member_no}</div>
-                    <div class="ccontent">${forum_commentVO.comment_content}</div>
-                    <div class="ctime">&ensp;${forum_commentVO.comment_time}</div>
+                    <br><div class="ctime">&ensp;${forum_commentVO.comment_time}</div>
+                    <br><div class="ccontent">${forum_commentVO.comment_content}</div>
+                   
                     <div class="c"></div>
               	</div>
               	<div class="addForum_comment_report">

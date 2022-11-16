@@ -57,13 +57,13 @@
 	<h1 style="align-self:center;margin: 2rem 0">論壇文章新增</h1>
 	
 	<form method="post" action="/web/Forum_articleServlet" id="form1">
-		<div>
+		<div style="text-align: center;">
 			
 			<label>輸入消息標題：</label><input type="text" name="article_name" value="${param.article_name}" required><br>
 			<br> <label>輸入會員編號：</label><input type="text" name="member_no" value="${param.member_no}" required><br>
 			<br>
 			
-			<label>輸入文章內容：</label><textarea name="article_content" value="${param.article_content}" required></textarea>
+			<label>輸入文章內容：</label><textarea name="article_content" value="${param.article_content}" class="editor"></textarea>
 			<br>
 			<br> <input type="hidden" name="action" value="insert">
 			
@@ -71,6 +71,28 @@
 			
 		</div>
 	</form>
+	
+	<script src="<%=request.getContextPath() %>/forum_article/ckeditor5/build/ckeditor.js"></script>
+ <script>
+ ClassicEditor
+    .create(document.querySelector('.editor'), {
+        cloudServices: {
+            tokenUrl: 'https://93322.cke-cs.com/token/dev/f61fb72c46962eeef89212e54452b4a95a6198649d6d844997f8a0be111e?limit=10',
+            uploadUrl: 'https://93322.cke-cs.com/easyimage/upload/'
+        },
+        toolbar: {
+            items: [
+                'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList',
+                '|', 'alignment', 'outdent', 'indent', '|', 'fontColor',
+                '|', 'imageUpload', 'blockQuote', 'insertTable', 'mediaEmbed',
+                'undo', 'redo'
+            ]
+        }
+    })
+    .then(editor => {
+        console.log(editor);
+    });
+ </script>
 </body>
 
 </html>
