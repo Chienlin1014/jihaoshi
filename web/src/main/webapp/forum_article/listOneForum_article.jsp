@@ -43,7 +43,7 @@ pageContext.setAttribute("list", list);
 <style>
   table#table-1 {
 	background-color: #F0E68C;
-    border: 2px solid black;
+    border: 2px solid f4f5e3;
     text-align: center;
   }
   table#table-1 h4 {

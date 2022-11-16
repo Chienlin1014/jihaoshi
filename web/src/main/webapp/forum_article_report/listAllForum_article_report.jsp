@@ -35,11 +35,28 @@ pageContext.setAttribute("list", list);
         background: #FFFAF0;
         }
     </style>
+    
+    <style>
+  table#table-1 {
+	background-color: #CCCCFF;
+    border: 2px solid black;
+    text-align: center;
+  }
+  table#table-1 h4 {
+    color: red;
+    display: block;
+    margin-bottom: 1px;
+  }
+  h4 {
+    color: blue;
+    display: inline;
+  }
+</style>
 
 <style>
 table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
+	background-color: #F0E68C;
+	border: 2px solid f4f5e3;
 	text-align: center;
 }
 
@@ -57,7 +74,7 @@ h4 {
 
 <style>
 table {
-	width: 1100px;
+	width: 1280px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -78,30 +95,15 @@ th, td {
 <body bgcolor='white'>
 <img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
 
-<div id="WRAPPER" class="">
-    <div class="divflex">
-        <div class="" style="text-align:center;background-color:#FFFAF0;widtH:13%; height:100vw; background-color:#F3E3C3;">
-            <!--側邊欄區塊開始-->
-                    <ul class="treeview">
-                        <li id="cate_D" class="expanded"><H1>功能列表</H1>
-                            <ul class="main">
-                               
-                                <li>
-                                    <a href="<%=request.getContextPath()%>/index.jsp">回即好食首頁</a>
-                                </li>
-                            </ul>
-                      </li>
-                 </ul>
-          </div>   
-            <!--側邊欄區塊結束-->
-	<div style="display:flex;flex-direction:column;width:100%">
-	<h1 style="align-self:center;margin: 2rem 0">論壇文章檢舉資料</h1>
+
+	
+<!-- 	<h1 style="align-self:center;margin: 2rem 0">論壇文章檢舉資料</h1> -->
 	
 	
 	<table id="table-1">
 		<tr>
 			<td>
-				
+				<h3>論壇文章檢舉資料</h3>
 				<h4>
 					<a href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp">回論壇文章首頁</a>
 				</h4>
