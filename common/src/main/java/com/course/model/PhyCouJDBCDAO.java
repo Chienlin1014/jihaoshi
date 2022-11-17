@@ -404,6 +404,12 @@ public class PhyCouJDBCDAO implements PhyCouDAO_interface {
 		return null;
 	}
 
+	@Override
+	public void updateStatus(Integer course_no) {
+		// TODO Auto-generated method stub
+		
+	}
+
 //	public static void main(String[] args) {
 
 //		PhyCouDAO dao = new PhyCouDAO();
