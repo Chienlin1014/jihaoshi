@@ -34,8 +34,8 @@ Forum_articleVO forum_articleVO = (Forum_articleVO) request.getAttribute("forum_
 
 <style>
   table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
+	background-color: #F0E68C;
+    border: 2px solid f4f5e3;
     text-align: center;
   }
   table#table-1 h4 {

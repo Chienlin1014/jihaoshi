@@ -39,8 +39,8 @@ pageContext.setAttribute("list", list);
     </style>
 <style>
 table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
+	background-color:  #F0E68C;
+	border: 2px solid f4f5e3;
 	text-align: center;
 }
 
@@ -97,7 +97,9 @@ th, td {
 			<th>會員編號</th>
 			<th>編輯時間</th>
 			<th>文章內容</th>
+			<th>檢舉事由</th>
 			<th>文章狀態</th>
+			<th>檢舉狀態</th>
 		</tr>
 		<%@ include file="forum_article_page1.file"%>
 		<c:forEach var="forum_articleVO" items="${list}"
@@ -110,9 +112,15 @@ th, td {
 				<td>${forum_articleVO.member_no}</td>
 				<td>${forum_articleVO.article_time}</td>
 				<td>${forum_articleVO.article_content}</td>
+				<td>${forum_article_reportVO.report_reason}</td>
 				<td>[${forum_articleVO.article_status}]
 				  ${(forum_articleVO.article_status==0)? '隱藏':''}
 				  ${(forum_articleVO.article_status==1)? '顯示':''}
+				</td>
+				<td>[${forum_article_reportVO.report_status}]
+				  ${(forum_article_reportVO.report_status==0)? '未處理':''}
+				  ${(forum_article_reportVO.report_status==1)? '未通過':''}
+				   ${(forum_article_reportVO.report_status==2)? '通過':''}
 				</td>
 
 				<td>
@@ -133,7 +141,29 @@ th, td {
 					
 					</FORM>
 				</td>
-
+				<td>
+					<FORM METHOD="post" ACTION="/web-admin/Forum_article_reportServlet" style="margin-bottom: 0px;">
+						 <c:if test="${forum_article_reportVO.report_status!=2}">	
+							<input type="submit" value="論壇文章檢舉處理">
+						 </c:if>
+						    
+						<input type="hidden" name="whichPage" value="<%=whichPage%>"/>
+						
+						
+						<input type="hidden" name="article_report_no" value="${forum_article_reportVO.article_report_no}">
+					
+					 <c:if test="${forum_article_reportVO.report_status==0}">	
+						<input type="hidden" name="action" value="change_status_0">
+					 </c:if> 
+					 <c:if test="${forum_article_reportVO.report_status==1}">	
+						<input type="hidden" name="action" value="change_status_1">
+					 </c:if> 
+					 <c:if test="${forum_article_reportVO.report_status==2}">	
+						<input type="hidden" name="action" value="change_status_2">
+					 </c:if> 
+					 
+					</FORM>
+				</td>
 			</tr>
 
 		</c:forEach>
