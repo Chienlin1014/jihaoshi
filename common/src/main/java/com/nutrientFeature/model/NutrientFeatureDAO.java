@@ -1,13 +1,7 @@
 package com.nutrientFeature.model;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface NutrientFeatureDAO {
-    void insert();
+public interface NutrientFeatureDAO extends JpaRepository<NutrientFeatureVO,Integer> {
 
-    void delete();
-
-    NutrientFeatureVO findByPk();
-
-    List<NutrientFeatureVO> getAll();
 }
