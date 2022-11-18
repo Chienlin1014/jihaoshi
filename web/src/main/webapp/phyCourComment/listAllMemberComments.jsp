@@ -63,18 +63,17 @@
           <div id="ItemContainer" class="Cm_C">
           <table>
 		<tr>
-			<th>線上課程評論編號</th>
-			<th>線上課程編號 | 名稱</th>
+			<th>實體課程評論編號</th>
+			<th>實體課程編號 | 名稱</th>
 			<th>評論內容</th>
 			<th>評分</th>
 			<th>修改</th>
 			<th>刪除</th>
 		<c:forEach var="onlineCourseCommentVO" items="${getOne_For_Display}">
 			<tr>
-				<td>${onlineCourseCommentVO.commentNo}</td>
-				<td>${onlineCourseCommentVO.courseNo} | ${onlineCourseCommentVO.onlineCourseVO.courseName}</td> 
-				<td>${onlineCourseCommentVO.commentContent}</td>
-				<td>${onlineCourseCommentVO.commentScore}</td>
+				<td>${phyCourseCommentVO.commentNo}</td>
+				<td>${phyCourseCommentVO.courseNo} | ${phyCourseCommentVO.PhyCouVO.courseName}</td> 
+				<td>${phyCourseCommentVO.commentContent}</td>
 				<td>
 					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/phyCourseComment" style="margin-bottom: 0px;">
 					<input type="submit" value="修改"> 

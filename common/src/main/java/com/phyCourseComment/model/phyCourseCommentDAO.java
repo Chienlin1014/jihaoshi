@@ -403,15 +403,13 @@ public class phyCourseCommentDAO implements phyCourseCommentDAO_interface{
 				phyCourseCommentVO.setMemberNo(rs.getInt("member_no"));
 				phyCourseCommentVO.setCourseNo(rs.getInt("course_no"));
 				phyCourseCommentVO.setCommentContent(rs.getString("comment_content"));
-				phyCourseCommentVO.setCommentScore(rs.getInt("comment_score"));
 				phyCourseCommentVO.setCommentStatus(rs.getInt("comment_status"));
 				list.add(phyCourseCommentVO); // Store the row in the vector
 			}
 	
 			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+		} catch (Exception se) {
+			se.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {

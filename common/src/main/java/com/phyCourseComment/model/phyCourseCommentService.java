@@ -11,14 +11,13 @@ public class phyCourseCommentService {
 		dao = new phyCourseCommentDAO();
 	}
 
-	public phyCourseCommentVO addPhyCourseComment(Integer memberno, Integer courseno, String commentcotent, Integer commentscore) {
+	public phyCourseCommentVO addPhyCourseComment(Integer memberno, Integer courseno, String commentcotent) {
 
 		phyCourseCommentVO phyCourseCommentVO = new phyCourseCommentVO();
 
 		phyCourseCommentVO.setMemberNo(memberno);
 		phyCourseCommentVO.setCourseNo(courseno);
 		phyCourseCommentVO.setCommentContent(commentcotent);
-		phyCourseCommentVO.setCommentScore(commentscore);
 		dao.insert(phyCourseCommentVO);
 
 		return phyCourseCommentVO;
