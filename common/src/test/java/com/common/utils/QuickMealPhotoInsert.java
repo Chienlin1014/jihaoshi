@@ -16,7 +16,7 @@ public class QuickMealPhotoInsert {
     public static void main(String[] args) throws IOException {
         String INSERT_PHOTO = "UPDATE MEAL_PRODUCT SET MEAL_PHOTO = ? WHERE MEAL_NO = ? ;";
         for (int i = 1; i<=10 ; i++) {
-            File file = new File("data/mealimages/"+i+".jpg");
+            File file = new File("C:\\CGA104_WebApp\\eclipse_WTP_workplace1\\jihaoshi\\data/mealimages/"+i+".jpg");
             BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
             try (Connection conn= DriverManager.getConnection(URL,USER,PASSWORD);
                  PreparedStatement ps= conn.prepareStatement(INSERT_PHOTO)) {
