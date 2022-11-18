@@ -11,6 +11,7 @@ public class phyCourseCommentVO implements Serializable {
 	private Integer commentNo;
 	private Integer memberNo;
 	private Integer courseNo;
+	private String courseName;
 	private String commentContent;
 	private Integer commentScore;
 	private Integer commentStatus;
@@ -62,5 +63,11 @@ public class phyCourseCommentVO implements Serializable {
 	    PhyCouService PhyCouSvc = new PhyCouService();
 	    PhyCouVO PhyCouVO = PhyCouSvc.getOneCou(courseNo);
 	    return PhyCouVO;
-  }	
+  }
+public String getCourseName() {
+	return courseName;
+}
+public void setCourseName(String courseName) {
+	this.courseName = courseName;
+}	
 }

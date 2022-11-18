@@ -1,14 +1,18 @@
-
-
 <%@ page import="com.cart.model.CartProdVO" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.phyCourseComment.model.*"%>
+
+<%
+phyCourseCommentService phySvc = new phyCourseCommentService();
+List<phyCourseCommentVO> list = phySvc.getAll();
+pageContext.setAttribute("list", list);
+%>
 <html>
 <head>
-  <title>我的線上課程評價</title>
+  <title>我的實體課程評價</title>
   <link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
   <style>
     #pageHead {
@@ -66,25 +70,23 @@
 			<th>實體課程評論編號</th>
 			<th>實體課程編號 | 名稱</th>
 			<th>評論內容</th>
-			<th>評分</th>
-			<th>修改</th>
 			<th>刪除</th>
-		<c:forEach var="onlineCourseCommentVO" items="${getOne_For_Display}">
+		<c:forEach var="phyCourseCommentVO" items="${list}">
 			<tr>
 				<td>${phyCourseCommentVO.commentNo}</td>
-				<td>${phyCourseCommentVO.courseNo} | ${phyCourseCommentVO.PhyCouVO.courseName}</td> 
+				<td>${phyCourseCommentVO.courseNo} | ${phyCourseCommentVO.courseName}</td> 
 				<td>${phyCourseCommentVO.commentContent}</td>
 				<td>
 					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/phyCourseComment" style="margin-bottom: 0px;">
 					<input type="submit" value="修改"> 
-					<input type="hidden" name="commentNo" value="${onlineCourseCommentVO.commentNo}"> 
+					<input type="hidden" name="commentNo" value="${phyCourseCommentVO.commentNo}"> 
 					<input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>
 				<td>
-					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/OnlineCourseCommentServlet" style="margin-bottom: 0px;">
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/phyCourseComment" style="margin-bottom: 0px;">
 					<input type="submit" value="刪除">
-					<input type="hidden" name="commentNo" value="${onlineCourseCommentVO.commentNo}"> 
+					<input type="hidden" name="commentNo" value="${phyCourseCommentVO.commentNo}"> 
 					<input type="hidden" name="action" value="delete">
 					</FORM>
 				</td>

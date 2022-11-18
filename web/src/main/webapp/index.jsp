@@ -52,6 +52,20 @@ a {
 	overflow: visible;
 	height: 30px;
 }
+table {
+		width: 1050px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	
+	table, th, td {
+		border: 1px solid #CCCCFF;
+	}
+	
+	th, td {
+		padding: 8px;
+		text-align: center;
+	}
 </style>
 </head>
 <body>
@@ -69,22 +83,22 @@ a {
 									${MemberNo} </font> <br> <font>會員姓名: ${MemberName} </font></li>
 							<li id="logout"><a
 								href="<%=request.getContextPath()%>/member/MemberServlet?action=Logout">登出</a></li>
-							<li id="search"><a
-								href="<%=request.getContextPath()%>/member/MemberServlet?action=Login&memberAccount=tony&memberPassword=password">test</a></li>
-									<li><a
-										href="<%=request.getContextPath()%>/member/login.jsp">登入</a></li>
+							<li><a href="<%=request.getContextPath()%>/member/login.jsp">登入</a></li>
 							<li id="cate_D" class="expanded"><H1>功能列表</H1>
 								<ul class="main">
 									<li class="drop"><a href="#">會員專區</a>
 										<ul class="submenu">
 											<li class="submenu-item"><button id="info">個人資料</button></li>
 											<li class="submenu-item"><a href="#">訂單查詢</a></li>
-											<li class="submenu-item"> <a href="<%=request.getContextPath()%>/phyCourseComment?action=getMember_For_Display">我的實體課程評價</a></li>
+											<li class="submenu-item"><a
+												href="phyCourComment/addPhyComment.jsp">新增實體課程評價</a></li>
+											<li class="submenu-item"><a
+												href="phyCourComment/listAllMemberComments.jsp">我的實體課程評價</a></li>
 										</ul></li>
 									<li class="drop"><a href="#">網站簡介</a></li>
 									<li class="drop"><a href="#">最新消息</a></li>
 									<li class="drop"><a
-										href="<%=request.getContextPath()%>/meal/MealProductIndex.jsp">好食產品專區</a>
+										href="<%=request.getContextPath()%>/meal/MealProductIndex.jsp">好食產品專區</a>	
 									</li>
 									<li class="drop"><a
 										href="<%=request.getContextPath()%>/meal/MealCart.jsp">菜單商品購物車</a>
@@ -102,7 +116,6 @@ a {
 				<div class="block_C s_list" id="cardWrapper">
 					<div class="Cm">
 						<div id="ItemContainer" class="Cm_C">
-							
 
 						</div>
 					</div>

@@ -30,7 +30,11 @@ public class phyCourseCommentDAO implements phyCourseCommentDAO_interface{
 		+ "VALUES (?, ?, ?)";
 	
 	private static final String GET_ALL_STMT = 
-		"SELECT * FROM physical_course_comment order by comment_no";
+		"SELECT a.comment_no,a.member_no,a.course_no,\r\n"
+		+ "b.course_name,a.comment_content,a.comment_status\r\n"
+		+ " FROM physical_course_comment a\r\n"
+		+ " join physical_course b\r\n"
+		+ " on a.course_no = b.course_no;";
 	private static final String GET_ONE_STMT = 
 		"SELECT * FROM physical_course_comment where comment_no = ?";
 	private static final String GET_PhyComments_ByCourseNo_STMT = 
@@ -270,7 +274,7 @@ public class phyCourseCommentDAO implements phyCourseCommentDAO_interface{
 
 	@Override
 	public List<phyCourseCommentVO> getAll() {
-		List<phyCourseCommentVO> list = new ArrayList<>();
+		List<phyCourseCommentVO> list = new ArrayList<phyCourseCommentVO>();
 		phyCourseCommentVO phyCourseCommentVO = null;
 
 		Connection con = null;
@@ -288,17 +292,15 @@ public class phyCourseCommentDAO implements phyCourseCommentDAO_interface{
 				phyCourseCommentVO.setCommentNo(rs.getInt("comment_no"));
 				phyCourseCommentVO.setMemberNo(rs.getInt("member_no"));
 				phyCourseCommentVO.setCourseNo(rs.getInt("course_no"));
+				phyCourseCommentVO.setCourseName(rs.getString("course_name"));
 				phyCourseCommentVO.setCommentContent(rs.getString("comment_content"));
-				phyCourseCommentVO.setCommentScore(rs.getInt("comment_score"));
 				phyCourseCommentVO.setCommentStatus(rs.getInt("comment_status"));
 				list.add(phyCourseCommentVO); // Store the row in the list
 			}
 
 			// Handle any driver errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
+		} catch (Exception se) {
+			se.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {

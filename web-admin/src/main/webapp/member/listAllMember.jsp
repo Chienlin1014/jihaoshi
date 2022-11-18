@@ -46,22 +46,29 @@ th, td {
 }
 </style>
 <style>
-#td.password{
-	color:red;
+#td.password {
+	color: red;
 }
 </style>
 </head>
 <body>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 	<h1>會員資料</h1>
-	<FORM METHOD="post" ACTION="MemberServlet">
-				<b>查詢會員資料 :</b> <input type="text" name="memberNo"> <input
-					type="hidden" name="action" value="getOne_For_Display"> <input
-					type="submit" value="送出">
-			</FORM>
+	<FORM METHOD="post" ACTION="../mem/MemberServlet">
+		<b>查詢會員資料 :</b> <input type="text" name="memberNo"> <input
+			type="hidden" name="action" value="getOne_For_Display"> <input
+			type="submit" value="送出">
+	</FORM>
 	<table>
 		<tr>
 			<th>會員編號</th>
-			<th>會員密碼</th>
 			<th>會員姓名</th>
 			<th>會員電話</th>
 			<th>會員暱稱</th>
@@ -73,7 +80,6 @@ th, td {
 		<c:forEach var="MemberVO" items="${list}">
 			<tr>
 				<td>${MemberVO.memberNo}</td>
-				<td>${MemberVO.memberPassword}</td>
 				<td>${MemberVO.memberName}</td>
 				<td>${MemberVO.memberPhone}</td>
 				<td>${MemberVO.memberNickname}</td>
@@ -81,22 +87,23 @@ th, td {
 				<td>${MemberVO.memberEmail}</td>
 				<td>${MemberVO.memberState}</td>
 				<td>
-					<FORM METHOD="post" 
-					ACTION="<%=request.getContextPath()%>/mem/MemberServlet" style="margin-bottom: 0px;"> 
-						<input type="submit" value="修改">
-						<input type="hidden" name="memberNo" value="${MemberVO.memberNo}"> 
-						<input type="hidden" name="action" value="getOne_For_Update">
-							
+					<FORM METHOD="post"
+						ACTION="<%=request.getContextPath()%>/mem/MemberServlet"
+						style="margin-bottom: 0px;">
+						<input type="submit" value="修改"> <input type="hidden"
+							name="memberNo" value="${MemberVO.memberNo}"> <input
+							type="hidden" name="action" value="getOne_For_Update">
+
 					</FORM>
 				</td>
 				<td>
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/mem/MemberServlet"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="刪除"> 
-						<input type="hidden" name="memberNo" value="${MemberVO.memberNo}"> 	
-						<input type="hidden" name="action" value="delete">
-						
+						<input type="submit" value="刪除"> <input type="hidden"
+							name="memberNo" value="${MemberVO.memberNo}"> <input
+							type="hidden" name="action" value="delete">
+
 					</FORM>
 				</td>
 			</tr>

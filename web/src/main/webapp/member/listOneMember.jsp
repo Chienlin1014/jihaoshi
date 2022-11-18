@@ -47,7 +47,6 @@ th, td {
 <body>
 	<div>
 		會員編號:${MemberVO.memberNo}<br>
-		會員密碼:${MemberVO.memberPassword}<br>
 		會員姓名:${MemberVO.memberName}<br>
 		會員電話:${MemberVO.memberPhone}<br>
 		會員暱稱:${MemberVO.memberNickname}<br>

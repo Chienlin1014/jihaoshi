@@ -36,8 +36,17 @@ function searchByName() {
         </tr>
         <tr>
             <td>會員e-mail :${memVO.memberEmail}</td><br>
-        </tr>
-    </table>															
+        </tr>       		 													
+    </table>
+    <tr>	
+    		<FORM METHOD="post" ACTION="member/MemberServlet">
+				<b></b> 
+				<input type="hidden" name="memberNo" value="${memVO.memberNo}"> 
+				<input type="hidden" name="action" value="getOne_For_Update">
+				<input type="submit" value="修改">
+					
+			</FORM>	
+		<tr>
 							</div>`
 
 

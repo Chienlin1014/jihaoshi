@@ -42,18 +42,31 @@ table, th, td {
 }
 
 th, td {
-	padding: 5px;<a href='frontPage.jsp'>到首頁</a>   <br><br>
-	text-align: center;
+	padding: 5px;
+	<
+	a
+	href='frontPage.jsp'>到首頁</a>
+	<br><br>
+	text-align
+	:
+	center;
 }
 </style>
 
 <title>listOneMember</title>
 </head>
 <body>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 	<table>
 		<tr>
 			<th>會員編號</th>
-			<th>會員密碼</th>
 			<th>會員姓名</th>
 			<th>會員電話</th>
 			<th>會員暱稱</th>
@@ -63,9 +76,8 @@ th, td {
 
 		</tr>
 		<tr>
-			
+
 			<td>${MemberVO.memberNo}</td>
-			<td>${MemberVO.memberPassword}</td>
 			<td>${MemberVO.memberName}</td>
 			<td>${MemberVO.memberPhone}</td>
 			<td>${MemberVO.memberNickname}</td>
@@ -78,7 +90,9 @@ th, td {
 
 		</tr>
 	</table>
-		<a href='frontPage.jsp'>到首頁</a>   <br><br>
+	<a href='frontPage.jsp'>到首頁</a>
+	<br>
+	<br>
 
 </body>
 </html>
