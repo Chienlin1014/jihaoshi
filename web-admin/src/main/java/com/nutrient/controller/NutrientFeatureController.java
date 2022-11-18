@@ -28,17 +28,17 @@ public class NutrientFeatureController {
     @GetMapping("/insert")
     public String index(ModelMap model) {
         model.addAttribute("nutrientFeature", new NutrientFeatureVO());
-        return "nutrient/NutrientFeatureInsert";
+        return "nutrient/NutrientFeatureInsert.jsp";
     }
 
     @PostMapping("/insert")
     public String insert(@Valid @ModelAttribute("nutrientFeature") NutrientFeatureVO nutrientFeature, BindingResult result) {
 
         if (result.hasErrors()) {
-            return "nutrient/NutrientFeatureInsert";
+            return "nutrient/NutrientFeatureInsert.jsp";
         }
         nutrientFeatureSV.save(nutrientFeature);
-        return "";
+        return "nutrient/NutrientInsertSucessful.jsp";
     }
 
     @PostMapping("/detailInsert")
@@ -46,7 +46,7 @@ public class NutrientFeatureController {
         List<NutrientFeatureVO> nutrientFeatures;
         nutrientFeatures=nutrientFeatureSV.listFeature();
         model.addAttribute("nutrientFeatures", nutrientFeatures);
-        return "nutrient/DetailInsert";
+        return "nutrient/DetailInsert.jsp";
 
     }
 }
