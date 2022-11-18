@@ -13,6 +13,7 @@ List<OnlineCourseVO> list = course.getAll();
 <head>
 <meta charset="UTF-8">
 <title>線上課程瀏覽專區</title>
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
 <link type="text/css"
@@ -40,6 +41,7 @@ div.formdiv {
 	background: #FFFAF0;
 }
 </style>
+
 
 
 <style>
