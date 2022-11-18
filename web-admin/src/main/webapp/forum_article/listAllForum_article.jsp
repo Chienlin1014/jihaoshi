@@ -88,10 +88,12 @@ th, td {
   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">修改文章與論壇文章檢舉處理</button>
 </p>
 <div class="row">
-  <div class="col">
+  <div class="">  <!-- 原本有class="col" -->
     <div class="collapse multi-collapse" id="multiCollapseExample1">
       <div class="card card-body">
-       <table id="table-1">
+      
+      
+       <table id="table-1" style="width: 100%">
 		<tr>
 			<td>
 				<h3>論壇文章資料</h3>
@@ -100,9 +102,9 @@ th, td {
 				</h4>
 			</td>
 		</tr>
-	</table>
+	   </table>
 
-	<table>
+	<table style="width: 100%">
 		<tr>
 			<th>論壇文章編號</th>
 			<th>文章標題</th>
@@ -156,10 +158,12 @@ th, td {
 		</c:forEach>
 	</table>
 	<%@ include file="forum_article_page2.file"%>
+	
+	
       </div>
     </div>
   </div>
-  <div class="col">
+  <div class="">	<!-- 原本有class="col" -->
     <div class="collapse multi-collapse" id="multiCollapseExample2">
       <div class="card card-body">
          <jsp:include page="/forum_article_report/listAllForum_article_report.jsp" />

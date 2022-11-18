@@ -57,7 +57,7 @@ th, td {
 
 
 
-	<table id="table-1">
+	<table id="table-1" style="width: 100%">
 		<tr>
 			<td>
 				<h3>論壇文章檢舉資料</h3>
@@ -69,7 +69,7 @@ th, td {
 		</tr>
 	</table>
 
-	<table>
+	<table style="width: 97.5vw">
 		<tr>
 			<th>論壇文章檢舉編號</th>
 			<th>論壇文章編號</th>
