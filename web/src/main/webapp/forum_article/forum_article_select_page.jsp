@@ -139,7 +139,25 @@
 <body bgcolor='white'>
 <img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
 
-<div style="width:50%; margin:auto; text-align: center">
+<div id="WRAPPER" class="">
+    <div class="divflex">
+        <div class="" style="text-align:center;background-color:#FFFAF0;widtH:13%; height:100vw; background-color:#F3E3C3;">
+           
+                    <ul class="treeview">
+                        <li id="cate_D" class="expanded"><H1>功能列表</H1>
+                            <ul class="main">
+                                <li>
+                                    <a href="<%=request.getContextPath()%>/index.jsp">回即好食首頁</a>
+                                </li>
+                            </ul>
+                      </li>
+                 </ul>
+          </div>   
+           
+ <div style="display:flex;flex-direction:column;width:100%">
+
+
+<div style="text-align: center">
 <table id="table-1" style="margin: auto">
    <tr style="text-align: center;"><td><h3>論壇文章首頁: Home</h3><h4>( Forum_article )</h4></td></tr>
 </table>

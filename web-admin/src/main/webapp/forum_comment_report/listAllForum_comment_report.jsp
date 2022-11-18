@@ -108,7 +108,7 @@ console.log(pageNumber);
 						 <c:if test="${forum_comment_reportVO.report_status!=2}">	
 							<input type="submit" value="論壇留言檢舉處理">
 						 </c:if>
-						    
+						 <input type="hidden" name="type" value="2">  
 						<input type="hidden" name="whichPage" value="<%=whichPage%>"/>
 						
 						
