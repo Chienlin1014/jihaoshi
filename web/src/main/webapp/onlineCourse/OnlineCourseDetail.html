@@ -18,16 +18,17 @@ div.divflex2 {
 	position: absolute;
 	top: 41%;
 	left: 50%;
-	translate: -50%;
+	translate: -42%;
 	gap: 5rem;
-	width: 100%;
+	width: 86%;
 	justify-content: center;
 	background-color: #fffcec;
-	z-index: -999;
+/* 	z-index: -999; */
 	min-height: 200vh;
 	padding-top: 20px;
 	flex-wrap: wrap;
-	z-index: 2;
+ 	z-index: 2; 
+ 	margin-top: 24px;
 }
 </style>
 
@@ -87,7 +88,7 @@ div.divflex2 {
                                 <input type="hidden" name="action" value="cartAdd">
                                 <input type="submit" value="加入購物車">
                             	</form>
-								<button class="payment">直接結帳</button>
+								<input type="submit" value="直接結帳">
  							<div id="commentarea" style="width:63%;position:absolute;top:30%;"></div>					
  						</div>`)
  						getComment(comment)

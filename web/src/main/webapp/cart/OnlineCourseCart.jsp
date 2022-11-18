@@ -43,12 +43,10 @@
 											<img src="data:image/png;base64,${course.onlineCoursePhotoBaseStr64}" onclick="showDetail(${cartProd.course.courseNo})">
 									</dd>
 									<dd class="c2f">
-
 										<ul class="tag_box s_label"></ul>
 										<h5 class="prod_name" onclick="showDetail(${cartProd.course.courseNo})">
 											${cartProd.course.courseName}
 										</h5>
-
 									</dd>
 									<dd class="c3f" id="button_DRAA0A-A900BUT82">
 										<ul class="price_box">

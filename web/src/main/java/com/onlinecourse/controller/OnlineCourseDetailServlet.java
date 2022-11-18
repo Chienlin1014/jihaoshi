@@ -40,13 +40,5 @@ public class OnlineCourseDetailServlet extends HttpServlet {
 		resp.setContentType("application/json; charset=UTF-8");
 		resp.getWriter().write(gson.toJson(list));
 		
-		String action = req.getParameter("action");
-		if ("findByprod".equals(action)) {
-            courseNo = Integer.valueOf(req.getParameter("courseNo"));
-            OnlineCourseVO course = service.getOneOnlineCourse(courseNo);
-            req.setAttribute("course", course);          
-            RequestDispatcher productPage = req.getRequestDispatcher("OnlineCourseDetail.jsp");
-            productPage.forward(req, resp);
-        }
 	}
 }

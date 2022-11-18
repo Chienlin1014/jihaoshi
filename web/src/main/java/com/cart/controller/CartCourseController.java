@@ -40,7 +40,8 @@ public class CartCourseController extends HttpServlet {
             session.setAttribute("totalPrice",totalPrice);
             session.setAttribute("cartProds", cartProds);
             System.out.println(cartProds);
-            res.sendRedirect(req.getHeader("referer"));
+            String url=req.getContextPath()+"/onlineCourse/ListAllOnlineCourse.jsp";
+            res.sendRedirect(url);
 
         }
 //        if ("cartModify".equals(action)) {
@@ -57,16 +58,16 @@ public class CartCourseController extends HttpServlet {
 //            res.sendRedirect(req.getHeader("referer"));
 //
 //        }
-//        if ("cartDelete".equals(action)) {
-//
-//            Integer cartIndex = Integer.valueOf(req.getParameter("cartIndex"));
-//            cartProds.remove(cartProds.get(cartIndex));
-//            Integer totalPrice = cartSV.calculateTotalPrice(cartProds);
-//            session.setAttribute("totalPrice",totalPrice);
-//            session.setAttribute("cartProds", cartProds);
-//            res.sendRedirect(req.getHeader("referer"));
-//            
-//        }
+        if ("cartDelete".equals(action)) {
+
+            Integer cartIndex = Integer.valueOf(req.getParameter("cartIndex"));
+            cartProds.remove(cartProds.get(cartIndex));
+            Integer totalPrice = cartSV.calculateTotalPrice(cartProds);
+            session.setAttribute("totalPrice",totalPrice);
+            session.setAttribute("cartProds", cartProds);
+            res.sendRedirect(req.getHeader("referer"));
+            
+        }
     }
 
 }
