@@ -8,6 +8,7 @@ public class ManagerVO implements java.io.Serializable{
 	private String managerPassword;
 	private Integer managerStatus;
 	private String authorityName;
+	private Integer authorityNo;
 	
 	public Integer getManagerNo() {
 		return managerNo;
@@ -50,6 +51,12 @@ public class ManagerVO implements java.io.Serializable{
 	}
 	public void setAuthorityName(String authorityName) {
 		this.authorityName = authorityName;
+	}
+	public Integer getAuthorityNo() {
+		return authorityNo;
+	}
+	public void setAuthorityNo(Integer authorityNo) {
+		this.authorityNo = authorityNo;
 	}
 	
 

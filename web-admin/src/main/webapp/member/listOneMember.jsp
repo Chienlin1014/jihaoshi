@@ -59,6 +59,7 @@ th, td {
 			<th>會員暱稱</th>
 			<th>會員地址</th>
 			<th>會員e-mail</th>
+			<th>會員狀態</th>
 
 		</tr>
 		<tr>
@@ -70,6 +71,7 @@ th, td {
 			<td>${MemberVO.memberNickname}</td>
 			<td>${MemberVO.memberAddress}</td>
 			<td>${MemberVO.memberEmail}</td>
+			<td>${MemberVO.memberState}</td>
 
 
 

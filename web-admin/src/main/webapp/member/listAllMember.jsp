@@ -53,6 +53,11 @@ th, td {
 </head>
 <body>
 	<h1>會員資料</h1>
+	<FORM METHOD="post" ACTION="MemberServlet">
+				<b>查詢會員資料 :</b> <input type="text" name="memberNo"> <input
+					type="hidden" name="action" value="getOne_For_Display"> <input
+					type="submit" value="送出">
+			</FORM>
 	<table>
 		<tr>
 			<th>會員編號</th>
@@ -77,7 +82,7 @@ th, td {
 				<td>${MemberVO.memberState}</td>
 				<td>
 					<FORM METHOD="post" 
-					ACTION="<%=request.getContextPath()%>/member/MemberServlet" style="margin-bottom: 0px;"> 
+					ACTION="<%=request.getContextPath()%>/mem/MemberServlet" style="margin-bottom: 0px;"> 
 						<input type="submit" value="修改">
 						<input type="hidden" name="memberNo" value="${MemberVO.memberNo}"> 
 						<input type="hidden" name="action" value="getOne_For_Update">
@@ -86,7 +91,7 @@ th, td {
 				</td>
 				<td>
 					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/member/MemberServlet"
+						ACTION="<%=request.getContextPath()%>/mem/MemberServlet"
 						style="margin-bottom: 0px;">
 						<input type="submit" value="刪除"> 
 						<input type="hidden" name="memberNo" value="${MemberVO.memberNo}"> 	
@@ -97,7 +102,7 @@ th, td {
 			</tr>
 		</c:forEach>
 	</table>
-	<a href='frontPage.jsp'>到首頁</a>
+	<a href='/index.jsp'>到首頁</a>
 	<br>
 	<br>
 

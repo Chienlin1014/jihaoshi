@@ -40,9 +40,7 @@ public class checkoutFilter  implements Filter {
 			return;}
 		else {
 			chain.doFilter(request, response);
-			PrintWriter out = res.getWriter();
-			out.println("<font color=blue>Filter 2......開始!</font><br>");
-			out.println("<br><font color=blue>Filter 2......結束!</font><br>");
+			
 		}
 	}
 

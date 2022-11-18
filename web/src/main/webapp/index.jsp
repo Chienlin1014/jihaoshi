@@ -18,12 +18,12 @@ a {
 	font-size: 20px;
 }
 
-#info{
-background:transparent;
-border:0;
-font-size:13px;
-
+#info {
+	background: transparent;
+	border: 0;
+	font-size: 13px;
 }
+
 .drop {
 	position: relative;
 }
@@ -67,14 +67,14 @@ font-size:13px;
 						<ul class="treeview">
 							<li>歡迎:<font color=red> ${MemberAcc} </font>您好 <br> <font>會員編號:
 									${MemberNo} </font> <br> <font>會員姓名: ${MemberName} </font></li>
-							<li><FORM METHOD="post" ACTION="member/MemberServlet">
-									<input type="hidden" name="action" value="Logout"> <input
-										type="submit" value="登出">
-								</FORM></li>
-							<li id="cate_D" class="expanded"><H1>功能列表</H1>
-								<ul class="main">
+							<li id="logout"><a
+								href="<%=request.getContextPath()%>/member/MemberServlet?action=Logout">登出</a></li>
+							<li id="search"><a
+								href="<%=request.getContextPath()%>/member/MemberServlet?action=Login&memberAccount=tony&memberPassword=password">test</a></li>
 									<li><a
 										href="<%=request.getContextPath()%>/member/login.jsp">登入</a></li>
+							<li id="cate_D" class="expanded"><H1>功能列表</H1>
+								<ul class="main">
 									<li class="drop"><a href="#">會員專區</a>
 										<ul class="submenu">
 											<li class="submenu-item"><button id="info">個人資料</button></li>
@@ -98,12 +98,10 @@ font-size:13px;
 				</dl>
 
 				<!--側邊欄區塊結束-->
-				<div class="block_C s_list" id ="cardWrapper">
+				<div class="block_C s_list" id="cardWrapper">
 					<div class="Cm">
 						<div id="ItemContainer" class="Cm_C">
-							<dl class="col3f" id="DRAA0A-A900BUT82">
-
-							</dl>
+							
 
 						</div>
 					</div>
@@ -112,7 +110,8 @@ font-size:13px;
 
 		</div>
 	</div>
-<script src = "js/member.js"></script>
-
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="js/member.js"></script>
+	<script type="text/javascript"></script>
 </body>
 </html>

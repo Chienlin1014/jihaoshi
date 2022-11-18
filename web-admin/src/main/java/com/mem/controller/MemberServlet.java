@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mem.model.MemService;
 import com.mem.model.MemberVO;
 
-@WebServlet("/member/MemberServlet")
+@WebServlet("/mem/MemberServlet")
 public class MemberServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

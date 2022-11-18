@@ -2,6 +2,9 @@ package com.mem.model;
 
 import java.util.List;
 
+import com.phyCourseComment.model.phyCourseCommentVO;
+import com.phyCourseCommentReport.model.phyCourseCommentReportVO;
+
 public class MemService {
 	private MemberDAO_interface dao;
 
@@ -55,7 +58,25 @@ public class MemService {
 	}
 
 	public MemberVO Login(String memberAccount, String memberPassword) {
-		return dao.selectForLogin(memberAccount,memberPassword);
+		return dao.selectForLogin(memberAccount, memberPassword);
 	}
 
+	public MemberVO findByAccount(String memberAccount) {
+		return dao.findByAccount(memberAccount);
+	}
+	public MemberVO findByEmail(String memberEmail) {
+		return dao.findByEmail(memberEmail);
+	}
+
+	public MemberVO getOnePhyCourse(Integer memberNo) {
+		return dao.findByPrimaryKey(memberNo);
+	}
+
+	public List<phyCourseCommentVO> getPhyCourseCommentsByMemberNo(Integer memberNo) {
+		return dao.getPhyCourseCommentsByMemberNo(memberNo);
+	}
+
+	public List<phyCourseCommentReportVO> getPhyCourseCommentReportsByMemberNo(Integer memberNo) {
+		return dao.getPhyCourseCommentReportsByMemberNo(memberNo);
+	}
 }

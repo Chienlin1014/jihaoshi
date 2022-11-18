@@ -12,12 +12,16 @@ MemberVO MemberVO = (MemberVO) request.getAttribute("memberVO");
 <title>會員新增 - addmember.jsp</title>
 
 <style>
+a {
+	font-size: 14px;
+}
+
 body {
 	background-color: white;
 }
 
 table {
-	width: 455px;
+	width: 520px;
 	background-color: lightgray;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -41,13 +45,12 @@ h3 {
 form {
 	margin: 65px;
 	border: 1px solid black;
-	width: 500px;
+	width: 530px;
 	height: 400px;
 	margin-left: 30%;
 	position: absolute;
 	background-color: lightgray;
 	border-radius: 10px 10px 10px 10px;
-	
 }
 
 #submit {

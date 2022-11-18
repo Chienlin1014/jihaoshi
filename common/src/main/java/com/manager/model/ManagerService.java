@@ -51,6 +51,8 @@ public class ManagerService {
 
 	public ManagerVO Login(String managerAccount, String managerPassword) {
 		return dao.selectForLogin(managerAccount,managerPassword);
+	}	
+	public ManagerVO getAuthority(Integer managerNo) {
+		return dao.GetAuthority(managerNo);
 	}
-
 }

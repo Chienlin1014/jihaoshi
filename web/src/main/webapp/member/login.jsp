@@ -54,24 +54,44 @@ form {
 		<table>
 			<tr>
 				<td>會員帳號:</td>
-				<td><input type="text" name="memberAccount"></td>
+				<td><input type="text" name="memberAccount" id="account"></td>
 			</tr>
 
 			<tr>
 				<td>會員密碼:</td>
-				<td><input type="password" name="memberPassword"></td>
+				<td><input type="password" name="memberPassword" id="password"></td>
 			</tr>
 			<tr>
 				<td><input type="hidden" name="action" value="Login"> <input
-					type="submit" value="送出"></td>
-				<td><a href="<%=request.getContextPath()%>/member/addmember.jsp">註冊</a>
-				</td>
+					type="submit" value="送出" onclick="login()"></td>
+				<td><a
+					href="<%=request.getContextPath()%>/member/addmember.jsp">註冊</a></td>
 			</tr>
 		</table>
 
 
 	</FORM>
-
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+        
+	async function login() {
+        const ac = document.getElementById("account").value
+        const pas = document.getElementById("password").value
+        console.log(ac);
+        console.log(pas);
+        const url = './MemberServlet?action=Login&memberAccount=ac&memberPassword=pas';
+//                member/MemberServlet?action=Login&memberAccount=tony&memberPassword=password
+        fetch(url)
+            .then(res => res.json())
+            .then(memVO => {
+				const account = \${memVO.memberAccount};
+				const No= \${memVO.memberNo};
+                sessionStorage.setItem("account", account);
+				sessionStorage.setItem("No", No);
+				
+            });
+    }
+    </script>
 
 </body>
 </html>
