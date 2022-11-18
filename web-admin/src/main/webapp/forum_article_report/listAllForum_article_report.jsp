@@ -8,32 +8,12 @@
 Forum_article_reportService forum_article_reportSvc = new Forum_article_reportService();
 List<Forum_article_reportVO> list = forum_article_reportSvc.getAll();
 pageContext.setAttribute("list", list);
+String type = request.getParameter("type");
 %>
 
 <html>
 <head>
 <title>論壇文章檢舉資料</title>
-<link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
-    <style>
-        #pageHead { 
-            width: 100%;
-            height: 30%; 
-        }
-        div.divflex{
-        display:flex;
-        width:100%;
-        margin:0;
-        height:100vh-30%;
-        }
-        body{
-        height: 100vh;
-        background-color:#FFFAF0;
-        }
-        div.formdiv{
-        style="width:80%%;
-        background: #FFFAF0;
-        }
-    </style>
 
 <style>
 table#table-1 {
@@ -74,10 +54,7 @@ th, td {
 
 </head>
 <body bgcolor='white'>
-<img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
-<script>
-console.log(pageNumber);
-</script>
+
 
 
 	<table id="table-1">
@@ -86,7 +63,7 @@ console.log(pageNumber);
 				<h3>論壇文章檢舉資料</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/forum_article_report/forum_article_report_select_page.jsp">回首頁</a>
+						href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -122,7 +99,7 @@ console.log(pageNumber);
 						 <c:if test="${forum_article_reportVO.report_status!=2}">	
 							<input type="submit" value="論壇文章檢舉處理">
 						 </c:if>
-						    
+						<input type="hidden" name="type" value="2">
 						<input type="hidden" name="whichPage" value="<%=whichPage%>"/>
 						
 						
@@ -140,26 +117,21 @@ console.log(pageNumber);
 					 
 					</FORM>
 				</td>
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post" ACTION="/web-admin/Forum_article_reportServlet" -->
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="修改"> <input type="hidden" -->
-<%-- 							name="article_report_no" value="${forum_article_reportVO.article_report_no}"> --%>
-<!-- 						<input type="hidden" name="action" value="getOne_For_Update"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post" ACTION="/web-admin/Forum_article_reportServlet" -->
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="刪除"> <input type="hidden" -->
-<%-- 							name="article_no" value="${forum_articleVO.article_no}"> --%>
-<!-- 						<input type="hidden" name="action" value="delete"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
+
 			</tr>
 
 		</c:forEach>
 	</table>
 	<%@ include file="forum_article_report_page2.file"%>
+	<script>
+	let type = <%=type%>
+	$(document).ready(function(){
+		if(type == 2){
+			$("#article_forum").trigger("click");
+		}
+	})
+	
+</script>
+	
 </body>
 </html>

@@ -85,10 +85,10 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
+<br>
 <ul>
-  <li><a href='<%= request.getContextPath() %>/forum_article/listAllForum_article.jsp'>List</a> all Forum_article.  <br><br></li>
-  
+  <li><a href='<%= request.getContextPath() %>/forum_article/listAllForum_article.jsp'>列出</a> 全部文章狀態與文章檢舉  <br><br></li>
+  <li><a href='<%= request.getContextPath() %>/forum_comment/listAllForum_comment.jsp'>列出</a> 全部留言狀態與留言檢舉  <br><br></li>
   
   <li>
     <FORM METHOD="post" ACTION="/web-admin/Forum_articleServlet" >

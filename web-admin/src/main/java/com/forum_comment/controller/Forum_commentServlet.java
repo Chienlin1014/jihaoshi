@@ -28,6 +28,7 @@ public class Forum_commentServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		String whichPage = req.getParameter("whichPage");
+		String type = req.getParameter("type");
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -210,7 +211,7 @@ public class Forum_commentServlet extends HttpServlet {
 			Forum_commentService forum_commentSvc = new Forum_commentService();
 			forum_commentSvc.change_status_0(comment_no);
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url = "/forum_comment/listAllForum_comment.jsp?whichPage = " + whichPage;
+			String url = "/forum_comment/listAllForum_comment.jsp?whichPage = " + whichPage + "&type=" + type ;
 			RequestDispatcher successview = req.getRequestDispatcher(url);
 			successview.forward(req, res);
 			
@@ -223,7 +224,7 @@ public class Forum_commentServlet extends HttpServlet {
 			Forum_commentService forum_commentSvc = new Forum_commentService();
 			forum_commentSvc.change_status_1(comment_no);
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url ="/forum_comment/listAllForum_comment.jsp?whichPage = " + whichPage;
+			String url ="/forum_comment/listAllForum_comment.jsp?whichPage = " + whichPage + "&type=" + type;
 			RequestDispatcher successview = req.getRequestDispatcher(url);
 			successview.forward(req, res);
 			

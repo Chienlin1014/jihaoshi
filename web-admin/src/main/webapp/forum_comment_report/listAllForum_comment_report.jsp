@@ -9,32 +9,12 @@
 Forum_comment_reportService forum_comment_reportSvc = new Forum_comment_reportService();
 List<Forum_comment_reportVO> list = forum_comment_reportSvc.getAll();
 pageContext.setAttribute("list", list);
+String type = request.getParameter("type");
 %>
 
 <html>
 <head>
 <title>論壇留言檢舉資料</title>
-<link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
-    <style>
-        #pageHead { 
-            width: 100%;
-            height: 30%; 
-        }
-        div.divflex{
-        display:flex;
-        width:100%;
-        margin:0;
-        height:100vh-30%;
-        }
-        body{
-        height: 100vh;
-        background-color:#FFFAF0;
-        }
-        div.formdiv{
-        style="width:80%%;
-        background: #FFFAF0;
-        }
-    </style>
 
 <style>
 table#table-1 {
@@ -76,7 +56,7 @@ th, td {
 </head>
 
 <body bgcolor='white'>
-<img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
+
 
 
 <script>
@@ -170,5 +150,14 @@ console.log(pageNumber);
 		</c:forEach>
 	</table>
 	<%@ include file="forum_comment_report_page2.file"%>
+	
+	<script>
+	let type = <%=type%>
+	$(document).ready(function(){
+		if(type == 2){
+			$("#forum_comment").trigger("click");
+		}
+	})
+	</script>
 </body>
 </html>

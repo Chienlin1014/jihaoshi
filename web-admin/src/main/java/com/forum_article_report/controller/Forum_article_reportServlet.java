@@ -27,6 +27,7 @@ public class Forum_article_reportServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		String whichPage = req.getParameter("whichPage");
 		System.out.println("page:" + whichPage);
+		String type = req.getParameter("type");
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -211,7 +212,7 @@ public class Forum_article_reportServlet extends HttpServlet {
 			Forum_article_reportService forum_article_reportSvc = new Forum_article_reportService();
 			forum_article_reportSvc.change_status_0(article_report_no);
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url = "/forum_article_report/listAllForum_article_report.jsp?whichPage = " + whichPage;
+			String url = "/forum_article/listAllForum_article.jsp?whichPage = " + whichPage + "&type= " + type;
 			RequestDispatcher successview = req.getRequestDispatcher(url);
 			successview.forward(req, res);
 			
@@ -227,7 +228,7 @@ public class Forum_article_reportServlet extends HttpServlet {
 			Forum_article_reportService forum_article_reportSvc = new Forum_article_reportService();
 			forum_article_reportSvc.change_status_1(article_report_no);
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url = "/forum_article_report/listAllForum_article_report.jsp?whichPage=" + whichPage;
+			String url = "/forum_article/listAllForum_article.jsp?whichPage=" + whichPage + "&type= " + type;
 			RequestDispatcher successview = req.getRequestDispatcher(url);
 			System.out.println("whichPage"+ whichPage);
 			successview.forward(req, res);

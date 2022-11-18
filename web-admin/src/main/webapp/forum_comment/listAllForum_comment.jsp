@@ -10,10 +10,14 @@ Forum_commentService forum_commentSvc = new Forum_commentService();
 // List<Forum_commentVO> list = forum_commentSvc.getAll(1);
 List<Forum_commentVO> list = forum_commentSvc.getAll();
 pageContext.setAttribute("list", list);
+String type = request.getParameter("type");
 %>
 
 <html>
 <head>
+ <link href="/web-admin/bootstrap-4.6.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+  <script src="/web-admin/js/jquery-3.6.1.min.js" ></script>
+  <script src="/web-admin/bootstrap-4.6.2/dist/js/bootstrap.bundle.min.js" ></script>
 <title>論壇留言資料</title>
 <link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
     <style>
@@ -78,14 +82,22 @@ th, td {
 <body bgcolor='white'>
 <img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
 
-
-	<table id="table-1">
+<p>
+   <a class="btn btn-primary"  id="comment" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">修改文章留言狀態</a> 
+  <button class="btn btn-primary" id="forum_comment" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">文章留言檢舉處理</button>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">修改文章留言狀態與文章留言檢舉處理</button>
+</p>
+<div class="row">
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample1">
+      <div class="card card-body">
+     	<table id="table-1">
 		<tr>
 			<td>
 				<h3>論壇留言資料</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/forum_comment/forum_comment_select_page.jsp">回首頁</a>
+						href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -121,7 +133,7 @@ th, td {
 						 
 						   <input type="submit" value="修改留言狀態"> 
 						
-						
+						<input type="hidden" name="type" value="1">
 						
 						<input type="hidden" name="comment_no" value="${forum_commentVO.comment_no}">
 					
@@ -140,5 +152,28 @@ th, td {
 		</c:forEach>
 	</table>
 	<%@ include file="forum_comment_page2.file"%>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample2">
+      <div class="card card-body">
+         <jsp:include page="/forum_comment_report/listAllForum_comment_report.jsp" />
+    </div>
+  </div>
+</div>
+<script>
+	let type = <%=type%>
+	$(document).ready(function(){
+		if(type == 1){
+			$("#comment").trigger("click");
+		}
+	})
+	
+</script>
+	
+
+
+
 </body>
 </html>
