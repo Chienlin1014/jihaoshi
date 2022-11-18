@@ -22,11 +22,6 @@
                                     <a href="${ctxPath}/meal/mealController?action=listAll">產品清單</a>
                                 </li>
                                 <li>
-                                    <a href="${ctxPath}/cart/MealCart.jsp">菜單商品購物車<c:if
-                                            test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if>
-                                    </a>
-                                </li>
-                                <li>
                                     <a href="${ctxPath}/order/orderController?action=orderList">訂單管理</a>
                                 </li>
                                 <li>
@@ -95,7 +90,7 @@
                         </c:forEach>
                         <div id="totalPrice">
                             <c:choose>
-                                <c:when test="${totalPrice==0|| empty totalPrice}">
+                                <c:when test="${empty cartProds}">
                                     <span style="font-size: 16px;">購物車中還沒有東西喔</span>
                                     <span style="font-size: 16px;"><a
                                             href="${ctxPath}/meal/mealController?action=listAll">去選購</a></span><br>
