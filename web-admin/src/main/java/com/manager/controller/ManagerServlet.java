@@ -37,10 +37,10 @@ public class ManagerServlet extends HttpServlet {
 			String managerpas = req.getParameter("managerPassword");
 
 			if (manageracc == null || manageracc.trim().length() == 0) {
-				errorMsgs.add("會員帳號請勿空白");
+				errorMsgs.add("請輸入管理員帳號");
 			}
 			if (managerpas == null || managerpas.trim().length() == 0) {
-				errorMsgs.add("會員密碼請勿空白");
+				errorMsgs.add("請輸入管理員密碼");
 			}
 
 			ManagerVO mgrVO = new ManagerVO();
