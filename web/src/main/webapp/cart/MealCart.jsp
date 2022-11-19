@@ -25,6 +25,9 @@
                                     <a href="${ctxPath}/order/orderController?action=orderList">訂單管理</a>
                                 </li>
                                 <li>
+                                    <a href="${ctxPath}/mealCollect/list">我的收藏</a>
+                                </li>
+                                <li>
                                     <a href="${ctxPath}/index.jsp">回首頁</a>
                                 </li>
                             </ul>
@@ -37,8 +40,7 @@
                     <div id="ItemContainer" class="Cm_C">
                         <c:forEach var="cartProd" items="${cartProds}" varStatus="loop">
                             <dl class="col3f" id="DRAA0A-A900BUT82">
-                                <dd class="c1f"><a class="prod_img"
-                                                   href="${ctxPath}/meal/mealController?action=findByprod&mealNo=${cartProd.meal.mealNo}">
+                                <dd class="c1f"><a class="prod_img" href="${ctxPath}/meal/mealController?action=findByprod&mealNo=${cartProd.meal.mealNo}">
                                     <img src="${cartProd.meal.showPhoto}"></a></dd>
                                 <dd class="c2f">
 
