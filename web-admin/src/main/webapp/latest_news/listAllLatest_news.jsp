@@ -110,7 +110,7 @@ th, td {
 				<td>${latest_newsVO.news_name}</td>
 				<td>${latest_newsVO.update_date}</td>
 				<td>${latest_newsVO.news_content}</td>
-				<td>${latest_newsVO.news_pic}</td>
+				<td><img src="${latest_newsVO.showPhoto}"></td>
 
 				<td>
 					<FORM METHOD="post" ACTION="/web-admin/Latest_newsServlet"
