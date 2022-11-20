@@ -14,6 +14,7 @@ for(int i = 0; i < list.size(); i++) {
 		vo.setShowPhoto("data:image/png;base64,"+Base64.getEncoder().encodeToString(vo.getNews_pic()));
 }
 
+
 pageContext.setAttribute("list", list);
 %>
 
