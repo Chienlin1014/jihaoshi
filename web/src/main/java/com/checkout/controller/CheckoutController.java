@@ -59,7 +59,6 @@ public class CheckoutController extends HttpServlet {
             AllInOne allInOne = new AllInOne("");
             AioCheckOutALL aioCheckOutALL = new AioCheckOutALL();
             StringBuilder itemName=new StringBuilder("");
-            CartTemp.cartProdTemp.put("cartProds", cartProds);
             for (CartProdVO prod : cartProds) {
                 itemName.append("品名："+prod.getMeal().getMealName()+" 份量："+prod.getQuantity()+" 數量："+prod.getAmount()+"#");
             }
