@@ -67,11 +67,7 @@ public class Latest_newsServlet extends HttpServlet {
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req.getRequestDispatcher("/latest_news/select_page.jsp");
 				failureView.forward(req, res);
-				
-				
-
 				return;// 程式中斷
-
 			}
 			/*************************** 2.開始查詢資料 *****************************************/
 			Latest_newsService latest_newsSvc = new Latest_newsService();
