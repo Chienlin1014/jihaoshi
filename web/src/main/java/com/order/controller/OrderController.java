@@ -46,7 +46,6 @@ public class OrderController extends HttpServlet {
 
         if ("orderInsert".equals(action)) {
             //            Integer memberNo = req.getParameter("memberNo");
-            List<CartProdVO> cartProds = CartTemp.cartProdTemp.get("cartProds");
             Integer memberNo = 1;
             String merchantTradeNo = req.getParameter("MerchantTradeNo"); // 店內之交易編號
             List<CartProdVO> cartProds = cartHolder.get(merchantTradeNo);
