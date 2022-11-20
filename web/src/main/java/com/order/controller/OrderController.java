@@ -49,7 +49,7 @@ public class OrderController extends HttpServlet {
         }
 
         if ("orderList".equals(action)) {
-//            Integer memberNo = req.getParameter("memberNo");
+//          Integer memberNo = req.getParameter("memberNo");
 
             Integer memberNo = 1;
             List<OrderVO> orders = orderSV.listOrsers(memberNo);
