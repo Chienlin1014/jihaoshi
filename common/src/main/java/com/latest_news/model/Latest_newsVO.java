@@ -47,5 +47,4 @@ public class Latest_newsVO implements java.io.Serializable{
 		this.news_pic = news_pic;
 	}
 	
-	
 }

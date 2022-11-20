@@ -4,6 +4,7 @@
 <%@ page import="com.latest_news.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
  
+ 
 <%
 Latest_newsService latest_newsSvc = new Latest_newsService();
 List<Latest_newsVO> list = latest_newsSvc.getAll();

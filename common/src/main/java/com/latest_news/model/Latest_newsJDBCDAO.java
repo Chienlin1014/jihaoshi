@@ -28,6 +28,7 @@ public class Latest_newsJDBCDAO implements Latest_newsDAO_interface{
 		private static final String UPDATE = 
 			"UPDATE LATEST_NEWS SET NEWS_NAME=?, NEWS_CONTENT=?,  NEWS_PIC=? WHERE NEWS_NO = ?";
 //		private static final String UPLOADFILE =
+		
 //			"INSERT INTO LATEST_NEWS(NEWS_NAME, NEWS_CONTENT, NEWS_PIC)VALUES (1,1, ?)";
 //		private static final String findByNewsName="select * from latest_news where news_name like ?";
 		// %r%

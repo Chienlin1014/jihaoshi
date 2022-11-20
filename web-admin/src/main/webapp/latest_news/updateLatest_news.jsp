@@ -6,6 +6,7 @@
 	Latest_newsVO latest_newsVO = (Latest_newsVO) request.getAttribute("latest_newsVO"); //Latest_newsVOServlet.java (Concroller) 存入req的latest_newsVO物件 (包括幫忙取出的latest_newsVO, 也包括輸入資料錯誤時的latest_newsVO物件)
 %>
 
+
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>

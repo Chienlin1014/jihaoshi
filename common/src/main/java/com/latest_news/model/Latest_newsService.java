@@ -48,6 +48,5 @@ public class Latest_newsService {
 //		dao.uploadfile(in);
 //	}
 		
-		
 	}
 

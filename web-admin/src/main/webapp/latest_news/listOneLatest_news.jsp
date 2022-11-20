@@ -5,6 +5,7 @@
 Latest_newsVO latest_newsVO = (Latest_newsVO) request.getAttribute("latest_newsVO"); //Latest_newsServlet.java(Concroller), 存入req的latest_newsVO物件
 %>
  
+ 
 <html>
 <head>
 <title>最新消息資料</title>
