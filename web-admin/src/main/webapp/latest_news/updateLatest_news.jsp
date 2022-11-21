@@ -6,14 +6,36 @@
 	Latest_newsVO latest_newsVO = (Latest_newsVO) request.getAttribute("latest_newsVO"); //Latest_newsVOServlet.java (Concroller) 存入req的latest_newsVO物件 (包括幫忙取出的latest_newsVO, 也包括輸入資料錯誤時的latest_newsVO物件)
 %>
 
+
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>最新消息修改</title>
+<link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
+    <style>
+        #pageHead { 
+            width: 100%;
+            height: 30%; 
+        }
+        div.divflex{
+        display:flex;
+        width:100%;
+        margin:0;
+        height:100vh-30%;
+        }
+        body{
+        height: 100vh;
+        background-color:#FFFAF0;
+        }
+        div.formdiv{
+        style="width:80%%;
+        background: #FFFAF0;
+        }
+    </style>
 
 <style>
   table#table-1 {
-	background-color: #CCCCFF;
+	background-color: #F0E68C;
     border: 2px solid black;
     text-align: center;
   }
@@ -30,7 +52,7 @@
 
 <style>
   table {
-	width: 450px;
+	width: 1280px;
 	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -45,16 +67,18 @@
 
 </head>
 <body bgcolor='white'>
+<img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
+
 
 <table id="table-1">
 	<tr><td>
 		 <h3>最新消息修改</h3>
-		 <h4><a href="<%= request.getContextPath() %>/latest_news/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="<%= request.getContextPath() %>/latest_news/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
-
+<br>
 <h3>資料修改:</h3>
-
+<br>
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -64,8 +88,8 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
-<FORM METHOD="post" ACTION="/third/Latest_newsServlet" name="form1">
+<br>
+<FORM METHOD="post" ACTION="/web-admin/Latest_newsServlet" enctype="multipart/form-data" name="form1">
 <table>
 <!-- 	<tr> -->
 <!-- 		<td>消息編號:<font color=red><b>*</b></font></td> -->
@@ -73,18 +97,21 @@
 <!-- 	</tr> -->
 	<tr>
 		<td>消息標題:</td>
-		<td><input type="TEXT" name="news_name" size="45" value="<%=latest_newsVO.getNews_name()%>" /></td>
+		<td><input type="TEXT" name="news_name" size="45" value="<%=latest_newsVO.getNews_name()%>" required/></td>
 	</tr>
+	
 <!-- 	<tr> -->
 <!-- 		<td>編輯時間:</td> -->
 <!-- 		<td><input  name="update_date" id="f_date1" type="text"></td> -->
 <!-- 	</tr> -->
 	<tr>
 		<td>消息內文:</td>
-		<td><textarea type="TEXT" name="news_content" size="45"	value="<%=latest_newsVO.getNews_content()%>" /></textarea></td>
+		<td><textarea type="TEXT" name="news_content" size="45"	value="<%=latest_newsVO.getNews_content()%>" required/></textarea></td>
 	</tr>
-
-	
+	<tr>
+		<td><input type="file" name="news_pic">
+		<input type="hidden" name="action" value="update"></td>
+	</tr>
 </table>
 <br>
 <input type="hidden" name="action" value="update">

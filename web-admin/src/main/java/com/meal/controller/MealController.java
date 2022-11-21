@@ -22,7 +22,8 @@ import com.meal.model.MealVO;
 @MultipartConfig(fileSizeThreshold = 0, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class MealController extends HttpServlet {
     MealService mealSV = new MealService();
-
+//    WebApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+//    NutrientFeatureDetailService nutrientFeatureDetailSV = applicationContext.getBean(NutrientFeatureDetailService.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         doPost(req, res);
@@ -38,7 +39,7 @@ public class MealController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+        RequestDispatcher productPage=null;
         req.setCharacterEncoding("UTF-8");
         Integer mealNo = null;
         String mealName = null;
@@ -99,10 +100,11 @@ public class MealController extends HttpServlet {
                 return; //程式中斷
             }
             MealVO lastMeal = mealSV.addMeal(mealName, mealContent, mealCal, mealAllergen, mealPrice, mealPhoto, mealRecipe, launch);
+            lastMeal.setShowPhoto("data:image/png;base64,"+Base64.getEncoder().encodeToString(meal.getMealPhoto()));
 
             if (lastMeal != null) {
                 req.setAttribute("meal", lastMeal);
-                RequestDispatcher productPage = req.getRequestDispatcher("/meal/ProductPage.jsp");
+                productPage = req.getRequestDispatcher("/meal/InsertSucessful.jsp");
                 productPage.forward(req, res);
             }
         }
@@ -153,7 +155,6 @@ public class MealController extends HttpServlet {
                 failureView.forward(req, res);
                 return; //程式中斷
             }
-
             String photoBase64 = Base64.getEncoder().encodeToString(IOUtils.toByteArray(req.getPart("mealPhoto").getInputStream()));
 
             if (!photoBase64.isEmpty()) {
@@ -162,17 +163,22 @@ public class MealController extends HttpServlet {
                 mealSV.updateMeal(mealNo, mealName, mealContent, mealCal, mealAllergen, mealPrice, mealRecipe, launch);
             }
             MealVO updatedMeal = mealSV.findByMealNo(mealNo);
+            updatedMeal.setShowPhoto("data:image/png;base64,"+Base64.getEncoder().encodeToString(updatedMeal.getMealPhoto()));
             if (updatedMeal != null) {
                 req.setAttribute("meal", updatedMeal);
-                RequestDispatcher productPage = req.getRequestDispatcher("/meal/ProductPage.jsp");
+                productPage = req.getRequestDispatcher("/nutrient/prodDetailList");
                 productPage.forward(req, res);
             }
         }
         if ("listAll".equals(action)) {
             List<MealVO> meals = mealSV.getAll();
+
             if (meals != null) {
-                req.setAttribute("lastAllMeal", meals);
-                RequestDispatcher productPage = req.getRequestDispatcher("/meal/ListMealProduct.jsp");
+                for (MealVO meal : meals) {
+                    meal.setShowPhoto("data:image/png;base64,"+Base64.getEncoder().encodeToString(meal.getMealPhoto()));
+                }
+                req.setAttribute("meals", meals);
+                productPage = req.getRequestDispatcher("/nutrient/aLLProdDetailList");
                 productPage.forward(req, res);
             }
         }
@@ -181,16 +187,18 @@ public class MealController extends HttpServlet {
             MealVO meal = mealSV.findByMealNo(mealNo);
             if (meal != null) {
                 req.setAttribute("meal", meal);
-                RequestDispatcher productPage = req.getRequestDispatcher("/meal/MealUpdate.jsp");
+                productPage = req.getRequestDispatcher("/meal/MealUpdate.jsp");
                 productPage.forward(req, res);
             }
         }
         if ("findByprod".equals(action)) {
             mealNo = Integer.valueOf(req.getParameter("mealNo"));
             MealVO meal = mealSV.findByMealNo(mealNo);
+            meal.setShowPhoto("data:image/png;base64,"+Base64.getEncoder().encodeToString(meal.getMealPhoto()));
             if (meal != null) {
                 req.setAttribute("meal", meal);
-                RequestDispatcher productPage = req.getRequestDispatcher("/meal/ProductPage.jsp");
+                productPage = req.getRequestDispatcher("/nutrient/prodDetailList");
+
                 productPage.forward(req, res);
 
             }
@@ -204,6 +212,23 @@ public class MealController extends HttpServlet {
             } else {
                 // TODO: 2022/10/27  做錯誤頁面
             }
+        }
+        if ("nameKeywordSearch".equals(action)) {
+            String nameKeyword = req.getParameter("nameKeyword");
+            List<MealVO> meals = mealSV.findByNameKeyword(nameKeyword);
+            if (meals != null) {
+                for (MealVO meal : meals) {
+                    meal.setShowPhoto("data:image/png;base64,"+Base64.getEncoder().encodeToString(meal.getMealPhoto()));
+                }
+                req.setAttribute("meals", meals);
+                productPage = req.getRequestDispatcher("/nutrient/aLLProdDetailList");
+                productPage.forward(req, res);
+            }
+        }
+
+        if ("hashtag".equals(action)) {
+            productPage = req.getRequestDispatcher("/nutrient/hashtag");
+            productPage.forward(req, res);
         }
     }
 }

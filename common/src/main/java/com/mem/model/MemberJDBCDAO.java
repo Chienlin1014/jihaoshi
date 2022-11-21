@@ -8,9 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.onlinecoursecomment.model.OnlineCourseCommentVO;
+import com.onlinecoursecommentreport.model.OnlineCourseCommentReportVO;
+
 public class MemberJDBCDAO implements MemberDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/test2?serverTimezone=Asia/Taipei";
+	String url = "jdbc:mysql://localhost:3306/jihaoshi?serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "password";
 
@@ -289,6 +292,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 				MemberVO = new MemberVO();
 				MemberVO.setMemberAccount(rs.getString("member_account"));
 				MemberVO.setMemberPassword(rs.getString("member_password"));
+				MemberVO.setMemberName(rs.getString("member_name"));
+				MemberVO.setMemberNo(rs.getInt("member_no"));
 			}
 
 			// Handle any driver errors
@@ -371,6 +376,24 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			System.out.println();
 		}
 
+	}
+
+	@Override
+	public Integer findByAccount(String memberAccount) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OnlineCourseCommentVO> getOnlineCourseCommentsByMemberNo(Integer memberNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OnlineCourseCommentReportVO> getOnlineCourseCommentReportsByMemberNo(Integer memberNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

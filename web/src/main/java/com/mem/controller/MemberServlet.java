@@ -248,8 +248,7 @@ public class MemberServlet extends HttpServlet {
 			}
 			session.setAttribute("MemberAcc", memVO.getMemberAccount());
 			session.setAttribute("MemberName", memVO.getMemberName());
-			session.setAttribute("MemberNo", memVO.getMemberNo());
-			
+			session.setAttribute("MemberNo", memVO.getMemberNo());		
 			
 			Gson gson = new Gson();
 			res.setContentType("application/json; charset=UTF-8");
@@ -259,7 +258,7 @@ public class MemberServlet extends HttpServlet {
 				session.removeAttribute("location");
 				res.sendRedirect(location);
 			}
-			res.sendRedirect(req.getContextPath() + "/index.jsp");
+
 
 		}
 

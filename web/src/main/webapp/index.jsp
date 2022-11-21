@@ -1,8 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-session.getAttribute("account");
-%>
+<%@ page import="com.cart.model.CartProdVO" %>
+<%@ page import="java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -74,17 +74,17 @@ th, td {
 </style>
 </head>
 <body>
-	<img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg"
-		id="pageHead">
-	<div class="block_N" style="margin: 0px auto;"></div>
-	<div id="WRAPPER" class="ecsite-layout style_shopping ecsite-search">
-		<div id="CONTENT" class="layout-wrapper">
-			<div class="layout-center" style="text-align: center">
-				<!--側邊欄區塊開始-->
-				<dl class="block_W">
-					<dd id="CategoryContainer">
-						<ul class="treeview">
-							<li>
+<img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
+<div class="block_N" style="margin:0px auto;">
+</div>
+<div id="WRAPPER" class="ecsite-layout style_shopping ecsite-search">
+  <div id="CONTENT" class="layout-wrapper">
+    <div class="layout-center" style="text-align:center">
+      <!--側邊欄區塊開始-->
+      <dl class="block_W">
+        <dd id="CategoryContainer">
+          <ul class="treeview">
+          	<li>
 							<c:if test="${not empty errorMsgs}">
 								<font style="color: red">請修正以下錯誤:</font>
 								<ul>
@@ -99,9 +99,9 @@ th, td {
 							<li id="logout"><a
 								href="./member/MemberServlet?action=Logout">登出</a></li>
 							<li><a href="./member/login.jsp">登入</a></li>
-							<li id="cate_D" class="expanded"><H1>功能列表</H1>
-								<ul class="main">
-									<li class="drop"><a href="#">會員專區</a>
+            <li id="cate_D" class="expanded"><H1>功能列表</H1>
+              <ul class="main">
+                <li class="drop"><a href="#">會員專區</a>
 										<ul class="submenu">
 											<li class="submenu-item"><button id="info">個人資料</button></li>
 											<li class="submenu-item"><a href="#">訂單查詢</a></li>
@@ -110,22 +110,52 @@ th, td {
 											<li class="submenu-item"><a
 												href="phyCourComment/listAllMemberComments.jsp">我的實體課程評價</a></li>
 										</ul></li>
-									<li class="drop"><a href="#">網站簡介</a></li>
-									<li class="drop"><a href="#">最新消息</a></li>
-									<li class="drop"><a
-										href="<%=request.getContextPath()%>/meal/MealProductIndex.jsp">好食產品專區</a>
-									</li>
-									<li class="drop"><a
-										href="<%=request.getContextPath()%>/meal/MealCart.jsp">菜單商品購物車</a>
-									</li>
-									<li class="drop"><a href="#">線上課程購物車</a></li>
-									<li class="drop"><a href="#">最新消息</a></li>
-									<li class="drop"><a href="#">康健新知論壇</a></li>
-									<li class="drop"><a href="#">FAQ及客服專區</a></li>
-								</ul>
-						</ul>
-					</dd>
-				</dl>
+                <li class="drop">
+                  <a href="<%=request.getContextPath()%>/OnlineCourseCommentServlet?action=getMember_For_Display">我的線上課程評價</a>
+                </li>
+                <li class="drop"> 
+                	<a href="<%=request.getContextPath()%>/onlinecoursecomment/addOnlineCourseComment.jsp">我要評價(線上課程)</a>
+                </li>
+                <li class="drop">
+                  <a href="<%=request.getContextPath()%>/onlinecoursecommentreport/addOnlineCourseCommentReport.jsp">我要檢舉(線上課程評論)</a>
+                </li>
+                <li class="drop">
+                  <a href="#">網站簡介</a>
+                </li>
+                <li class="drop">
+                  <a href="#">最新消息</a>
+                </li>
+                <li class="drop">
+                  <a href="${ctxPath}/meal/MealProductIndex.jsp">好食產品專區</a>
+                </li>
+                <li class="drop">
+                  <a href="${ctxPath}/cart/MealCart.jsp">菜單商品購物車<c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
+                </li>
+                <li class="drop">
+                  <a href="${pageContext.request.contextPath}/onlineCourse/ListAllOnlineCourse.jsp">線上課程瀏覽專區</a>
+                </li>
+                <li class="drop">
+                  <a href="${pageContext.request.contextPath}/onlineCourse/ManageCourse.jsp">會員線上課程管理</a>
+                </li>
+                 <li class="drop">
+                  <a href="${pageContext.request.contextPath}/onlineCourseOrderServlet?action=orderlist">會員線上課程訂單管理</a>
+                </li>
+                <li class="drop">
+                	<a href="${ctxPath}/cart/OnlineCourseCart.jsp">線上課程購物車<c:if test="${not empty cartCourses}"> (${fn:length(cartCourses)})</c:if></a>
+				</li>
+                <li class="drop">
+                  <a href="#">最新消息</a>
+                </li>
+                <li class="drop">
+                  <a href="#">康健新知論壇</a>
+                </li>
+                <li class="drop">
+                  <a href="<%=request.getContextPath()%>/faqservlet?action=getAll">FAQ及客服專區</a>
+                </li>
+              </ul>
+          </ul>
+        </dd>
+      </dl>
 
 				<!--側邊欄區塊結束-->
 				<div class="block_C s_list" id="cardWrapper">

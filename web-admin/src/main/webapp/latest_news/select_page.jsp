@@ -5,29 +5,34 @@
 <head>
 <title>最新消息首頁: Home</title> 
 
-<style>
-  table#table-1 {
-	width: 450px;
-	background-color: #CCCCFF;
-	margin-top: 5px;
-	margin-bottom: 10px;
-    border: 3px ridge Gray;
-    height: 80px;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
+
+<link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
+    <style>
+        #pageHead { 
+            width: 100%;
+            height: 30%; 
+        }
+        div.divflex{
+        display:flex;
+        width:100%;
+        margin:0;
+        height:100vh-30%;
+        }
+        body{
+        height: 100vh;
+        background-color:#FFFAF0;
+        }
+        div.formdiv{
+        style="width:80%%;
+        background: #FFFAF0;
+        }
+    </style>
 
 </head>
 <body bgcolor='white'>
+<img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
+
+
 
 <table id="table-1">
    <tr><td><h3>最新消息首頁: Home</h3><h4>( Latest_news )</h4></td></tr>
@@ -52,7 +57,7 @@
   
   
   <li>
-    <FORM METHOD="post" ACTION="/third/Latest_newsServlet" >
+    <FORM METHOD="post" ACTION="/web-admin/Latest_newsServlet" >
         <b>輸入消息編號 (如:1):</b>
         <input type="text" name="news_no">
         <input type="hidden" name="action" value="getOne_For_Display">
@@ -63,7 +68,7 @@
   <jsp:useBean id="latest_newsSvc" scope="page" class="com.latest_news.model.Latest_newsService" />
    
   <li>
-     <FORM METHOD="post" ACTION="/third/Latest_newsServlet" >
+     <FORM METHOD="post" ACTION="/web-admin/Latest_newsServlet" >
        <b>選擇消息編號:</b>
        <select size="1" name="news_no">
          <c:forEach var="latest_newsVO" items="${latest_newsSvc.all}" > 
@@ -76,7 +81,7 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="/third/Latest_newsServlet" >
+     <FORM METHOD="post" ACTION="/web-admin/Latest_newsServlet" >
        <b>選擇消息內文:</b>
        <select size="1" name="news_no">
          <c:forEach var="latest_newsVO" items="${latest_newsSvc.all}" > 
@@ -93,7 +98,7 @@
 <h3>最新消息管理</h3>
 
 <ul>
-  <li><a href='InsertLatest_news.jsp'>Add</a> a new Latest_news.</li>
+  <li><a href='<%= request.getContextPath() %>/latest_news/InsertLatest_news.jsp'>Add</a> a new Latest_news.</li>
 </ul>
 
 </body>

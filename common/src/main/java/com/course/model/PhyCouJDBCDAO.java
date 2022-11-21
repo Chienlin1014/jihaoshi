@@ -12,9 +12,9 @@ import java.util.Map;
 
 public class PhyCouJDBCDAO implements PhyCouDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://15.152.181.134:3306/JihaoDB?serverTimezone=Asia/Taipei";
-	String userid = "tsai";
-	String passwd = "Tibame@cga104";
+	String url = "jdbc:mysql://localhost:3306/jihaoshi?serverTimezone=Asia/Taipei";
+	String userid = "root";
+	String passwd = "123";
 
 	private static final String INSERT_STMT = 
 		"INSERT INTO Physical_course (course_name, course_hr, course_price, course_teacher, course_date, course_location, course_info, course_status, sign_up_start_day, sign_up_end_day, max_sign_up_people, min_sign_up_people,	current_sign_up_people, pic) VALUES ( ?, ?, ?, ?,   ?, ?, ?, ?,  ?, ?, ?, ?,  ?, ?)";
@@ -402,6 +402,12 @@ public class PhyCouJDBCDAO implements PhyCouDAO_interface {
 	public List<PhyCouVO> getCanSignUp() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void updateStatus(Integer course_no) {
+		// TODO Auto-generated method stub
+		
 	}
 
 //	public static void main(String[] args) {
