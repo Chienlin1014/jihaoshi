@@ -46,7 +46,7 @@ public class OnlineCourseOrderServlet extends HttpServlet {
 				try {
 					JsonObject reqBody = new Gson().fromJson(req.getReader(), JsonObject.class);
 					OnlineCourseOrderVO orderVo = new OnlineCourseOrderVO();
-					orderVo.setOrderNo(reqBody.get("orderNo").getAsInt());
+					orderVo.setOrderNo(reqBody.get("orderNo").getAsString());
 					orderVo.setOrderStatus(1);
 					service.updateOnlineCourseOrder(orderVo);
 					respBody = new JsonObject();
@@ -65,7 +65,7 @@ public class OnlineCourseOrderServlet extends HttpServlet {
 				req.getRequestDispatcher("/onlineCourseOrder/ListAllOnlineCourseOrder.jsp").forward(req, res);
 				break;
 			case "searchOrderDetail":
-				Integer orderNo = Integer.parseInt(req.getParameter("orderNo"));
+				String orderNo = req.getParameter("orderNo");
 				OnlineCourseOrderVO order = service.getOrderDetail(orderNo);
 				req.setAttribute("order", order);
 				req.getRequestDispatcher("/onlineCourseOrder/OnlineCourseOrderDetail.jsp").forward(req, res);
