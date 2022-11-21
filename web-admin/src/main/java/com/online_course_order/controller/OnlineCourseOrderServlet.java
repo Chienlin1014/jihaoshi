@@ -37,7 +37,7 @@ public class OnlineCourseOrderServlet extends HttpServlet {
 				PrintWriter out = res.getWriter();
 				if (memberNoStr != null && !memberNoStr.isEmpty()) {
 					Integer memberNo = Integer.parseInt(memberNoStr);
-					List<OnlineCourseOrderVO> list = service.getOneOnlineCourseOrderMem(memberNo);
+					List<OnlineCourseOrderVO> list = service.getOnlineCourseOrderbyMem(memberNo);
 					out.write(gson.toJson(list));
 				}
 				break;
