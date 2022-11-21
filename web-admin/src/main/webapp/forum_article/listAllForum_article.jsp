@@ -45,7 +45,7 @@ String type = request.getParameter("type");
 	<style>
 		table#table-1 {
 			background-color:  #F0E68C;
-			border: 2px solid black;
+			border: 2px solid f4f5e3;
 			text-align: center;
 		}
 		
@@ -59,9 +59,9 @@ String type = request.getParameter("type");
 			color: blue;
 			display: inline;
 		}
-		</style>
+	</style>
 		
-		<style>
+	<style>
 		table {
 			width: 1000px;
 			background-color: white;
@@ -70,7 +70,7 @@ String type = request.getParameter("type");
 		}
 		
 		table, th, td {
-			border: 1px solid #F0E68C;
+			border: 1px solid #CCCCFF;
 		}
 		
 		th, td {
