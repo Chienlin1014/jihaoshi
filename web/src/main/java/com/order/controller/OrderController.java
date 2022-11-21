@@ -1,7 +1,6 @@
 package com.order.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,50 +11,64 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.cart.model.CartMapHolder;
 import com.cart.model.CartProdVO;
-import com.cart.model.CartService;
+import com.cart.model.CartHolder;
+
 import com.order.model.OrderService;
 import com.order.model.OrderVO;
 
 @WebServlet("/order/orderController")
 public class OrderController extends HttpServlet {
 
+    private final CartHolder cartHolder;
+
+    // DI style
+//    public OrderController(CartHolder cartHolder) {
+//        this.cartHolder = cartHolder;
+//    }
+
+    public OrderController() {
+        this.cartHolder = new CartMapHolder();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        doPost(req,res);
+        doPost(req, res);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        OrderService orderSV=new OrderService();
+        OrderService orderSV = new OrderService();
 
         HttpSession session = req.getSession();
-        List<CartProdVO> cartProds = (ArrayList<CartProdVO>) session.getAttribute("cartProds");
         String action = req.getParameter("action");
-        CartService cartSV=new CartService();
 
         if ("orderInsert".equals(action)) {
             //            Integer memberNo = req.getParameter("memberNo");
+            Integer memberNo = 1;
+            String merchantTradeNo = req.getParameter("MerchantTradeNo"); // 店內之交易編號
+            List<CartProdVO> cartProds = cartHolder.get(merchantTradeNo);
+            String tradeNo = req.getParameter("TradeNo"); // 綠界之交易編號
+            Integer TradeAmt = Integer.valueOf(req.getParameter("TradeAmt"));
 
-            Integer memberNo=1;
-            String merchantTradeNo=req.getParameter("MerchantTradeNo"); // 店內之交易編號
-            String tradeNo=req.getParameter("TradeNo"); // 綠界之交易編號
-            Integer totalPrice = cartSV.calculateTotalPrice(cartProds);
-            orderSV.orderInsert(merchantTradeNo, memberNo, totalPrice, tradeNo, cartProds);
+            orderSV.orderInsert(merchantTradeNo, memberNo, TradeAmt, tradeNo, cartProds);
 
-            res.sendRedirect(req.getContextPath()+"/order/orderController?action=orderList");
+            session.removeAttribute("cartProds");
+            session.removeAttribute("totalPrice");
+            cartHolder.remove(merchantTradeNo);
+
+            res.sendRedirect(req.getContextPath() + "/order/orderController?action=orderList");
         }
 
         if ("orderList".equals(action)) {
-//            Integer memberNo = req.getParameter("memberNo");
-            session.removeAttribute("cartProds");
-            session.removeAttribute("totalPrice");
-            Integer memberNo=1;
+//          Integer memberNo = req.getParameter("memberNo");
+
+            Integer memberNo = 1;
             List<OrderVO> orders = orderSV.listOrsers(memberNo);
-            req.setAttribute("orders",orders);
-            RequestDispatcher orderPage= req.getRequestDispatcher("ListOrder.jsp");
-            orderPage.forward(req,res);
-            return;
+            req.setAttribute("orders", orders);
+            RequestDispatcher orderPage = req.getRequestDispatcher("ListOrder.jsp");
+            orderPage.forward(req, res);
         }
     }
 }

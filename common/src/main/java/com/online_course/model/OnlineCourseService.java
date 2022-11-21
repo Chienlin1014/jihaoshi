@@ -2,7 +2,12 @@ package com.online_course.model;
 
 import java.util.Base64;
 import java.util.Base64.Encoder;
+
+
+
 import java.util.List;
+
+import com.onlinecoursecomment.model.OnlineCourseCommentVO;
 
 public class OnlineCourseService {
 	private OnlineCourseDAO_interface dao;
@@ -24,8 +29,8 @@ public class OnlineCourseService {
 	}
 
 	public OnlineCourseVO getOneOnlineCourse(Integer courseNo) {
-		Encoder encoder = Base64.getEncoder();
 		OnlineCourseVO vo = dao.findByPrimaryKey(courseNo);
+		Encoder encoder = Base64.getEncoder();
 		byte[] photo = vo.getOnlineCoursePhoto();
 		if (photo != null) {
 			String photoBase64Str = encoder.encodeToString(photo);
@@ -79,4 +84,8 @@ public class OnlineCourseService {
     public boolean courseSwitch(Integer courseNo, Integer courseStatus) {
         return dao.courseSwitch(courseNo,courseStatus);
     }
+    
+    public List<OnlineCourseCommentVO> getOnlineCourseComments(Integer courseNo) {
+		return dao.getOnlineCourseCommentsByOnlineCourseNo(courseNo);
+	}
 }

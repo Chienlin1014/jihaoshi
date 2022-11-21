@@ -36,16 +36,25 @@
                   <a href="#">會員專區</a>
                 </li>
                 <li>
+                  <a href="<%=request.getContextPath()%>/OnlineCourseCommentServlet?action=getMember_For_Display">我的線上課程評價</a>
+                </li>
+                <li>
+                	<a href="<%=request.getContextPath()%>/onlinecoursecomment/addOnlineCourseComment.jsp">我要評價(線上課程)</a>
+                </li>
+                <li>
+                  <a href="<%=request.getContextPath()%>/onlinecoursecommentreport/addOnlineCourseCommentReport.jsp">我要檢舉(線上課程評論)</a>
+                </li>
+                <li>
                   <a href="#">網站簡介</a>
                 </li>
                 <li>
                   <a href="#">最新消息</a>
                 </li>
                 <li>
-                  <a href="<%=request.getContextPath()%>/meal/MealProductIndex.jsp">好食產品專區</a>
+                  <a href="${ctxPath}/meal/MealProductIndex.jsp">好食產品專區</a>
                 </li>
                 <li>
-                  <a href="<%=request.getContextPath()%>/cart/MealCart.jsp">菜單商品購物車<c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
+                  <a href="${ctxPath}/cart/MealCart.jsp">菜單商品購物車<c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
                 </li>
                 <li>
                   <a href="${pageContext.request.contextPath}/onlineCourse/ListAllOnlineCourse.jsp">線上課程瀏覽專區</a>
@@ -57,8 +66,8 @@
                   <a href="${pageContext.request.contextPath}/onlineCourseOrderServlet?action=orderlist">會員線上課程訂單管理</a>
                 </li>
                 <li>
-                  <a href="#">線上課程購物車</a>
-                </li>
+                	<a href="${ctxPath}/cart/OnlineCourseCart.jsp">線上課程購物車<c:if test="${not empty cartCourses}"> (${fn:length(cartCourses)})</c:if></a>
+				</li>
                 <li>
                   <a href="#">最新消息</a>
                 </li>
@@ -66,7 +75,7 @@
                   <a href="#">康健新知論壇</a>
                 </li>
                 <li>
-                  <a href="#">FAQ及客服專區</a>
+                  <a href="<%=request.getContextPath()%>/faqservlet?action=getAll">FAQ及客服專區</a>
                 </li>
               </ul>
           </ul>
