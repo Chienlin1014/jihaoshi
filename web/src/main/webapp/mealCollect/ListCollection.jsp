@@ -11,21 +11,6 @@
 <img src="../images/JihaoshiPageHead.jpg" id="pageHead">
 <div class="block_N" style="margin:0px auto;">
     <!--搜尋欄開始-->
-    <div class="Nm" style="display: flex; justify-content: center; align-items: center; ">
-        <form method="post" action="${ctxPath}/meal/mealController" enctype="application/x-www-form-urlencoded" id="keywordSearch">
-            <ul class="searchfield">
-
-                <li><input id="keyword" type="text" class="text ac_input" placeholder="請輸入關鍵字" autocomplete="off"></li>
-                <li><input type="text" name="action" value="keywordSearch" hidden></li>
-                <li>
-                    <button id="btn_search" type="submit" class="button" form="keywordSearch">搜尋</button>
-                </li>
-
-            </ul>
-
-        </form>
-
-    </div>
     <!--搜尋欄結束-->
 </div>
 <div id="WRAPPER" class="ecsite-layout style_shopping ecsite-search">
@@ -41,13 +26,15 @@
                                     <a href="${ctxPath}/meal/mealController?action=listAll">產品清單</a>
                                 </li>
                                 <li>
+                                    <a href="${ctxPath}/meal/RandomAssign.jsp">隨機配餐</a>
+                                </li>
+                                <li>
                                     <a href="${ctxPath}/cart/MealCart.jsp">菜單商品購物車
                                         <c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
                                 </li>
                                 <li>
                                     <a href="${ctxPath}/order/orderController?action=orderList">訂單管理</a>
                                 </li>
-
                                 <li>
                                     <a href="${ctxPath}/index.jsp">回首頁</a>
                                 </li>
@@ -62,25 +49,36 @@
                         <br>
                         <div id="orderTable" style="margin:auto">
                             <table class="order">
-                                <tr>
-                                    <td style="width: 100px" class="order">收藏編號</td>
-                                    <td style="width: 150px" class="order">商品名稱</td>
-                                    <td style="width: 100px" class="order">刪除商品</td>
-                                </tr>
-                                <c:forEach var="detail" items="${collectionDetails}" varStatus="loop">
-                                    <tr>
-                                        <td class="order">${loop.count}</td>
-                                        <td class="order"><a href="${ctxPath}/meal/mealController?action=findByprod&mealNo=${detail.mealNo}">${detail.mealName}</a></td>
-                                        <td class="order">
-                                            <form method="post" action="${ctxPath}/mealCollect/delete"
-                                                  id="form${loop.index}">
-                                                <input type="text" name="detailNo" value="${detail.detailNo}" hidden>
-                                            </form>
-                                            <button type="submit" form="form${loop.index}">刪除收藏</button>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-
+                                <c:choose>
+                                    <c:when test="${empty collectionDetails}">
+                                        <span style="font-size: 16px;">您還沒有收藏任何商品喔</span>
+                                        <span style="font-size: 16px;"><a
+                                                href="${ctxPath}/meal/mealController?action=listAll">去收藏</a></span><br>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <tr>
+                                            <td style="width: 100px" class="order">收藏編號</td>
+                                            <td style="width: 150px" class="order">商品名稱</td>
+                                            <td style="width: 100px" class="order">刪除商品</td>
+                                        </tr>
+                                        <c:forEach var="detail" items="${collectionDetails}" varStatus="loop">
+                                            <tr>
+                                                <td class="order">${loop.count}</td>
+                                                <td class="order"><a
+                                                        href="${ctxPath}/meal/mealController?action=findByprod&mealNo=${detail.mealNo}">${detail.mealName}</a>
+                                                </td>
+                                                <td class="order">
+                                                    <form method="post" action="${ctxPath}/mealCollect/delete"
+                                                          id="form${loop.index}">
+                                                        <input type="text" name="detailNo" value="${detail.detailNo}"
+                                                               hidden>
+                                                    </form>
+                                                    <button type="submit" form="form${loop.index}">刪除收藏</button>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
                             </table>
                         </div>
 

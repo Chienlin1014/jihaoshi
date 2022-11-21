@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>購物車</title>
+    <title>菜單商品購物車</title>
     <link type="text/css" href="${ctxPath}/css/jihaoshi.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -20,6 +20,9 @@
                             <ul class="main">
                                 <li>
                                     <a href="${ctxPath}/meal/mealController?action=listAll">產品清單</a>
+                                </li>
+                                <li>
+                                    <a href="${ctxPath}/meal/RandomAssign.jsp">隨機配餐</a>
                                 </li>
                                 <li>
                                     <a href="${ctxPath}/order/orderController?action=orderList">訂單管理</a>
@@ -40,7 +43,8 @@
                     <div id="ItemContainer" class="Cm_C">
                         <c:forEach var="cartProd" items="${cartProds}" varStatus="loop">
                             <dl class="col3f" id="DRAA0A-A900BUT82">
-                                <dd class="c1f"><a class="prod_img" href="${ctxPath}/meal/mealController?action=findByprod&mealNo=${cartProd.meal.mealNo}">
+                                <dd class="c1f"><a class="prod_img"
+                                                   href="${ctxPath}/meal/mealController?action=findByprod&mealNo=${cartProd.meal.mealNo}">
                                     <img src="${cartProd.meal.showPhoto}"></a></dd>
                                 <dd class="c2f">
 
@@ -71,7 +75,7 @@
                                         </li>
                                     </ul>
 
-                                    <form method="post" action="cartController"
+                                    <form method="post" action="${ctxPath}/cart/cartController"
                                           enctype="application/x-www-form-urlencoded" id="cart${loop.index}">
                                         <input name="action" type="text" value="cartModify" hidden>
                                         <input name="amount" type="range" min="1" max="99" value="${cartProd.amount}"
@@ -79,7 +83,7 @@
                                         <input name="cartIndex" type="text" value="${loop.index}" hidden>
                                     </form>
                                     <br>
-                                    <form method="post" action="cartController"
+                                    <form method="post" action="${ctxPath}/cart/cartController"
                                           enctype="application/x-www-form-urlencoded" id="cartDelete${loop.index}">
                                         <input name="action" type="text" value="cartDelete" hidden>
                                         <input name="cartIndex" type="text" value="${loop.index}" hidden>
@@ -89,6 +93,7 @@
                                     <br><br>
                                 </dd>
                             </dl>
+
                         </c:forEach>
                         <div id="totalPrice">
                             <c:choose>
@@ -99,10 +104,18 @@
                                 </c:when>
                                 <c:otherwise>
                                     <span style="font-size: 16px;">商品總價：${totalPrice}元 </span>
-                                    <button type="submit" form="checkout">去結帳</button>
-                                    <form method="post" action="/web/checkout/checkoutController" id="checkout" enctype="application/x-www-form-urlencoded">
-                                        <input type="text" name="action" value="checkout" hidden>
+
+                                    <form method="post" action="${ctxPath}/checkout/checkoutController" id="checkout" enctype="application/x-www-form-urlencoded">
+                                        <input type="hidden" name="action" value="checkout">
+
+
                                     </form>
+                                    <form method="post" action="${ctxPath}/cart/cartController" enctype="application/x-www-form-urlencoded" id="clearCart">
+                                        <input type="hidden" value="clearCart" name="action">
+                                    </form>
+                                    <button type="submit" form="checkout">去結帳</button>
+                                    <button type="submit" form="clearCart">清空購物車</button>
+
                                 </c:otherwise>
                             </c:choose>
 
@@ -117,7 +130,7 @@
 <script>
     $(document).ready(function () {
         <c:forEach var="cartProd" items="${cartProds}" varStatus="loop">
-        $('#amount${loop.index}').on('change mousemove',function () {
+        $('#amount${loop.index}').on('change mousemove', function () {
             $('#amount_value_${loop.index}').html($(this).val());
         });
 

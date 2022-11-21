@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
 <head>
   <link type="text/css" href="${ctxPath}/css/jihaoshi.css" rel="stylesheet">
@@ -51,6 +52,9 @@
                   <a href="${ctxPath}/meal/mealController?action=listAll">產品清單</a>
                 </li>
                 <li>
+                  <a href="${ctxPath}/meal/RandomAssign.jsp">隨機配餐</a>
+                </li>
+                <li>
                   <a href="${ctxPath}/cart/MealCart.jsp">菜單商品購物車<c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
                 </li>
                 <li>
@@ -84,8 +88,8 @@
                         ${orderDetail.meal.mealName}</a></td>
                     <td class="order">${orderDetail.quantity}</td>
                     <td class="order">${orderDetail.amount}</td>
-                    <td class="order">${orderDetail.price/orderDetail.amount}</td>
-                    <td class="order">${orderDetail.price}</td>
+                    <td class="order"><fmt:formatNumber value="${orderDetail.price/orderDetail.amount}" pattern="#,###"/> </td>
+                    <td class="order"><fmt:formatNumber value="${orderDetail.price}" pattern="#,###"/></td>
                   </tr>
                 </c:forEach>
               </table>
