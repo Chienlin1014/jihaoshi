@@ -11,6 +11,7 @@
 	<h1 style="text-align: center">請稍後，正將您導向結帳頁面...</h1>
 	<div id="checkout">
 		${checkoutPage} 		
+
 	</div>
 
 </body>
