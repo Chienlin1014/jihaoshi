@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,10 @@ public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
 	 }
 	@Override
 	public void insert(OnlineCourseVO onlineCourseVO) {
-		String sql = "INSERT INTO ONLINE_COURSE(COURSE_NAME ,COURSE_HR ,COURSE_TEACHER ,COURSE_INFO , COURSE_PRICE ,COURSE_STATUS,COURSE_PHOTO) VALUES(?, ?, ?, ?, ?, ?, ?)";
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
+		String sql = "INSERT INTO ONLINE_COURSE(COURSE_NAME ,COURSE_HR ,COURSE_TEACHER ,COURSE_INFO , COURSE_PRICE ,COURSE_STATUS,COURSE_PHOTO,COURSE_VIDEO) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+		try (
+				Connection conn = ds.getConnection(); 
+				PreparedStatement pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);) {
 
 			pstmt.setString(1, onlineCourseVO.getCourseName());
 			pstmt.setString(2, onlineCourseVO.getCourseHr());
@@ -35,7 +38,14 @@ public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
 			pstmt.setInt(5, onlineCourseVO.getCoursePrice());
 			pstmt.setInt(6, onlineCourseVO.getCourseStatus());
 			pstmt.setBytes(7, onlineCourseVO.getOnlineCoursePhoto());
+			pstmt.setString(8, onlineCourseVO.getCourseVideo());
 			pstmt.executeUpdate();
+			try(ResultSet rs=pstmt.getGeneratedKeys()){
+				if(rs.next()) {				
+					onlineCourseVO.setCourseNo(rs.getInt(1));
+				}
+				
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -43,7 +53,7 @@ public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
 
 	@Override
 	public void update(OnlineCourseVO onlineCourseVO) {
-		String sql = "UPDATE ONLINE_COURSE SET COURSE_NAME = ?, COURSE_HR = ?, COURSE_TEACHER = ? ,COURSE_INFO = ?,COURSE_PRICE = ?,COURSE_STATUS = ?,COMMENT_PEOPLE = ?, COMMENT_SCORE = ? , COURSE_PHOTO = ? WHERE COURSE_NO = ?";
+		String sql = "UPDATE ONLINE_COURSE SET COURSE_NAME = ?, COURSE_HR = ?, COURSE_TEACHER = ? ,COURSE_INFO = ?,COURSE_PRICE = ?,COURSE_STATUS = ?,COMMENT_PEOPLE = ?, COMMENT_SCORE = ? , COURSE_PHOTO = ? , COURSE_VIDEO = ? WHERE COURSE_NO = ?";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setString(1, onlineCourseVO.getCourseName());
 			pstmt.setString(2, onlineCourseVO.getCourseHr());
@@ -54,7 +64,9 @@ public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
 			pstmt.setInt(7, onlineCourseVO.getCommentPeople());
 			pstmt.setInt(8, onlineCourseVO.getCommentScore());
 			pstmt.setBytes(9, onlineCourseVO.getOnlineCoursePhoto());
-			pstmt.setInt(10, onlineCourseVO.getCourseNo());
+			pstmt.setString(10, onlineCourseVO.getCourseVideo());
+			pstmt.setInt(11, onlineCourseVO.getCourseNo());
+			
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -95,6 +107,7 @@ public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
 					vo.setCommentPeople(rs.getInt("comment_people"));
 					vo.setCommentScore(rs.getInt("comment_score"));
 					vo.setOnlineCoursePhoto(rs.getBytes("course_photo"));
+					vo.setCourseVideo(rs.getString("course_video"));
 					return vo;
 				}
 			}
@@ -245,4 +258,34 @@ public class OnlineCourseJDBCDAO implements OnlineCourseDAO_interface {
 
     }
 
+	
+    @Override
+	public List<OnlineCourseVO> getStatusOnAll() {
+		String sql = "select * from Online_course where course_status = 0";
+		try (Connection conn = ds.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+			List<OnlineCourseVO> list = new ArrayList<>();
+			while (rs.next()) {
+				OnlineCourseVO vo = new OnlineCourseVO();
+				vo.setCourseNo(rs.getInt("course_no"));
+				vo.setCourseName(rs.getString("course_name"));
+				vo.setCourseHr(rs.getString("course_hr"));
+				vo.setCourseTeacher(rs.getString("course_teacher"));
+				vo.setCourseInfo(rs.getString("course_info"));
+				vo.setCoursePrice(rs.getInt("course_price"));
+				vo.setCourseStatus(rs.getInt("course_status"));
+				vo.setUpdateDate(rs.getTimestamp("update_date"));
+				vo.setCommentPeople(rs.getInt("comment_people"));
+				vo.setCommentScore(rs.getInt("comment_score"));
+				vo.setCommentScore(rs.getInt("comment_score"));
+				vo.setOnlineCoursePhoto(rs.getBytes("course_photo"));
+				list.add(vo);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

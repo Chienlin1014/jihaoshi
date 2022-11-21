@@ -2,15 +2,19 @@ package com.online_course_order.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
+
+import com.online_course_order_detail.model.OnlineCourseOrderDetailVO;
 
 public class OnlineCourseOrderVO implements Serializable {
 	private Integer orderNo;
-	private Integer courseNo;
-	private String courseName;
 	private Integer memberNo;
 	private Timestamp orderTime;
+	private Integer orderVolume;
 	private Integer orderPrice;
 	private Integer orderStatus;
+	private String  memberAccount;
+	private List<OnlineCourseOrderDetailVO> orderDetailList;
 
 	public Integer getOrderNo() {
 		return orderNo;
@@ -18,22 +22,6 @@ public class OnlineCourseOrderVO implements Serializable {
 
 	public void setOrderNo(Integer orderNo) {
 		this.orderNo = orderNo;
-	}
-
-	public Integer getCourseNo() {
-		return courseNo;
-	}
-
-	public void setCourseNo(Integer courseNo) {
-		this.courseNo = courseNo;
-	}
-
-	public String getCourseName() {
-		return courseName;
-	}
-
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
 	}
 
 	public Integer getMemberNo() {
@@ -52,6 +40,14 @@ public class OnlineCourseOrderVO implements Serializable {
 		this.orderTime = orderTime;
 	}
 
+	public Integer getOrderVolume() {
+		return orderVolume;
+	}
+
+	public void setOrderVolume(Integer order_volume) {
+		this.orderVolume = order_volume;
+	}
+
 	public Integer getOrderPrice() {
 		return orderPrice;
 	}
@@ -68,4 +64,21 @@ public class OnlineCourseOrderVO implements Serializable {
 		this.orderStatus = orderStatus;
 	}
 
+	public List<OnlineCourseOrderDetailVO> getOrderDetailList() {
+		return orderDetailList;
+	}
+
+	public void setOrderDetailList(List<OnlineCourseOrderDetailVO> orderDetailList) {
+		this.orderDetailList = orderDetailList;
+	}
+
+	public String getMemberAccount() {
+		return memberAccount;
+	}
+
+	public void setMemberAccount(String memberAccount) {
+		this.memberAccount = memberAccount;
+	}
+	
+	
 }

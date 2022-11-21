@@ -53,6 +53,9 @@
                 <li>
                   <a href="${pageContext.request.contextPath}/onlineCourse/ManageCourse.jsp">會員線上課程管理</a>
                 </li>
+                 <li>
+                  <a href="${pageContext.request.contextPath}/onlineCourseOrderServlet?action=orderlist">會員線上課程訂單管理</a>
+                </li>
                 <li>
                   <a href="#">線上課程購物車</a>
                 </li>
