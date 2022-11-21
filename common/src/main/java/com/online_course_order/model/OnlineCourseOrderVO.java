@@ -15,7 +15,7 @@ public class OnlineCourseOrderVO implements Serializable {
 	private Integer orderStatus;
 	private String  memberAccount;
 	private List<OnlineCourseOrderDetailVO> orderDetailList;
-  private String tradeNo;
+	private String tradeNo;
 
 	public String getOrderNo() {
 		return orderNo;
