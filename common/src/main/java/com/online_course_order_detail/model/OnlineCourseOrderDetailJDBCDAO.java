@@ -32,37 +32,37 @@ public class OnlineCourseOrderDetailJDBCDAO implements OnlineCourseOrderDetailDA
 	}
 
 
-	@Override
-	public void update(OnlineCourseOrderDetailVO onlineCourseOrderDetailVO) {
-		String sql = "update Online_course_order_detail set course_price = ? where order_no = ? and course_no = ?";
-		try (Connection conn = DriverManager.getConnection(url, userid, passwd);
-
-				PreparedStatement pstmt = conn.prepareStatement(sql);) {
-			pstmt.setInt(1, onlineCourseOrderDetailVO.getCoursePrice());
-			pstmt.setInt(2, onlineCourseOrderDetailVO.getOrderNo());
-			pstmt.setInt(3, onlineCourseOrderDetailVO.getCourseNo());
-			pstmt.setBytes(4, onlineCourseOrderDetailVO.getOrderPhoto());
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	@Override
-	public void delete(OnlineCourseOrderDetailVO onlineCourseOrderDetailVO) {
-		String sql = "delete from Online_course_order_detail where order_no = ? and course_no = ?";
-		try (Connection conn = DriverManager.getConnection(url, userid, passwd);
-
-				PreparedStatement pstmt = conn.prepareStatement(sql);) {
-
-			pstmt.setInt(1, onlineCourseOrderDetailVO.getOrderNo());
-			pstmt.setInt(2, onlineCourseOrderDetailVO.getCourseNo());
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	@Override
+//	public void update(OnlineCourseOrderDetailVO onlineCourseOrderDetailVO) {
+//		String sql = "update Online_course_order_detail set course_price = ? where order_no = ? and course_no = ?";
+//		try (Connection conn = DriverManager.getConnection(url, userid, passwd);
+//
+//				PreparedStatement pstmt = conn.prepareStatement(sql);) {
+//			pstmt.setInt(1, onlineCourseOrderDetailVO.getCoursePrice());
+//			pstmt.setInt(2, onlineCourseOrderDetailVO.getOrderNo());
+//			pstmt.setInt(3, onlineCourseOrderDetailVO.getCourseNo());
+//			pstmt.setBytes(4, onlineCourseOrderDetailVO.getOrderPhoto());
+//			pstmt.executeUpdate();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
+//
+//	@Override
+//	public void delete(OnlineCourseOrderDetailVO onlineCourseOrderDetailVO) {
+//		String sql = "delete from Online_course_order_detail where order_no = ? and course_no = ?";
+//		try (Connection conn = DriverManager.getConnection(url, userid, passwd);
+//
+//				PreparedStatement pstmt = conn.prepareStatement(sql);) {
+//
+//			pstmt.setInt(1, onlineCourseOrderDetailVO.getOrderNo());
+//			pstmt.setInt(2, onlineCourseOrderDetailVO.getCourseNo());
+//			pstmt.executeUpdate();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	@Override
 	public OnlineCourseOrderDetailVO findByPrimaryKey(Integer orderNo, Integer courseNo) {
