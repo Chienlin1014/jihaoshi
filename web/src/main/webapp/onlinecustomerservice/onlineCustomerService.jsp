@@ -85,7 +85,7 @@ a {
 		// ws是Socket自己的通訊協定
 		var statusOutput = document.getElementById("statusOutput");
 		var messagesArea = document.getElementById("messagesArea");
-		var self = ${memberVO.memberAccount};
+		var self = ${empty memberVO.memberAccount ? "vistor" : memberVO.memberAccount };
 		var webSocket;
 
 		function connect() {
