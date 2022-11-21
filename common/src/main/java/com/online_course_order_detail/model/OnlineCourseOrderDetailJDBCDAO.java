@@ -75,7 +75,7 @@ public class OnlineCourseOrderDetailJDBCDAO implements OnlineCourseOrderDetailDA
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
 					OnlineCourseOrderDetailVO vo = new OnlineCourseOrderDetailVO();
-					vo.setOrderNo(rs.getInt("order_no"));
+					vo.setOrderNo(rs.getString("order_no"));
 					vo.setCourseNo(rs.getInt("course_no"));
 					vo.setCoursePrice(rs.getInt("course_price"));
 					vo.setOrderPhoto(rs.getBytes("order_photo"));
@@ -99,7 +99,7 @@ public class OnlineCourseOrderDetailJDBCDAO implements OnlineCourseOrderDetailDA
 			List<OnlineCourseOrderDetailVO> list = new ArrayList<>();
 			while (rs.next()) {
 				OnlineCourseOrderDetailVO vo = new OnlineCourseOrderDetailVO();
-				vo.setOrderNo(rs.getInt("order_no"));
+				vo.setOrderNo(rs.getString("order_no"));
 				vo.setCourseNo(rs.getInt("course_no"));
 				vo.setCoursePrice(rs.getInt("course_price"));
 				vo.setOrderPhoto(rs.getBytes("order_photo"));
