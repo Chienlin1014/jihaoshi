@@ -138,7 +138,7 @@ pageContext.setAttribute("list", list);
 
 				<td><a
 					href="/web/Forum_articleServlet?article_no=${forum_comment_reportVO.article_no}&action=getOne_For_Display">
-						${forum_comment_reportVO.article_no} </a></td>
+						${forum_comment_reportVO.article_name} </a></td>
 
 
 				<td>${forum_comment_reportVO.member_no}</td>

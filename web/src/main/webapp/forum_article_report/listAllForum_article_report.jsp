@@ -127,8 +127,12 @@ th, td {
 	
 			<tr>
 				<td>${forum_article_reportVO.article_report_no}</td>
+<%-- 				<td><a href="/web/Forum_articleServlet?article_no=${forum_article_reportVO.article_no}&action=getOne_For_Display"> --%>
+<%-- 					${forum_article_reportVO.article_no} </a></td>  --%>
+				
 				<td><a href="/web/Forum_articleServlet?article_no=${forum_article_reportVO.article_no}&action=getOne_For_Display">
-					${forum_article_reportVO.article_no} </a></td> 
+     					${forum_article_reportVO.article_name} </a></td>
+					
 				<td>${forum_article_reportVO.member_no}</td>
 				<td>${forum_article_reportVO.report_reason}</td>
 			</tr>
