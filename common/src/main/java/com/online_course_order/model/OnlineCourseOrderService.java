@@ -21,13 +21,13 @@ public class OnlineCourseOrderService {
 
 
 	public void orderInsert(String merchantTradeNo, Integer memberNo, Integer totalPrice, String tradeNo, List<CartCourseVO> cartCourses ) {
-        OnlineCourseOrderVO order=new OnlineCourseOrderVO();
-        order.setOrderNo(merchantTradeNo);
-        order.setMemberNo(memberNo);
-        order.setOrderPrice(totalPrice);
-        order.setTradeNo(tradeNo);
-        dao.insert(order,cartCourses);
-    }
+		OnlineCourseOrderVO order=new OnlineCourseOrderVO();
+		order.setOrderNo(merchantTradeNo);
+		order.setMemberNo(memberNo);
+		order.setOrderPrice(totalPrice);
+		order.setTradeNo(tradeNo);
+		dao.insert(order,cartCourses);
+	}
 
 	public void updateOnlineCourseOrder(OnlineCourseOrderVO onlineCourseOrderVO) {
 		dao.update(onlineCourseOrderVO);
@@ -35,13 +35,7 @@ public class OnlineCourseOrderService {
 	}
 
 
-	public void deleteOnlineCourseOrder(OnlineCourseOrderVO onlineCourseOrderVO) {
-		dao.delete(onlineCourseOrderVO);
-	}
 
-	public OnlineCourseOrderVO getOneOnlineCourseOrder(Integer orderNo) {
-		return dao.findByPrimaryKey(orderNo);
-	}
 	public List<OnlineCourseOrderVO> getOnlineCourseOrderbyMem(Integer memberNo) {
 		return dao.findByMemNo(memberNo);
 	}
@@ -49,8 +43,8 @@ public class OnlineCourseOrderService {
 	public List<OnlineCourseOrderVO> getAll() {
 		return dao.getAll();
 	}
-	
-	public OnlineCourseOrderVO getOrderDetail(Integer orderNo) {
+
+	public OnlineCourseOrderVO getOrderDetail(String orderNo) {
 		OnlineCourseOrderVO vo = dao.getOrderDetail(orderNo);
 		if (vo != null && vo.getOrderDetailList() != null) {
 			for (OnlineCourseOrderDetailVO detail : vo.getOrderDetailList()) {
