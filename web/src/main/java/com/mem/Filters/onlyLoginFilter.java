@@ -1,4 +1,4 @@
-package com.testcheckout.Filters;
+package com.mem.Filters;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class checkoutFilter  implements Filter {
+public class onlyLoginFilter  implements Filter {
 
 	private FilterConfig config;
 

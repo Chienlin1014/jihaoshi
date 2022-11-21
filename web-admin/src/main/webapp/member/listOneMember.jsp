@@ -11,45 +11,39 @@ MemberVO MemberVO = (MemberVO) request.getAttribute("MemberVO");
 <html>
 <head>
 <style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
+body {
+	background-color: lightgray;
 }
 
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
+h1 {
 	color: blue;
 	display: inline;
+	margin-left: 43%;
 }
 </style>
 
 <style>
 table {
 	width: 800px;
-	background-color: white;
+	/* 	background-color: #79798c; */
 	margin-top: 5px;
 	margin-bottom: 5px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 table, th, td {
-	border: 1px solid #CCCCFF;
+	border: 1px solid black;
 }
 
 th, td {
 	padding: 5px;
-	<
-	a
-	href='frontPage.jsp'>到首頁</a>
-	<br><br>
-	text-align
-	:
-	center;
+	text-align: center;
+}
+</style>
+<style>
+#td.password {
+	color: red;
 }
 </style>
 

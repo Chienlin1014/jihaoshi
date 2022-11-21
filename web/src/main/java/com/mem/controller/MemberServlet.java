@@ -172,7 +172,7 @@ public class MemberServlet extends HttpServlet {
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("MemberVO", memVO);
-			String url = "listOneMember.jsp";
+			String url = "editSucces.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
@@ -249,6 +249,8 @@ public class MemberServlet extends HttpServlet {
 			session.setAttribute("MemberAcc", memVO.getMemberAccount());
 			session.setAttribute("MemberName", memVO.getMemberName());
 			session.setAttribute("MemberNo", memVO.getMemberNo());
+			
+			
 			Gson gson = new Gson();
 			res.setContentType("application/json; charset=UTF-8");
 			res.getWriter().write(gson.toJson(memVO));

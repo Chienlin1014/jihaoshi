@@ -12,19 +12,9 @@
 
     <filter>
         <filter-name>loginFilter</filter-name>
-        <filter-class>com.mem.Filters.loginFilter</filter-class>
+        <filter-class>com.mem.Filters.indexFilter</filter-class>
     </filter>
-    <filter-mapping>
-        <filter-name>loginFilter</filter-name>
-        <url-pattern>/member/onlyLogin.jsp</url-pattern>
-
-    </filter-mapping>
     
-    <filter-mapping>
-        <filter-name>loginFilter</filter-name>
-        <url-pattern>/member/LoginSuccess.jsp</url-pattern>
-
-    </filter-mapping>
     <filter-mapping>
         <filter-name>loginFilter</filter-name>
         <url-pattern>/index.jsp</url-pattern>
@@ -32,12 +22,12 @@
     </filter-mapping>
     
     <filter>
-        <filter-name>checkoutFilter</filter-name>
-        <filter-class>com.testcheckout.Filters.checkoutFilter</filter-class>
+        <filter-name>onlyLoginFilter</filter-name>
+        <filter-class>com.mem.Filters.onlyLoginFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>checkoutFilter</filter-name>
-        <url-pattern>/testCart/testCheckout</url-pattern>
+        <filter-name>onlyLoginFilter</filter-name>
+        <url-pattern>/member/getOneMem</url-pattern>
 
     </filter-mapping>
     

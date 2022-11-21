@@ -37,52 +37,25 @@ public class getOneMem extends HttpServlet {
 			HttpSession session = req.getSession();
 
 			Object No = session.getAttribute("MemberNo");
+			if(No == null) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/member/login.jsp");
+				failureView.forward(req, res);
+				return;
+			}
 			String str = No.toString();
-			if (str == null || (str.trim()).length() == 0) {
-				errorMsgs.add("請輸入會員編號");
-			}
-
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/member/frontPage.jsp");
-				failureView.forward(req, res);
-				return;// 程式中斷
-			}
-
 			Integer memberNo = null;
-			try {
 				memberNo = Integer.valueOf(str);
-			} catch (Exception e) {
-				errorMsgs.add("員工編號格式不正確");
-			}
-			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/member/frontPage.jsp");
-				failureView.forward(req, res);
-				return;// 程式中斷
-			}
+			
 
-			/*************************** 2.開始查詢資料 *****************************************/
+			/********************************************************************/
 			MemService memSvc = new MemService();
 			MemberVO memVO = memSvc.getOneMem(memberNo);
-			if (memVO == null) {
-				errorMsgs.add("查無資料");
 
-			}
 
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/member/frontPage.jsp");
-				failureView.forward(req, res);
-				return;// 程式中斷
-			}
-
-			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-//			req.setAttribute("MemberVO", memVO);
 			Gson gson = new Gson();
 			res.setContentType("application/json; charset=UTF-8");
 			res.getWriter().write(gson.toJson(memVO));
-//			String url = "member/listOneMember.jsp";
-//			RequestDispatcher successView = req.getRequestDispatcher(url);
-//			successView.forward(req, res);
+
 		}
 	}
 

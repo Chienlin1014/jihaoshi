@@ -71,29 +71,17 @@ a {
 				<dl class="block_W">
 					<dd id="CategoryContainer">
 						<ul class="treeview">
-						<li>管理員:<font color=red> ${manager.managerName} </font><br>
-									權限編號:<font> <c:forEach var="manager" items="${list}">${manager.authorityNo}</c:forEach> </font>
-									</li>
-						<li id="logout"><a
-								href="./manager/ManagerServlet?action=Logout">登出</a></li>
-									<li><a
-										href="./manager/login.jsp">登入</a></li>
-							<li id="cate_D" class="expanded"><H1>功能列表</H1>
+						<li>管理員:<font color=red> ${manager.managerName} </font>
+						
+							<li id="cate_D" class="expanded"><H1>商品管理</H1>
 								<ul class="main">
-									<li class="drop"><a href="./mealsManag.jsp">商品管理</a>
+									<li class="drop"><a href="#">商品管理</a>
 										</li>
-									<li class="drop"><a href="./manager/managerIndex.jsp">員工管理</a>
+									<li class="drop"><a href="#">菜單管理</a>
 										</li>
-									<li class="drop"><a href="./manager/memberIndex.jsp">會員管理</a>
+									<li class="drop"><a href="#">會員管理</a>
 										</li>
-									<li><a
-										href="<%=request.getContextPath()%>/meal/MealInsert.jsp">新增菜單商品</a>
-									</li>
-									<li><a href="meal/mealController?action=listAll">菜單商品列表</a>
-									</li>
-									<li><a
-										href="<%=request.getContextPath()%>/faqservlet?action=selectFAQ">FAQ列表</a>
-									</li>
+									
 								</ul>
 						</ul>
 					</dd>

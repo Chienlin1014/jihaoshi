@@ -12,30 +12,33 @@ function searchByName() {
 			ItemContainer.insertAdjacentHTML('beforeend', `<div class="content">
 			<table>
         <tr>
-            <td>會員編號 :${memVO.memberNo}</td><br>
+            <td>會員編號 :</td><br>
+            <td>${memVO.memberNo}</td>
         </tr>
         <tr>
-            <td>會員密碼 :${memVO.memberPassword}</td><br>
+            <td>會員密碼 :</td><br>
+            <td>${memVO.memberPassword}</td>
 
         </tr>
         <tr>
-            <td>會員姓名 :${memVO.memberName}</td><br>
-
+            <td>會員姓名 :</td><br>
+			<td>${memVO.memberName}</td>
         </tr>
         <tr>
-            <td>會員電話 :${memVO.memberPhone}</td><br>
-
+            <td>會員電話 :</td><br>
+			<td>${memVO.memberPhone}</td>
         </tr>
         <tr>
-            <td>會員暱稱 :${memVO.memberNickname}</td><br>
-
+            <td>會員暱稱 :</td><br>
+			<td>${memVO.memberNickname}</td>
         </tr>
         <tr>
-            <td>會員地址 :${memVO.memberAddress}</td><br>
-
+            <td>會員地址 :</td><br>
+			<td>${memVO.memberAddress}</td>
         </tr>
         <tr>
-            <td>會員e-mail :${memVO.memberEmail}</td><br>
+            <td>會員e-mail :</td><br>
+            <td>${memVO.memberEmail}</td>
         </tr>       		 													
     </table>
     <tr>	

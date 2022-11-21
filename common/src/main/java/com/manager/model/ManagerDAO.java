@@ -26,10 +26,7 @@ public class ManagerDAO implements ManagerDAO_interface {
 	// manager_password,manager_status
 
 	private static final String INSERT_STMT = "INSERT INTO backend_manager (manager_name,manager_ip,manager_account,manager_password) VALUES (?, ?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT b.manager_no,b.manager_name,  e.authority_name, \r\n "
-			+ "b.manager_account,b.manager_status\r\n " + "FROM authority_detail a \r\n"
-			+ "join authority e join backend_manager b\r\n " + "on a.authority_no = e.authority_no \r\n "
-			+ "and b.manager_no = a.manager_no\r\n " + "order by a.manager_no ";
+	private static final String GET_ALL_STMT = "SELECT * from backend_manager ";
 	private static final String GET_ONE_STMT = "SELECT manager_no, manager_name, manager_ip, manager_account, manager_password, manager_status FROM backend_manager where manager_no = ?";
 	private static final String DELETE = "DELETE FROM backend_manager where manager_no = ?";
 	private static final String UPDATE = "UPDATE backend_manager set manager_name=?,manager_ip=?,manager_account=?,manager_password=? where manager_no = ?";
@@ -52,10 +49,10 @@ public class ManagerDAO implements ManagerDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, ManagerVO.getManagerName());
-			pstmt.setString(2, ManagerVO.getManagerIp());
-			pstmt.setString(3, ManagerVO.getManagerAccount());
-			pstmt.setString(4, ManagerVO.getManagerPassword());
+			pstmt.setString(1, ManagerVO.getManagerAccount());
+			pstmt.setString(2, ManagerVO.getManagerPassword());
+			pstmt.setString(3, ManagerVO.getManagerName());
+			pstmt.setString(4, ManagerVO.getManagerIp());
 
 			pstmt.executeUpdate();
 
@@ -142,10 +139,11 @@ public class ManagerDAO implements ManagerDAO_interface {
 			while (rs.next()) {
 				// empVo 也稱為 Domain objects
 				ManamgerVO = new ManagerVO();
-				ManamgerVO.setManagerName(rs.getNString("manager_name"));
+				ManamgerVO.setManagerName(rs.getString("manager_name"));
 				ManamgerVO.setManagerIp(rs.getString("manager_ip"));
 				ManamgerVO.setManagerAccount(rs.getString("manager_account"));
 				ManamgerVO.setManagerPassword(rs.getString("manager_password"));
+				ManamgerVO.setManagerStatus(rs.getInt("manager_status"));;
 				ManamgerVO.setManagerNo(rs.getInt("manager_no"));
 
 			}
@@ -237,8 +235,8 @@ public class ManagerDAO implements ManagerDAO_interface {
 	}
 
 	@Override
-	public ManagerVO GetAuthority(Integer managerNo) {
-		ManagerVO managerVO = null;
+	public List<Integer> GetAuthority(Integer managerNo) {
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -251,16 +249,15 @@ public class ManagerDAO implements ManagerDAO_interface {
 			pstmt.setInt(1, managerNo);
 
 			rs = pstmt.executeQuery();
-
+			List<Integer> authorityNo=new ArrayList();
 			while (rs.next()) {
 
-				managerVO = new ManagerVO();
-				//manager_no,authority_no
-				managerVO.setManagerNo(rs.getInt("manager_no"));
-				managerVO.setAuthorityNo(rs.getInt("authority_no"));
+				authorityNo.add(rs.getInt("authority_no"));
 			}
+			return authorityNo;
 
-		} catch (SQLException se) {
+			
+		} catch (Exception se) {
 			se.printStackTrace();
 
 		} finally {
@@ -286,7 +283,7 @@ public class ManagerDAO implements ManagerDAO_interface {
 				}
 			}
 		}
-		return managerVO;
+		return null;
 	}
 
 	@Override
@@ -351,7 +348,6 @@ public class ManagerDAO implements ManagerDAO_interface {
 				manVO.setManagerAccount(rs.getString("manager_account"));
 //				managerVO.setManagerPassword(rs.getString("manager_password"));
 				manVO.setManagerStatus(rs.getInt("manager_status"));
-				manVO.setAuthorityName(rs.getString("authority_name"));
 
 				list.add(manVO);
 			}
