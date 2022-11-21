@@ -67,7 +67,7 @@ public class OnlineCourseOrderJDBCDAO implements OnlineCourseOrderDAO_interface 
 		try (Connection conn =  ds.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);) {		
 			pstmt.setInt(1, onlineCourseOrderVO.getOrderStatus());
-			pstmt.setInt(2, onlineCourseOrderVO.getOrderNo());
+			pstmt.setString(2, onlineCourseOrderVO.getOrderNo());
 			pstmt.executeUpdate();
 			conn.close();
 			
