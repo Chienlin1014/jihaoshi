@@ -12,7 +12,7 @@ import com.forum_article.model.Forum_articleVO;
 import com.latest_news.model.Latest_newsVO;
 
 public class Forum_article_reportJDBCDAO implements Forum_article_reportDAO_interface {
-	String driver = "com.mysql.cj.jdbc.Driver";
+	String driver = "com.mysql.cj.jdbc.Driver"; 
 	String url = "jdbc:mysql://localhost:3306/jihaoshi?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "password";

@@ -119,8 +119,8 @@ pageContext.setAttribute("list", list);
 
 	<table>
 		<tr>
-			<th>論壇文章檢舉編號</th>
-			<th>論壇文章留言編號</th>
+<!-- 			<th>論壇文章檢舉編號</th> -->
+<!-- 			<th>論壇文章留言編號</th> -->
 			<th>論壇文章編號</th>
 			<th>會員編號</th>
 			<th>檢舉事由</th>
@@ -133,8 +133,8 @@ pageContext.setAttribute("list", list);
 
 
 			<tr>
-				<td>${forum_comment_reportVO.comment_report_no}</td>
-				<td>${forum_comment_reportVO.comment_no}</td>
+<%-- 				<td>${forum_comment_reportVO.comment_report_no}</td> --%>
+<%-- 				<td>${forum_comment_reportVO.comment_no}</td> --%>
 
 				<td><a
 					href="/web/Forum_articleServlet?article_no=${forum_comment_reportVO.article_no}&action=getOne_For_Display">

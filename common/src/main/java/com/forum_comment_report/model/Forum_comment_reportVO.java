@@ -9,8 +9,6 @@ public class Forum_comment_reportVO implements java.io.Serializable{
 	private String report_reason;
 	private Integer report_status;
 	
-	
-	
 	public String getArticle_name() {
 		return article_name;
 	}

@@ -3,7 +3,7 @@ package com.forum_article_report.model;
 public class Forum_article_reportVO implements java.io.Serializable{
 	private Integer article_report_no;
 	private Integer comment_no;
-	private Integer article_no;
+	private Integer article_no; 
 	private String article_name;
 	private Integer member_no;
 	private String report_reason;
