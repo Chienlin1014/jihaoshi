@@ -379,7 +379,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	}
 
 	@Override
-	public Integer findByAccount(String memberAccount) {
+	public MemberVO findByAccount(String memberAccount) {
 		// TODO Auto-generated method stub
 		return null;
 	}

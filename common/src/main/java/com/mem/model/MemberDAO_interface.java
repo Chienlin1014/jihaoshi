@@ -27,7 +27,7 @@ public interface MemberDAO_interface {
 
 	public List<phyCourseCommentReportVO> getPhyCourseCommentReportsByMemberNo(Integer memberNo);
 
-	public Integer findByAccount(String memberAccount);
+	public MemberVO findByAccount(String memberAccount);
   
 	public List<OnlineCourseCommentVO> getOnlineCourseCommentsByMemberNo(Integer memberNo);
   

@@ -39,11 +39,11 @@ public class MemberDAO implements MemberDAO_interface {
 	private static final String GET_OnlineCourseComments_ByMemberNo_STMT = "SELECT comment_no,member_no,course_no,comment_content,comment_score,comment_status FROM Online_course_comment where member_no = ? order by comment_no";
 	private static final String GET_OnlineCourseCommentReports_ByMemberNo_STMT = "SELECT * FROM Online_course_comment_report where member_no = ? order by report_no";
 	private static final String GET_ACCOUNT_STMT = "SELECT * FROM MEMBER where member_account = ?";
-	private static final String GET_OnlineCourseComments_ByMemberNo_STMT = 
-			"SELECT comment_no,member_no,course_no,comment_content,comment_score,comment_status FROM Online_course_comment where member_no = ? order by comment_no";
-	private static final String GET_OnlineCourseCommentReports_ByMemberNo_STMT = 
-			"SELECT * FROM Online_course_comment_report where member_no = ? order by report_no";
-	
+//	private static final String GET_OnlineCourseComments_ByMemberNo_STMT =
+//			"SELECT comment_no,member_no,course_no,comment_content,comment_score,comment_status FROM Online_course_comment where member_no = ? order by comment_no";
+//	private static final String GET_OnlineCourseCommentReports_ByMemberNo_STMT =
+//			"SELECT * FROM Online_course_comment_report where member_no = ? order by report_no";
+
 
 	@Override
 	public void insert(MemberVO memberVO) {
@@ -349,21 +349,21 @@ public class MemberDAO implements MemberDAO_interface {
 
 	@Override
 	public MemberVO findByAccount(String memberAccount) {
-		
+
 		MemberVO memberVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
-			
+
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ACCOUNT_STMT);
-			
+
 			pstmt.setString(1, memberAccount);
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
 				memberVO = new MemberVO();
 				memberVO.setMemberNo(rs.getInt("member_no"));
@@ -556,58 +556,58 @@ public class MemberDAO implements MemberDAO_interface {
 		return list;
 	}
 	
-	@Override
-	public Integer findByAccount(String memberAccount) {
-
-		MemberVO memberVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ACCOUNT_STMT);
-
-			pstmt.setString(1, memberAccount);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				memberVO = new MemberVO();
-				memberVO.setMemberNo(rs.getInt(1));
-				memberVO.setMemberAccount(rs.getString(2));
-			}
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return memberVO.getMemberNo();
-	}
+//	@Override
+//	public Integer findByAccount(String memberAccount) {
+//
+//		MemberVO memberVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//
+//		try {
+//
+//			con = ds.getConnection();
+//			pstmt = con.prepareStatement(GET_ACCOUNT_STMT);
+//
+//			pstmt.setString(1, memberAccount);
+//
+//			rs = pstmt.executeQuery();
+//
+//			while (rs.next()) {
+//				memberVO = new MemberVO();
+//				memberVO.setMemberNo(rs.getInt(1));
+//				memberVO.setMemberAccount(rs.getString(2));
+//			}
+//			// Handle any SQL errors
+//		} catch (SQLException se) {
+//			throw new RuntimeException("A database error occured. "
+//					+ se.getMessage());
+//			// Clean up JDBC resources
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (Exception e) {
+//					e.printStackTrace(System.err);
+//				}
+//			}
+//		}
+//		return memberVO.getMemberNo();
+//	}
 	public List<OnlineCourseCommentVO> getOnlineCourseCommentsByMemberNo(Integer memberNo) {
 		List<OnlineCourseCommentVO> list = new ArrayList<>();
 		OnlineCourseCommentVO onlineCourseCommentVO = null;

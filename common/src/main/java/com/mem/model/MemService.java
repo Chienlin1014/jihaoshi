@@ -16,8 +16,8 @@ public class MemService {
 	private MemberDAO_interface dao;
 
 	public MemService() {
-//		dao = new MemberDAO();
-		dao = new MemberJDBCDAO();
+		dao = new MemberDAO();
+//		dao = new MemberJDBCDAO();
 	}
 
 	public MemberVO addmember(String memberAccount, String memberPassword, String memberName, String memberPhone,
@@ -69,9 +69,9 @@ public class MemService {
 		return dao.selectForLogin(memberAccount, memberPassword);
 	}
 
-	public MemberVO findByAccount(String memberAccount) {
-		return dao.findByAccount(memberAccount);
-	}
+//	public MemberVO findByAccount(String memberAccount) {
+//		return dao.findByAccount(memberAccount);
+//	}
 	public MemberVO findByEmail(String memberEmail) {
 		return dao.findByEmail(memberEmail);
 	}
@@ -86,9 +86,9 @@ public class MemService {
 	}
 
 	public List<phyCourseCommentReportVO> getPhyCourseCommentReportsByMemberNo(Integer memberNo) {
-		return dao.getPhyCourseCommentReportsByMemberNo(memberNo);
+		return dao.getPhyCourseCommentReportsByMemberNo(memberNo);}
 
-	public Integer findByAccount(String memberAccount) {
+	public MemberVO findByAccount(String memberAccount) {
 		return dao.findByAccount(memberAccount);
 	}
 	public MemberVO getOneOnlineCourse(Integer memberNo) {
