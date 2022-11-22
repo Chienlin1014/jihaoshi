@@ -27,21 +27,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	private static final String Login = "SELECT * FROM MEMBER where member_account = ? and member_password = ?";
 
 	@Override
-	public MemberVO findByEmail(String memberEmail) {
-		return null;
-	}
-
-	@Override
-	public List<phyCourseCommentVO> getPhyCourseCommentsByMemberNo(Integer memberNo) {
-		return null;
-	}
-
-	@Override
-	public List<phyCourseCommentReportVO> getPhyCourseCommentReportsByMemberNo(Integer memberNo) {
-		return null;
-	}
-
-	@Override
 	public void insert(MemberVO memberVO) {
 
 		Connection con = null;
@@ -341,6 +326,21 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			}
 		}
 		return MemberVO;
+	}
+
+	@Override
+	public MemberVO findByEmail(String memberEmail) {
+		return null;
+	}
+
+	@Override
+	public List<phyCourseCommentVO> getPhyCourseCommentsByMemberNo(Integer memberNo) {
+		return null;
+	}
+
+	@Override
+	public List<phyCourseCommentReportVO> getPhyCourseCommentReportsByMemberNo(Integer memberNo) {
+		return null;
 	}
 
 	public static void main(String[] args) {
