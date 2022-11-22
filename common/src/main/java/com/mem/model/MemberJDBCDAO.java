@@ -10,6 +10,8 @@ import java.util.List;
 
 import com.onlinecoursecomment.model.OnlineCourseCommentVO;
 import com.onlinecoursecommentreport.model.OnlineCourseCommentReportVO;
+import com.phyCourseComment.model.phyCourseCommentVO;
+import com.phyCourseCommentReport.model.phyCourseCommentReportVO;
 
 public class MemberJDBCDAO implements MemberDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
@@ -23,6 +25,21 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	private static final String DELETE = "DELETE FROM member where member_no = ?";
 	private static final String UPDATE = "UPDATE member set member_account=?,member_password=?,member_name=?,member_phone=?,member_nickname=?,member_address=?,member_email=? where member_no = ? ";
 	private static final String Login = "SELECT * FROM MEMBER where member_account = ? and member_password = ?";
+
+	@Override
+	public MemberVO findByEmail(String memberEmail) {
+		return null;
+	}
+
+	@Override
+	public List<phyCourseCommentVO> getPhyCourseCommentsByMemberNo(Integer memberNo) {
+		return null;
+	}
+
+	@Override
+	public List<phyCourseCommentReportVO> getPhyCourseCommentReportsByMemberNo(Integer memberNo) {
+		return null;
+	}
 
 	@Override
 	public void insert(MemberVO memberVO) {
