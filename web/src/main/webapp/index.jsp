@@ -48,7 +48,7 @@
                   <a href="#">網站簡介</a>
                 </li>
                 <li>
-                  <a href="#">最新消息</a>
+                  <a href="${pageContext.request.contextPath}/latest_news/select_page.jsp">最新消息</a>
                 </li>
                 <li>
                   <a href="${ctxPath}/meal/MealProductIndex.jsp">好食產品專區</a>
@@ -68,9 +68,7 @@
                 <li>
                 	<a href="${ctxPath}/cart/OnlineCourseCart.jsp">線上課程購物車<c:if test="${not empty cartCourses}"> (${fn:length(cartCourses)})</c:if></a>
 				</li>
-                <li>
-                  <a href="#">最新消息</a>
-                </li>
+               
                 <li>
                   <a href="#">康健新知論壇</a>
                 </li>
