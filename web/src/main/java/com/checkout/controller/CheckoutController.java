@@ -57,20 +57,18 @@ public class CheckoutController extends HttpServlet {
         String action = req.getParameter("action");
         if ("checkout".equals(action)) {
 
-
-
+            
             AllInOne allInOne = new AllInOne("");
 
             AioCheckOutALL aioCheckOutALL = getAioCheckOutALL(req.getRequestURL().toString(), cartProds);
-
 
             String checkoutPage = allInOne.aioCheckOut(aioCheckOutALL, null);
 
             cartHolder.put(aioCheckOutALL.getMerchantTradeNo(), cartProds);
 
             req.setAttribute("checkoutPage", checkoutPage);
-            RequestDispatcher goCheckout = req
-                    .getRequestDispatcher("/checkout/CheckoutPage.jsp");
+
+            RequestDispatcher goCheckout = req.getRequestDispatcher("/checkout/CheckoutPage.jsp");
             goCheckout.forward(req, res);
 
         }
