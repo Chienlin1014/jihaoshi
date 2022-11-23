@@ -49,4 +49,5 @@
         <filter-name>onlyLoginFilter</filter-name>
         <url-pattern>/mealCollect/*</url-pattern>
     </filter-mapping>
+
 </web-app>
