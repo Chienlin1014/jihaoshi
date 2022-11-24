@@ -13,6 +13,7 @@ import java.util.*;
 public class PhyCouPromotionDetailHibernateDAO implements PhyCouPromotionDetailDAO_interface {
 
 	private static final String GET_ALL_STMT = "from com.phyCouPromotionDetail.model.PhyCouPromotionDetailVO order by project_no";
+	private static final String GET_ONE_STMT = "from PhyCouPromotionDetailVO where project_no=:project_no and course_no=:course_no";
 
 	@Override
 	public void insert(PhyCouPromotionDetailVO phyCouPromotionDetailVO) {
@@ -31,9 +32,21 @@ public class PhyCouPromotionDetailHibernateDAO implements PhyCouPromotionDetailD
 	@Override
 	public void update(PhyCouPromotionDetailVO phyCouPromotionDetailVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<PhyCouPromotionDetailVO> list = null;
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(phyCouPromotionDetailVO);
+			PhyCouPromotionVO phyCouPromotionVO = new PhyCouPromotionVO();
+			PhyCouVO phyCouVO = new PhyCouVO();
+			Integer project_no = phyCouPromotionDetailVO.getPhyCouPromotionVO().getProject_no();
+			Integer course_no = phyCouPromotionDetailVO.getPhyCouVO().getCourse_no();
+//			session.saveOrUpdate(phyCouPromotionDetailVO);
+			Query<PhyCouPromotionDetailVO> query = session.createQuery(GET_ONE_STMT, PhyCouPromotionDetailVO.class);
+			query.setParameter("project_no", project_no);
+			query.setParameter("course_no", course_no);
+			list = query.getResultList();
+			for ( PhyCouPromotionDetailVO vo : list) {
+				vo.setProm_price(phyCouPromotionDetailVO.getProm_price());
+			}
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -107,18 +120,23 @@ public class PhyCouPromotionDetailHibernateDAO implements PhyCouPromotionDetailD
 		}
 	}
 	@Override
-	public PhyCouPromotionDetailVO findByPrimaryKey(Integer project_no) {
-		PhyCouPromotionDetailVO phyCouPromotionDetailVO = null;
+	public List<PhyCouPromotionDetailVO> findByPrimaryKey(Integer project_no, Integer course_no) {
+//		PhyCouPromotionDetailVO phyCouPromotionDetailVO = null;
+		List<PhyCouPromotionDetailVO> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			phyCouPromotionDetailVO = (PhyCouPromotionDetailVO) session.get(PhyCouPromotionDetailVO.class, project_no);
+			Query<PhyCouPromotionDetailVO> query = session.createQuery(GET_ONE_STMT, PhyCouPromotionDetailVO.class);
+			query.setParameter("project_no", project_no);
+			query.setParameter("course_no", course_no);
+			list = query.getResultList();
+//			phyCouPromotionDetailVO = (PhyCouPromotionDetailVO) session.get(PhyCouPromotionDetailVO.class, project_no);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return phyCouPromotionDetailVO;
+		return list;
 	}
 
 	@Override

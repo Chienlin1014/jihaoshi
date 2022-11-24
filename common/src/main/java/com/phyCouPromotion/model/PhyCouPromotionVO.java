@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+
 import com.phyCouPromotionDetail.model.*;
 
 public class PhyCouPromotionVO implements java.io.Serializable{

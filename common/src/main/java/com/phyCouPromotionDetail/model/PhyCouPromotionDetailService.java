@@ -38,15 +38,13 @@ public class PhyCouPromotionDetailService {
 	public PhyCouPromotionDetailVO updateProDetail(Integer project_no, Integer course_no, Integer prom_price) {
 
 		PhyCouPromotionDetailVO phyCouPromotionDetailVO = new PhyCouPromotionDetailVO();
-		
-		PhyCouPromotionVO phyCouPromotionlVO = new PhyCouPromotionVO();
-		phyCouPromotionlVO.setProject_no(project_no);
-		phyCouPromotionDetailVO.setPhyCouPromotionVO(phyCouPromotionlVO);
-		
+		PhyCouPromotionVO phyCouPromotionVO = new PhyCouPromotionVO();
 		PhyCouVO phyCouVO = new PhyCouVO();
+		
+		phyCouPromotionVO.setProject_no(project_no);
+		phyCouPromotionDetailVO.setPhyCouPromotionVO(phyCouPromotionVO);
 		phyCouVO.setCourse_no(course_no);
 		phyCouPromotionDetailVO.setPhyCouVO(phyCouVO);
-		
 		phyCouPromotionDetailVO.setProm_price(prom_price);
 
 		dao.update(phyCouPromotionDetailVO);
@@ -61,8 +59,8 @@ public class PhyCouPromotionDetailService {
 	public void deleteOnePro(Integer project_no) {
 		dao.deleteOnePro(project_no);
 	}
-	public PhyCouPromotionDetailVO getOnePro(Integer project_no) {
-		return dao.findByPrimaryKey(project_no);
+	public List<PhyCouPromotionDetailVO> getOneDetail(Integer project_no, Integer course_no) {
+		return dao.findByPrimaryKey(project_no, course_no);
 	}
 
 	public List<PhyCouPromotionDetailVO> getAll() {

@@ -33,7 +33,25 @@ public class PhyCouPromotionHibernateDAO implements PhyCouPromotionDAO_interface
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(phyCouPromotionVO);
+//			session.saveOrUpdate(phyCouPromotionVO);
+//			PhyCouPromotionVO fVO = null;
+			PhyCouPromotionVO DBVO = session.get(PhyCouPromotionVO.class, phyCouPromotionVO.getProject_no());
+			if (phyCouPromotionVO.getProject_name() !=  DBVO.getProject_name()) {
+				DBVO.setProject_name(phyCouPromotionVO.getProject_name());
+			}
+			if (phyCouPromotionVO.getStart_date() !=  DBVO.getStart_date()) {
+				DBVO.setStart_date(phyCouPromotionVO.getStart_date());
+			}
+			if (phyCouPromotionVO.getEnd_date() !=  DBVO.getEnd_date()) {
+				DBVO.setEnd_date(phyCouPromotionVO.getEnd_date());
+			}
+			if (phyCouPromotionVO.getProm_description() !=  DBVO.getProm_description()) {
+				DBVO.setProm_description(phyCouPromotionVO.getProm_description());
+			}
+			if (phyCouPromotionVO.getProm_status() !=  DBVO.getProm_status()) {
+				DBVO.setProm_status(phyCouPromotionVO.getProm_status());
+			}
+					
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
