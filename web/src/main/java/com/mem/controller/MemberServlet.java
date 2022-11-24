@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
 import com.mem.model.MemService;
 import com.mem.model.MemberVO;
 
@@ -251,14 +250,15 @@ public class MemberServlet extends HttpServlet {
 			session.setAttribute("member", member);
 			session.setAttribute("memberNo", member.getMemberNo());
 	
-			Gson gson = new Gson();
-			res.setContentType("application/json; charset=UTF-8");
-			res.getWriter().write(gson.toJson(member));
-			String location = (String) session.getAttribute("location");
-			if (location != null) {
-				session.removeAttribute("location");
-				res.sendRedirect(location);
-			}
+//			Gson gson = new Gson();
+//			res.setContentType("application/json; charset=UTF-8");
+//			res.getWriter().write(gson.toJson(member));
+//			String location = (String) session.getAttribute("location");
+//			if (location != null) {
+//				session.removeAttribute("location");
+//				res.sendRedirect(location);
+//			}
+
 			res.sendRedirect(req.getContextPath() + "/index.jsp");
 
 		}

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.cart.model.CartHolder;
 import com.cart.model.CartProdVO;
 import com.cart.model.CartRedisHolder;
+import com.mem.model.MemberVO;
 import com.order.model.OrderService;
 import com.order.model.OrderVO;
 
@@ -44,27 +45,25 @@ public class OrderController extends HttpServlet {
         String action = req.getParameter("action");
 
         if ("orderInsert".equals(action)) {
-            //            Integer memberNo = req.getParameter("memberNo");
-            Integer memberNo = 1;
-            String merchantTradeNo = req.getParameter("MerchantTradeNo"); // 店內之交易編號
-            List<CartProdVO> cartProds = cartHolder.get(merchantTradeNo);
-            String tradeNo = req.getParameter("TradeNo"); // 綠界之交易編號
-            Integer TradeAmt = Integer.valueOf(req.getParameter("TradeAmt"));
 
-            orderSV.orderInsert(merchantTradeNo, memberNo, TradeAmt, tradeNo, cartProds);
+            MemberVO member = (MemberVO) session.getAttribute("member");
+            String merchantTradeNo = req.getParameter("MerchantTradeNo"); // 店內之交易編號
+            String tradeNo = req.getParameter("TradeNo"); // 綠界之交易編號
+            List<CartProdVO> cartProds = cartHolder.get(merchantTradeNo);
+
+            Integer tradeAmt = Integer.valueOf(req.getParameter("TradeAmt"));
+
+            orderSV.orderInsert(merchantTradeNo, member.getMemberNo(), tradeAmt, tradeNo, cartProds);
 
             session.removeAttribute("cartProds");
             session.removeAttribute("totalPrice");
             cartHolder.remove(merchantTradeNo);
-
             res.sendRedirect(req.getContextPath() + "/order/orderController?action=orderList");
         }
 
         if ("orderList".equals(action)) {
-//          Integer memberNo = req.getParameter("memberNo");
-
-            Integer memberNo = 1;
-            List<OrderVO> orders = orderSV.listOrsers(memberNo);
+            MemberVO member = (MemberVO) session.getAttribute("member");
+            List<OrderVO> orders = orderSV.listOrsers(member.getMemberNo());
             req.setAttribute("orders", orders);
             RequestDispatcher orderPage = req.getRequestDispatcher("ListOrder.jsp");
             orderPage.forward(req, res);

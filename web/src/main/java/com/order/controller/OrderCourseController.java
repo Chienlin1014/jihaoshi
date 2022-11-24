@@ -47,28 +47,29 @@ public class OrderCourseController extends HttpServlet {
             Integer memberNo = 1;
             String merchantTradeNo = req.getParameter("MerchantTradeNo"); // 店內之交易編號
             List<CartCourseVO> cartCourses = cartCourseHolder.get(merchantTradeNo);
+            Integer volume=cartCourses.size();
             String tradeNo = req.getParameter("TradeNo"); // 綠界之交易編號
             Integer TradeAmt = Integer.valueOf(req.getParameter("TradeAmt"));
 //          Integer totalPrice = cartCourseSV.calculateTotalPrice(cartCourses);
 
-            orderSV.orderInsert(merchantTradeNo, memberNo, TradeAmt, tradeNo, cartCourses);
+            orderSV.orderInsert(merchantTradeNo, memberNo, volume, TradeAmt, tradeNo, cartCourses);
             session.removeAttribute("cartCourses");
             session.removeAttribute("totalCoursePrice");
             cartCourseHolder.remove(merchantTradeNo);
-            res.sendRedirect(req.getContextPath() + "/order/orderCourseController?action=orderList");
+            res.sendRedirect(req.getContextPath() + "/onlineCourseOrderServlet?action=orderlist");
             
 
         }
 
-        if ("orderList".equals(action)) {
+//        if ("orderList".equals(action)) {
 //        	HttpSession session = req.getSession();
 //		    Object No = session.getAttribute("MemberNo");
 //		    String no = No.toString();
-        	Integer memberNo = 1;
-            List<OnlineCourseOrderVO> orders = orderSV.getOnlineCourseOrderbyMem(memberNo);
-            req.setAttribute("courseorders", orders);
-            RequestDispatcher orderPage = req.getRequestDispatcher(".jsp"); //會員查看所有訂單網址
-            orderPage.forward(req, res);
-        }
+//        	Integer memberNo = 1;
+//            List<OnlineCourseOrderVO> orders = orderSV.getOnlineCourseOrderbyMem(memberNo);
+//            req.setAttribute("courseorders", orders);
+//            RequestDispatcher orderPage = req.getRequestDispatcher("/onlineCourseOrderServlet?action=orderlist"); //會員查看所有訂單網址
+//            orderPage.forward(req, res);
+//        }
     }
 }
