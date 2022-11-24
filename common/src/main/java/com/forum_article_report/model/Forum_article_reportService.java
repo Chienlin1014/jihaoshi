@@ -6,7 +6,7 @@ import com.forum_article.model.Forum_articleDAO_interface;
 import com.forum_article.model.Forum_articleJDBCDAO;
 import com.forum_article.model.Forum_articleVO;
 
-public class Forum_article_reportService {
+public class Forum_article_reportService { 
 private Forum_article_reportDAO_interface dao;
 	
 	public Forum_article_reportService() {
@@ -41,11 +41,25 @@ private Forum_article_reportDAO_interface dao;
 	public void deleteForum_article_report(Integer article_report_no) {
 		dao.delete(article_report_no);
 	}
+	
+	public void change_status_0(Integer article_report_no) {
+		dao.change_status_0(article_report_no);
+	}
+	public void change_status_1(Integer article_report_no) {
+		dao.change_status_1(article_report_no);
+	}
+	public void change_status_2(Integer article_report_no) {
+		dao.change_status_1(article_report_no);
+	}
 
 	public Forum_article_reportVO getOneForum_article_report(Integer article_report_no) {
 		return dao.findByPrimaryKey(article_report_no);
 	}
-
+	
+	public List<Forum_article_reportVO> getAll(Integer memberNo) {
+		return dao.getAll(memberNo);
+	}
+	
 	public List<Forum_article_reportVO> getAll() {
 		return dao.getAll();
 	}

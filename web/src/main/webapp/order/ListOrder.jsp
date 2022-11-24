@@ -22,23 +22,6 @@
 <body>
 <img src="../images/JihaoshiPageHead.jpg" id="pageHead">
 <div class="block_N" style="margin:0px auto;">
-    <!--搜尋欄開始-->
-    <div class="Nm" style="display: flex; justify-content: center; align-items: center; ">
-        <form method="post" action="mealController" enctype="application/x-www-form-urlencoded" id="keywordSearch">
-            <ul class="searchfield">
-
-                <li><input id="keyword" type="text" class="text ac_input" placeholder="請輸入關鍵字" autocomplete="off"></li>
-                <li><input type="text" name="action" value="keywordSearch" hidden></li>
-                <li>
-                    <button id="btn_search" type="submit" class="button" form="keywordSearch">搜尋</button>
-                </li>
-
-            </ul>
-
-        </form>
-
-    </div>
-    <!--搜尋欄結束-->
 </div>
 <div id="WRAPPER" class="ecsite-layout style_shopping ecsite-search">
     <div id="CONTENT" class="layout-wrapper">
@@ -53,8 +36,13 @@
                                     <a href="${ctxPath}/meal/mealController?action=listAll">產品清單</a>
                                 </li>
                                 <li>
-                                    <a href="${ctxPath}/cart/MealCart.jsp">菜單商品購物車
-                                        <c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
+                                    <a href="${ctxPath}/meal/RandomAssign.jsp">隨機配餐</a>
+                                </li>
+                                <li>
+                                    <a href="${ctxPath}/cart/MealCart.jsp">菜單商品購物車<c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
+                                </li>
+                                <li>
+                                    <a href="${ctxPath}/mealCollect/list">我的收藏</a>
                                 </li>
                                 <li>
                                     <a href="${ctxPath}/index.jsp">回首頁</a>
@@ -68,6 +56,13 @@
                 <div class="Cm">
                     <div id="ItemContainer" class="Cm_C" style="margin:auto">
                         <br>
+                        <c:choose>
+                            <c:when test="${empty orders}">
+                                <span style="font-size: 16px;">您尚未有購買紀錄喔！</span>
+                                <span style="font-size: 16px;"><a
+                                        href="${ctxPath}/meal/mealController?action=listAll">去選購</a></span><br>
+                            </c:when>
+                            <c:otherwise>
                         <div id="orderTable" style="margin:auto">
                             <table class="order">
                                 <tr>
@@ -81,7 +76,7 @@
                                     <tr>
                                         <td class="order">${order.orderNo}</td>
                                         <td class="order"><fmt:formatDate value="${order.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                        <td class="order">${order.price}</td>
+                                        <td class="order"><fmt:formatNumber value="${order.price}" pattern="#,###"/></td>
                                         <td class="order">${OrderStatus[order.status]}</td>
                                         <td class="order">
                                             <form method="get" action="orderDetailController"
@@ -93,7 +88,8 @@
                                         </td>
                                     </tr>
                                 </c:forEach>
-
+                            </c:otherwise>
+                        </c:choose>
                             </table>
                         </div>
 

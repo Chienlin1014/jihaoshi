@@ -4,9 +4,18 @@
 <%@ page import="com.latest_news.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
  
+ 
 <%
 Latest_newsService latest_newsSvc = new Latest_newsService();
 List<Latest_newsVO> list = latest_newsSvc.getAll();
+Latest_newsVO vo = null;
+for(int i = 0; i < list.size(); i++) {
+	vo = list.get(i);
+	if(vo.getNews_pic() != null)
+		vo.setShowPhoto("data:image/png;base64,"+Base64.getEncoder().encodeToString(vo.getNews_pic()));
+}
+
+
 pageContext.setAttribute("list", list);
 %>
 
@@ -14,10 +23,31 @@ pageContext.setAttribute("list", list);
 <html>
 <head>
 <title>所有最新消息資料</title>
+<link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
+    <style>
+        #pageHead { 
+            width: 100%;
+            height: 30%; 
+        }
+        div.divflex{
+        display:flex;
+        width:100%;
+        margin:0;
+        height:100vh-30%;
+        }
+        body{
+        height: 100vh;
+        background-color:#FFFAF0;
+        }
+        div.formdiv{
+        style="width:80%%;
+        background: #FFFAF0;
+        }
+    </style>
 
 <style>
 table#table-1 {
-	background-color: #CCCCFF;
+	background-color:  #F0E68C;
 	border: 2px solid black;
 	text-align: center;
 }
@@ -36,7 +66,7 @@ h4 {
 
 <style>
 table {
-	width: 800px;
+	width: 1250px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -53,7 +83,10 @@ th, td {
 </style>
 
 </head>
+
 <body bgcolor='white'>
+<img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
+
 
 
 	<table id="table-1">
@@ -73,6 +106,7 @@ th, td {
 			<th>消息標題</th>
 			<th>編輯時間</th>
 			<th>消息內文</th>
+			<th>消息圖片</th>
 			<th>修改</th>
 			<th>刪除</th>
 		</tr>
@@ -85,6 +119,7 @@ th, td {
 				<td>${latest_newsVO.news_name}</td>
 				<td>${latest_newsVO.update_date}</td>
 				<td>${latest_newsVO.news_content}</td>
+				<td><img src="${latest_newsVO.showPhoto}"></td>
 
 				<td>
 					<FORM METHOD="post" ACTION="/web-admin/Latest_newsServlet"

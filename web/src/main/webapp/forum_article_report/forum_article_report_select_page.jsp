@@ -4,12 +4,12 @@
 <html>
 <head>
 <title>論壇文章檢舉首頁: Home</title>
-
+ 
 <style>
   table#table-1 {
 	width: 450px;
 	background-color: #CCCCFF;
-	margin-top: 5px;
+	margin-top: 5px; 
 	margin-bottom: 10px;
     border: 3px ridge Gray;
     height: 80px;

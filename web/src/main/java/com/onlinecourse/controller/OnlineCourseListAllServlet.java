@@ -15,6 +15,7 @@ import com.google.gson.JsonObject;
 import com.online_course.model.OnlineCourseService;
 import com.online_course.model.OnlineCourseVO;
 
+
 @WebServlet("/onlineCourse/searchAll")
 public class OnlineCourseListAllServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,7 +29,7 @@ public class OnlineCourseListAllServlet extends HttpServlet {
 		if(null != courseName) {
 			list = service.getByCourseName(courseName);
 		}else {
-			list = service.getAll();
+			list = service.getStatusOnAll();
 
 		}
 		Gson gson = new Gson();

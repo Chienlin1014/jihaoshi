@@ -14,10 +14,16 @@ public interface OnlineCourseDAO_interface {
 	public OnlineCourseVO findByPrimaryKey(Integer courseNo);
 
 	public List<OnlineCourseVO> getAll();
+	
+	public List<OnlineCourseVO> getStatusOnAll();
 
 	public List<OnlineCourseVO> selectByCourseName(String courseName);
 	
 	boolean courseSwitch(Integer courseNo, Integer courseStatus);
 	
 	public List<OnlineCourseCommentVO> getOnlineCourseCommentsByOnlineCourseNo(Integer courseNo);
+
+	public List<OnlineCourseVO> selectByMemId(Integer memId);
+	
+	public List<OnlineCourseVO> selectByCourseNameAndMemId(String courseName, Integer memId);
 }

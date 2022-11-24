@@ -15,51 +15,41 @@ OnlineCourseVO onlinecourseVO = (OnlineCourseVO) request.getAttribute("onlinecou
 <!DOCTYPE html>
 <html>
 <head>
-<title>所有課程資料</title>
-
-<link type="text/css"
-	href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
-<style>
-#pageHead {
-	width: 100%;
-	height: 30%;
-}
-</style>
-<img src="../images/JihaoshiPageHead.jpg" id="pageHead">
-
-<div id="WRAPPER" class="ecsite-layout style_shopping ecsite-search">
-	<div id="CONTENT" class="layout-wrapper">
-		<div class="layout-center" style="text-align: center">
-			<!--側邊欄區塊開始-->
-			<dl class="block_W">
-				<dd id="CategoryContainer">
-					<ul class="treeview">
-						<li id="cate_D" class="expanded"><H1>功能列表</H1>
-							<ul class="main">
-								<li><a
-									href="<%=request.getContextPath()%>/meal/MealInsert.jsp">新增菜單</a>
-								</li>
-								<li><a href="<%=request.getContextPath()%>/index.jsp">回首頁</a>
-								</li>
-							</ul>
-					</ul>
-				</dd>
-			</dl>
-			<!--側邊欄區塊結束-->
-			<div style="width: 85.4%; float: right; background: #FFFAF0">
-				<div style="width: 63%; float: right; margin: 3%;">
-					<table id="table-1">
-
-					</table>
-
-
-
-
-
-
-					</style>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
+ 	<link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
+	<style>
+	#pageHead {
+		width: 100%;
+		height: 30%;
+	}
+	</style>
 </head>
-<body bgcolor='white'>
+<body>
+<img src="../images/JihaoshiPageHead.jpg" id="pageHead">
+	<div id="WRAPPER" class="ecsite-layout style_shopping ecsite-search">
+		<div id="CONTENT" class="layout-wrapper">
+			<div class="layout-center" style="text-align: center">
+				<!--側邊欄區塊開始-->
+				<dl class="block_W">
+					<dd id="CategoryContainer">
+						<ul class="treeview">
+							<li id="cate_D" class="expanded"><H1>功能列表</H1>
+								<ul class="main">
+									<li><a
+										href="<%=request.getContextPath()%>/meal/MealInsert.jsp">新增菜單</a>
+									</li>
+									<li><a href="<%=request.getContextPath()%>/index.jsp">回首頁</a>
+									</li>
+								</ul>
+						</ul>
+					</dd>
+				</dl>
+				<!--側邊欄區塊結束-->
+				<div style="width: 85.4%; float: right; background: #FFFAF0">
+					<div style="width: 63%; float: right; margin: 3%;">
+						<div>
+							
 
 
 	<table id="table-1">
@@ -107,9 +97,9 @@ OnlineCourseVO onlinecourseVO = (OnlineCourseVO) request.getAttribute("onlinecou
 					<FORM METHOD="post"
 						ACTION="onlineCourse"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
-							name="courseNo" value="${onlinecourseVO.courseNo}"> <input
-							type="hidden" name="action" value="getOne_For_Update">
+						<input type="submit" value="修改">
+						<input type="hidden" name="courseNo" value="${onlinecourseVO.courseNo}">
+						<input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>
 			</tr>
@@ -161,19 +151,10 @@ OnlineCourseVO onlinecourseVO = (OnlineCourseVO) request.getAttribute("onlinecou
 			})
                 .then(resp => resp.json())
                 .then(body=> {
-                	alert(body.successful);
+                	alert('成功!');
                 	location = "searchAll";
                 });
    		}
-   
-   
-   
-   
-   
-   
-   
-   
-   
    </script>
 </body>
 </html>

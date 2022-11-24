@@ -11,9 +11,6 @@ public class Forum_articleVO implements java.io.Serializable{
 	private String article_content;
 	private Integer article_status;
 	
-	
-	
-	
 	public Integer getArticle_no() {
 		return article_no;
 	}
@@ -50,8 +47,10 @@ public class Forum_articleVO implements java.io.Serializable{
 	public void setArticle_status(Integer article_status) {
 		this.article_status = article_status;
 	}
-	
-	
-		
-	
+//	  // for join dname from deptno
+//    public com.forum_article_report.model.Forum_article_reportVO getForum_article_reportVO() {
+//    	com.forum_article_report.model.Forum_article_reportService forum_article_reportSvc = new com.forum_article_report.model.Forum_article_reportService();
+//    	com.forum_article_report.model.Forum_article_reportVO forum_article_reportVO = forum_article_reportSvc.getOneForum_article_report(article_no);
+//	    return forum_article_reportVO;	
+//	}
 }

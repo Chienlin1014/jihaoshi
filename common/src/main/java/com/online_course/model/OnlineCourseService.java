@@ -29,8 +29,8 @@ public class OnlineCourseService {
 	}
 
 	public OnlineCourseVO getOneOnlineCourse(Integer courseNo) {
-		Encoder encoder = Base64.getEncoder();
 		OnlineCourseVO vo = dao.findByPrimaryKey(courseNo);
+		Encoder encoder = Base64.getEncoder();
 		byte[] photo = vo.getOnlineCoursePhoto();
 		if (photo != null) {
 			String photoBase64Str = encoder.encodeToString(photo);
@@ -42,6 +42,20 @@ public class OnlineCourseService {
 	public List<OnlineCourseVO> getAll() {
 		Encoder encoder = Base64.getEncoder();
 		List<OnlineCourseVO> list = dao.getAll();
+		for (OnlineCourseVO vo : list) {
+			byte[] photo = vo.getOnlineCoursePhoto();
+			if (photo == null) {
+				continue;
+			}
+			String photoBase64Str = encoder.encodeToString(photo);
+			vo.setOnlineCoursePhotoBaseStr64(photoBase64Str);
+		}
+		return list;
+	}
+	
+	public List<OnlineCourseVO> getStatusOnAll() {
+		Encoder encoder = Base64.getEncoder();
+		List<OnlineCourseVO> list = dao.getStatusOnAll();
 		for (OnlineCourseVO vo : list) {
 			byte[] photo = vo.getOnlineCoursePhoto();
 			if (photo == null) {
@@ -74,4 +88,32 @@ public class OnlineCourseService {
     public List<OnlineCourseCommentVO> getOnlineCourseComments(Integer courseNo) {
 		return dao.getOnlineCourseCommentsByOnlineCourseNo(courseNo);
 	}
+    
+    public List<OnlineCourseVO> selectByMemId(Integer memId) {
+    	Encoder encoder = Base64.getEncoder();
+		List<OnlineCourseVO> list = dao.selectByMemId(memId);
+		for (OnlineCourseVO vo : list) {
+			byte[] photo = vo.getOnlineCoursePhoto();
+			if (photo == null) {
+				continue;
+			}
+			String photoBase64Str = encoder.encodeToString(photo);
+			vo.setOnlineCoursePhotoBaseStr64(photoBase64Str);
+		}
+    	return list;
+    }
+    
+    public List<OnlineCourseVO> selectByCourseNameAndMemId(String courseName, Integer memId) {
+    	Encoder encoder = Base64.getEncoder();
+		List<OnlineCourseVO> list = dao.selectByCourseNameAndMemId(courseName, memId);
+		for (OnlineCourseVO vo : list) {
+			byte[] photo = vo.getOnlineCoursePhoto();
+			if (photo == null) {
+				continue;
+			}
+			String photoBase64Str = encoder.encodeToString(photo);
+			vo.setOnlineCoursePhotoBaseStr64(photoBase64Str);
+		}
+    	return list;
+    }
 }

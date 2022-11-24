@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>論壇留言檢舉首頁: Home</title>
-
+ 
 <style>
   table#table-1 {
 	width: 450px;
@@ -14,7 +14,7 @@
     border: 3px ridge Gray;
     height: 80px;
     text-align: center;
-  }
+  } 
   table#table-1 h4 {
     color: red;
     display: block;

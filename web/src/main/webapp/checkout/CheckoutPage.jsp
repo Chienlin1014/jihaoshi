@@ -1,5 +1,6 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>導向結帳頁面</title>
@@ -7,10 +8,10 @@
 
 </head>
 <body>
-<h1 style="text-align: center" >請稍後，正將您導向結帳頁面...</h1>
-<div id="checkout">
+
+<h1 style="text-align: center">請稍候，正將您導向結帳頁面...</h1>
+
     ${checkoutPage}
-</div>
 
 </body>
 
