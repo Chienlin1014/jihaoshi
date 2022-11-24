@@ -80,9 +80,9 @@ public class CheckoutCourseController extends HttpServlet {
             aioCheckOutALL.setTotalAmount(String.valueOf(totalPrice));
             aioCheckOutALL.setTradeDesc("付款測試");
             aioCheckOutALL.setItemName(String.valueOf(itemName));
-            aioCheckOutALL.setCustomField2(tradeDesc);
+            aioCheckOutALL.setCustomField1(tradeDesc);
             aioCheckOutALL.setReturnURL(req.getRequestURL()+"?action=serverCallBack");
-            aioCheckOutALL.setOrderResultURL("http://localhost:8081/web/recive/reciveController?action=ecpay");
+            aioCheckOutALL.setOrderResultURL("http://localhost:8081/web/recive/reciveCourseController?action=ecpay");
             aioCheckOutALL.setClientBackURL("http://localhost:8081/web");
             aioCheckOutALL.setNeedExtraPaidInfo("N");
            
