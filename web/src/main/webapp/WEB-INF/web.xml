@@ -45,6 +45,18 @@
         <filter-name>onlyLoginFilter</filter-name>
         <url-pattern>/order/*</url-pattern>
     </filter-mapping>
+      <filter-mapping>
+        <filter-name>onlyLoginFilter</filter-name>
+        <url-pattern>/onlineCourse/ManageCourse.jsp</url-pattern>
+    </filter-mapping>
+         <filter-mapping>
+        <filter-name>onlyLoginFilter</filter-name>
+        <url-pattern>/onlineCourse/ManageCourseDetail.html</url-pattern>
+    </filter-mapping>
+          <filter-mapping>
+        <filter-name>onlyLoginFilter</filter-name>
+        <url-pattern>/onlineCourseOrderServlet</url-pattern>
+    </filter-mapping>
 
 
 </web-app>
