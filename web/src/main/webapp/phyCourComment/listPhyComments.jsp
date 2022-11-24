@@ -71,8 +71,8 @@
 		<c:forEach var="phyCourseCommentVO" items="${getOne_For_Display}">
 			<tr>
 				<td>${phyCourseCommentVO.commentNo}</td>
-				<td>${phyCourseCommentVO.courseNo} | ${phyCourseCommentVO.PhyCouVO.courseName}</td> 
-				
+				<td>${phyCourseCommentVO.courseNo} </td> 
+<%-- 				| ${phyCourseCommentVO.PhyCouVO.courseName} --%>
 				<td>${phyCourseCommentVO.commentContent}</td>
 
 				<td>

@@ -37,7 +37,10 @@ public class webMgrFilter  implements Filter {
 		HttpSession session = req.getSession();
 		// 【從 session 判斷此user是否登入過】
 		ManagerVO manager =(ManagerVO) session.getAttribute("manager");
-		
+		if(manager == null) {
+			res.sendRedirect(req.getContextPath() + "/manager/login.jsp");
+			return;
+		}
 		List<Integer> authority = manager.getAuthorityNo();
 		
 		boolean sts  = authority.contains(1);

@@ -60,4 +60,9 @@
         <url-pattern>/ztest/serviceManag.jsp</url-pattern>
 
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>servicemgrFilter</filter-name>
+        <url-pattern>/member/listAllMember.jsp</url-pattern>
+
+    </filter-mapping>
 </web-app>

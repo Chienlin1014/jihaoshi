@@ -33,7 +33,8 @@ public class MemberDAO implements MemberDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT member_no,member_account,member_password,member_name,member_phone,member_nickname,member_address,member_email,member_state FROM member order by member_no";
 	private static final String GET_ONE_STMT = "SELECT member_no,member_account,member_password,member_name,member_phone,member_nickname,member_address,member_email,member_state FROM member where member_no = ?";
 	private static final String DELETE = "DELETE FROM member where member_no = ?";
-	private static final String UPDATE = "UPDATE member set member_account=?,member_password=?,member_name=?,member_phone=?,member_nickname=?,member_address=?,member_email=? where member_no = ?";
+	private static final String UPDATE = "UPDATE member set member_name=?,member_phone=?,member_nickname=?,member_address=?,member_email=?,member_state=? where member_no = ?";
+	private static final String MNGMEMBER = "UPDATE member set member_name=?,member_phone=?,member_nickname=?,member_address=?,member_email=? where member_no = ?";
 	private static final String Login = "SELECT * FROM MEMBER where member_account = ? and member_password = ?";
 	private static final String GET_EMAIL_STMT = "SELECT member_no,member_account,member_email FROM MEMBER where member_email = ?";
 	private static final String GET_OnlineCourseComments_ByMemberNo_STMT = "SELECT comment_no,member_no,course_no,comment_content,comment_score,comment_status FROM Online_course_comment where member_no = ? order by comment_no";
@@ -100,14 +101,13 @@ public class MemberDAO implements MemberDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, memberVO.getMemberAccount());
-			pstmt.setString(2, memberVO.getMemberPassword());
-			pstmt.setString(3, memberVO.getMemberName());
-			pstmt.setString(4, memberVO.getMemberPhone());
-			pstmt.setString(5, memberVO.getMemberNickname());
-			pstmt.setString(6, memberVO.getMemberAddress());
-			pstmt.setString(7, memberVO.getMemberEmail());
-			pstmt.setInt(8, memberVO.getMemberNo());
+			pstmt.setString(1, memberVO.getMemberName());
+			pstmt.setString(2, memberVO.getMemberPhone());
+			pstmt.setString(3, memberVO.getMemberNickname());
+			pstmt.setString(4, memberVO.getMemberAddress());
+			pstmt.setString(5, memberVO.getMemberEmail());
+			pstmt.setInt(6,memberVO.getMemberState());
+			pstmt.setInt(7, memberVO.getMemberNo());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -131,6 +131,47 @@ public class MemberDAO implements MemberDAO_interface {
 			}
 		}
 
+	}
+	@Override
+	public void mngMember(MemberVO memberVO) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(MNGMEMBER);
+			
+			pstmt.setString(1, memberVO.getMemberName());
+			pstmt.setString(2, memberVO.getMemberPhone());
+			pstmt.setString(3, memberVO.getMemberNickname());
+			pstmt.setString(4, memberVO.getMemberAddress());
+			pstmt.setString(5, memberVO.getMemberEmail());
+			pstmt.setInt(6, memberVO.getMemberNo());
+			pstmt.executeUpdate();
+			
+			// Handle any driver errors
+		} catch (SQLException se) {
+			se.printStackTrace();
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
 	}
 
 	@Override

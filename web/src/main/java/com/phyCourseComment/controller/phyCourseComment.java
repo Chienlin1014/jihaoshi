@@ -70,8 +70,7 @@ public class phyCourseComment extends HttpServlet {
 			} catch (Exception e) {
 			}
 
-			Integer courseNo = 5;
-			// String courseNo = req.getParameter("courseNo");
+			 Integer courseNo = Integer.valueOf(req.getParameter("courseNo").trim());
 
 			String commentCentent = req.getParameter("commentContent");
 			if (commentCentent == null || commentCentent.trim().length() == 0) {
