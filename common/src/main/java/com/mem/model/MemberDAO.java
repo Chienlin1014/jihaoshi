@@ -39,10 +39,10 @@ public class MemberDAO implements MemberDAO_interface {
 	private static final String GET_OnlineCourseComments_ByMemberNo_STMT = "SELECT comment_no,member_no,course_no,comment_content,comment_score,comment_status FROM Online_course_comment where member_no = ? order by comment_no";
 	private static final String GET_OnlineCourseCommentReports_ByMemberNo_STMT = "SELECT * FROM Online_course_comment_report where member_no = ? order by report_no";
 	private static final String GET_ACCOUNT_STMT = "SELECT * FROM MEMBER where member_account = ?";
-//	private static final String GET_OnlineCourseComments_ByMemberNo_STMT =
-//			"SELECT comment_no,member_no,course_no,comment_content,comment_score,comment_status FROM Online_course_comment where member_no = ? order by comment_no";
-//	private static final String GET_OnlineCourseCommentReports_ByMemberNo_STMT =
-//			"SELECT * FROM Online_course_comment_report where member_no = ? order by report_no";
+	private static final String GET_PhyCourseComments_ByMemberNo_STMT =
+			"SELECT * FROM Physical_course_comment where member_no = ? order by comment_no";
+	private static final String GET_PhyCourseCommentReports_ByMemberNo_STMT =
+			"SELECT * FROM Online_course_comment_report where member_no = ? order by report_no";
 
 
 	@Override
@@ -194,7 +194,7 @@ public class MemberDAO implements MemberDAO_interface {
 	}
 
 	@Override
-	public MemberVO selectForLogin(String mamberAccount, String mamberPassword) {
+	public MemberVO selectForLogin(String memberAccount, String memberPassword) {
 		MemberVO MemberVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -205,8 +205,8 @@ public class MemberDAO implements MemberDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(Login);
 
-			pstmt.setString(1, mamberAccount);
-			pstmt.setString(2, mamberPassword);
+			pstmt.setString(1, memberAccount);
+			pstmt.setString(2, memberPassword);
 
 			rs = pstmt.executeQuery();
 
@@ -460,23 +460,22 @@ public class MemberDAO implements MemberDAO_interface {
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_OnlineCourseComments_ByMemberNo_STMT);
+			pstmt = con.prepareStatement(GET_PhyCourseComments_ByMemberNo_STMT);
 			pstmt.setInt(1, memberNo);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				phyCourseCommentVO = new phyCourseCommentVO();
 				phyCourseCommentVO.setCommentNo(rs.getInt(1));
-				phyCourseCommentVO.setMemberNo(rs.getInt(2));
-				phyCourseCommentVO.setCourseNo(rs.getInt(3));
+				phyCourseCommentVO.setCourseNo(rs.getInt(2));
+				phyCourseCommentVO.setMemberNo(rs.getInt(3));
 				phyCourseCommentVO.setCommentContent(rs.getString(4));
-				phyCourseCommentVO.setCommentScore(rs.getInt(5));
-				phyCourseCommentVO.setCommentStatus(rs.getInt(6));
+				phyCourseCommentVO.setCommentStatus(rs.getInt(5));
 				list.add(phyCourseCommentVO); // Store the row in the vector
 			}
 			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (Exception se) {
+			se.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -514,7 +513,7 @@ public class MemberDAO implements MemberDAO_interface {
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_OnlineCourseCommentReports_ByMemberNo_STMT);
+			pstmt = con.prepareStatement(GET_PhyCourseCommentReports_ByMemberNo_STMT);
 			pstmt.setInt(1, memberNo);
 			rs = pstmt.executeQuery();
 
@@ -528,8 +527,8 @@ public class MemberDAO implements MemberDAO_interface {
 				list.add(phyCourseCommentReportVO); // Store the row in the vector
 			}
 			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (Exception se) {
+			se.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {

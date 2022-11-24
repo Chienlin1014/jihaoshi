@@ -62,8 +62,8 @@ border: solid 1px lightgray;
 				<dl class="block_W">
 					<dd id="CategoryContainer">
 						<ul class="treeview">
-							<li>管理員:<font color=red> ${ManagerAcc} </font><br> <font>權限編號:
-									${AuthorityNo} </font>
+							<li>管理員:<font color=red>  ${manager.managerName} </font> <br> <font>權限編號:
+									${manager.authorityNo} </font>
 							</li>	
 							<li><a
 										href="../index.jsp">到首頁</a></li>						
