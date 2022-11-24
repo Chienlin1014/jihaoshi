@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>CheckoutFail</title>
+    <title>CheckoutCouFail</title>
 </head>
 <body>
 <h1 style="text-align: center" >結帳失敗，請確認您的資訊是否正確</h1>

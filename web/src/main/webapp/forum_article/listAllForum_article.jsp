@@ -108,12 +108,13 @@ th, td {
 
 			<tr>
 				<td>${forum_articleVO.article_no}</td>
-				<td>${forum_articleVO.article_name}</td>
+				<td><a href="/web/Forum_articleServlet?article_no=${forum_articleVO.article_no}&action=getOne_For_Display">
+     					${forum_articleVO.article_name} </a></td>
 				<td>${forum_articleVO.member_no}</td>
 				<td>${forum_articleVO.article_time}</td>
 				<td>${forum_articleVO.article_content}</td>
 				
-
+   
 <!-- 				<td> -->
 <!-- 					<FORM METHOD="post" ACTION="/web/Forum_article_reportServlet" -->
 <!-- 						style="margin-bottom: 0px;"> -->

@@ -100,14 +100,13 @@
                             <%--@elvariable id="collectionDetail" type="com.mealCollectionDetail.model.CollectionDetailVO"--%>
                             <form:form method="post" action="${ctxPath}/mealCollect/insert" enctype="application/x-www-form-urlencoded"
                                        id="formCollect" modelAttribute="collectionDetail" >
-                                <input type="text" name="memberNo" value="1" hidden>
+                                <input type="text" name="memberNo" value="${member.memberNo}" hidden>
                                 <input type="text" name="mealNo" value="${meal.mealNo}" hidden>
                                 <input type="text" name="mealName" value="${meal.mealName}" hidden>
                             </form:form>
                             <button type="submit" form="formCart">加入購物車</button>
                             <button type="submit" form="formCollect">加入收藏</button><br>
                             <span style="color: red">${empty collectionResult?"":collectionResult}</span>
-                            (這邊寫死會員編號為1，記得正式demo要改！)
 
                         </div>
                     </div>

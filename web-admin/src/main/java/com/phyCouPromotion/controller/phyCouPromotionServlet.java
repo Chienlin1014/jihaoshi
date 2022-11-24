@@ -6,9 +6,15 @@ import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+
 import com.course.model.*;
+import com.mysql.cj.util.StringUtils;
 import com.phyCouPromotion.model.PhyCouPromotionService;
 import com.phyCouPromotion.model.PhyCouPromotionVO;
+import com.phyCouPromotionDetail.model.PhyCouPromotionDetailService;
+import com.phyCouPromotionDetail.model.PhyCouPromotionDetailVO;
+
+
 
 
 @WebServlet("/phyCouPromotion/promotion")
@@ -97,7 +103,16 @@ public class phyCouPromotionServlet extends HttpServlet {
 				/***************************2.開始查詢資料****************************************/
 				PhyCouPromotionService phyCouPromotionSvc = new PhyCouPromotionService();
 				PhyCouPromotionVO phyCouPromotionVO = phyCouPromotionSvc.getOnePro(project_no);
-								
+				Set<PhyCouPromotionDetailVO> set = phyCouPromotionVO.getPhyCouPromotionDetails();
+				
+				PhyCouPromotionVO vo = new PhyCouPromotionVO();				
+				vo.setProject_no(phyCouPromotionVO.getProject_no());
+				vo.setProject_name(phyCouPromotionVO.getProject_name());
+				vo.setStart_date(phyCouPromotionVO.getStart_date());
+				vo.setEnd_date(phyCouPromotionVO.getEnd_date());
+				vo.setProm_description(phyCouPromotionVO.getProm_description());
+				vo.setProm_status(phyCouPromotionVO.getProm_status());
+				
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				String param = "?project_no="    +phyCouPromotionVO.getProject_no()+
 						       "&project_name="  +phyCouPromotionVO.getProject_name()+
@@ -107,8 +122,9 @@ public class phyCouPromotionServlet extends HttpServlet {
 						       "&prom_status="  +phyCouPromotionVO.getProm_status()+
 						       "&update_time="  +phyCouPromotionVO.getUpdate_time();
 
-						       
-				req.setAttribute("phyCouPromotionVO", phyCouPromotionVO);        
+					       
+				req.setAttribute("phyCouPromotionVO", vo);        
+				req.setAttribute("set", set);        
 				String url = "/phyCouPromotion/update_pro_input.jsp"+param;
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -128,6 +144,7 @@ public class phyCouPromotionServlet extends HttpServlet {
 			String project_name = req.getParameter("project_name");
 			if (project_name == null || project_name.trim().length() == 0) {
 				errorMsgs.put("project_name", "專案名稱 請勿空白");
+				System.out.println("專案名稱 請勿空白");
 			}
 			
 			java.sql.Date start_date = null;
@@ -136,6 +153,7 @@ public class phyCouPromotionServlet extends HttpServlet {
 			} catch (IllegalArgumentException e) {
 				start_date = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.put("start_date", "請輸入日期!");
+				System.out.println("請輸入日期!");
 			}
 			
 			java.sql.Date end_date = null;
@@ -144,11 +162,13 @@ public class phyCouPromotionServlet extends HttpServlet {
 			} catch (IllegalArgumentException e) {
 				end_date = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.put("end_date", "請輸入日期!");
+				System.out.println("請輸入日期!");
 			}
 			
-			String prom_description = req.getParameter("prom_description").trim();
+			String prom_description = req.getParameter("prom_description");
 			if (prom_description == null || prom_description.trim().length() == 0) {
 				errorMsgs.put("prom_description", "促銷活動敘述 請勿空白");
+				System.out.println("促銷活動敘述 請勿空白");
 			}
 			
 			Integer prom_status = null;
@@ -156,6 +176,7 @@ public class phyCouPromotionServlet extends HttpServlet {
 				prom_status = Integer.valueOf(req.getParameter("prom_status").trim()); 
 			} catch (Exception e) {
 				errorMsgs.put("prom_status", "專案狀態 請填數字");
+				System.out.println("專案狀態 請填數字");
 			}
 			
 			java.sql.Date update_time = null;
@@ -164,31 +185,48 @@ public class phyCouPromotionServlet extends HttpServlet {
 			} catch (IllegalArgumentException e) {
 				update_time = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.put("update_time", "請輸入日期!");
+				System.out.println("請輸入日期!");
 			}
-
-//			PhyCouVO phyCouVO = new PhyCouVO();
-//			phyCouVO.setCourse_no(course_no);
-//			phyCouVO.setCourse_name(course_name);
-//			phyCouVO.setCourse_hr(course_hr);
-//			phyCouVO.setCourse_price(course_price);
-//			phyCouVO.setCourse_teacher(course_teacher);
-//			phyCouVO.setCourse_date(course_date);
-//			phyCouVO.setCourse_location(course_location);
-//			phyCouVO.setCourse_info(course_info);
-//			phyCouVO.setCourse_status(course_status);
-//			phyCouVO.setCreate_date(create_date);
-//			phyCouVO.setUpdate_time(update_time);
-//			phyCouVO.setSign_up_start_day(sign_up_start_day);
-//			phyCouVO.setSign_up_end_day(sign_up_end_day);
-//			phyCouVO.setMax_sign_up_people(max_sign_up_people);
-//			phyCouVO.setMin_sign_up_people(min_sign_up_people);
-//			phyCouVO.setCurrent_sign_up_people(current_sign_up_people);
-//			phyCouVO.setPic(buf);
-					
+			
+			String tep_proCous = null;
+			tep_proCous= req.getParameter("proCous");
+			System.out.println("======================================================");
+			System.out.println(tep_proCous);
+			System.out.println("======================================================");
+			if (tep_proCous == null || tep_proCous.trim().length() == 0) {
+				errorMsgs.put("proCous", "促銷課程編號 請勿空白");
+				System.out.println("促銷課程編號 請勿空白");
+			}
+			String[] proCous = tep_proCous.split(",");
+	
+			for ( int i = 0; i < proCous.length; i++)
+			{
+				try {
+					proCous[i] = proCous[i].trim();
+					Integer.valueOf(proCous[i]);
+				} catch (Exception e) {
+					errorMsgs.put("proCous", "促銷課程編號 請填數字");
+					System.out.println("促銷課程編號 請填數字");
+				}
+			}
+				
+			Integer prom_price = null;
+			try {		
+				prom_price = Integer.valueOf(req.getParameter("prom_price").trim()); 
+			} catch (Exception e) {
+				errorMsgs.put("prom_price", "促銷打折內容 請填數字");
+				System.out.println("促銷打折內容 請填數字");
+			}
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 //				req.setAttribute("phyCouVO", phyCouVO); 
+				System.out.println("error");
+				System.out.println("================================================");
+//				req.setAttribute("tep_proCous", tep_proCous);
+//				req.setAttribute("prom_price", prom_price);
+//				req.setAttribute("update_time", update_time);
+				
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/phyCouPromotion/update_pro_input.jsp");
 				failureView.forward(req, res);
@@ -197,10 +235,23 @@ public class phyCouPromotionServlet extends HttpServlet {
 				
 				/***************************2.開始修改資料*****************************************/
 				PhyCouPromotionService phyCouPromotionSvc = new PhyCouPromotionService();
-				PhyCouPromotionVO phyCouPromotionVO = phyCouPromotionSvc.updatePhyCouPromotion(project_no, project_name, start_date, end_date, prom_description, prom_status, update_time);
+				PhyCouPromotionVO phyCouPromotionVO = phyCouPromotionSvc.updatePhyCouPromotion(project_no, project_name, start_date, end_date, prom_description, prom_status, proCous, prom_price);
+				System.out.println("==========================================");
+				System.out.println(phyCouPromotionVO);
+				System.out.println("==========================================");
+				Set<PhyCouPromotionDetailVO> set = phyCouPromotionVO.getPhyCouPromotionDetails();
 				
+				PhyCouPromotionVO vo = new PhyCouPromotionVO();				
+				vo.setProject_no(phyCouPromotionVO.getProject_no());
+				vo.setProject_name(phyCouPromotionVO.getProject_name());
+				vo.setStart_date(phyCouPromotionVO.getStart_date());
+				vo.setEnd_date(phyCouPromotionVO.getEnd_date());
+				vo.setProm_description(phyCouPromotionVO.getProm_description());
+				vo.setProm_status(phyCouPromotionVO.getProm_status());
+				vo.setUpdate_time(phyCouPromotionVO.getUpdate_time());
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("phyCouPromotionVO", phyCouPromotionVO); 
+				req.setAttribute("phyCouPromotionVO", vo); 
+				req.setAttribute("set", set); 
 				String url = "/phyCouPromotion/listOnePro.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
@@ -247,33 +298,26 @@ public class phyCouPromotionServlet extends HttpServlet {
 				errorMsgs.put("prom_status", "專案狀態 請填數字");
 			}
 						
-			String proCous = req.getParameter("proCous").trim();
-			if (prom_description == null || prom_description.trim().length() == 0) {
-				errorMsgs.put("proCous", "促銷課程清單 請勿空白");
+			String tep_proCous = null;
+			tep_proCous= req.getParameter("proCous").trim();
+			String[] proCous = tep_proCous.split(",");
+	
+			for ( int i = 0; i < proCous.length; i++)
+			{
+				try {
+					proCous[i] = proCous[i].trim();
+					Integer.valueOf(proCous[i]);
+				} catch (Exception e) {
+					errorMsgs.put("proCous", "課程代碼 請填數字");
+				}
 			}
 				
 			Integer prom_price = null;
 			try {		
-				prom_status = Integer.valueOf(req.getParameter("prom_price").trim()); 
+				prom_price = Integer.valueOf(req.getParameter("prom_price").trim()); 
 			} catch (Exception e) {
 				errorMsgs.put("prom_price", "促銷打折內容 請填數字");
 			}
-
-//				PhyCouVO phyCouVO = new PhyCouVO();
-//				phyCouVO.setCourse_name(course_name);
-//				phyCouVO.setCourse_hr(course_hr);
-//				phyCouVO.setCourse_price(course_price);
-//				phyCouVO.setCourse_teacher(course_teacher);
-//				phyCouVO.setCourse_date(course_date);
-//				phyCouVO.setCourse_location(course_location);
-//				phyCouVO.setCourse_info(course_info);
-//				phyCouVO.setCourse_status(course_status);
-//				phyCouVO.setSign_up_start_day(sign_up_start_day);
-//				phyCouVO.setSign_up_end_day(sign_up_end_day);
-//				phyCouVO.setMax_sign_up_people(max_sign_up_people);
-//				phyCouVO.setMin_sign_up_people(min_sign_up_people);
-//				phyCouVO.setCurrent_sign_up_people(current_sign_up_people);
-//				phyCouVO.setPic(buf);
 		
         
 				// Send the use back to the form, if there were errors
@@ -287,13 +331,14 @@ public class phyCouPromotionServlet extends HttpServlet {
 				
 				/***************************2.開始新增資料***************************************/
 				PhyCouPromotionService phyCouPromotionSvc = new PhyCouPromotionService();
-				phyCouPromotionSvc.addPhyCouPromotion(project_name, start_date, end_date, prom_description, prom_status);
+				Integer project_no = phyCouPromotionSvc.addPhyCouPromotion(project_name, start_date, end_date, prom_description, prom_status, prom_price, proCous);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/phyCouPromotion/listAllPro.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);				
 		}
+        
 		
 		
 		if ("delete".equals(action)) { // 來自listAllEmp.jsp
@@ -307,8 +352,10 @@ public class phyCouPromotionServlet extends HttpServlet {
 				Integer project_no = Integer.valueOf(req.getParameter("project_no"));
 				
 				/***************************2.開始刪除資料***************************************/
-				PhyCouPromotionService phyCouPromotionSvc = new PhyCouPromotionService();
-				phyCouPromotionSvc.deletePro(project_no);
+//				PhyCouPromotionService phyCouPromotionSvc = new PhyCouPromotionService();
+//				phyCouPromotionSvc.deletePro(project_no);
+				PhyCouPromotionDetailService phyCouPromotionDetailSvc = new PhyCouPromotionDetailService();
+				phyCouPromotionDetailSvc.deleteOnePro(project_no);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
 				String url = "/phyCouPromotion/listAllPro.jsp";

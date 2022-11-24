@@ -112,51 +112,52 @@ th, td {
 												href="phyCourComment/addPhyComment.jsp">新增實體課程評價</a></li>
 											<li class="submenu-item"><a
 												href="<%=request.getContextPath()%>/phyCourseComment?action=getMember_For_Display">我的實體課程評價</a></li>
+                        <li class="submenu-item"><a
+												href="<%=request.getContextPath()%>/OnlineCourseCommentServlet?action=getMember_For_Display">我的線上課程評價</a></li>
 										</ul></li>
-									<li class="drop"><a
-										href="<%=request.getContextPath()%>/OnlineCourseCommentServlet?action=getMember_For_Display">我的線上課程評價</a>
-									</li>
-									<li class="drop"><a
-										href="<%=request.getContextPath()%>/onlinecoursecomment/addOnlineCourseComment.jsp">我要評價(線上課程)</a>
-									</li>
-									<li class="drop"><a
-										href="<%=request.getContextPath()%>/onlinecoursecommentreport/addOnlineCourseCommentReport.jsp">我要檢舉(線上課程評論)</a>
-									</li>
+                    
 									<li class="drop"><a href="#">網站簡介</a></li>
+                <li class="drop">
+                  <a href="${pageContext.request.contextPath}/latest_news/select_page.jsp">最新消息</a>         
+                </li>
+                <li class="drop">
+                  <a href="${ctxPath}/meal/MealProductIndex.jsp">好食產品專區</a>
+                </li>
+                <li class="drop">
+                  <a href="${ctxPath}/cart/MealCart.jsp">菜單商品購物車<c:if test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
+                </li>
+                <li class="drop">
+                  <a href="${pageContext.request.contextPath}/onlineCourse/ListAllOnlineCourse.jsp">線上課程瀏覽專區</a>
+                </li>
+                <li class="drop">
+                  <a href="${pageContext.request.contextPath}/onlineCourse/ManageCourse.jsp">會員線上課程管理</a>
+                </li>
+                 <li class="drop">
+                  <a href="${pageContext.request.contextPath}/onlineCourseOrderServlet?action=orderlist">會員線上課程訂單管理</a>
+                </li>
+                <li class="drop">
+                	<a href="${ctxPath}/cart/OnlineCourseCart.jsp">線上課程購物車<c:if test="${not empty cartCourses}"> (${fn:length(cartCourses)})</c:if></a>
+				</li>             
 
-									<li class="drop"><a
-										href="${pageContext.request.contextPath}/latest_news/select_page.jsp">最新消息</a>
-									</li>
-									<li class="drop"><a
-										href="${ctxPath}/meal/MealProductIndex.jsp">好食產品專區</a></li>
-									<li class="drop"><a href="${ctxPath}/cart/MealCart.jsp">菜單商品購物車<c:if
-												test="${not empty cartProds}"> (${fn:length(cartProds)})</c:if></a>
-									</li>
-									<li class="drop"><a
-										href="${pageContext.request.contextPath}/onlineCourse/ListAllOnlineCourse.jsp">線上課程瀏覽專區</a>
-									</li>
-									<li class="drop"><a
-										href="${pageContext.request.contextPath}/onlineCourse/ManageCourse.jsp">會員線上課程管理</a>
-									</li>
-									<li class="drop"><a
-										href="${pageContext.request.contextPath}/onlineCourseOrderServlet?action=orderlist">會員線上課程訂單管理</a>
-									</li>
-									<li class="drop"><a
-										href="${ctxPath}/cart/OnlineCourseCart.jsp">線上課程購物車<c:if
-												test="${not empty cartCourses}"> (${fn:length(cartCourses)})</c:if></a>
-									</li>
 
+                <li class="drop">
+                	<c:if test="${not empty member}">
+                		<a href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp">康健新知論壇</a>
+                	</c:if>
+                	<c:if test="${empty member}">
+                		<a href="<%=request.getContextPath()%>/forum_article/listAllForum_articlevistor.jsp">康健新知論壇</a>
+                	</c:if>
+                  
+                </li>
 
-									<li class="drop"><a
-										href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp">康健新知論壇</a>
-									</li>
-									<li class="drop"><a
-										href="<%=request.getContextPath()%>/faqservlet?action=getAll">FAQ及客服專區</a>
-									</li>
-								</ul>
-						</ul>
-					</dd>
-				</dl>
+                <li class="drop">
+                  <a href="<%=request.getContextPath()%>/faqservlet?action=getAll">FAQ及客服專區</a>
+                </li>
+              </ul>
+          </ul>
+        </dd>
+      </dl>
+
 
 				<!--側邊欄區塊結束-->
 				<div class="block_C s_list" id="cardWrapper">

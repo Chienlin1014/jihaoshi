@@ -21,6 +21,10 @@ import com.cart.model.CartProdVO;
 import com.cart.model.CartRedisHolder;
 import com.cart.model.CartService;
 
+import com.mem.model.MemHolder;
+import com.mem.model.MemRedisHolder;
+import com.mem.model.MemberVO;
+
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
 
@@ -28,10 +32,9 @@ import ecpay.payment.integration.domain.AioCheckOutALL;
 public class CheckoutController extends HttpServlet {
 
     private final CartHolder cartHolder;
-
+    private final MemHolder memHolder;
     CartService cartSV = new CartService();
     private final SimpleDateFormat sdf;
-
     private final String ECPAY_PROD_FORMAT = "品名：%s 份量：%s 數量：%s #";
 
     // DI style
@@ -41,6 +44,7 @@ public class CheckoutController extends HttpServlet {
     public CheckoutController() {
 
         this.cartHolder = new CartRedisHolder();
+        this.memHolder=new MemRedisHolder();
         sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     }
@@ -54,20 +58,20 @@ public class CheckoutController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession();
         List<CartProdVO> cartProds = (ArrayList<CartProdVO>) session.getAttribute("cartProds");
+        MemberVO member =(MemberVO) session.getAttribute("member");
         String action = req.getParameter("action");
         if ("checkout".equals(action)) {
 
             
             AllInOne allInOne = new AllInOne("");
-
-            AioCheckOutALL aioCheckOutALL = getAioCheckOutALL(req.getRequestURL().toString(), cartProds);
+            String tradeDesc="checkout0"+member.getMemberNo();
+            AioCheckOutALL aioCheckOutALL = getAioCheckOutALL(req.getContextPath(),req.getRequestURL().toString(), cartProds, tradeDesc);
 
             String checkoutPage = allInOne.aioCheckOut(aioCheckOutALL, null);
-
             cartHolder.put(aioCheckOutALL.getMerchantTradeNo(), cartProds);
-
+            memHolder.put(tradeDesc,member);
             req.setAttribute("checkoutPage", checkoutPage);
-
+            System.out.println(checkoutPage);
             RequestDispatcher goCheckout = req.getRequestDispatcher("/checkout/CheckoutPage.jsp");
             goCheckout.forward(req, res);
 
@@ -88,9 +92,7 @@ public class CheckoutController extends HttpServlet {
         }
 
         if ("callBack".equals(action)) {
-
             Integer rtnCode = Integer.valueOf(req.getParameter("RtnCode")); // rtnCode==1 交易成功
-
             if (rtnCode.equals(1)) {
                 RequestDispatcher orderInsert = req.getRequestDispatcher("/order/orderController?action=orderInsert");
                 orderInsert.forward(req, res);
@@ -100,7 +102,7 @@ public class CheckoutController extends HttpServlet {
         }
     }
 
-    private AioCheckOutALL getAioCheckOutALL(String requestURL, List<CartProdVO> cartProds) {
+    private AioCheckOutALL getAioCheckOutALL(String contextPath,String requestURL, List<CartProdVO> cartProds, String tradeDesc) {
         AioCheckOutALL aioCheckOutALL = new AioCheckOutALL();
 
         String tradeDate = sdf.format(new Date(System.currentTimeMillis()));
@@ -109,10 +111,12 @@ public class CheckoutController extends HttpServlet {
         aioCheckOutALL.setMerchantTradeNo(getTradeNo(tradeDate));
         aioCheckOutALL.setMerchantTradeDate(tradeDate);
         aioCheckOutALL.setTotalAmount(String.valueOf(cartSV.calculateTotalPrice(cartProds)));
-        aioCheckOutALL.setTradeDesc("付款測試");
+        aioCheckOutALL.setTradeDesc(tradeDesc);
+        aioCheckOutALL.setCustomField1(tradeDesc);
         aioCheckOutALL.setItemName(String.valueOf(getECContent(cartProds)));
         aioCheckOutALL.setReturnURL(requestURL + "?action=serverCallBack");
-        aioCheckOutALL.setOrderResultURL(requestURL + "?action=callBack");
+        // demo環境改變記得改下面寫死之路徑
+        aioCheckOutALL.setOrderResultURL("http://localhost:8081/web/recive/reciveController?action=ecpay");
         aioCheckOutALL.setClientBackURL("http://localhost:8081/web");
         aioCheckOutALL.setNeedExtraPaidInfo("N");
         return aioCheckOutALL;

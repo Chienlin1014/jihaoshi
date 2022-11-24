@@ -108,7 +108,6 @@ a {
 
 										</ul></li>
 
-
 									<li class="drop"><a
 										href="${ctxPath}/meal/MealManagerIndex.jsp">菜單管理</a></li>
 									<li class="drop"><a
@@ -133,8 +132,13 @@ a {
 									</li>
 									<li class="drop"><a
 										href="<%=request.getContextPath()%>/onlinecustomerservice/customerService.jsp">線上客服</a>
-
 									</li>
+                  <li class="drop">
+                     <a href="<%=request.getContextPath()%>/latest_news/select_page.jsp">最新消息</a>
+                  </li>
+                  <li class="drop">
+                     <a href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp">康健新知論壇</a>
+                  </li>
 								</ul>
 						</ul>
 					</dd>
@@ -144,6 +148,7 @@ a {
 					<div class="Cm">
 						<div id="ItemContainer" class="Cm_C">
 							<dl class="col3f" id="DRAA0A-A900BUT82">
+
 
 							</dl>
 

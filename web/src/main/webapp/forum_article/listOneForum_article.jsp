@@ -3,6 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page import="com.forum_article.model.*"%>
 <%@ page import="com.forum_comment.model.*"%>
+<%@ page import="com.mem.model.MemberVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
@@ -12,7 +13,8 @@ Integer article_no = forum_articleVO.getArticle_no();
 List<Forum_commentVO> list = forum_commentSvc.catch_display(article_no);
  
 session = request.getSession();
-Integer memberNo = Integer.valueOf(session.getAttribute("MemberNo").toString());
+MemberVO memberVO = ((MemberVO)session.getAttribute("member"));
+Integer memberNo = Integer.valueOf(memberVO.getMemberNo());
 
 pageContext.setAttribute("list", list);
 %>
@@ -78,7 +80,7 @@ pageContext.setAttribute("list", list);
 </style>
 <style>
  div.comments {
-            display: grid;
+/*             display: grid; */
             grid-template-columns: 60px 80px auto;
             padding: 10px;
         }
@@ -125,17 +127,19 @@ pageContext.setAttribute("list", list);
 	</tr>
 </table>
 			
-    		<div class="comment">
+    		<div class="comment" style="display:flex;flex-wrap:wrap">
             <c:forEach var="forum_commentVO" items="${list}">
 
-                <div class="comments">
-                    <div class="cname">&ensp;${forum_commentVO.member_no}</div>
-                    <br><div class="ctime">&ensp;${forum_commentVO.comment_time}</div>
-                    <br><div class="ccontent">${forum_commentVO.comment_content}</div>
+                <div class="comments" style="width:50%;display:flex;flex-wrap: nowrap">
+                    <div class="cname" style="width:20%">會員編號:${forum_commentVO.member_no}</div>
+                    <div class="ctime" style="width:20%">${forum_commentVO.comment_time}</div>
+                    <div class="ccontent" style="width:30%">${forum_commentVO.comment_content}</div>
                    
-                    <div class="c"></div>
+<!--                     <div class="c"></div> -->
               	</div>
-              	<div class="addForum_comment_report">
+              	
+              	<div class="addForum_comment_report" style="width:50%;padding-top:5px">
+              	
                 <form method="post" action="/web/Forum_comment_reportServlet">
                     <input type="hidden" name="comment_no" value="${param.article_no}">
                     <input type="hidden" name="article_no" value="${param.article_no}">
@@ -145,11 +149,13 @@ pageContext.setAttribute("list", list);
                         placeholder="這留言我覺得不行">&ensp;
                     <button type="submit" class="btn btn-info">送出</button>
                 </form>
+                
                 </div>
+                <hr style="width:100%">
             </c:forEach>
 				</br>
                 </br>
-            <div class="addComment">
+            <div class="addComment" style="width:100%">
                 <form method="post" action="/web/Forum_commentServlet">
                     <input type="hidden" name="article_no" value="${param.article_no}">
                     <input type="hidden" name="member_no" value="<%=memberNo%>">
