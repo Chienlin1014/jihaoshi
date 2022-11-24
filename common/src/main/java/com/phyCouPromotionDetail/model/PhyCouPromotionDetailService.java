@@ -2,6 +2,7 @@ package com.phyCouPromotionDetail.model;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.course.model.PhyCouVO;
 import com.phyCouPromotion.model.PhyCouPromotionVO;
@@ -33,6 +34,7 @@ public class PhyCouPromotionDetailService {
 		return phyCouPromotionDetailVO;
 	}
 
+	
 	public PhyCouPromotionDetailVO updateProDetail(Integer project_no, Integer course_no, Integer prom_price) {
 
 		PhyCouPromotionDetailVO phyCouPromotionDetailVO = new PhyCouPromotionDetailVO();
@@ -52,10 +54,13 @@ public class PhyCouPromotionDetailService {
 		return phyCouPromotionDetailVO;
 	}
 
-	public void deletePro(Integer project_no) {
-		dao.delete(project_no);
+	public void deleteOneCou(Integer project_no, Integer course_no) {
+		dao.deleteOneCou(project_no, course_no);
 	}
 
+	public void deleteOnePro(Integer project_no) {
+		dao.deleteOnePro(project_no);
+	}
 	public PhyCouPromotionDetailVO getOnePro(Integer project_no) {
 		return dao.findByPrimaryKey(project_no);
 	}

@@ -5,7 +5,8 @@ import java.util.*;
 public interface PhyCouPromotionDetailDAO_interface {
           public void insert(PhyCouPromotionDetailVO phyCouPromotionDetailVO);
           public void update(PhyCouPromotionDetailVO phyCouPromotionDetailVO);
-          public void delete(Integer project_no);
+          public void deleteOnePro(Integer project_no);
+          public void deleteOneCou(Integer project_no, Integer course_no);
           public PhyCouPromotionDetailVO findByPrimaryKey(Integer project_no);
           public List<PhyCouPromotionDetailVO> getAll();
           

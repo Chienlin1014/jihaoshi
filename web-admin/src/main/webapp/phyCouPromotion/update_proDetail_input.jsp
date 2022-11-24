@@ -40,9 +40,7 @@
 	  pageContext.setAttribute("proCous",proCous);
 	  pageContext.setAttribute("prom_price",prom_price);
 	  pageContext.setAttribute("update_time",update_time);
-	  System.out.println("=======================================================");
-	  System.out.println(proCous);
-	  System.out.println("=======================================================");
+ 	  System.out.println(proCous);
       
   }
   
@@ -152,11 +150,13 @@
 	</tr>
 	<tr>
 		<td>促銷課程代碼:</td>
-		<td>${proCous}</td>
+		<td><input type="TEXT" name="proCous" size="45" 
+		value="${proCous}"/></td><td>${errorMsgs.proCous}</td>
 	</tr>
 	<tr>
 		<td>促銷折扣:</td>
-		<td>${prom_price}</td>
+		<td><input type="TEXT" name="prom_price" size="45" 
+		value="${prom_price}"/></td><td>${errorMsgs.prom_price}</td>
 	</tr>
 	
 </table>
@@ -164,8 +164,6 @@
 <input type="hidden" name="action" value="update">
 <input type="hidden" name="project_no" value="${param.project_no}">
 <input type="hidden" name="update_time" value="${param.update_time}">
-<input type="hidden" name="proCous" value="${proCous}">
-<input type="hidden" name="prom_price" value="${prom_price}">
 <input type="submit" value="送出修改">
 </FORM>
 </body>

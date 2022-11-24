@@ -1,4 +1,4 @@
-package com.phyCouPromotion.controller;
+package com.phyCouPromotionDetaiil.controller;
 
 import java.io.*;
 import java.util.*;
@@ -17,8 +17,8 @@ import com.phyCouPromotionDetail.model.PhyCouPromotionDetailVO;
 
 
 
-@WebServlet("/phyCouPromotion/promotion")
-public class phyCouPromotionServlet extends HttpServlet {
+@WebServlet("/phyCouPromotionDetail/promotionDetail")
+public class phyCouPromotionDetailServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -223,9 +223,9 @@ public class phyCouPromotionServlet extends HttpServlet {
 //				req.setAttribute("phyCouVO", phyCouVO); 
 				System.out.println("error");
 				System.out.println("================================================");
-//				req.setAttribute("tep_proCous", tep_proCous);
-//				req.setAttribute("prom_price", prom_price);
-//				req.setAttribute("update_time", update_time);
+				req.setAttribute("tep_proCous", tep_proCous);
+				req.setAttribute("prom_price", prom_price);
+				req.setAttribute("update_time", update_time);
 				
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/phyCouPromotion/update_pro_input.jsp");
@@ -235,10 +235,7 @@ public class phyCouPromotionServlet extends HttpServlet {
 				
 				/***************************2.開始修改資料*****************************************/
 				PhyCouPromotionService phyCouPromotionSvc = new PhyCouPromotionService();
-				PhyCouPromotionVO phyCouPromotionVO = phyCouPromotionSvc.updatePhyCouPromotion(project_no, project_name, start_date, end_date, prom_description, prom_status, proCous, prom_price);
-				System.out.println("==========================================");
-				System.out.println(phyCouPromotionVO);
-				System.out.println("==========================================");
+				PhyCouPromotionVO phyCouPromotionVO = phyCouPromotionSvc.updatePhyCouPromotion(project_no, project_name, start_date, end_date, prom_description, prom_status, prom_price, proCous);
 				Set<PhyCouPromotionDetailVO> set = phyCouPromotionVO.getPhyCouPromotionDetails();
 				
 				PhyCouPromotionVO vo = new PhyCouPromotionVO();				
@@ -341,7 +338,7 @@ public class phyCouPromotionServlet extends HttpServlet {
         
 		
 		
-		if ("delete".equals(action)) { // 來自listAllEmp.jsp
+		if ("deleteOneCou".equals(action)) { // 來自listAllEmp.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -349,22 +346,44 @@ public class phyCouPromotionServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 	
 				/***************************1.接收請求參數***************************************/
+				Integer course_no = Integer.valueOf(req.getParameter("course_no"));
 				Integer project_no = Integer.valueOf(req.getParameter("project_no"));
 				
+				
 				/***************************2.開始刪除資料***************************************/
-//				PhyCouPromotionService phyCouPromotionSvc = new PhyCouPromotionService();
-//				phyCouPromotionSvc.deletePro(project_no);
 				PhyCouPromotionDetailService phyCouPromotionDetailSvc = new PhyCouPromotionDetailService();
-				phyCouPromotionDetailSvc.deleteOnePro(project_no);
+				phyCouPromotionDetailSvc.deleteOneCou(project_no, course_no);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/phyCouPromotion/listAllPro.jsp";
+				String url = "/phyCouPromotion/listAllProDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 		}
 	
 	
 //	if ("listPros_ByCompositeQuery".equals(action)) { 
+		if ("deleteOnePro".equals(action)) { // 來自listAllEmp.jsp
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			/***************************1.接收請求參數***************************************/
+			Integer project_no = Integer.valueOf(req.getParameter("project_no"));
+			
+			
+			/***************************2.開始刪除資料***************************************/
+			PhyCouPromotionDetailService phyCouPromotionDetailSvc = new PhyCouPromotionDetailService();
+			phyCouPromotionDetailSvc.deleteOnePro(project_no);
+			
+			/***************************3.刪除完成,準備轉交(Send the Success view)***********/
+//			String url = req.getContextPath()+"/phyCouPromotion/listAllProDetail.jsp";
+			String url = "/phyCouPromotion/listAllProDetail.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
+		
 //		List<String> errorMsgs = new LinkedList<String>();
 //		// Store this set in the request scope, in case we need to
 //		// send the ErrorPage view.
