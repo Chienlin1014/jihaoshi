@@ -56,12 +56,16 @@
 
 							<c:forEach var="detail" items="${order.orderDetailList}">
 								<div>
-									線上課程編號:${detail.courseNo}<br> 線上課程價格:${detail.coursePrice}<br>
-									菜單照片<img src="data:image/*;base64, ${detail.orderPhotoBaseStr64}"><br>
-									<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/onlinecoursecomment/addOnlineCourseComment.jsp">
+
+									線上課程編號:${detail.courseNo}<br>
+									線上課程名稱:${detail.courseName}<br>
+									線上課程價格:${detail.coursePrice}<br>
+								    菜單照片<img src="data:image/*;base64, ${detail.orderPhotoBaseStr64}"><br>
+                  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/onlinecoursecomment/addOnlineCourseComment.jsp">
 										評價:<input type="submit" value="我要評價">
 										<input type="hidden" name="${detail.courseNo}">
 									</FORM>
+
 								</div>
 							</c:forEach>
 							</table>
