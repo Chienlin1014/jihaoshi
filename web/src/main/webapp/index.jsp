@@ -134,6 +134,10 @@ th, td {
                 <li class="drop">
                   <a href="${pageContext.request.contextPath}/onlineCourse/ManageCourse.jsp">會員線上課程管理</a>
                 </li>
+                </li>
+                <li class="drop">
+                  <a href="${pageContext.request.contextPath}/course/listAllCou.jsp">瀏覽實體課程</a>
+                </li>
                  <li class="drop">
                   <a href="${pageContext.request.contextPath}/onlineCourseOrderServlet?action=orderlist">會員線上課程訂單管理</a>
                 </li>

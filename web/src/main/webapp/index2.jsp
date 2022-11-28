@@ -73,7 +73,7 @@
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/onlineCourse/ListAllOnlineCourse.jsp">線上課程專區</a></li>
 								<li><a class="dropdown-item" href="${ctxPath}/cart/OnlineCourseCart.jsp">線上課程購物車<c:if test="${not empty cartCourses}"> (${fn:length(cartCourses)})</c:if></a></li>
-								<li><a class="dropdown-item" href="">實體課程專區</a></li>
+								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/course/SignUpCouMgn.jsp">實體課程專區</a></li>
 							</ul>
 					</li>
 					<li class="nav-item">
