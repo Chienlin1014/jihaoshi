@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax練習</title>
+    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+
+<button id="getMeal" onclick="getMeal()">取得菜單</button>
+<div id="testDiv"></div>
+<script>
+    const url = "http://localhost:8081/web/meal/MealAJAXPractice";
+
+    function getMeal() {
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+
+            success: function (response) {
+                // alert("success")
+                // let meal = JSON.parse(response);
+
+                let meal = JSON.parse(JSON.stringify(response));
+                console.log(meal.mealName)
+                $('#testDiv').html(`<div class="div_productPage">
+                            <img src="${meal.showPhoto}" id="productPhoto"/>
+                        </div>
+
+                        <div class="div_productPage" style="text-align: left;line-height: 35px">
+                        <label>菜單名稱：</label><span>${meal.mealName}</span>
+                            <br>
+                            <label>內容物：</label><span>${meal.mealContent}</span>
+                            <br>
+                            <label>熱量：</label><span id="cal">${meal.mealCal}</span>
+                            <br>
+                            <label>過敏源：</label><span>${meal.mealAllergen}</span>
+                            <br>
+                            <label>價格：</label><span id="price">${meal.mealPrice}</span>
+                            <br>
+                            <label>食譜：</label><span>${meal.mealRecipe}</span>
+                            <br>`);
+            },
+
+            error: function () {
+                alert("fail")
+            },
+        });
+
+    }
+
+</script>
+</body>
+</html>
