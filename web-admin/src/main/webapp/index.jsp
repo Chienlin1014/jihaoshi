@@ -101,11 +101,13 @@ a {
 												href="./ztest/mealsManag.jsp">菜單管理test</a></li>
 
 										</ul></li>
-									<li class="drop"><a href="#">課程管理</a>
+									<li class="drop"><a href="#">實體課程管理</a>
 										<ul class="submenu">
 											<li class="submenu-item"><a
-												href="./ztest/courseManag.jsp">課程管理test</a></li>
-
+												href="./course/addCou.jsp">新增實體課程</a></li>
+											<li class="submenu-item"><a
+												href="./course/select_page.jsp">查詢與刪改實體課程</a></li>
+									
 										</ul></li>
 
 									<li class="drop"><a

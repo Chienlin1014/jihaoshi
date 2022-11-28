@@ -75,7 +75,6 @@
 		<tr><th>授課老師</th><td><%=phyCouVO.getCourse_teacher()%></td></tr>
 		<tr><th>上課日期</th><td><%=phyCouVO.getCourse_date()%></td></tr>
 		<tr><th>上課地點</th><td><%=phyCouVO.getCourse_location()%></td></tr>
-		<tr><th>照片</th><td><img src="http://localhost:8081/myproject/course/DBGifReader?course_no=<%=phyCouVO.getCourse_no()%>"></td></tr>
 </table>
 
 </body>

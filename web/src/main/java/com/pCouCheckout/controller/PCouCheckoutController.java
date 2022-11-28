@@ -32,6 +32,7 @@ public class PCouCheckoutController extends HttpServlet {
 	 Integer course_no = null;
 	 Integer signUpNum = null;
 	 Integer member_no = null;
+	 Integer totalPrice = null;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         doPost(req, res);
@@ -49,9 +50,10 @@ public class PCouCheckoutController extends HttpServlet {
         
         if ("checkout".equals(action)) {
         	
-  		  	Integer totalPrice = phyCouVO.getCourse_price();
+  		  	
   		  	course_no = phyCouVO.getCourse_no();
   		    signUpNum = phyCouVO.getCurrent_sign_up_people();	
+  		    totalPrice = phyCouVO.getCourse_price();
   		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             String tradeDate = sdf.format(new Date(System.currentTimeMillis()));
             AllInOne allInOne = new AllInOne("");
