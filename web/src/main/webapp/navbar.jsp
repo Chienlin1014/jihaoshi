@@ -55,7 +55,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/latest_news/select_page.jsp">最新消息</a>
+						<a class="nav-link active" aria-current="page" href="${ctxpath}/web/latest_news/listAllLatest_news.jsp">最新消息</a>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">好食產品專區</a>
@@ -128,6 +128,20 @@
 		</div>
 	</nav>
 	<!-- Navbar End -->
+
+	<!-- Feature Section Start-->
+	<div class="mx-auto" id="feature">
+		<img class="mx-auto d-block" id="feature-img" src="./css/feature.jpg"
+			alt="">
+		<div id="feature-text" style="">
+			<p class="name">Take the stress<br>out of mealtime</p>
+			<br>
+			<button id="indexbutton"><a href="${ctxPath}/meal/mealController?action=listAll" style="text-decoration: none ; color:#FFE1CA ;">Get Start!</a></button>
+		</div>
+	</div>
+	<!-- Feature Section End-->
+
+
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

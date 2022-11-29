@@ -1,10 +1,10 @@
 package com.onlinecourseorder.controller;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +15,9 @@ import javax.servlet.http.HttpSession;
 import com.mem.model.MemberVO;
 import com.online_course_order.model.OnlineCourseOrderService;
 import com.online_course_order.model.OnlineCourseOrderVO;
+import com.online_course_order_detail.model.OnlineCourseOrderDetailVO;
+import com.onlinecoursecomment.model.OnlineCourseCommentService;
+import com.onlinecoursecomment.model.OnlineCourseCommentVO;
 
 
 @WebServlet("/onlineCourseOrderServlet")
@@ -37,7 +40,7 @@ public class OnlineCourseOrderServlet extends HttpServlet {
 		
 
 		if ("orderlist".equals(action)) {
-			List<OnlineCourseOrderVO> list = courseorderSV.getOnlineCourseOrderbyMem(memberNo); 
+			List<OnlineCourseOrderVO> list = courseorderSV.getOnlineCourseOrderbyMem(memberNo);
 			req.setAttribute("list", list);
 			req.getRequestDispatcher("/onlineCourseOrder/ListMemOnlineCourseOrder.jsp").forward(req, res);
 
@@ -47,6 +50,30 @@ public class OnlineCourseOrderServlet extends HttpServlet {
 	 if("searchOrderDetail".equals(action)) {
 		String orderNo = req.getParameter("orderNo");
 		OnlineCourseOrderVO order = courseorderSV.getOrderDetail(orderNo);
+		
+		// 取得單筆訂單內的所有課程編號
+		List<Integer> courseNo= new ArrayList<>();
+		List<OnlineCourseOrderDetailVO> detail=order.getOrderDetailList();
+		for(OnlineCourseOrderDetailVO all : detail) {
+			courseNo.add(all.getCourseNo());
+		}
+		// 取得會員評論過的所有課程編號
+		OnlineCourseCommentService commentSV= new OnlineCourseCommentService();
+		List<OnlineCourseCommentVO> comment= commentSV.getOnlineCommentsByMemberNo(memberNo);
+		List<Integer> memComment= new ArrayList<>();
+		for(OnlineCourseCommentVO all : comment) {
+			memComment.add(all.getCourseNo());
+		}
+		HashMap<Integer,Boolean> comments= new HashMap<Integer, Boolean>();
+		for(Integer course:courseNo) {
+			for(Integer memCom: memComment) {
+				if(course==memCom) {
+					comments.put(course,true);
+				}
+			}
+		}
+		
+		req.setAttribute("comments", comments);
 		req.setAttribute("order", order);
 		req.getRequestDispatcher("/onlineCourseOrder/OnlineCourseOrderDetail.jsp").forward(req, res);
 	}
