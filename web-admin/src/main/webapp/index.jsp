@@ -135,10 +135,14 @@
 							</ul>					
 					</li>
 					&emsp;&emsp;
-					
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="">登入 | 註冊</a>
+
+					<li class="nav-item"><c:if test="${empty manager}"><a class="nav-link active"
+																		 aria-current="page" href="${ctxPath}/manager/login.jsp">登入 | 註冊</a></c:if>
 					</li>
+					<li class="nav-item"><c:if test="${not empty manager}">
+						<a class="nav-link active" aria-current="page"
+						   href="<%=request.getContextPath()%>/manager/ManagerServlet?action=Logout">登出</a>
+					</c:if></li>
 				</ul>
 			</div>
 		</div>

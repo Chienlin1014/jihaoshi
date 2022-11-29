@@ -48,7 +48,7 @@ public class phyCourseComment extends HttpServlet {
 			List<phyCourseCommentVO> list = phyCourseCommentSvc.getPhyCommentsByMemberNo(memberNo);
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("getOne_For_Display", list); // 資料庫取出的list物件,存入request
-			String url = "/phyCourComment/listPhyComments.jsp"; // 成功轉交
+			String url = "/phyCourComment/listMemberPhyComments.jsp"; // 成功轉交
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
@@ -98,40 +98,39 @@ public class phyCourseComment extends HttpServlet {
 
 		}
 //		
-//		if ("delete".equals(action)){ // 來自listAll.jsp
-//			
-//			/*************************** 1.接收請求參數 ***************************************/		
-//			Integer commentNo = Integer.valueOf(req.getParameter("commentNo"));
-//			/*************************** 2.開始刪除資料 ***************************************/
-//			OnlineCourseCommentService onlineCourseCommentSvc = new OnlineCourseCommentService();
-//			onlineCourseCommentSvc.deleteOnlineCourseComment(commentNo);
-//
-//			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-//			String url = "/OnlineCourseCommentServlet?action=getMember_For_Display";        // 成功轉交 .jsp		
-//			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
-//			successView.forward(req, res);
-//		}
+		if ("delete".equals(action)){ 
+
+			/*************************** 1.接收請求參數 ***************************************/		
+			Integer commentNo = Integer.valueOf(req.getParameter("commentNo"));
+			/*************************** 2.開始刪除資料 ***************************************/
+			phyCourseCommentService phyCourseCommentSVC = new phyCourseCommentService();
+			phyCourseCommentSVC.deletePhyCourseComment(commentNo);
+
+			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+			String url = "/phyCourseComment?action=getMember_For_Display";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
 //		
-//		if ("getOne_For_Update".equals(action)) { // 來自listAll.jsp的請求
-//
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//
-//			/*************************** 1.接收請求參數 ****************************************/
-//			Integer commentNo = Integer.valueOf(req.getParameter("commentNo"));
-//
-//			/*************************** 2.開始查詢資料 ****************************************/
-//			OnlineCourseCommentService onlineCourseCommentSvc = new OnlineCourseCommentService();
-//			OnlineCourseCommentVO onlineCourseCommentVO = onlineCourseCommentSvc.getOneOnlineCourseComment(commentNo);
-//
-//			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-//			req.setAttribute("onlineCourseCommentVO", onlineCourseCommentVO); // 資料庫取出的VO物件,存入req
-//			String url = "/onlinecoursecomment/updateOnlineCourseComment.jsp";
-//			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update__input.jsp
-//			successView.forward(req, res);
-//		}
+		if ("getOne_For_Update".equals(action)) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*************************** 1.接收請求參數 ****************************************/
+			Integer commentNo = Integer.valueOf(req.getParameter("commentNo"));
+
+			/*************************** 2.開始查詢資料 ****************************************/
+			phyCourseCommentService phyCourseCommentSvc = new phyCourseCommentService();
+			phyCourseCommentVO phyVO  = phyCourseCommentSvc.getPhyCourseComment(commentNo);
+
+			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+			req.setAttribute("phyCourseCommentVO", phyVO); // 資料庫取出的VO物件,存入req
+			String url = "/phyCourComment/updatePhyCourseComment.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update__input.jsp
+			successView.forward(req, res);
+		}
 //		
 //		if ("update".equals(action)) { // 來自update.jsp的請求
 //
