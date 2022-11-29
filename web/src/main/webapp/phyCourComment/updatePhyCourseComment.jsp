@@ -41,18 +41,18 @@
 	</c:if>
 	</div>
 	<br>	
-		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/phyCourComment" name="phyCourComment">
+		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/phyCourseComment" name="phyCourComment">
 		<div id="form">
 				<div style="margin: 0px auto;">
 				<label>線上課程評論編號：<%=phyVO.getCommentNo()%></label>
 				</div>
 				<br>
 				<div style="margin: 0px auto;">
-				<label>會員編號_帳號：<%=phyVO.getMemberNo()%>_${phyVO.memberVO.memberAccount}</label>
+				<label>會員編號_帳號：<%=phyVO.getMemberNo()%>_<%=phyVO.getMemberVO().getMemberName()%></label>
 				</div>
 				<br>
 				<div style="margin: 0px auto;">
-				<label>線上課程編號_名稱：<%=phyVO.getCourseNo()%>_${phyVO.courseName}</label>
+				<label>線上課程編號_名稱：<%=phyVO.getCourseNo()%>_<%=phyVO.getCourseName()%></label>
 				</div>
 				<br>
 				<div style="margin: 0px auto;">

@@ -13,50 +13,63 @@
 <head>
 
     <title>listOneMember</title>
+    <style>
+    #content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #form {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        border-radius: 0.6rem;
+        border: 3px solid #ccc;
+        width: 400px;
+        height: 300px;
+        border-style: outset;
+    }
+</style>
 </head>
 <body>
 
-
 <%@ include file="../navbar.file" %>
-<table>
-    <tr>
-        <td>會員編號</td>
-        <td>${MemberVO.memberNo}</td>
-    </tr>
-    <tr>
-        <td>會員姓名</td>
-        <td>${MemberVO.memberName}</td>
-    </tr>
-    <tr>
-        <td>會員電話</td>
-        <td>${MemberVO.memberPhone}</td>
-    </tr>
-    <tr>
-        <td>會員暱稱</td>
-        <td>${MemberVO.memberNickname}</td>
-    </tr>
-    <tr>
-        <td>會員地址</td>
-        <td>${MemberVO.memberAddress}</td>
-    </tr>
-    <tr>
-        <td>會員e-mail</td>
-        <td>${MemberVO.memberEmail}</td>
-    </tr>
-    <tr>
-        <td>會員狀態</td>
-        <td>${MemberVO.memberState}</td>
-    </tr>
-    <tr>
-        <FORM METHOD="post" ACTION="member/MemberServlet">
-            <b></b>
-            <input type="hidden" name="memberNo" value="${member.memberNo}">
-            <input type="hidden" name="action" value="getOne_For_Update">
-            <input type="submit" value="修改">
+<div id="content">
+    <FORM METHOD="post" ACTION="member/MemberServlet">
+        <div id="form">
+            <div style="margin: 0px auto;">會員編號:
+                <label>${MemberVO.memberNo}</label></div>
 
-        </FORM>
-    <tr>
-</table>
+
+            <div style="margin: 0px auto;">會員姓名:
+                <label>${MemberVO.memberName}</label></div>
+
+
+            <div style="margin: 0px auto;">會員電話:
+                <label>${MemberVO.memberPhone}</label></div>
+
+
+            <div style="margin: 0px auto;">會員暱稱:
+                <label>${MemberVO.memberNickname}</label></div>
+
+
+            <div style="margin: 0px auto;">會員地址:
+                <lable>${MemberVO.memberAddress}</lable>
+            </div>
+
+            <div style="margin: 0px auto;">會員e-mail:
+                <label>${MemberVO.memberEmail}</label></div>
+            <div style="margin: 0px auto;">
+                <input type="hidden" name="memberNo" value="${member.memberNo}">
+                <input type="hidden" name="action" value="getOne_For_Update">
+                <input type="submit" value="修改" style="border-radius:1rem; border: 1px solid #ccc;">
+
+            </div>
+        </div>
+    </FORM>
+</div>
 <br>
 <br>
 

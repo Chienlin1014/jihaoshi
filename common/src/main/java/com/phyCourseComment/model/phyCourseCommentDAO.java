@@ -58,10 +58,9 @@ public class phyCourseCommentDAO implements phyCourseCommentDAO_interface {
     private static final String DELETE =
             "DELETE FROM physical_course_comment where comment_no = ?";
 
-    private static final String UPDATE =
-            "UPDATE physical_course_comment Set "
-                    + "member_no = ?, course_no = ?, comment_content = ?,"
-                    + " where comment_no = ?";
+    private static final String UPDATE ="UPDATE physical_course_comment Set \n" +
+            "        member_no = ?, course_no = ?, comment_content = ?\n" +
+            "        where comment_no = ?;";
     private static final String UPDATESTATUS = "UPDATE physical_course_comment Set comment_status = ? where comment_no = ?";
 
     @Override
@@ -125,9 +124,7 @@ public class phyCourseCommentDAO implements phyCourseCommentDAO_interface {
 
             // Handle any driver errors
         } catch (SQLException se) {
-            throw new RuntimeException("A database error occured. "
-                    + se.getMessage());
-            // Clean up JDBC resources
+            se.printStackTrace();
         } finally {
             if (pstmt != null) {
                 try {
@@ -250,7 +247,6 @@ public class phyCourseCommentDAO implements phyCourseCommentDAO_interface {
                 phyCourseCommentVO.setCourseNo(rs.getInt("course_no"));
                 phyCourseCommentVO.setCourseName(rs.getString("course_name"));
                 phyCourseCommentVO.setCommentContent(rs.getString("comment_content"));
-                phyCourseCommentVO.setCommentStatus(rs.getInt("comment_status"));
             }
 
             // Handle any driver errors
