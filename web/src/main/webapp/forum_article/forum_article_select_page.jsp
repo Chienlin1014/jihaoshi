@@ -14,8 +14,12 @@
 <html>
 <head>
 <title>論壇文章首頁: Home</title>
-
- <link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
     <style>
         div.divflex{
         display:flex;
@@ -131,6 +135,7 @@
 </head>
 
 <body bgcolor='white'>
+
 <%@ include file="../navbar.file" %>
 
 <!-- <div id="WRAPPER" class=""> -->
