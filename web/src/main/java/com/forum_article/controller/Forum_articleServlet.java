@@ -80,7 +80,7 @@ public class Forum_articleServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("forum_articleVO", forum_articleVO); // 資料庫取出的forum_articleVO物件,存入req
-			String url = "/forum_article/listOneForum_article2.jsp";
+			String url = "/forum_article/listOneForum_article.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneForum_article.jsp
 			successView.forward(req, res);
 		}
@@ -203,12 +203,12 @@ public class Forum_articleServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
-		if ("123".equals(action)) {
-
-			String url = "/forum_comment/InsertForum_comment.jsp";
-			RequestDispatcher successview = req.getRequestDispatcher(url);
-			successview.forward(req, res);
-		}
+//		if ("123".equals(action)) {
+//
+//			String url = "/forum_comment/InsertForum_comment.jsp";
+//			RequestDispatcher successview = req.getRequestDispatcher(url);
+//			successview.forward(req, res);
+//		}
 
 		if ("change_status_0".equals(action)) { // 來自listAllForum_article.jsp
 

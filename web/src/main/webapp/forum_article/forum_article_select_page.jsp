@@ -14,13 +14,13 @@
 <html>
 <head>
 <title>論壇文章首頁: Home</title>
-
- <link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
     <style>
-        #pageHead { 
-            width: 100%;
-            height: 30%; 
-        }
         div.divflex{
         display:flex;
         width:100%;
@@ -40,8 +40,6 @@
 
 
   <style>
-	
-		
         .evenarticle {
             background-color: white;
             width: 75%;
@@ -125,7 +123,7 @@
 			
 		}
 		
-		form{
+		form {
 			width: 600px;
 			display: inline;
 			text-align: center
@@ -137,8 +135,8 @@
 </head>
 
 <body bgcolor='white'>
-<%@ include file="navbar.file" %>
 
+<%@ include file="../navbar.file" %>
 
 <!-- <div id="WRAPPER" class=""> -->
 <!--     <div class="divflex"> -->
@@ -162,8 +160,11 @@
 <table id="table-1" style="margin: auto">
    <tr style="text-align: center;"><td><h3>論壇文章首頁: Home</h3><h4>( Forum_article )</h4></td></tr>
 </table>
-
-
+<div style="margin:0 auto;text-align: center">
+<h6 style="">論壇文章新增</h6>
+<button style="border-radius:1rem; border: 1px solid #ccc;"><a style="text-decoration: none;color:#333;" href='<%= request.getContextPath() %>/forum_article/InsertForum_article.jsp'>Add a new Forum_article.</a></button>
+</div>
+<br>
 </div>
 
 <div class="container">
@@ -190,15 +191,6 @@
         </div>
 	</c:forEach>
 </div>
-
-
-<ul>
-<br>
-<h6 style="padding-left: 15.5%">論壇文章新增</h6>
-
-<ul>
-  <li><a  style="padding-left: 13.5%;" href='<%= request.getContextPath() %>/forum_article/InsertForum_article.jsp'>Add</a> a new Forum_article.</li>
-</ul>
 
 </body>
 </html>
