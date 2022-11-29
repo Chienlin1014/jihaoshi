@@ -1,165 +1,162 @@
+<%@ page import="com.cart.model.CartProdVO"%>
+<%@ page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
+<%@ page import="java.util.*"%>
+<%@ page import="com.faq.model.*"%>
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<title>Jihaoshi</title>
-<link type="text/css" href="./css/jihaoshi.css" rel="stylesheet">
-<style>
-#pageHead {
-	width: 100%;
-	height: 30%;
-}
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Oxygen:wght@700&display=swap"
+	rel="stylesheet">	
+<link rel="stylesheet" href="${ctxPath}/css/styles.css">
 
-a {
-	font-size: 20px;
-}
-
-#info {
-	background: transparent;
-	border: 0;
-	font-size: 13px;
-}
-
-.drop {
-	position: relative;
-}
-
-.submenu {
-	position: relative;
-	opacity: 0;
-	width: 100%;
-	z-index: 8;
-	transition: opacity 0.5s ease;
-}
-
-.submenu-item {
-	display: block;
-	height: 0px;
-	overflow: hidden;
-	transition: height 0.5s ease;
-}
-
-.drop:hover .submenu {
-	opacity: 1;
-	border: solid 1px black;
-}
-
-.drop:hover .submenu-item {
-	overflow: visible;
-	height: 30px;
-}
-</style>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.smartmenus/1.1.0/jquery.smartmenus.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.smartmenus/1.1.0/addons/bootstrap/jquery.smartmenus.bootstrap.min.js'></script>
+<title>JiHaoShi</title>
 </head>
+
 <body>
-
-	<img src="images/JihaoshiPageHead.jpg" id="pageHead">
-	<div class="block_N" style="margin: 0px auto;"></div>
-	<div id="WRAPPER" class="ecsite-layout style_shopping ecsite-search">
-		<div id="CONTENT" class="layout-wrapper">
-			<div class="layout-center" style="text-align: center">
-				<!--側邊欄區塊開始-->
-				<dl class="block_W">
-					<dd id="CategoryContainer">
-						<ul class="treeview">
-							<li>管理員:<font color=red> ${manager.managerName} </font><br>
-								權限編號:<font> ${manager.authorityNo} </font>
-							</li>
-							<li><c:if test="${not empty manager}">
-									<a href="./manager/ManagerServlet?action=Logout">登出</a>
-								</c:if></li>
-							<li><c:if test="${empty manager}">
-									<a href="./manager/login.jsp">登入</a>
-								</c:if></li>
-							<li id="cate_D" class="expanded"><H1>功能列表</H1>
-								<ul class="main">
-									<li class="drop"><a href="#">員工管理</a>
-										<ul class="submenu">
-											<li class="submenu-item"><a
-												href="./manager/addManager.jsp">新增員工</a></li>
-											<li class="submenu-item"><a
-												href="./manager/listAllManager.jsp">員工查詢</a></li>
-											<li class="submenu-item"><a
-												href="./manager/listAllManager.jsp">員工管理test</a></li>
-										</ul></li>
-									<li class="drop"><a href="#">會員管理</a>
-										<ul class="submenu">
-											<li class="submenu-item"><a
-												href="./member/listAllMember.jsp">會員查詢</a></li>
-											<li class="submenu-item"><a href="#">訂單查詢</a></li>
-											<li class="submenu-item"><a href="#">修改會員</a></li>
-											<li class="submenu-item"><a
-												href="<%=request.getContextPath()%>/member/listAllMember.jsp">會員管理test</a></li>
-										</ul></li>
-									<li class="drop"><a href="#">網站管理</a>
-										<ul class="submenu">
-											<li class="submenu-item"><a href="./ztest/webManag.jsp">網站管理test</a></li>
-
-										</ul></li>
-									<li class="drop"><a href="#">菜單管理</a>
-										<ul class="submenu">
-											<li class="submenu-item"><a
-												href="./ztest/mealsManag.jsp">菜單管理test</a></li>
-
-										</ul></li>
-									<li class="drop"><a href="#">課程管理</a>
-										<ul class="submenu">
-											<li class="submenu-item"><a
-												href="./ztest/courseManag.jsp">課程管理test</a></li>
-
-										</ul></li>
-
-									<li class="drop"><a
-										href="${ctxPath}/meal/MealManagerIndex.jsp">菜單管理</a></li>
-									<li class="drop"><a
-										href="${pageContext.request.contextPath}/onlineCourse/AddOnlineCourse.jsp">新增線上課程</a>
-									</li>
-
-									<li class="drop"><a
-										href="<%=request.getContextPath()%>/faqservlet?action=getAll">FAQ列表</a>
-									</li>
-									<li class="drop"><a
-										href="<%=request.getContextPath()%>/OnlineCourseCommentReportServlet?action=getAll">線上課程評論檢舉</a>
-									<li class="drop"><a
-										href="${pageContext.request.contextPath}/onlineCourse/searchAll">線上課程管理</a>
-									</li>
-									<li class="drop"><a
-										href="${pageContext.request.contextPath}/onlineCourseOrderServlet?action=orderlist">訂單管理</a>
-
-										<a
-										href="<%=request.getContextPath()%>/OnlineCourseCommentReportServlet?action=getAll">線上課程評論檢舉</a>
-									<li class="drop"><a
-										href="${pageContext.request.contextPath}/onlineCourse/searchAll">線上課程管理</a>
-									</li>
-									<li class="drop"><a
-										href="<%=request.getContextPath()%>/onlinecustomerservice/customerService.jsp">線上客服</a>
-									</li>
-                  <li class="drop">
-                     <a href="<%=request.getContextPath()%>/latest_news/select_page.jsp">最新消息</a>
-                  </li>
-                  <li class="drop">
-                     <a href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp">康健新知論壇</a>
-                  </li>
-								</ul>
-						</ul>
-					</dd>
-				</dl>
-				<!--側邊欄區塊結束-->
-				<div class="block_C s_list">
-					<div class="Cm">
-						<div id="ItemContainer" class="Cm_C">
-							<dl class="col3f" id="DRAA0A-A900BUT82">
-
-
-							</dl>
-
-						</div>
-					</div>
-				</div>
+	<!-- Navbar Start -->
+	<nav class="navbar navbar-expand-lg bg-light">
+		<div class="container-fluid">
+			<!-- LOGO -->
+			<a class="navbar-brand" href="${ctxPath}/index.jsp"> 
+				<img src="${ctxPath}/css/LOGO.png" alt="Logo" width="80" height="90">
+			</a>
+			<!-- 螢幕縮小時導覽列會縮小成右上按鈕點開會直向呈現 -->
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<!-- collapse：無論任何螢幕大小，你都不會看到有選單在頂部。 -->
+			<!-- nav-collapse：當螢幕變小時，選單會改為直行顯示。 -->
+			<div class="collapse navbar-collapse" id="navbarSupportedContent" style="justify-content:space-around;">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">					
+					<li class="nav-item dropdown">					
+						<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">員工管理</a>
+							<ul class="dropdown-menu">
+								<li>
+                  					<a class="dropdown-item" href="${ctxPath}/manager/addManager.jsp">新增員工</a>
+               	 				</li>
+                				<li>
+                 		     		<a class="dropdown-item" href="${ctxPath}/manager/listAllManager.jsp">員工查詢</a>
+      				            </li>
+							</ul>
+					</li>										
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員管理</a>
+							<ul class="dropdown-menu">
+								<li>
+                  					<a class="dropdown-item" href="${ctxPath}/member/listAllMember.jsp">會員查詢</a>
+               	 				</li>
+                				<li>
+                  					<a class="dropdown-item" href="${ctxPath}">修改會員</a>
+               					</li>
+							</ul>
+					</li>					
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">網站管理</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="${ctxPath}/ztest/webManag.jsp">網站管理test</a></li>	
+								<li class="dropdown-submenu">
+									<a class="dropdown-item">最新消息管理&emsp;></a>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" href="<%=request.getContextPath()%>/latest_news/select_page.jsp">最新消息列表</a></li>
+										<li><a class="dropdown-item" href="">新刪修</a></li>
+									</ul>
+								</li>
+								<li><a class="dropdown-item">康健新知論壇管理&emsp;></a>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" href="<%=request.getContextPath()%>/forum_article/forum_article_select_page.jsp">康健新知論壇列表</a></li>
+										<li><a class="dropdown-item" href="">新刪修</a></li>
+									</ul>
+								</li>
+                				<li><a class="dropdown-item">FAQ管理&emsp;></a>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" href="<%=request.getContextPath()%>/faqservlet?action=getAll">FAQ列表</a></li>
+										<li><a class="dropdown-item" href="<%=request.getContextPath()%>/faq/addFAQ.jsp">新增FAQ</a></li>
+									</ul>
+								</li>
+								<li>
+                  					<a class="dropdown-item" href="<%=request.getContextPath()%>/onlinecustomerservice/customerService.jsp">線上客服</a>
+                				</li>
+							</ul>
+					</li>										
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">菜單管理</a>
+							<ul class="dropdown-menu">
+								<li>
+                  					<a class="dropdown-item" href="${ctxPath}/meal/MealManagerIndex.jsp">菜單管理</a>
+               	 				</li>
+								<li>
+                  					<a class="dropdown-item" href="${ctxPath}/ztest/mealsManag.jsp">菜單管理test</a>
+               	 				</li>
+							</ul>
+					</li>						
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">實體課程管理</a>
+							<ul class="dropdown-menu">
+								<li>
+                  					<a class="dropdown-item" href="${ctxPath}/ztest/courseManag.jsp">實體課程管理test</a>
+               	 				</li>
+							</ul>
+					</li>								
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">線上課程管理</a>
+							<ul class="dropdown-menu">
+								<li>
+                  					<a class="dropdown-item" href="${pageContext.request.contextPath}/onlineCourse/AddOnlineCourse.jsp">新增線上課程</a>
+               	 				</li>
+								<li>
+                  					<a class="dropdown-item" href="${pageContext.request.contextPath}/onlineCourse/searchAll">線上課程管理</a>
+               	 				</li>
+               	 				<li>
+                  					<a class="dropdown-item" href="<%=request.getContextPath()%>/OnlineCourseCommentReportServlet?action=getAll">線上課程評論檢舉</a>
+               	 				</li>
+							</ul>					
+					</li>
+					&emsp;&emsp;
+					
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="">登入 | 註冊</a>
+					</li>
+				</ul>
 			</div>
-
+		</div>
+	</nav>
+	<!-- Navbar End -->
+	<!-- Feature Section Start-->
+	<div class="mx-auto" id="feature">
+		<img class="mx-auto d-block" id="feature-img" src="./css/feature.jpg" alt="">
+		<div id="feature-text" style="">
+			<p class="name">JiHaoShi<br>後台首頁</p>
 		</div>
 	</div>
+	<!-- Feature Section End-->
 
 
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

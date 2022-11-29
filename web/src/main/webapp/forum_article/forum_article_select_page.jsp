@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.forum_article.model.*"%>
@@ -14,13 +14,13 @@
 <html>
 <head>
 <title>論壇文章首頁: Home</title>
-
- <link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<link type="text/css" href="<%=request.getContextPath()%>/css/jihaoshi.css" rel="stylesheet">
     <style>
-        #pageHead { 
-            width: 100%;
-            height: 30%; 
-        }
         div.divflex{
         display:flex;
         width:100%;
@@ -40,8 +40,6 @@
 
 
   <style>
-	
-		
         .evenarticle {
             background-color: white;
             width: 75%;
@@ -125,7 +123,7 @@
 			
 		}
 		
-		form{
+		form {
 			width: 600px;
 			display: inline;
 			text-align: center
@@ -137,22 +135,23 @@
 </head>
 
 <body bgcolor='white'>
-<img src="<%=request.getContextPath()%>/images/JihaoshiPageHead.jpg" id="pageHead">
 
-<div id="WRAPPER" class="">
-    <div class="divflex">
-        <div class="" style="text-align:center;background-color:#FFFAF0;widtH:13%; height:100vw; background-color:#F3E3C3;">
+<%@ include file="../navbar.file" %>
+
+<!-- <div id="WRAPPER" class=""> -->
+<!--     <div class="divflex"> -->
+<!--         <div class="" style="text-align:center;background-color:#FFFAF0;widtH:13%; height:100vw; background-color:#F3E3C3;"> -->
            
-                    <ul class="treeview">
-                        <li id="cate_D" class="expanded"><H1>功能列表</H1>
-                            <ul class="main">
-                                <li>
-                                    <a href="<%=request.getContextPath()%>/index.jsp">回即好食首頁</a>
-                                </li>
-                            </ul>
-                      </li>
-                 </ul>
-          </div>   
+<!--                     <ul class="treeview"> -->
+<!--                         <li id="cate_D" class="expanded"><H1>功能列表</H1> -->
+<!--                             <ul class="main"> -->
+<!--                                 <li> -->
+<%--                                     <a href="<%=request.getContextPath()%>/index.jsp">回即好食首頁</a> --%>
+<!--                                 </li> -->
+<!--                             </ul> -->
+<!--                       </li> -->
+<!--                  </ul> -->
+<!--           </div>    -->
            
  <div style="display:flex;flex-direction:column;width:100%">
 
@@ -161,8 +160,11 @@
 <table id="table-1" style="margin: auto">
    <tr style="text-align: center;"><td><h3>論壇文章首頁: Home</h3><h4>( Forum_article )</h4></td></tr>
 </table>
-
-<p>This is the Home page for Forum_article: Home</p>
+<div style="margin:0 auto;text-align: center">
+<h6 style="">論壇文章新增</h6>
+<button style="border-radius:1rem; border: 1px solid #ccc;"><a style="text-decoration: none;color:#333;" href='<%= request.getContextPath() %>/forum_article/InsertForum_article.jsp'>Add a new Forum_article.</a></button>
+</div>
+<br>
 </div>
 
 <div class="container">
@@ -189,15 +191,6 @@
         </div>
 	</c:forEach>
 </div>
-
-
-<ul>
-<br>
-<h3 style="padding-left: 12.5%">論壇文章新增</h3>
-<br>
-<ul>
-  <li><a  style="padding-left: 12.5%;" href='<%= request.getContextPath() %>/forum_article/InsertForum_article.jsp'>Add</a> a new Forum_article.</li>
-</ul>
 
 </body>
 </html>
