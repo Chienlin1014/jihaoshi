@@ -156,7 +156,7 @@ table#table-1 {
 			<td>
 			<h3>論壇文章資料</h3>
 			<button class="button">
-		 	<a href="<%= request.getContextPath() %>/forum_article/forum_article_select_page.jsp" style="text-decoration: none;color:#333;">回首頁</a>
+		 	<a href="<%= request.getContextPath() %>/forum_article/forum_article_select_page.jsp" style="text-decoration: none;color:#333;">回康健新知論壇首頁</a>
 		 	</button>
 			</td>
 		</tr>
@@ -193,6 +193,7 @@ table#table-1 {
                     <input type="hidden" name="article_no" value="${param.article_no}">
                     <input type="hidden" name="member_no" value="<%=memberNo%>">
                     <input type="hidden" name="action" value="insert">
+                    <div>文章留言檢舉:</div>
                     <input type="text" name="report_reason" value="${param.report_reason}" placeholder="這留言我覺得不行">
                     <button type="submit" class="button">送出</button>
                 </form> 
@@ -207,9 +208,11 @@ table#table-1 {
                     <input type="hidden" name="article_no" value="${param.article_no}">
                     <input type="hidden" name="member_no" value="<%=memberNo%>">
                     <input type="hidden" name="action" value="insert">
+                    <div>文章留言:</div>
                     <input type="text" name="comment_content" value="${param.comment_content}"
                         placeholder="跟版主交交流XD~">&ensp;
                     <button type="submit" class="button">送出</button>
+                    
                 </form>
              </div>
              
@@ -218,9 +221,11 @@ table#table-1 {
                     <input type="hidden" name="article_no" value="${param.article_no}">
                     <input type="hidden" name="member_no" value=<%=memberNo%>>
                     <input type="hidden" name="action" value="insert">
+                    <div>文章檢舉:</div>
                     <input type="text" name="report_reason" value="${param.report_reason}"
-                        placeholder="文章檢舉魔人就是我">&ensp;
+                        placeholder="檢舉魔人就是我">&ensp;
                     <button type="submit" class="button">送出</button>
+                    
                 </form>
              </div> 
 		</div>

@@ -136,7 +136,9 @@
 </head>
 
 <body>
+
 <%@ include file="../navbar.file" %>
+
 <!-- 	<div id="WRAPPER" class="ecsite-layout style_shopping ecsite-search"></div> -->
 <!-- 		<div id="CONTENT" class="layout-wrapper"></div> -->
 			
