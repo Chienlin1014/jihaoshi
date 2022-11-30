@@ -69,7 +69,7 @@
             <div style="margin: 0px auto;">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="managerNo" value="<%=mgrVO.getManagerNo()%>">
-                <input type="submit" value="送出修改">
+                <input type="submit" value="送出修改" style="border-radius:1rem; border: 1px solid #ccc;">
             </div>
         </div>
     </FORM>

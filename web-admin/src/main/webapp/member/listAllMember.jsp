@@ -158,16 +158,6 @@
 
                                 </FORM>
                             </td>
-                            <td>
-                                <FORM METHOD="post"
-                                      ACTION="<%=request.getContextPath()%>/mem/MemberServlet"
-                                      style="margin-bottom: 0px;">
-                                    <input type="submit" value="刪除"> <input
-                                        type="hidden" name="memberNo" value="${MemberVO.memberNo}">
-                                    <input type="hidden" name="action" value="delete">
-
-                                </FORM>
-                            </td>
                         </tr>
                     </c:forEach>
                 </table>
