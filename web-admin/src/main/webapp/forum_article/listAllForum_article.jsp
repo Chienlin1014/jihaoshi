@@ -86,6 +86,11 @@ String type = request.getParameter("type");
 		.btn {
 			background-color: #FFBA3B;
 		}
+		.btn:hover {
+		    color: var(--bs-btn-hover-color);
+		    background-color: #FFBA3B;
+		    border-color: var(--bs-btn-hover-border-color);
+		}
 	</style>
 
 </head>
