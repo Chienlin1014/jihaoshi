@@ -69,6 +69,7 @@
 </head>
 <body>
 <%@ include file="../navbar.file" %>
+<br>
 <div id="searchArea" style="margin: 0px auto; display: flex; justify-content: center; align-items: center;">
     <!--搜尋欄開始-->
     <div id="search">
@@ -81,7 +82,7 @@
     <!--搜尋欄結束-->
 </div>
 <br>
-<div id="CONTENT">
+<div id="content">
 <!--商品欄開始-->
 	<div style="margin: 0px auto;">
     <%@ include file="page1.jsp" %>
