@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import com.course.model.*;
+import com.meal.model.MealVO;
+import com.signupcourse.model.PhyCouSignUpService;
 
 
 @WebServlet("/course/cou.do")
@@ -472,6 +474,26 @@ public class CourseServlet extends HttpServlet {
 		}
 	
 	
+		if ("changeStatus".equals(action)) { // 來自listAllEmp.jsp
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			/***************************1.接收請求參數***************************************/
+			Integer course_no = Integer.valueOf(req.getParameter("course_no"));
+			Integer course_status = Integer.valueOf(req.getParameter("course_status"));
+			
+			/***************************2.開始刪除資料***************************************/
+			PhyCouService phyCouSvc = new PhyCouService();
+			phyCouSvc.changeStatus(course_no, course_status);
+			
+			/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+			String url = "/course/listAllCou.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
 	if ("listCous_ByCompositeQuery".equals(action)) { 
 		List<String> errorMsgs = new LinkedList<String>();
 		// Store this set in the request scope, in case we need to
@@ -492,7 +514,55 @@ public class CourseServlet extends HttpServlet {
 			req.setAttribute("listCous_ByCompositeQuery", list); 
 			RequestDispatcher successView = req.getRequestDispatcher("/course/listCous_ByCompositeQuery.jsp"); 
 			successView.forward(req, res);
-	}		
+	}
+	
+    if ("nameKeywordSearch".equals(action)) {
+        String nameKeyword = req.getParameter("nameKeyword");
+        PhyCouService phyCouSvc = new PhyCouService();
+        List<PhyCouVO> list = phyCouSvc.findByNameKeyword(nameKeyword);
+        System.out.println(list);
+   
+            req.setAttribute("searchResult", list);
+			String url = "/course/listSearchCourse.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); 
+			successView.forward(req, res);
+        
+    }
+    
+	if ("cancle".equals(action)) { // 來自listAllEmp.jsp
+
+		List<String> errorMsgs = new LinkedList<String>();
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
+
+			/***************************1.接收請求參數***************************************/
+			Integer order_no = Integer.valueOf(req.getParameter("order_no"));
+			Integer course_no = Integer.valueOf(req.getParameter("course_no"));
+			Integer order_status = Integer.valueOf(req.getParameter("order_status"));
+			if (order_status == 2) {
+				errorMsgs.add("已取消，不能再取消");
+			}
+			
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/phyCouSignUpMgn/listAllSignUpCou.jsp");
+				failureView.forward(req, res);
+				return;//程式中斷
+			}
+			/***************************2.開始刪除資料***************************************/
+			PhyCouSignUpService phyCouSignUpSvc = new PhyCouSignUpService();
+			PhyCouService phyCouSvc = new PhyCouService();
+			PhyCouVO phyCouVO = phyCouSvc.getOneCou(course_no);
+			Integer signUpNum = phyCouVO.getCurrent_sign_up_people();
+			phyCouSignUpSvc.deleteCou(order_no, signUpNum, course_no );
+			
+			/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+			String url = "/phyCouSignUpMgn/listAllSignUpCou.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+			successView.forward(req, res);
+	}
+
 
 }
 }

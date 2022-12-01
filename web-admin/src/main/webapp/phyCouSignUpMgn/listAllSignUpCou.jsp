@@ -8,11 +8,8 @@
 
 
 <%
-	HttpSession psession = request.getSession();
-	MemberVO member = (MemberVO) psession.getAttribute("member");
-	/*  List<PhyCouSignUpVO> list = (List<PhyCouSignUpVO>) request.getAttribute("list");*/
     PhyCouSignUpService phyCouSignUpSvc = new PhyCouSignUpService();
-	List<PhyCouSignUpVO> list = phyCouSignUpSvc.getAllSignUpCou(member.getMemberNo());
+	List<PhyCouSignUpVO> list = phyCouSignUpSvc.getAll();
     pageContext.setAttribute("list",list);
 
 %>
@@ -41,7 +38,7 @@
 
 <style>
   table {
-	width: 900px;
+	width: 950px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -57,7 +54,7 @@
     width:450px;
   }
     #pageHead {
-    width: 900px;
+    width: 950px;
     height: 24%;
   }
 </style>
@@ -82,12 +79,13 @@
 <table>
 	<tr>
 		<th>訂單編號</th>
+		<th>會員編號</th>
 		<th>日期</th>
 		<th>訂單狀態</th>
 		<th>課程編號</th>
 		<th>課程名稱</th>
 		<th>上課日期</th>
-		<th>課程價格</th>
+		<th>訂單價格</th>
 		<th>授課老師</th>
 		<th></th>
 
@@ -98,6 +96,7 @@
 		<tr>
 		
 			<td>${phyCouSignUpVO.order_no}</td>
+			<td>${phyCouSignUpVO.member_no}</td>
 			<td>${phyCouSignUpVO.update_time}</td>
 			<td>${phyCouSignUpVO.order_status}</td>
 			<td>${phyCouSignUpVO.course_no}</td>
@@ -106,12 +105,12 @@
 			<td>${phyCouSignUpVO.order_price}</td>
 			<td>${phyCouSignUpVO.phyCouVO.course_teacher}</td>
 		    <td>			    
-				   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/signup/cou.do" style="margin-bottom: 0px;">
+				   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/course/cou.do" style="margin-bottom: 0px;">
 				     <input type="submit" value="取消報名">
 				     <input type="hidden" name="order_no"  value="${phyCouSignUpVO.order_no}">
 				     <input type="hidden" name="course_no"  value="${phyCouSignUpVO.course_no}">
 				     <input type="hidden" name="order_status"  value="${phyCouSignUpVO.order_status}">
-     			     <input type="hidden" name="action"	value="refund"></FORM>
+     			     <input type="hidden" name="action"	value="cancle"></FORM>
 				</td>
 	</c:forEach>
 </table>
