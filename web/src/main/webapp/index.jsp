@@ -161,7 +161,7 @@
 							<a href="<%=request.getContextPath()%>/member/MemberServlet?action=Logout" style="display:inline-block; text-decoration:none;color:black;">登出</a>
 						</button>
 					</li>
-
+					</c:if>
 					<c:if test="${empty member}">
 					<li class="nav-item">
 						&emsp;
@@ -171,12 +171,6 @@
 						</button>
 					</li>
 					</c:if>
-          &emsp;&emsp;
-					<li class="nav-item"><c:if test="${not empty member}">
-						<a class="nav-link active" aria-current="page"
-						   href="<%=request.getContextPath()%>/member/MemberServlet?action=Logout">登出</a>
-					</c:if></li>
-
 				</ul>
 			</div>
 		</div>
