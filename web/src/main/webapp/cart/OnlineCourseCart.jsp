@@ -22,12 +22,21 @@ List<CartCourseVO> cartCourses = (ArrayList<CartCourseVO>) session.getAttribute(
 	flex-direction: column;
 	align-items: center;
 }
-#all{
+.all{
 	width:90%;
 	display: flex; 
 	justify-content: Space-around; 	
 	align-items: center;
 	
+}
+.pic{
+	width:20%;
+}
+.info {
+	width:60%;
+}
+.romove {
+	width:20%;
 }
 
 </style>
@@ -38,15 +47,15 @@ List<CartCourseVO> cartCourses = (ArrayList<CartCourseVO>) session.getAttribute(
 <div id="content">
 	<div id="cart">		
 		<c:forEach var="cartCourse" items="${cartCourses}" varStatus="loop">
-		<div id="all" style="border-style:outset;">		
-			<div>
+		<div class="all" style="border-style:outset;">		
+			<div class="pic">
 				<img src="data:image/png;base64,${cartCourse.course.onlineCoursePhotoBaseStr64}" onclick="showDetail(${cartCourse.course.courseNo})">
 			</div>
-			<div>
+			<div class="info">
 				<h3 class="prod_name" onclick="showDetail(${cartCourse.course.courseNo})"> ${cartCourse.course.courseName}</h3>
 				<span style="font-size: 18px">價格NT$${cartCourse.course.coursePrice}</span>
 			</div>
-			<div>
+			<div class="remove">
 				<form method="post" action="cartCourseController"
 					enctype="application/x-www-form-urlencoded"
 					id="cartDelete${loop.index}">
@@ -61,10 +70,9 @@ List<CartCourseVO> cartCourses = (ArrayList<CartCourseVO>) session.getAttribute(
 	<div id="totalPrice">
 		<c:choose>
 			<c:when test="${totalCoursePrice==0|| empty totalCoursePrice}">
-				<div style="border-style:outset;">
+				<div>
 				<span style="font-size: 16px;">購物車中還沒有東西喔</span>
-				<span style="font-size: 16px;"><a
-					href="<%=request.getContextPath()%>/onlineCourse/ListAllOnlineCourse.jsp">去選購</a></span>
+				<button style="border-radius:1rem; border: 1px solid #ccc;"><a href="<%=request.getContextPath()%>/onlineCourse/ListAllOnlineCourse.jsp" style="text-decoration: none;color:#333;">去選購!</a></button>				
 				</div>
 			</c:when>
 			<c:otherwise>
