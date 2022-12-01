@@ -90,13 +90,8 @@
             box-shadow: inset -1px -1px 0 #fff;
         }
 
-        tbody:hover td {
-            color: transparent;
-            text-shadow: 0 0 3px #aaa;
-        }
-
         tbody:hover tr:hover td {
-            color: #444;
+            color: grey;
             text-shadow: 0 1px 0 #fff;
         }
         .h3,h3 {
@@ -225,7 +220,7 @@
 										</form>
 									</td>
 									<td id="tdStatus\${order.orderNo}">
-										\${order.orderStatus == 0 ? '<button class="wrap button" onclick="changeStatus(' + order.orderNo + ')">訂單已成立</button>' : ''}
+									    \${order.orderStatus == 0 ? '<button class ="wrap button" onclick="changeStatus(\'' + order.orderNo + '\')">訂單已成立</button>' : ''}
 										\${order.orderStatus == 1 ? '訂單已取消' : ''}
 									</td>
 								</tr>
