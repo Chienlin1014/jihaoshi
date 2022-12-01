@@ -171,13 +171,7 @@
 							<a href="${ctxPath}/member/login.jsp" style="display:inline-block; text-decoration:none;color:black;"> 登入 | 註冊</a>
 						</button>
 					</li>
-					</c:if>
-          &emsp;&emsp;
-					<li class="nav-item"><c:if test="${not empty member}">
-						<a class="nav-link active" aria-current="page"
-						   href="<%=request.getContextPath()%>/member/MemberServlet?action=Logout">登出</a>
-					</c:if></li>
-
+				</c:if>
 				</ul>
 			</div>
 		</div>
