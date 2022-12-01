@@ -19,8 +19,8 @@ List<MealVO> meals = (List<MealVO>) request.getAttribute("meals");
 	border-radius:10px;
 	width:300px;
 	height:50px;
-	display: flex; 
-	justify-content: center; 
+	display: flex;
+	justify-content: center;
 	align-items: center;
 }
 .searchfield {
@@ -46,7 +46,7 @@ List<MealVO> meals = (List<MealVO>) request.getAttribute("meals");
 	border-style: outset;
 }
 .button {
- 	border-radius:1rem; 
+ 	border-radius:1rem;
  	border: 1px solid #ccc;
 }
 .img {
@@ -115,7 +115,7 @@ List<MealVO> meals = (List<MealVO>) request.getAttribute("meals");
 			<label>商品總價為：</label>${totalPrice}元，是否需要重新幫您配餐？
 
 			<button type="submit" form="goCart" class="button">否，請幫我加入購物車</button>
-			<button type="button" id="reAsssign" class="button">是</button>
+			<button type="button" id="reAsssign" class="button" >是</button>
 			<div id="reAssignArea" hidden>
 				<form method="post" action="${ctxPath}/meal/mealController" enctype="application/x-www-form-urlencoded" id="formRandom">
 					<input type="hidden" name="action" value="randomAssign" >
@@ -134,11 +134,11 @@ List<MealVO> meals = (List<MealVO>) request.getAttribute("meals");
 		</div>
 </div>
 	<script>
+
 		$(document).ready(function() {
 
 			$('#reAsssign').click(function() {
-
-				$('#reAssignArea').show();
+				$('#reAssignArea').removeAttr("hidden");
 
 			});
 			$('#mealAmount').mousemove(function() {
@@ -154,4 +154,5 @@ List<MealVO> meals = (List<MealVO>) request.getAttribute("meals");
 		});
 	</script>
 </body>
+
 </html>
