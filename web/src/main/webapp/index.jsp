@@ -81,7 +81,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/latest_news/select_page.jsp">最新消息</a>
+						<a class="nav-link active" aria-current="page" href="${ctxPath}/latest_news/listAllLatest_news.jsp">最新消息</a>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">好食產品專區</a>
@@ -102,7 +102,7 @@
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/onlineCourse/ListAllOnlineCourse.jsp">線上課程專區</a></li>
 								<li><a class="dropdown-item" href="${ctxPath}/cart/OnlineCourseCart.jsp">線上課程購物車<c:if test="${not empty cartCourses}"> (${fn:length(cartCourses)})</c:if></a></li>
-								<li><a class="dropdown-item" href="">實體課程專區</a></li>
+								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/course/ListAllCourse.jsp">實體課程專區</a></li>
 							</ul>
 					</li>
 					<li class="nav-item">
@@ -118,12 +118,13 @@
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員專區</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="">個人資料管理</a></li>	
+								<li><a class="dropdown-item" href="<%=request.getContextPath()%>/getOneMem">個人資料管理</a></li>
 								<li class="dropdown-submenu">
 									<a class="dropdown-item">訂單管理&emsp;></a>
 									<ul class="dropdown-menu">
 										<li><a class="dropdown-item" href="${ctxPath}/order/orderController?action=orderList">商品訂單</a></li>
 										<li><a class="dropdown-item" href="${pageContext.request.contextPath}/onlineCourseOrderServlet?action=orderlist">線上課程訂單</a></li>
+										<li><a class="dropdown-item" href="${pageContext.request.contextPath}/course/listAllSignUpCou.jsp">已報名實體課程清單</a></li>
 									</ul>
 								</li>
 								<li><a class="dropdown-item">我的課程&emsp;></a>
@@ -171,6 +172,12 @@
 						</button>
 					</li>
 					</c:if>
+          &emsp;&emsp;
+					<li class="nav-item"><c:if test="${not empty member}">
+						<a class="nav-link active" aria-current="page"
+						   href="<%=request.getContextPath()%>/member/MemberServlet?action=Logout">登出</a>
+					</c:if></li>
+
 				</ul>
 			</div>
 		</div>
@@ -187,9 +194,11 @@
 			<button id="indexbutton"><a href="${ctxPath}/meal/mealController?action=listAll" style="text-decoration: none ; color:#FFE1CA ;">Get Start!</a></button>
 		</div>
 	</div>
-	<!-- Feature Section End-->										
+	<!-- Feature Section End-->
 	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js">
+
+	</script>
 </body>
 
 </html>

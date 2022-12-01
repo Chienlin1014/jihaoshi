@@ -153,7 +153,16 @@
 						<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">實體課程管理</a>
 							<ul class="dropdown-menu">
 								<li>
-                  					<a class="dropdown-item" href="${ctxPath}/ztest/courseManag.jsp">實體課程管理test</a>
+                  					<a class="dropdown-item" href="${ctxPath}/course/addCou.jsp">新增實體課程</a>
+               	 				</li>
+								<li>
+                  					<a class="dropdown-item" href="${ctxPath}/course/ListAllCourse.jsp">查詢修改實體課程</a>
+               	 				</li>
+								<li>
+                  					<a class="dropdown-item" href="${ctxPath}/phyCouPromotion/addPro.jsp">新增實體課程促銷專案</a>
+               	 				</li>
+								<li>
+                  					<a class="dropdown-item" href="${ctxPath}/phyCouPromotion/select_page.jsp">查詢修改實體課程促銷專案</a>
                	 				</li>
 							</ul>
 					</li>								
@@ -165,6 +174,9 @@
                	 				</li>
 								<li>
                   					<a class="dropdown-item" href="${pageContext.request.contextPath}/onlineCourse/searchAll">線上課程管理</a>
+               	 				</li>
+               	 					<li>
+                  					<a class="dropdown-item" href="${pageContext.request.contextPath}/onlineCourseOrderServlet?action=orderlist">線上課程訂單管理</a>
                	 				</li>
                	 				<li>
                   					<a class="dropdown-item" href="<%=request.getContextPath()%>/OnlineCourseCommentReportServlet?action=getAll">線上課程評論檢舉</a>
@@ -184,6 +196,7 @@
 						</button>
 					</li>
 					</c:if>
+
 				</ul>
 			</div>
 		</div>
