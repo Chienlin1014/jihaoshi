@@ -107,6 +107,7 @@
 			<c:if test="${phyCouSignUpVO.order_status==2}">
 				報名取消
 			</c:if>
+      </td>
 			<td>${phyCouSignUpVO.course_no}</td>
 			<td>${phyCouSignUpVO.phyCouVO.course_name}</td>
 			<td>${phyCouSignUpVO.phyCouVO.course_date}</td> 
