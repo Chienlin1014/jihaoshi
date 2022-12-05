@@ -67,7 +67,7 @@ div.formdiv {
 
 .photo {
 	width: 100%;
-	height: 250px;
+	height: auto;
 	border-radius: 10px;
 	line-height: 150px;
 }
@@ -144,15 +144,15 @@ img {
 				}
 					)
                     .then(resp => resp.json())
-                    .then(xxx);				
+                    .then(listAll);				
 				}else{
 					 fetch('../onlineCourse/searchAll')
                     .then(resp => resp.json())
-                    .then(xxx);
+                    .then(listAll);
 
 				}
 									
-					function xxx(list){
+					function listAll(list){
 						cardWrapper.innerHTML='';
 						for(onlineCourse of list){
                             cardWrapper.insertAdjacentHTML('beforeend', `
