@@ -14,15 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.cart.model.*;
+import com.mem.model.MemMapHolder;
 import org.apache.commons.lang3.RandomStringUtils;
 
-import com.cart.model.CartHolder;
-import com.cart.model.CartProdVO;
-import com.cart.model.CartRedisHolder;
-import com.cart.model.CartService;
-
 import com.mem.model.MemHolder;
-import com.mem.model.MemRedisHolder;
 import com.mem.model.MemberVO;
 
 import ecpay.payment.integration.AllInOne;
@@ -43,8 +39,8 @@ public class CheckoutController extends HttpServlet {
 //    }
     public CheckoutController() {
 
-        this.cartHolder = new CartRedisHolder();
-        this.memHolder=new MemRedisHolder();
+        this.cartHolder = new CartMapHolder();
+        this.memHolder = new MemMapHolder();
         sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     }
@@ -87,7 +83,6 @@ public class CheckoutController extends HttpServlet {
 
                 System.out.println("綠界有回傳，但非數字");
                 e.printStackTrace();
-
             }
         }
 

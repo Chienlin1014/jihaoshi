@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.mem.model.MemHolder;
+import com.mem.model.MemMapHolder;
 import com.mem.model.MemRedisHolder;
 
 @WebServlet("/recive/reciveController")
@@ -18,7 +19,7 @@ public class ReciveController extends HttpServlet {
     private final MemHolder memHolder;
 
     public ReciveController() {
-        this.memHolder = new MemRedisHolder();
+        this.memHolder = new MemMapHolder();
     }
 
     @Override
