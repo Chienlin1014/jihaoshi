@@ -34,7 +34,7 @@ public class MealController extends HttpServlet {
         if (parameterValue == null || parameterValue.isBlank()) {
             errMsgs.add(validationMessage);
         }
-        return parameterValue;
+        return parameterValue
     }
 
     @Override
