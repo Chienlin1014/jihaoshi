@@ -10,6 +10,9 @@ MealVO meal = (MealVO) request.getAttribute("meal");
 <head>
 <title>修改菜單商品</title>
 <style>
+.class2{
+diplay: none;
+}
 #content {
 	display: flex;
 	flex-direction: column;
