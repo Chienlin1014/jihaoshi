@@ -1,7 +1,6 @@
 # jihaoshi
 
 ## 模組說明
-
 - common - 共用程式碼  
   例如: DAO、Model、Utils
 - web - 前台程式碼  
